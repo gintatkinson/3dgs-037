@@ -58,11 +58,13 @@ This feature defines the date and time data types specified in `ietf-yang-types@
 classDiagram
     class DateAndTimeTypes {
         +String containerId "[1]"
+        +Boolean [1] validateDateTime(String isoString)
     }
     class DateAndTimeType {
         +String dateAndTimeValue "[1]"
         +Boolean supportsLeapSeconds "[1]"
         +Boolean hasKnownTimezone "[0..1]"
+        +DateAndTimeType [1] parseDateAndTime(String isoString)
     }
     class DateType {
         +String dateValue "[1]"
@@ -94,11 +96,13 @@ classDiagram
     class TimeticksType {
         +Integer timeticksValue "[1]"
         +Integer moduloValue "[1]"
+        +Integer [1] wrapTimeticks(Integer ticksCount)
     }
     class TimestampType {
         +Integer timestampValue "[1]"
         +Integer associatedTimeticksRef "[1]"
         +Boolean isResetOnWrap "[1]"
+        +Integer [1] evaluateTimestampReset(Integer timeticksRef)
     }
 
     DateAndTimeTypes "1" *-- "0..1" DateAndTimeType : dateAndTime
@@ -589,6 +593,10 @@ classDiagram
       "RFC 2579: Textual Conventions for SMIv2";
   }
 ```
+
+## User Stories
+- [ ] #12 - [RFC 3339 Date and Time Timestamp Parsing, Fractional Seconds, and RFC 9557 Timezone Offset Semantics](https://github.com/gintatkinson/3dgs-037/blob/main/docs/user-stories/us-07-date-time-timestamp-parsing.md) (Validates RFC 3339 and RFC 9557 date-and-time, date, and time parsing semantics)
+- [ ] #13 - [Timeticks Modulo 2^32 Arithmetic and Associated Timestamp Reset](https://github.com/gintatkinson/3dgs-037/blob/main/docs/user-stories/us-08-timeticks-wrap-timestamp-reset.md) (Validates timeticks modulo 2^32 wrap-around and associated timestamp reset logic)
 
 ## Source References
 Structural Schema: https://github.com/YangModels/yang/blob/main/standard/ietf/RFC/ietf-yang-types%402025-12-22.yang

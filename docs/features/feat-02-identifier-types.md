@@ -317,6 +317,11 @@ From `schema/ietf-yang-types@2025-12-22.yang`:
   }
 ```
 
+## User Stories
+- [ ] #9 - [Object Identifier ASN.1 Arc Hierarchy and 128-Subidentifier Boundary Validation](https://github.com/gintatkinson/3dgs-037/blob/main/docs/user-stories/us-04-object-identifier-asn1-validation.md) (Validates object-identifier ASN.1 arc restrictions and object-identifier-128 sub-identifier limits)
+- [ ] #10 - [RFC 9562 UUID Pattern Validation and Canonical Lowercase Normalization](https://github.com/gintatkinson/3dgs-037/blob/main/docs/user-stories/us-05-uuid-formatting-canonicalization.md) (Validates RFC 9562 UUID format and canonical lowercase representation)
+- [ ] #11 - [RFC 7950 YANG Identifier Syntax Rules and Length Restriction Validation](https://github.com/gintatkinson/3dgs-037/blob/main/docs/user-stories/us-06-yang-identifier-syntax-validation.md) (Validates RFC 7950 YANG 1.1 identifier syntax and character rules)
+
 ## Source References
 Structural Schema: https://github.com/YangModels/yang/blob/main/standard/ietf/RFC/ietf-yang-types%402025-12-22.yang
 Normative Specification: https://datatracker.ietf.org/doc/rfc9911/

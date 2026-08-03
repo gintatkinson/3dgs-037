@@ -267,6 +267,10 @@ classDiagram
   }
 ```
 
+## User Stories
+- [ ] #14 - [IEEE 802 MAC Address and Physical Media Address Validation and Lowercase Canonicalization](https://github.com/gintatkinson/3dgs-037/blob/main/docs/user-stories/us-09-mac-and-phys-address-canonicalization.md) (Validates MAC address 48-bit octet format, physical media address variable octets, and canonical lowercasing)
+- [ ] #15 - [Dotted-Quad Decimal Parsing to Unsigned Int32 and XPath 1.0 Expression Syntax Validation](https://github.com/gintatkinson/3dgs-037/blob/main/docs/user-stories/us-10-dotted-quad-and-xpath-validation.md) (Validates dotted-quad decimal notation parsing, XPath 1.0 syntax evaluation, and BCP 47 language tag formatting)
+
 ## Source References
 Structural Schema: https://github.com/YangModels/yang/blob/main/standard/ietf/RFC/ietf-yang-types%402025-12-22.yang
 Normative Specification: https://datatracker.ietf.org/doc/rfc9911/

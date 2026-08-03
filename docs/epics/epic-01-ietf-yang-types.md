@@ -34,7 +34,16 @@ The `ietf-yang-types` module supersedes RFC 6991 (`ietf-yang-types@2013-07-15`) 
 *To be populated after Phase 3*
 
 #### Associated User Stories
-*To be populated after Phase 3*
+- [ ] #6 - [Counter32 and Counter64 Monotonic Increment and Wraparound Behavior](https://github.com/gintatkinson/3dgs-037/blob/main/docs/user-stories/us-01-counter-monotonic-wrap.md) (Validates counter32 and counter64 monotonic wraparound semantics)
+- [ ] #7 - [Zero-Based Counter Default Initialization and Initial Delta Computation](https://github.com/gintatkinson/3dgs-037/blob/main/docs/user-stories/us-02-zero-based-counter-initialization.md) (Validates zero-based-counter32 and zero-based-counter64 initialization and initial delta calculation)
+- [ ] #8 - [Gauge32 and Gauge64 Dynamic Range and Boundary Latching Behavior](https://github.com/gintatkinson/3dgs-037/blob/main/docs/user-stories/us-03-gauge-min-max-latching.md) (Validates gauge32 and gauge64 dynamic variation and min/max latching boundaries)
+- [ ] #9 - [Object Identifier ASN.1 Arc Hierarchy and 128-Subidentifier Boundary Validation](https://github.com/gintatkinson/3dgs-037/blob/main/docs/user-stories/us-04-object-identifier-asn1-validation.md) (Validates object-identifier ASN.1 arc restrictions and object-identifier-128 sub-identifier limits)
+- [ ] #10 - [RFC 9562 UUID Pattern Validation and Canonical Lowercase Normalization](https://github.com/gintatkinson/3dgs-037/blob/main/docs/user-stories/us-05-uuid-formatting-canonicalization.md) (Validates RFC 9562 UUID format and canonical lowercase representation)
+- [ ] #11 - [RFC 7950 YANG Identifier Syntax Rules and Length Restriction Validation](https://github.com/gintatkinson/3dgs-037/blob/main/docs/user-stories/us-06-yang-identifier-syntax-validation.md) (Validates RFC 7950 YANG 1.1 identifier syntax and character rules)
+- [ ] #12 - [RFC 3339 Date and Time Timestamp Parsing, Fractional Seconds, and RFC 9557 Timezone Offset Semantics](https://github.com/gintatkinson/3dgs-037/blob/main/docs/user-stories/us-07-date-time-timestamp-parsing.md) (Validates RFC 3339 and RFC 9557 date-and-time, date, and time parsing semantics)
+- [ ] #13 - [Timeticks Modulo 2^32 Arithmetic and Associated Timestamp Reset](https://github.com/gintatkinson/3dgs-037/blob/main/docs/user-stories/us-08-timeticks-wrap-timestamp-reset.md) (Validates timeticks modulo 2^32 wrap-around and associated timestamp reset logic)
+- [ ] #14 - [IEEE 802 MAC Address and Physical Media Address Validation and Lowercase Canonicalization](https://github.com/gintatkinson/3dgs-037/blob/main/docs/user-stories/us-09-mac-and-phys-address-canonicalization.md) (Validates MAC address 48-bit octet format, physical media address variable octets, and canonical lowercasing)
+- [ ] #15 - [Dotted-Quad Decimal Parsing to Unsigned Int32 and XPath 1.0 Expression Syntax Validation](https://github.com/gintatkinson/3dgs-037/blob/main/docs/user-stories/us-10-dotted-quad-and-xpath-validation.md) (Validates dotted-quad decimal notation parsing, XPath 1.0 syntax evaluation, and BCP 47 language tag formatting)
 
 ## 3. Architecture
 

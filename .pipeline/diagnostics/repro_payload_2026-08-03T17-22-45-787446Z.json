@@ -1,0 +1,33 @@
+{
+  "timestamp": "2026-08-03T17:22:45.787446Z",
+  "tooling": {
+    "name": "parity_auditor",
+    "version": "1.0.0"
+  },
+  "context": {
+    "command": ".agents/skills/spec-orchestrator/scripts/verify_model_coverage.py --spec-only --allow-missing-specs",
+    "exit_code": 1,
+    "downstream_repo": "https://github.com/gintatkinson/3dgs-037.git",
+    "commit_hash": "a75a100b911a0090762974f4ffb8cfc1a2815a93"
+  },
+  "failure": {
+    "traceback": "",
+    "error_summary": [
+      "Feature feat-03-date-and-time-types.md class 'TimeticksType' method 'wrapTimeticks' is missing a multiplicity (e.g. [1], [0..1], [0..*]) in its return signature.",
+      "Feature feat-03-date-and-time-types.md class 'TimestampType' method 'evaluateTimestampReset' is missing a multiplicity (e.g. [1], [0..1], [0..*]) in its return signature.",
+      "User Story us-02-zero-based-counter-initialization.md sequence diagram contains a combined fragment 'alt' with guard '\"[val >= 0]\"' that is not enclosed in square brackets [].",
+      "User Story us-02-zero-based-counter-initialization.md sequence diagram contains a combined fragment 'else' with guard '\"[val < 0]\"' that is not enclosed in square brackets [].",
+      "User Story us-02-zero-based-counter-initialization.md sequence diagram contains a combined fragment 'alt' with guard '\"[val >= 0]\"' that is not enclosed in square brackets [].",
+      "User Story us-02-zero-based-counter-initialization.md sequence diagram contains a combined fragment 'else' with guard '\"[val < 0]\"' that is not enclosed in square brackets [].",
+      "User Story us-08-timeticks-wrap-timestamp-reset.md sequence diagram contains a combined fragment 'alt' with guard '\"[ticksCount >= 4294967296]\"' that is not enclosed in square brackets [].",
+      "User Story us-08-timeticks-wrap-timestamp-reset.md sequence diagram contains a combined fragment 'alt' with guard '\"[timeticksRef < previousTicksRef]\"' that is not enclosed in square brackets [].",
+      "User Story us-08-timeticks-wrap-timestamp-reset.md sequence diagram contains a combined fragment 'else' with guard '\"[timeticksRef >= previousTicksRef]\"' that is not enclosed in square brackets [].",
+      "User Story us-08-timeticks-wrap-timestamp-reset.md sequence diagram contains a combined fragment 'else' with guard '\"[ticksCount < 4294967296]\"' that is not enclosed in square brackets []."
+    ]
+  },
+  "reproduction_case": {
+    "target_file": "",
+    "snippet_type": "text",
+    "snippet_content": ""
+  }
+}

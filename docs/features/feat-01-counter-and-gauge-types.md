@@ -287,6 +287,11 @@ classDiagram
   }
 ```
 
+## User Stories
+- [ ] #6 - [Counter32 and Counter64 Monotonic Increment and Wraparound Behavior](https://github.com/gintatkinson/3dgs-037/blob/main/docs/user-stories/us-01-counter-monotonic-wrap.md) (Validates counter32 and counter64 monotonic wraparound semantics)
+- [ ] #7 - [Zero-Based Counter Default Initialization and Initial Delta Computation](https://github.com/gintatkinson/3dgs-037/blob/main/docs/user-stories/us-02-zero-based-counter-initialization.md) (Validates zero-based-counter32 and zero-based-counter64 initialization and initial delta calculation)
+- [ ] #8 - [Gauge32 and Gauge64 Dynamic Range and Boundary Latching Behavior](https://github.com/gintatkinson/3dgs-037/blob/main/docs/user-stories/us-03-gauge-min-max-latching.md) (Validates gauge32 and gauge64 dynamic variation and min/max latching boundaries)
+
 ## Source References
 Structural Schema: https://github.com/YangModels/yang/blob/main/standard/ietf/RFC/ietf-yang-types%402025-12-22.yang
 Normative Specification: https://datatracker.ietf.org/doc/rfc9911/

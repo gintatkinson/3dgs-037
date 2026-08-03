@@ -1,0 +1,27 @@
+{
+  "timestamp": "2026-08-03T17:22:49.426840Z",
+  "tooling": {
+    "name": "parity_auditor",
+    "version": "1.0.0"
+  },
+  "context": {
+    "command": "skills/spec-orchestrator/scripts/verify_model_coverage.py --spec-only --allow-missing-specs",
+    "exit_code": 1,
+    "downstream_repo": "https://github.com/gintatkinson/3dgs-037.git",
+    "commit_hash": "a75a100b911a0090762974f4ffb8cfc1a2815a93"
+  },
+  "failure": {
+    "traceback": "",
+    "error_summary": [
+      "User Story us-08-timeticks-wrap-timestamp-reset.md sequence diagram contains a combined fragment 'alt' with guard '\"[ticksCount >= 4294967296]\"' that is not enclosed in square brackets [].",
+      "User Story us-08-timeticks-wrap-timestamp-reset.md sequence diagram contains a combined fragment 'alt' with guard '\"[timeticksRef < previousTicksRef]\"' that is not enclosed in square brackets [].",
+      "User Story us-08-timeticks-wrap-timestamp-reset.md sequence diagram contains a combined fragment 'else' with guard '\"[timeticksRef >= previousTicksRef]\"' that is not enclosed in square brackets [].",
+      "User Story us-08-timeticks-wrap-timestamp-reset.md sequence diagram contains a combined fragment 'else' with guard '\"[ticksCount < 4294967296]\"' that is not enclosed in square brackets []."
+    ]
+  },
+  "reproduction_case": {
+    "target_file": "",
+    "snippet_type": "text",
+    "snippet_content": ""
+  }
+}
