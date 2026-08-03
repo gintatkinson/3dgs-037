@@ -1,0 +1,24 @@
+{
+  "timestamp": "2026-08-03T16:57:45.168650Z",
+  "tooling": {
+    "name": "parity_auditor",
+    "version": "1.0.0"
+  },
+  "context": {
+    "command": "skills/spec-orchestrator/scripts/verify_model_coverage.py --spec-only --only feat-01-counter-and-gauge-types.md",
+    "exit_code": 1,
+    "downstream_repo": "",
+    "commit_hash": ""
+  },
+  "failure": {
+    "traceback": "",
+    "error_summary": [
+      "Feature feat-01-counter-and-gauge-types.md:16 contains unresolved issue reference token: '- [ ] #[EpicIssueID] - [[ietf-yang-types]: Common YANG Data Types](https://github.com/gintatkinson/3dgs-037/blob/main/docs/epics/epic-01-ietf-yang-types.md) (Parent Epic for common YANG data types)'. Specification templates must be populated before registration."
+    ]
+  },
+  "reproduction_case": {
+    "target_file": "",
+    "snippet_type": "text",
+    "snippet_content": ""
+  }
+}

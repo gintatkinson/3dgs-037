@@ -1,0 +1,94 @@
+{
+  "meta": {
+    "version": "1.0.0",
+    "schema_name": "ietf-yang-types@2025-12-22",
+    "yang_source": "/Users/perkunas/jail/3dgs-037/schema/ietf-yang-types@2025-12-22.yang"
+  },
+  "theme": {
+    "modes": [
+      "light",
+      "dark",
+      "system"
+    ]
+  },
+  "navigation": {
+    "sidebar": {
+      "collapsible": true,
+      "default_expanded": true
+    }
+  },
+  "layout": {
+    "root_container": {
+      "type": "SidebarLayout",
+      "id": "main_shell",
+      "children": [
+        {
+          "type": "HierarchyTree",
+          "id": "resource_tree",
+          "props": {
+            "hierarchy": []
+          },
+          "bindings": {
+            "selection_target": "selected_managed_object"
+          }
+        },
+        {
+          "type": "ResizableSplitter",
+          "id": "workspace_split",
+          "props": {
+            "axis": "horizontal",
+            "resizable": true
+          },
+          "children": [
+            {
+              "type": "TopologyMap",
+              "id": "topology_pane"
+            },
+            {
+              "type": "ResizableSplitter",
+              "id": "lower_split",
+              "props": {
+                "axis": "horizontal",
+                "resizable": true
+              },
+              "children": [
+                {
+                  "type": "DensityTable",
+                  "id": "elements_view"
+                },
+                {
+                  "type": "TabbedContainer",
+                  "id": "details_and_relations_tab",
+                  "children": [
+                    {
+                      "type": "TableView",
+                      "id": "components_table",
+                      "props": {
+                        "label": "token:layout.labels.components"
+                      }
+                    },
+                    {
+                      "type": "TableView",
+                      "id": "relation_a_table",
+                      "props": {
+                        "label": "token:layout.labels.relation_a"
+                      }
+                    },
+                    {
+                      "type": "TableView",
+                      "id": "relation_b_table",
+                      "props": {
+                        "label": "token:layout.labels.relation_b"
+                      }
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  },
+  "attributes": []
+}

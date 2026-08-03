@@ -1,0 +1,42 @@
+{
+  "timestamp": "2026-08-03T16:23:37.061710Z",
+  "tooling": {
+    "name": "parity_auditor",
+    "version": "1.0.0"
+  },
+  "context": {
+    "command": "./skills/spec-orchestrator/scripts/verify_model_coverage.py --spec-only --allow-missing-specs",
+    "exit_code": 1,
+    "downstream_repo": "",
+    "commit_hash": ""
+  },
+  "failure": {
+    "traceback": "",
+    "error_summary": [
+      "Feature feat-01-counter-and-gauge-types.md:16 contains unresolved issue reference token: '- [ ] #[EpicIssueID] - [[ietf-yang-types]: Common YANG Data Types](https://github.com/gintatkinson/3dgs-037/blob/main/docs/epics/epic-01-ietf-yang-types.md) (Parent Epic for common YANG data types)'. Specification templates must be populated before registration.",
+      "Feature feat-01-counter-and-gauge-types.md contains an aggregation or composition relationship without multiplicity tags. You must enforce multiplicity tags (e.g., '1', '0..1', '0..*') on association ends between 'ParentContainer' and 'CounterAndGaugeTypes'.",
+      "Feature feat-01-counter-and-gauge-types.md class 'CounterAndGaugeTypes' method 'validateCounter32' is missing a multiplicity (e.g. [1], [0..1], [0..*]) in its return signature.",
+      "Feature feat-01-counter-and-gauge-types.md class 'CounterAndGaugeTypes' method 'validateZeroBasedCounter32' is missing a multiplicity (e.g. [1], [0..1], [0..*]) in its return signature.",
+      "Feature feat-01-counter-and-gauge-types.md class 'CounterAndGaugeTypes' method 'validateCounter64' is missing a multiplicity (e.g. [1], [0..1], [0..*]) in its return signature.",
+      "Feature feat-01-counter-and-gauge-types.md class 'CounterAndGaugeTypes' method 'validateZeroBasedCounter64' is missing a multiplicity (e.g. [1], [0..1], [0..*]) in its return signature.",
+      "Feature feat-01-counter-and-gauge-types.md class 'CounterAndGaugeTypes' method 'validateGauge32' is missing a multiplicity (e.g. [1], [0..1], [0..*]) in its return signature.",
+      "Feature feat-01-counter-and-gauge-types.md class 'CounterAndGaugeTypes' method 'validateGauge64' is missing a multiplicity (e.g. [1], [0..1], [0..*]) in its return signature.",
+      "Feature feat-02-identifier-types.md:16 contains unresolved issue reference token: '- [ ] #[EpicIssueID] - [[ietf-yang-types]: Common YANG Data Types](https://github.com/gintatkinson/3dgs-037/blob/main/docs/epics/epic-01-ietf-yang-types.md) (Parent Epic for common YANG data types)'. Specification templates must be populated before registration.",
+      "Feature feat-02-identifier-types.md contains an aggregation or composition relationship without multiplicity tags. You must enforce multiplicity tags (e.g., '1', '0..1', '0..*') on association ends between 'IdentifierTypes' and 'ObjectIdentifier'.",
+      "Feature feat-02-identifier-types.md contains an aggregation or composition relationship without multiplicity tags. You must enforce multiplicity tags (e.g., '1', '0..1', '0..*') on association ends between 'IdentifierTypes' and 'ObjectIdentifier128'.",
+      "Feature feat-02-identifier-types.md contains an aggregation or composition relationship without multiplicity tags. You must enforce multiplicity tags (e.g., '1', '0..1', '0..*') on association ends between 'IdentifierTypes' and 'Uuid'.",
+      "Feature feat-02-identifier-types.md contains an aggregation or composition relationship without multiplicity tags. You must enforce multiplicity tags (e.g., '1', '0..1', '0..*') on association ends between 'IdentifierTypes' and 'YangIdentifier'.",
+      "Feature feat-02-identifier-types.md class 'ObjectIdentifier' method 'validateAsn1Restrictions' is missing a multiplicity (e.g. [1], [0..1], [0..*]) in its return signature.",
+      "Feature feat-02-identifier-types.md class 'ObjectIdentifier' method 'validateSubIdentifierLimits' is missing a multiplicity (e.g. [1], [0..1], [0..*]) in its return signature.",
+      "Feature feat-02-identifier-types.md class 'ObjectIdentifier128' method 'validate128Limit' is missing a multiplicity (e.g. [1], [0..1], [0..*]) in its return signature.",
+      "Feature feat-02-identifier-types.md class 'Uuid' method 'validateRfc9562Format' is missing a multiplicity (e.g. [1], [0..1], [0..*]) in its return signature.",
+      "Feature feat-02-identifier-types.md class 'Uuid' method 'isCanonicalLowercase' is missing a multiplicity (e.g. [1], [0..1], [0..*]) in its return signature.",
+      "Feature feat-02-identifier-types.md class 'YangIdentifier' method 'validateRfc7950Rules' is missing a multiplicity (e.g. [1], [0..1], [0..*]) in its return signature."
+    ]
+  },
+  "reproduction_case": {
+    "target_file": "",
+    "snippet_type": "text",
+    "snippet_content": ""
+  }
+}
