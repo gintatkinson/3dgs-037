@@ -31,7 +31,10 @@ The `ietf-yang-types` module supersedes RFC 6991 (`ietf-yang-types@2013-07-15`) 
 ### Associated Use Cases & User Stories
 
 #### Associated Use Cases
-*To be populated after Phase 3*
+- [ ] #16 - [Telemetry Ingestion and Delta/Range Computation for Counter and Gauge Types](https://github.com/gintatkinson/3dgs-037/blob/main/docs/use-cases/uc-01-counter-and-gauge-telemetry.md) (Validates ingestion, delta computation, and wraparound bounds for counter and gauge telemetry)
+- [ ] #17 - [Object Identifier, UUID, and YANG Identifier Resolution and Validation](https://github.com/gintatkinson/3dgs-037/blob/main/docs/use-cases/uc-02-identifier-validation-and-lookup.md) (Validates ASN.1 object identifiers, RFC 9562 UUID canonicalization, and YANG identifier syntax rules)
+- [ ] #18 - [RFC 3339 Timestamp Parsing, Timezone Alignment, and Timeticks Rollover Tracking](https://github.com/gintatkinson/3dgs-037/blob/main/docs/use-cases/uc-03-date-and-time-telemetry-parsing.md) (Validates RFC 3339 timestamp parsing, timezone offsets, and timeticks rollover handling)
+- [ ] #19 - [Network Address (MAC/IP/Domain/XPath) Parsing and Syntax Validation](https://github.com/gintatkinson/3dgs-037/blob/main/docs/use-cases/uc-04-address-and-string-validation.md) (Validates MAC, IP, domain name, and XPath syntax validation and canonicalization)
 
 #### Associated User Stories
 - [ ] #6 - [Counter32 and Counter64 Monotonic Increment and Wraparound Behavior](https://github.com/gintatkinson/3dgs-037/blob/main/docs/user-stories/us-01-counter-monotonic-wrap.md) (Validates counter32 and counter64 monotonic wraparound semantics)
