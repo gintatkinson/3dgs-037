@@ -38,15 +38,15 @@ sequenceDiagram
     autonumber
     actor userActor as "userActor : UserActor"
     participant subsystemComponent as "subsystemComponent : SubsystemComponent"
-    participant link as "link : Link"
+    participant linkEntity as "linkEntity : Link"
     participant source as "source : Source"
     participant destination as "destination : Destination"
     participant supportingLink as "supportingLink : SupportingLink"
 
     userActor->>subsystemComponent: addLink(networkId: String, linkId: String, sourceNode: String, destNode: String)
     alt [linkId is unique and endpoints exist]
-        subsystemComponent->>link: setLinkId(linkId: String)
-        link-->subsystemComponent: status : Status
+        subsystemComponent->>linkEntity: setLinkId(linkId: String)
+        linkEntity-->subsystemComponent: status : Status
         subsystemComponent->>source: setSource(sourceNode: String, sourceTp: String)
         source-->subsystemComponent: status : Status
         subsystemComponent->>destination: setDestination(destNode: String, destTp: String)

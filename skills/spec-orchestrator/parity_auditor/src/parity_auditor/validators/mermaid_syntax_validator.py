@@ -283,6 +283,17 @@ def check_mermaid_text(text: str, source: str = "<input>") -> List[str]:
                         f"operators or brackets MUST be enclosed in double quotes."
                     , location=f"{source}"))
 
+            if kind == "sequencediagram":
+                m_part = re.match(r"^\s*participant\s+([A-Za-z0-9_]+)\b", line_strip, re.I)
+                if m_part:
+                    alias = m_part.group(1).lower()
+                    if alias in {"link", "actor", "participant", "loop", "opt", "alt", "rect", "note"}:
+                        errors.append(Finding(
+                            "mermaid-sequence-reserved-participant-alias",
+                            f"{source}:{lineno}: reserved keyword '{m_part.group(1)}' used as unquoted sequence diagram participant alias: '{line_strip}'. Participant aliases MUST NOT use Mermaid reserved keywords.",
+                            location=f"{source}"
+                        ))
+
             if kind in ("graph", "flowchart"):
                 unquoted_title = validate_mermaid_subgraph_title_quoting(line_strip)
                 if unquoted_title:

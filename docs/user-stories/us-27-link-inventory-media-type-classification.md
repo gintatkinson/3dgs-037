@@ -42,7 +42,7 @@ spec_source: "draft-ietf-ivy-network-inventory-topology & ietf-network-inventory
 sequenceDiagram
     autonumber
     actor userActor as "userActor : UserActor"
-    participant link as "link : Link"
+    participant linkEntity as "linkEntity : Link"
     participant inventoryMappingAttributes as "inventoryMappingAttributes : InventoryMappingAttributes"
     participant linkType as "linkType : LinkType"
 
