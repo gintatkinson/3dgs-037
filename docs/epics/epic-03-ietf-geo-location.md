@@ -14,6 +14,8 @@ This Epic encompasses the complete geographic location management capabilities d
 
 The `ietf-geo-location` module models reference frames, geodetic systems, spatial coordinate choices (ellipsoid vs. Cartesian), motion vectors, and temporal validity bounds. It serves as a core location infrastructure provider for physical network inventories, device placement tracking, fiber endpoints, and spatial topology visualization.
 
+**Parent Epic**: [Epic #38: [ietf-geo-location]: Geographic Location Management](file:///Users/perkunas/jail/3dgs-037/docs/epics/epic-03-ietf-geo-location.md)
+
 ## 2. Requirements & Checklist
 - [ ] #34 - [ietf-geo-location: Geodetic Reference Frame](https://github.com/gintatkinson/3dgs-037/blob/main/docs/features/feat-09-geodetic-reference-frame.md) (reference-frame, alternate-system, astronomical-body)
 - [ ] #35 - [ietf-geo-location: Geodetic System and Accuracy Bounds](https://github.com/gintatkinson/3dgs-037/blob/main/docs/features/feat-10-geodetic-system-and-accuracy.md) (geodetic-system, geodetic-datum, coord-accuracy, height-accuracy)

@@ -14,6 +14,8 @@ This Epic establishes the network inventory location management specification de
 
 The `ietf-ni-location` model extends standard inventory management paradigms by providing a hierarchical and composable location framework. It enables physical network equipment (such as chassis, line cards, and transceivers) to be mapped to precise physical locations—ranging from macro-level postal and civic addresses down to micro-level rack units, bays, rooms, and row/column coordinates. Furthermore, it integrates with `ietf-geo-location` to support 3D coordinate mapping and spatial indexing across multi-site network infrastructure.
 
+**Parent Epic**: [Epic #38: [ietf-geo-location]: Geographic Location Management](file:///Users/perkunas/jail/3dgs-037/docs/epics/epic-03-ietf-geo-location.md)
+
 ## 2. Requirements & Checklist
 - [ ] #47 - [ietf-ni-location: Location Inventory Base and Postal Address](https://github.com/gintatkinson/3dgs-037/blob/main/docs/features/feat-13-location-inventory-base-and-postal-address.md) (locations, location, id, type, parent, timestamp, valid-until, physical-address)
 - [ ] #48 - [ietf-ni-location: Building and Floor Position Specs](https://github.com/gintatkinson/3dgs-037/blob/main/docs/features/feat-14-building-and-floor-position-specs.md) (room-building-position, building, floor, room, address, postal-code, state, city, country-code)
