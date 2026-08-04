@@ -27,7 +27,10 @@ The `ietf-network-inventory-topology` model extends standard logical network top
 ### Associated Use Cases & User Stories
 
 #### Associated Use Cases
-*To be populated after Phase 3*
+- [ ] #69 - [Physical Underlay Network Topology Type Discovery, Activation, and Base Network Topology Augmentation Verification](https://github.com/gintatkinson/3dgs-037/blob/main/docs/use-cases/uc-17-network-inventory-topology-type-discovery-and-activation.md) (Provides physical underlay network topology type discovery and presence container activation verification)
+- [ ] #70 - [Logical Node to Physical Network Element (NE) Inventory Mapping and 1:1 Correlation](https://github.com/gintatkinson/3dgs-037/blob/main/docs/use-cases/uc-18-node-to-physical-network-element-mapping.md) (Provides logical node to physical network element inventory mapping and 1:1 leafref correlation)
+- [ ] #71 - [Port Component Leafref Binding, Port Breakout Mode Configuration (4x10G, 2x50G), and Child TP Management](https://github.com/gintatkinson/3dgs-037/blob/main/docs/use-cases/uc-19-termination-point-component-binding-and-breakout-management.md) (Provides termination point port component leafref binding, port breakout mode configuration, and child TP management)
+- [ ] #72 - [Underlay Link Physical Media Classification, Leased Fiber/Wireless Media Resolution, and Fallback Handling](https://github.com/gintatkinson/3dgs-037/blob/main/docs/use-cases/uc-20-link-media-classification-and-passive-inventory-resolution.md) (Provides underlay link physical media classification, leased fiber/wireless media resolution, and fallback handling)
 
 #### Associated User Stories
 - [ ] #65 - [[ietf-network-inventory-topology]: Physical Underlay Topology Network Type Discovery, Activation, and Network Topology Augmentation Verification](https://github.com/gintatkinson/3dgs-037/blob/main/docs/user-stories/us-24-inventory-topology-type-activation.md) (Provides physical underlay topology network type discovery and presence container augmentation)
