@@ -27,10 +27,10 @@ The `ietf-inet-types` module forms a foundational data type library that standar
 ### Associated Use Cases & User Stories
 
 #### Associated Use Cases
-- [ ] #TBD - [IP Address Parsing and Zone Identifier Scoping](https://github.com/gintatkinson/3dgs-037/blob/main/docs/use-cases/uc-05-ip-address-parsing.md) (Validates IPv4/v6 address and prefix syntax, zone index resolution, and CIDR prefix bounds)
-- [ ] #TBD - [DNS Domain Name and URI Format Validation](https://github.com/gintatkinson/3dgs-037/blob/main/docs/use-cases/uc-06-domain-and-uri-validation.md) (Validates FQDN syntax rules, host union parsing, and RFC 3986 URI structure)
-- [ ] #TBD - [Autonomous System and Transport Port Validation](https://github.com/gintatkinson/3dgs-037/blob/main/docs/use-cases/uc-07-as-and-port-validation.md) (Validates 32-bit AS number representation and 16-bit transport port bounds)
-- [ ] #TBD - [Traffic Classification and Scope Identification](https://github.com/gintatkinson/3dgs-037/blob/main/docs/use-cases/uc-08-traffic-classification.md) (Validates IPv6 flow labels, DSCP marking, and address scope classification)
+- [ ] #30 - [End-to-End IP Address Ingestion, Zone Index Association, and Prefix Boundary Validation](https://github.com/gintatkinson/3dgs-037/blob/main/docs/use-cases/uc-05-ip-address-and-zone-management.md) (Validates IPv4/v6 address and prefix syntax, zone index resolution, and CIDR prefix bounds)
+- [ ] #31 - [Domain Name Lookup, FQDN Length Restriction Enforcement, and URI Scheme Resolution](https://github.com/gintatkinson/3dgs-037/blob/main/docs/use-cases/uc-06-domain-name-and-uri-resolution.md) (Validates FQDN syntax rules, host union parsing, and RFC 3986 URI structure)
+- [ ] #32 - [Autonomous System (AS) Notation Conversion and TCP/UDP Service Port Range Assignment](https://github.com/gintatkinson/3dgs-037/blob/main/docs/use-cases/uc-07-as-number-and-port-assignment.md) (Validates 32-bit AS number representation and 16-bit transport port bounds)
+- [ ] #33 - [IP Unicast/Multicast Telemetry Classification, IPv6 Flow Label Generation, and DSCP QoS Tagging](https://github.com/gintatkinson/3dgs-037/blob/main/docs/use-cases/uc-08-ip-unicast-multicast-flow-routing.md) (Validates IPv6 flow labels, DSCP marking, and address scope classification)
 
 #### Associated User Stories
 - [ ] #25 - [[ietf-inet-types]: IPv4 and IPv6 Address Format Validation, Zone Index Parsing, and Hex Normalization](https://github.com/gintatkinson/3dgs-037/blob/main/docs/user-stories/us-11-ip-address-zone-index-validation.md) (Validates IPv4/v6 address format rules, zone index percent-delimiter extraction, and no-zone restriction enforcement)
