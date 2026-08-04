@@ -48,10 +48,14 @@ classDiagram
     class Ipv4Address {
         +String address "[1]"
         +String zoneIndex "[0..1]"
+        +Boolean validateIpAddress(String addressString) "[1]"
+        +String stripZoneIndex(String scopedAddressString) "[1]"
     }
     class Ipv6Address {
         +String address "[1]"
         +String zoneIndex "[0..1]"
+        +Boolean validateIpAddress(String addressString) "[1]"
+        +String stripZoneIndex(String scopedAddressString) "[1]"
     }
     class IpAddressNoZone {
         <<abstract>>
@@ -71,10 +75,14 @@ classDiagram
     class Ipv4Prefix {
         +String address "[1]"
         +Integer prefixLength "[1]"
+        +Boolean validateIpPrefix(String prefixString) "[1]"
+        +String determineIpVersion(String ipString) "[1]"
     }
     class Ipv6Prefix {
         +String address "[1]"
         +Integer prefixLength "[1]"
+        +Boolean validateIpPrefix(String prefixString) "[1]"
+        +String determineIpVersion(String ipString) "[1]"
     }
 
     IpAddress <|-- Ipv4Address
@@ -434,6 +442,10 @@ classDiagram
                 Representation";
   }
 ```
+
+## User Stories
+- [ ] #25 - [[ietf-inet-types]: IPv4 and IPv6 Address Format Validation, Zone Index Parsing, and Hex Normalization](https://github.com/gintatkinson/3dgs-037/blob/main/docs/user-stories/us-11-ip-address-zone-index-validation.md) (Validates IPv4/v6 address format rules, zone index percent-delimiter extraction, and no-zone restriction enforcement)
+- [ ] #26 - [[ietf-inet-types]: IPv4 and IPv6 Prefix Notation Parsing, Subnet Mask Calculation, and Prefix-Length Bound Enforcement](https://github.com/gintatkinson/3dgs-037/blob/main/docs/user-stories/us-12-ip-prefix-and-subnet-range-calculation.md) (Validates IPv4/v6 prefix length bounds 0..32 and 0..128, subnet mask MSB calculation, and zero-host-bits canonicalization)
 
 ## Source References
 Structural Schema: https://github.com/YangModels/yang/blob/main/standard/ietf/RFC/ietf-inet-types%402013-07-15.yang

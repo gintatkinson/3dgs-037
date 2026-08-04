@@ -252,6 +252,9 @@ classDiagram
    }
 ```
 
+## User Stories
+- [ ] #29 - [[ietf-inet-types]: IP Unicast vs Multicast Address Classification, IPv6 Flow Label Generation, and DSCP Code Point Validation](https://github.com/gintatkinson/3dgs-037/blob/main/docs/user-stories/us-15-ip-unicast-multicast-flow-label-classification.md) (Validates 20-bit IPv6 flow label range 0..1048575, 6-bit DSCP range 0..63, IP unicast vs multicast address classification, and multicast scope extraction)
+
 ## Source References
 Structural Schema: https://github.com/YangModels/yang/blob/main/standard/ietf/RFC/ietf-inet-types%402013-07-15.yang
 Normative Specification: https://datatracker.ietf.org/doc/rfc6021/

@@ -167,6 +167,9 @@ classDiagram
    }
 ```
 
+## User Stories
+- [ ] #28 - [[ietf-inet-types]: Autonomous System (AS) Number 2-Byte / 4-Byte Notation Parsing, AS Plain Conversions, and TCP/UDP Port Range Bounds (0..65535)](https://github.com/gintatkinson/3dgs-037/blob/main/docs/user-stories/us-14-as-number-and-port-range-validation.md) (Validates 32-bit AS number range bounds 0..4294967295, 16-bit transport port bounds 0..65535, and subtyped non-zero port constraints)
+
 ## Source References
 Structural Schema: https://github.com/YangModels/yang/blob/main/standard/ietf/RFC/ietf-inet-types%402013-07-15.yang
 Normative Specification: https://datatracker.ietf.org/doc/rfc6021/

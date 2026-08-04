@@ -284,6 +284,9 @@ classDiagram
   }
 ```
 
+## User Stories
+- [ ] #27 - [[ietf-inet-types]: RFC 1034 / RFC 1123 Domain Name Syntax Validation, FQDN Length Restrictions, and RFC 3986 URI Parsing](https://github.com/gintatkinson/3dgs-037/blob/main/docs/user-stories/us-13-domain-name-and-uri-syntax-parsing.md) (Validates DNS domain name label/total length limits, host union discrimination, and RFC 3986 URI syntax normalization)
+
 ## Source References
 Structural Schema: https://github.com/YangModels/yang/blob/main/standard/ietf/RFC/ietf-inet-types%402013-07-15.yang
 Normative Specification: https://datatracker.ietf.org/doc/rfc6021/
