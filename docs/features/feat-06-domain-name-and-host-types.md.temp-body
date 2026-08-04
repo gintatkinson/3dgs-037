@@ -1,0 +1,295 @@
+| Metadata | Value |
+| --- | --- |
+| **issue_id** | 21 |
+| **title** | [ietf-inet-types]: Domain Name and Host Data Types |
+| **type** | feature |
+| **interface_type** | api |
+| **generation_mode** | subagent |
+| **spec_source** | Project Constitution |
+| **labels** | feature, ietf-inet-types |
+| **schema_containers** | {'path': 'ietf-inet-types:domain-name', 'node_type': 'typedef'} |
+
+# Feature: [ietf-inet-types]: Domain Name and Host Data Types
+
+## Parent Epic
+- [ ] #24 - [ietf-inet-types: Common Internet Data Types](https://github.com/gintatkinson/3dgs-037/blob/main/docs/epics/epic-02-ietf-inet-types.md) (Parent Epic specification)
+
+## Description
+This feature specifies domain name, host, and Uniform Resource Identifier (URI) data types defined in the `ietf-inet-types` module (RFC 6021 / RFC 6991). These derived types provide standardized semantic representations, pattern constraints, length bounds, encoding rules, and normalization procedures for network identifiers and resources across management interfaces.
+
+The specific typedefs covered by this feature specification are:
+- **`domain-name`**: Represents a DNS domain name according to RFC 952, RFC 1034, RFC 1123, RFC 2782, and RFC 5890. It supports fully qualified domain names (FQDNs), service records (SRV), and root domain (`.`). Textual length is constrained to 1..253 characters (corresponding to the 255 octet DNS wire format). Encoding must be US-ASCII, using lowercase characters canonically, and internationalized domain names (IDNs) must use A-labels (punycode).
+- **`host`**: Represents a network host identifier modeled as a YANG union of an IP address (`inet:ip-address`, combining IPv4 and IPv6 addresses with optional zone identifiers) or a DNS domain name (`inet:domain-name`).
+- **`uri`**: Represents a Uniform Resource Identifier (URI) as defined by STD 66 (RFC 3986). Requires US-ASCII encoding and mandatory RFC 3986 normalization (removal of unnecessary percent-encoding, lowercasing of scheme/host, and uppercasing of hexadecimal digits). Zero-length URIs are invalid and signify absent URIs.
+
+## UML Class Diagram
+```mermaid
+classDiagram
+    class DomainNameAndHostTypes {
+        +String domainName "[0..1]"
+        +String hostIdentifier "[0..1]"
+        +String uriValue "[0..1]"
+        +Boolean validateDomainNameAndHostTypes() "[1]"
+    }
+    class DomainName {
+        +String nameValue "[1]"
+        +Integer lengthInChars "[1]"
+        +Boolean isFullyQualified "[1]"
+        +Boolean isValidSyntax() "[1]"
+        +String getCanonicalDomainName() "[1]"
+    }
+    class Host {
+        +String rawValue "[1]"
+        +Boolean isIpAddress "[1]"
+        +Boolean isDomainName "[1]"
+        +Boolean validateHostFormat() "[1]"
+    }
+    class HostUnionChoice {
+        <<choice>>
+    }
+    class IpAddressHost {
+        +String ipAddressString "[1]"
+        +String ipVersion "[1]"
+        +Boolean isValidIpHost() "[1]"
+    }
+    class DomainNameHost {
+        +String domainNameString "[1]"
+        +Boolean isValidDomainHost() "[1]"
+    }
+    class Uri {
+        +String rawUri "[1]"
+        +String normalizedUri "[1]"
+        +String scheme "[0..1]"
+        +Boolean isAsciiEncoded "[1]"
+        +Boolean isValidUriSyntax() "[1]"
+        +String getNormalizedUri() "[1]"
+    }
+
+    DomainNameAndHostTypes "1" *-- "0..1" DomainName : domainNameSpec
+    DomainNameAndHostTypes "1" *-- "0..1" Host : hostSpec
+    DomainNameAndHostTypes "1" *-- "0..1" Uri : uriSpec
+    Host "1" *-- "1" HostUnionChoice : hostTypeChoice
+    HostUnionChoice <|-- IpAddressHost
+    HostUnionChoice <|-- DomainNameHost
+```
+
+## Interface Requirements
+
+### 1. Payload Schema
+```json
+{
+  "domain-name": "example.com",
+  "host": "192.0.2.1",
+  "uri": "https://example.com:8443/api/v1/resource?query=test#section1"
+}
+```
+
+### 2. Validation & Constraints
+- **`domain-name`**:
+  - Base Type: `string`
+  - Pattern: `((([a-zA-Z0-9_]([a-zA-Z0-9\-_]){0,61})?[a-zA-Z0-9]\.)*([a-zA-Z0-9_]([a-zA-Z0-9\-_]){0,61})?[a-zA-Z0-9]\.?)|\.`
+  - Length: `1..253` characters (reflecting 255-octet DNS wire format limit after accounting for length prefixes and trailing null byte).
+  - Individual Label Length: 1 to 63 characters per dot-separated label.
+  - Encoding: US-ASCII only. Lowercase canonical representation.
+  - Internationalized Domain Names (IDN): Must be formatted as A-labels (e.g., `xn--...`) per RFC 5890.
+
+- **`host`**:
+  - Base Type: `union`
+  - Member Type 1: `inet:ip-address` (Union of `inet:ipv4-address` and `inet:ipv6-address`, supporting zone indices).
+  - Member Type 2: `inet:domain-name` (Constrained string matching domain name regex and 1..253 length).
+  - Disambiguation Rule: Values matching IPv4 or IPv6 dotted-quad or hex-colon syntax evaluate as `ip-address`; otherwise evaluated as `domain-name`.
+
+- **`uri`**:
+  - Base Type: `string`
+  - Syntax: STD 66 / RFC 3986 compliant Generic URI Syntax.
+  - Length: Minimum 1 character. Zero-length string (`""`) is invalid.
+  - Encoding: US-ASCII encoding strictly required. Non-ASCII characters must be percent-encoded.
+  - Normalization Rules:
+    - Case Normalization: Scheme and host components converted to lowercase; percent-encoding hex digits converted to uppercase (e.g., `%3a` -> `%3A`).
+    - Percent-Encoding Normalization: Unnecessary percent-encoding of unreserved characters (`A-Z`, `a-z`, `0-9`, `-`, `.`, `_`, `~`) must be decoded to native US-ASCII.
+
+### 3. Logical Operations & Interface Messages
+- **`validateDomainName(input: String): Boolean`**: Evaluates string length (1..253 chars) and verifies pattern matching for DNS domain names.
+- **`canonicalizeDomainName(input: String): String`**: Converts valid domain name input into lowercase US-ASCII representation and verifies A-label format for IDN components.
+- **`validateHost(input: String): Boolean`**: Determines whether input conforms to either valid IP address format (IPv4/IPv6) or valid DNS domain name format.
+- **`normalizeUri(input: String): String`**: Applies RFC 3986 Sections 6.2.1 and 6.2.2 normalization to input URI string (lowercasing scheme/host, uppercasing hex percent-encodings, decoding unreserved percent-encoded octets).
+- **`resolveHostAddress(host: String): List[String]`**: Abstract operation for resolving host domain names to target IPv4/IPv6 addresses via DNS lookup chains.
+
+### 4. Logical Exception States & Validation Failures
+- **`ERR_DOMAIN_NAME_LENGTH_EXCEEDED`**: Returned when `domain-name` length exceeds 253 characters or is zero.
+- **`ERR_INVALID_LABEL_SYNTAX`**: Returned when a domain name label exceeds 63 characters, contains invalid characters, or starts/ends with an invalid hyphen.
+- **`ERR_INVALID_HOST_FORMAT`**: Returned when `host` input fails validation as both an IP address and a domain name.
+- **`ERR_URI_ZERO_LENGTH`**: Returned when `uri` input string is empty (length == 0).
+- **`ERR_URI_NON_ASCII`**: Returned when `uri` string contains non-US-ASCII characters.
+- **`ERR_INVALID_PUNYCODE_IDN`**: Returned when an internationalized domain name fails A-label decoding per RFC 5890.
+
+## Given-When-Then Acceptance Criteria
+
+### Scenario 1: Valid Domain Name Syntax and Length Boundary Validation
+- **Given** a domain name validator supporting `inet:domain-name` constraints
+- **When** valid domain name strings are provided, including:
+  - Root domain `.` (length 1)
+  - Single-label host `localhost`
+  - Fully qualified domain name `subdomain.example.com.`
+  - Max-length 253-character multi-label domain name
+- **Then** the validator accepts all values as valid `domain-name` instances
+- **And** canonicalizes uppercase characters to lowercase US-ASCII.
+
+### Scenario 2: Domain Name Length Violation Rejection
+- **Given** a domain name string exceeding 253 characters in length
+- **When** validation is performed against the `inet:domain-name` typedef
+- **Then** the validation fails with error code `ERR_DOMAIN_NAME_LENGTH_EXCEEDED`
+- **And** the payload is rejected.
+
+### Scenario 3: Domain Name Label Constraint Validation
+- **Given** a domain name string containing an invalid label (e.g., label exceeding 63 characters or containing invalid characters like spaces or exclamation marks)
+- **When** pattern matching is evaluated
+- **Then** validation fails with error code `ERR_INVALID_LABEL_SYNTAX`.
+
+### Scenario 4: Host Type Union Matching for IP Addresses and Domain Names
+- **Given** a host identifier validator supporting `inet:host`
+- **When** input values are supplied as:
+  - An IPv4 address string `"192.0.2.1"`
+  - An IPv6 address string `"2001:db8::1"`
+  - A scoped IPv6 address string `"fe80::1%eth0"`
+  - A DNS domain name string `"server01.network.internal"`
+- **Then** the validator successfully matches and validates each input as a valid `host` union instance.
+
+### Scenario 5: Invalid Host Format Rejection
+- **Given** a host string `"invalid_host_@#$%.com"` that is neither a valid IP address nor a valid domain name
+- **When** host union validation is executed
+- **Then** validation fails with error code `ERR_INVALID_HOST_FORMAT`.
+
+### Scenario 6: URI Normalization and ASCII Constraint Enforcements
+- **Given** a URI validator enforcing STD 66 / RFC 3986 normalization rules
+- **When** an input URI string `"HTTP://USER:PASS@EXAMPLE.COM:8080/path/%7Euser/default.html?query=1"` is processed
+- **Then** scheme and host components are normalized to lowercase (`"http://USER:PASS@example.com:8080..."`)
+- **And** unreserved percent-encoded character `%7E` is decoded to `~`
+- **And** any hex percent-encodings are uppercased.
+
+### Scenario 7: Zero-Length and Non-ASCII URI Rejection
+- **Given** a URI input that is empty `""` or contains unencoded non-ASCII Unicode characters (e.g., `"https://example.com/ñ"`)
+- **When** URI validation is executed
+- **Then** the empty string is rejected with `ERR_URI_ZERO_LENGTH`
+- **And** the non-ASCII URI is rejected with `ERR_URI_NON_ASCII`.
+
+## Specification Context (Verbatim)
+
+```yang
+  /*** collection of domain name and URI types ***/
+
+  typedef domain-name {
+    type string {
+      pattern
+        '((([a-zA-Z0-9_]([a-zA-Z0-9\-_]){0,61})?[a-zA-Z0-9]\.)*'
+      + '([a-zA-Z0-9_]([a-zA-Z0-9\-_]){0,61})?[a-zA-Z0-9]\.?)'
+      + '|\.';
+      length "1..253";
+    }
+    description
+     "The domain-name type represents a DNS domain name.  The
+      name SHOULD be fully qualified whenever possible.
+
+      Internet domain names are only loosely specified.  Section
+      3.5 of RFC 1034 recommends a syntax (modified in Section
+      2.1 of RFC 1123).  The pattern above is intended to allow
+      for current practice in domain name use, and some possible
+      future expansion.  It is designed to hold various types of
+      domain names, including names used for A or AAAA records
+      (host names) and other records, such as SRV records.  Note
+      that Internet host names have a stricter syntax (described
+      in RFC 952) than the DNS recommendations in RFCs 1034 and
+      1123, and that systems that want to store host names in
+      schema nodes using the domain-name type are recommended to
+      adhere to this stricter standard to ensure interoperability.
+
+      The encoding of DNS names in the DNS protocol is limited
+      to 255 characters.  Since the encoding consists of labels
+      prefixed by a length bytes and there is a trailing NULL
+      byte, only 253 characters can appear in the textual dotted
+      notation.
+
+      The description clause of schema nodes using the domain-name
+      type MUST describe when and how these names are resolved to
+      IP addresses.  Note that the resolution of a domain-name value
+      may require to query multiple DNS records (e.g., A for IPv4
+      and AAAA for IPv6).  The order of the resolution process and
+      which DNS record takes precedence can either be defined
+      explicitly or may depend on the configuration of the
+      resolver.
+
+      Domain-name values use the US-ASCII encoding.  Their canonical
+      format uses lowercase US-ASCII characters.  Internationalized
+      domain names MUST be A-labels as per RFC 5890.";
+    reference
+     "RFC  952: DoD Internet Host Table Specification
+      RFC 1034: Domain Names - Concepts and Facilities
+      RFC 1123: Requirements for Internet Hosts -- Application
+                and Support
+      RFC 2782: A DNS RR for specifying the endpoints of services
+                (DNS SRV)
+      RFC 5890: Internationalized Domain Names in Applications
+                (IDNA): Definitions and Document Framework";
+  }
+
+  typedef host {
+    type union {
+      type inet:ip-address;
+      type inet:domain-name;
+    }
+    description
+     "The host type represents either an IP address or a DNS
+      domain name.";
+  }
+
+  typedef uri {
+    type string;
+    description
+     "The uri type represents a Uniform Resource Identifier
+      (URI) as defined by STD 66.
+
+      Objects using the uri type MUST be in US-ASCII encoding,
+      and MUST be normalized as described by RFC 3986 Sections
+      6.2.1, 6.2.2.1, and 6.2.2.2.  All unnecessary
+      percent-encoding is removed, and all case-insensitive
+      characters are set to lowercase except for hexadecimal
+      digits, which are normalized to uppercase as described in
+      Section 6.2.2.1.
+
+      The purpose of this normalization is to help provide
+      unique URIs.  Note that this normalization is not
+      sufficient to provide uniqueness.  Two URIs that are
+      textually distinct after this normalization may still be
+      equivalent.
+
+      Objects using the uri type may restrict the schemes that
+      they permit.  For example, 'data:' and 'urn:' schemes
+      might not be appropriate.
+
+      A zero-length URI is not a valid URI.  This can be used to
+      express 'URI absent' where required.
+
+      In the value set and its semantics, this type is equivalent
+      to the Uri SMIv2 textual convention defined in RFC 5017.";
+    reference
+     "RFC 3986: Uniform Resource Identifier (URI): Generic Syntax
+      RFC 3305: Report from the Joint W3C/IETF URI Planning Interest
+                Group: Uniform Resource Identifiers (URIs), URLs,
+                and Uniform Resource Names (URNs): Clarifications
+                and Recommendations
+      RFC 5017: MIB Textual Conventions for Uniform Resource
+                Identifiers (URIs)";
+  }
+```
+
+## User Stories
+- [ ] #27 - [[ietf-inet-types]: RFC 1034 / RFC 1123 Domain Name Syntax Validation, FQDN Length Restrictions, and RFC 3986 URI Parsing](https://github.com/gintatkinson/3dgs-037/blob/main/docs/user-stories/us-13-domain-name-and-uri-syntax-parsing.md) (Validates DNS domain name label/total length limits, host union discrimination, and RFC 3986 URI syntax normalization)
+
+## Source References
+Structural Schema: https://github.com/gintatkinson/3dgs-037/blob/main/standard/ietf/RFC/ietf-inet-types%402013-07-15.yang
+Normative Specification: https://datatracker.ietf.org/doc/rfc6021/
+
+## Logical UI & Layout Bindings
+- **Target LUI Component:** N/A
+- **Target Layout Container ID:** N/A
+- **Data Source Bindings:** N/A
