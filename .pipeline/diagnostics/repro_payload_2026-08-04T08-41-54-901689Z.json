@@ -1,0 +1,24 @@
+{
+  "timestamp": "2026-08-04T08:41:54.901689Z",
+  "tooling": {
+    "name": "parity_auditor",
+    "version": "1.0.0"
+  },
+  "context": {
+    "command": "./skills/spec-orchestrator/scripts/verify_model_coverage.py --spec-only --allow-missing-specs",
+    "exit_code": 1,
+    "downstream_repo": "https://github.com/gintatkinson/3dgs-037.git",
+    "commit_hash": "c0a4ca1fe06c78ffcae3f90e7e9903e7a14665a5"
+  },
+  "failure": {
+    "traceback": "",
+    "error_summary": [
+      "User Story us-27-link-inventory-media-type-classification.md sequence diagram message 'inventoryMappingAttributes->>linkType: validateLinkType(linkType: String)' calls operation 'validateLinkType' which is not defined on class 'LinkType' in any class diagram."
+    ]
+  },
+  "reproduction_case": {
+    "target_file": "",
+    "snippet_type": "text",
+    "snippet_content": ""
+  }
+}

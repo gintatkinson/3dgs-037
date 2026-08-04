@@ -1,0 +1,24 @@
+{
+  "timestamp": "2026-08-04T08:46:18.336943Z",
+  "tooling": {
+    "name": "reconcile_backlog",
+    "version": "1.0.0"
+  },
+  "context": {
+    "command": "skills/spec-orchestrator/scripts/reconcile_backlog.py",
+    "exit_code": 1,
+    "downstream_repo": "https://github.com/gintatkinson/3dgs-037.git",
+    "commit_hash": "c0a4ca1fe06c78ffcae3f90e7e9903e7a14665a5"
+  },
+  "failure": {
+    "traceback": "Traceback (most recent call last):\n  File \"/Users/perkunas/jail/3dgs-037/skills/spec-orchestrator/scripts/reconcile_backlog.py\", line 2073, in main\n    sys.exit(1)\nSystemExit: 1\n",
+    "error_summary": [
+      "1"
+    ]
+  },
+  "reproduction_case": {
+    "target_file": "",
+    "snippet_type": "text",
+    "snippet_content": ""
+  }
+}

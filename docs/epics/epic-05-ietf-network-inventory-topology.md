@@ -30,7 +30,10 @@ The `ietf-network-inventory-topology` model extends standard logical network top
 *To be populated after Phase 3*
 
 #### Associated User Stories
-*To be populated after Phase 3*
+- [ ] #65 - [[ietf-network-inventory-topology]: Physical Underlay Topology Network Type Discovery, Activation, and Network Topology Augmentation Verification](https://github.com/gintatkinson/3dgs-037/blob/main/docs/user-stories/us-24-inventory-topology-type-activation.md) (Provides physical underlay topology network type discovery and presence container augmentation)
+- [ ] #66 - [[ietf-network-inventory-topology]: Logical Node to Physical Network Element (NE) Leafref Mapping, 1:1 Correlation, and Unmapped Node Fallback](https://github.com/gintatkinson/3dgs-037/blob/main/docs/user-stories/us-25-node-inventory-element-mapping.md) (Provides logical node to physical network element leafref mapping and correlation)
+- [ ] #67 - [[ietf-network-inventory-topology]: Port Component Leafref Binding, Port Breakout Capability Configuration (e.g. 4x10G, 2x50G), Child TP Numbering, and Speed/Duplex Alignment](https://github.com/gintatkinson/3dgs-037/blob/main/docs/user-stories/us-26-termination-point-component-and-breakout-mode.md) (Provides termination point port-ref binding and port breakout channelization)
+- [ ] #68 - [[ietf-network-inventory-topology]: Underlay Link Media Type Classification (copper, fiber, coax, microwave, wlan, leased-fiber, unknown), Unset vs Unknown Evaluation, and Passive Inventory Resolution](https://github.com/gintatkinson/3dgs-037/blob/main/docs/user-stories/us-27-link-inventory-media-type-classification.md) (Provides underlay link media type classification and passive inventory resolution)
 
 ## 3. Architecture
 

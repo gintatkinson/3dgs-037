@@ -28,8 +28,10 @@ classDiagram
     class Network {
     }
     class NetworkTypes {
+        +Boolean augmentNetworkTopologyType() "[1]"
     }
     class InventoryTopology {
+        +Boolean isInventoryTopology() "[1]"
         +Boolean presence "[1]"
     }
     Networks "1" *-- "1" Network : network
