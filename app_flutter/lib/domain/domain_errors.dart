@@ -134,3 +134,30 @@ final class SerializationError extends DomainError {
   /// Optional raw payload data associated with the failure.
   final Object? payload;
 }
+
+/// Realises: [Feat-10/DomainError]
+/// Error raised when database or storage operation fails.
+@immutable
+final class DatabaseStorageError extends DomainError {
+  /// Creates a [DatabaseStorageError].
+  const DatabaseStorageError({
+    required this.message,
+  });
+
+  /// Detailed message explaining the storage error.
+  final String message;
+}
+
+/// Realises: [Feat-10/DomainError]
+/// Error raised when a requested record or instance is not found.
+@immutable
+final class InstanceNotFoundError extends DomainError {
+  /// Creates an [InstanceNotFoundError].
+  const InstanceNotFoundError({
+    required this.instanceId,
+  });
+
+  /// The identifier of the instance that was not found.
+  final String instanceId;
+}
+

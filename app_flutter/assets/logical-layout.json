@@ -1,8 +1,8 @@
 {
   "meta": {
     "version": "1.0.0",
-    "schema_name": "ietf-network@2018-02-26",
-    "yang_source": "/Users/perkunas/jail/3dgs-037/schema/ietf-network@2018-02-26.yang"
+    "schema_name": "ietf-yang-types@2025-12-22",
+    "yang_source": "/Users/perkunas/jail/3dgs-037/schema/ietf-yang-types@2025-12-22.yang"
   },
   "theme": {
     "modes": [
@@ -26,38 +26,7 @@
           "type": "HierarchyTree",
           "id": "resource_tree",
           "props": {
-            "hierarchy": [
-              {
-                "id": "networks",
-                "label": "Networks",
-                "children": [
-                  {
-                    "id": "network",
-                    "label": "Network",
-                    "children": [
-                      {
-                        "id": "network-types",
-                        "label": "Network Types"
-                      },
-                      {
-                        "id": "supporting-network",
-                        "label": "Supporting Network"
-                      },
-                      {
-                        "id": "node",
-                        "label": "Node",
-                        "children": [
-                          {
-                            "id": "supporting-node",
-                            "label": "Supporting Node"
-                          }
-                        ]
-                      }
-                    ]
-                  }
-                ]
-              }
-            ]
+            "hierarchy": []
           },
           "bindings": {
             "selection_target": "selected_managed_object"
@@ -121,41 +90,5 @@
       ]
     }
   },
-  "attributes": [
-    {
-      "key": "networks/network/network-id",
-      "label": "Network Id",
-      "type": "string",
-      "sectionGroup": "networks",
-      "isRequired": false
-    },
-    {
-      "key": "networks/network/supporting-network/network-ref",
-      "label": "Network Ref",
-      "type": "string",
-      "sectionGroup": "networks",
-      "isRequired": false
-    },
-    {
-      "key": "networks/network/node/node-id",
-      "label": "Node Id",
-      "type": "string",
-      "sectionGroup": "networks",
-      "isRequired": false
-    },
-    {
-      "key": "networks/network/node/supporting-node/network-ref",
-      "label": "Network Ref",
-      "type": "string",
-      "sectionGroup": "networks",
-      "isRequired": false
-    },
-    {
-      "key": "networks/network/node/supporting-node/node-ref",
-      "label": "Node Ref",
-      "type": "string",
-      "sectionGroup": "networks",
-      "isRequired": false
-    }
-  ]
+  "attributes": []
 }

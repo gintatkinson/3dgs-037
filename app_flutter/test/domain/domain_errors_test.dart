@@ -90,6 +90,8 @@ void main() {
         const SchemaFieldPatternError(fieldName: 'f', value: 'v', pattern: 'p'),
         const SchemaFieldEnumError(fieldName: 'f', value: 'e', allowedValues: ['e']),
         const SerializationError(targetType: 't', reason: 'r'),
+        const DatabaseStorageError(message: 'm'),
+        const InstanceNotFoundError(instanceId: 'i'),
       ];
 
       for (final err in errors) {
@@ -106,6 +108,10 @@ void main() {
             'Enum: $fieldName ($value not in $allowedValues)',
           SerializationError(:final targetType, :final reason) =>
             'Serialization: $targetType ($reason)',
+          DatabaseStorageError(:final message) =>
+            'DatabaseStorage: $message',
+          InstanceNotFoundError(:final instanceId) =>
+            'InstanceNotFound: $instanceId',
         };
 
         expect(description, isNotEmpty);
