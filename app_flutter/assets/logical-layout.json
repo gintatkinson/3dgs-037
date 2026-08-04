@@ -1,8 +1,8 @@
 {
   "meta": {
     "version": "1.0.0",
-    "schema_name": "ietf-inet-types@2013-07-15",
-    "yang_source": "/Users/perkunas/jail/3dgs-037/schema/ietf-inet-types@2013-07-15.yang"
+    "schema_name": "ietf-geo-location@2022-02-11",
+    "yang_source": "/Users/perkunas/jail/3dgs-037/schema/ietf-geo-location@2022-02-11.yang"
   },
   "theme": {
     "modes": [
@@ -26,7 +26,28 @@
           "type": "HierarchyTree",
           "id": "resource_tree",
           "props": {
-            "hierarchy": []
+            "hierarchy": [
+              {
+                "id": "geo-location",
+                "label": "Geo Location",
+                "children": [
+                  {
+                    "id": "reference-frame",
+                    "label": "Reference Frame",
+                    "children": [
+                      {
+                        "id": "geodetic-system",
+                        "label": "Geodetic System"
+                      }
+                    ]
+                  },
+                  {
+                    "id": "velocity",
+                    "label": "Velocity"
+                  }
+                ]
+              }
+            ]
           },
           "bindings": {
             "selection_target": "selected_managed_object"
@@ -90,5 +111,122 @@
       ]
     }
   },
-  "attributes": []
+  "attributes": [
+    {
+      "key": "geo-location/reference-frame/alternate-system",
+      "label": "Alternate System",
+      "type": "string",
+      "sectionGroup": "geo-location",
+      "isRequired": false
+    },
+    {
+      "key": "geo-location/reference-frame/astronomical-body",
+      "label": "Astronomical Body",
+      "type": "string",
+      "sectionGroup": "geo-location",
+      "isRequired": false,
+      "pattern": "[ -@\\[-\\^_-~]*"
+    },
+    {
+      "key": "geo-location/reference-frame/geodetic-system/geodetic-datum",
+      "label": "Geodetic Datum",
+      "type": "string",
+      "sectionGroup": "geo-location",
+      "isRequired": false,
+      "pattern": "[ -@\\[-\\^_-~]*"
+    },
+    {
+      "key": "geo-location/reference-frame/geodetic-system/coord-accuracy",
+      "label": "Coord Accuracy",
+      "type": "double",
+      "sectionGroup": "geo-location",
+      "isRequired": false
+    },
+    {
+      "key": "geo-location/reference-frame/geodetic-system/height-accuracy",
+      "label": "Height Accuracy",
+      "type": "double",
+      "sectionGroup": "geo-location",
+      "isRequired": false
+    },
+    {
+      "key": "geo-location/latitude",
+      "label": "Latitude",
+      "type": "double",
+      "sectionGroup": "geo-location",
+      "isRequired": false
+    },
+    {
+      "key": "geo-location/longitude",
+      "label": "Longitude",
+      "type": "double",
+      "sectionGroup": "geo-location",
+      "isRequired": false
+    },
+    {
+      "key": "geo-location/height",
+      "label": "Height",
+      "type": "double",
+      "sectionGroup": "geo-location",
+      "isRequired": false
+    },
+    {
+      "key": "geo-location/x",
+      "label": "X",
+      "type": "double",
+      "sectionGroup": "geo-location",
+      "isRequired": false
+    },
+    {
+      "key": "geo-location/y",
+      "label": "Y",
+      "type": "double",
+      "sectionGroup": "geo-location",
+      "isRequired": false
+    },
+    {
+      "key": "geo-location/z",
+      "label": "Z",
+      "type": "double",
+      "sectionGroup": "geo-location",
+      "isRequired": false
+    },
+    {
+      "key": "geo-location/velocity/v-north",
+      "label": "V North",
+      "type": "double",
+      "sectionGroup": "geo-location",
+      "isRequired": false
+    },
+    {
+      "key": "geo-location/velocity/v-east",
+      "label": "V East",
+      "type": "double",
+      "sectionGroup": "geo-location",
+      "isRequired": false
+    },
+    {
+      "key": "geo-location/velocity/v-up",
+      "label": "V Up",
+      "type": "double",
+      "sectionGroup": "geo-location",
+      "isRequired": false
+    },
+    {
+      "key": "geo-location/timestamp",
+      "label": "Timestamp",
+      "type": "string",
+      "sectionGroup": "geo-location",
+      "isRequired": false,
+      "pattern": "[0-9]{4}-(1[0-2]|0[1-9])-(0[1-9]|[1-2][0-9]|3[0-1])T(0[0-9]|1[0-9]|2[0-3]):[0-5][0-9]:([0-5][0-9]|60)(\\.[0-9]+)?(Z|[\\+\\-]((1[0-3]|0[0-9]):([0-5][0-9])|14:00))?"
+    },
+    {
+      "key": "geo-location/valid-until",
+      "label": "Valid Until",
+      "type": "string",
+      "sectionGroup": "geo-location",
+      "isRequired": false,
+      "pattern": "[0-9]{4}-(1[0-2]|0[1-9])-(0[1-9]|[1-2][0-9]|3[0-1])T(0[0-9]|1[0-9]|2[0-3]):[0-5][0-9]:([0-5][0-9]|60)(\\.[0-9]+)?(Z|[\\+\\-]((1[0-3]|0[0-9]):([0-5][0-9])|14:00))?"
+    }
+  ]
 }
