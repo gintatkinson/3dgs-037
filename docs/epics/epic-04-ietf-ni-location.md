@@ -23,8 +23,10 @@ The `ietf-ni-location` model extends standard inventory management paradigms by 
 ### Associated Use Cases & User Stories
 
 #### Associated Use Cases
-*To be populated after Phase 3*
-(Leave placeholder list if none yet created)
+- [ ] #56 - [Physical Facility Location Registration, Postal Address Formatting, and Inventory Hierarchy Initialization](https://github.com/gintatkinson/3dgs-037/blob/main/docs/use-cases/uc-13-facility-location-and-postal-address-onboarding.md) (Models physical facility location registration, postal address formatting, ISO country code validation, parent site hierarchy, and un-racked chassis bindings)
+- [ ] #57 - [Building, Floor, and Room Position Management, Room Name Assignment, and Physical Access Bounds](https://github.com/gintatkinson/3dgs-037/blob/main/docs/use-cases/uc-14-building-floor-and-room-positioning-management.md) (Models indoor building, floor, room spatial hierarchy navigation, room name assignment, compound position formatting, and physical access bounds)
+- [ ] #58 - [Equipment Rack Onboarding, Bay Position Assignment, U-Position Allocation (1U..48U), and Chassis Placement Validation](https://github.com/gintatkinson/3dgs-037/blob/main/docs/use-cases/uc-15-rack-bay-and-u-position-equipment-placement.md) (Models equipment rack onboarding, enclosure dimensions, security classification identityrefs, electrical capacity limits, vertical U-slot relative position alignment, and chassis placement validation)
+- [ ] #59 - [Facility Geodetic Coordinate Binding, Spatial Coordinate Synchronization, and Altitude Offset Mapping](https://github.com/gintatkinson/3dgs-037/blob/main/docs/use-cases/uc-16-geodetic-location-synchronization-and-mapping.md) (Models facility geodetic coordinate binding via ietf-geo-location augmentation, floor grid row/column positioning, spatial coordinate synchronization, and altitude offset mapping)
 
 #### Associated User Stories
 - [ ] #52 - [[ietf-ni-location]: Facility Location Creation, Unique Identifier Generation, and Postal Address Formatting/Validation](https://github.com/gintatkinson/3dgs-037/blob/main/docs/user-stories/us-20-location-inventory-onboarding.md) (Validates facility location creation, unique identifier generation, postal address formatting, ISO country code regex, parent hierarchy, and contained chassis assignment)

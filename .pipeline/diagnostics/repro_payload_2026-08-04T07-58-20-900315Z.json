@@ -1,0 +1,24 @@
+{
+  "timestamp": "2026-08-04T07:58:20.900315Z",
+  "tooling": {
+    "name": "parity_auditor",
+    "version": "1.0.0"
+  },
+  "context": {
+    "command": "skills/spec-orchestrator/scripts/verify_model_coverage.py --spec-only",
+    "exit_code": 1,
+    "downstream_repo": "https://github.com/gintatkinson/3dgs-037.git",
+    "commit_hash": "53af21e306c08f8d8b28fad51f703a771b416c59"
+  },
+  "failure": {
+    "traceback": "",
+    "error_summary": [
+      "Use Case uc-16-geodetic-location-synchronization-and-mapping.md must contain at least 32 detailed Alternate/Exception flows. Found only 6 flows. (Referenced features define 32 schema validation constraints, requiring at least that many alternate flows, with a minimum floor of 2.)"
+    ]
+  },
+  "reproduction_case": {
+    "target_file": "",
+    "snippet_type": "text",
+    "snippet_content": ""
+  }
+}
