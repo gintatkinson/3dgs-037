@@ -1,0 +1,3157 @@
+
+<!DOCTYPE html>
+
+
+
+
+
+
+
+<html data-bs-theme="auto" lang="en">
+    <head>
+        
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title>
+            
+                draft-ygb-ivy-passive-network-inventory-05
+            
+        </title>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link href="https://static.ietf.org/fonts/inter/import.css" rel="stylesheet">
+        <link href="https://static.ietf.org/fonts/noto-sans-mono/import.css" rel="stylesheet">
+        
+            <link rel="stylesheet" href="https://static.ietf.org/dt/12.69.0/ietf/css/document_html_referenced.css">
+            
+                <link rel="stylesheet" href="https://static.ietf.org/dt/12.69.0/ietf/css/document_html_txt.css">
+            
+            <script type="module" crossorigin="" src="https://static.ietf.org/dt/12.69.0/assets/embedded-f7f04c22.js"></script>
+<link href="https://static.ietf.org/dt/12.69.0/assets/create-pinia-singleton-e1887cc7.js" type="text/javascript" crossorigin="anonymous" rel="modulepreload" as="script" />
+<link href="https://static.ietf.org/dt/12.69.0/assets/Scrollbar-f0f599a2.js" type="text/javascript" crossorigin="anonymous" rel="modulepreload" as="script" />
+            <script src="https://static.ietf.org/dt/12.69.0/ietf/js/document_html.js"></script>
+            <script src="https://static.ietf.org/dt/12.69.0/ietf/js/theme.js"></script>
+        
+        <link rel="alternate" type="application/atom+xml" title="Document changes" href="/feed/document-changes/draft-ygb-ivy-passive-network-inventory/">
+        <meta name="description"
+            
+                content="A YANG Data Model for Passive Network Inventory (Internet-Draft, 2026)"
+            >
+        
+
+<link rel="apple-touch-icon"
+      sizes="180x180"
+      href="https://static.ietf.org/dt/12.69.0/ietf/images/ietf-logo-nor-180.png">
+<link rel="icon"
+      sizes="32x32"
+      href="https://static.ietf.org/dt/12.69.0/ietf/images/ietf-logo-nor-32.png">
+<link rel="icon"
+      sizes="16x16"
+      href="https://static.ietf.org/dt/12.69.0/ietf/images/ietf-logo-nor-16.png">
+<link rel="manifest" href="/site.webmanifest">
+<link rel="mask-icon"
+      href="https://static.ietf.org/dt/12.69.0/ietf/images/ietf-logo-nor-mask.svg"
+      color="#ffffff">
+<meta name="msapplication-TileColor"
+      content="#ffffff">
+<meta name="theme-color"
+      content="#ffffff">
+        
+
+
+
+
+<meta property="og:title" content="A YANG Data Model for Passive Network Inventory">
+<meta property="og:url" content="https://datatracker.ietf.org/doc/html/draft-ygb-ivy-passive-network-inventory">
+<link rel="canonical" href="https://datatracker.ietf.org/doc/html/draft-ygb-ivy-passive-network-inventory">
+<meta property="og:site_name" content="IETF Datatracker">
+<meta property="og:description" content="This document presents a YANG data model for tracking and managing passive network inventory. The model augments the base network inventory model.">
+<meta property="og:type" content="article">
+
+<meta property="article:section" content="Individual Internet-Draft">
+
+<meta property="article:author" content="Aihua Guo">
+<meta property="article:author" content="tom van caenegem">
+<meta property="article:author" content="Nigel Davis">
+<meta property="article:author" content="Mauro Tilocca">
+<meta property="article:author" content="Brad Peters">
+
+
+
+        
+        <style>
+            
+            .diff-form .select2-selection__rendered {
+                direction: rtl;
+                text-align: left;
+            }
+        </style>
+    </head>
+    <body>
+        
+        <noscript><iframe class="status" title="Site status" src="/status/latest"></iframe></noscript>
+<div class="vue-embed" data-component="Status"></div>
+        <div class="btn-toolbar sidebar-toolbar position-fixed top-0 end-0 m-2 m-lg-3 d-print-none">
+            <div class="dropdown">
+                <button class="btn btn-outline-secondary btn-sm me-1 dropdown-toggle d-flex align-items-center"
+                    id="bd-theme" type="button" aria-expanded="false" data-bs-toggle="dropdown"
+                    aria-label="Toggle theme">
+                        <i class="theme-icon-active bi bi-circle-half"></i>
+                </button>
+
+                <ul class="dropdown-menu" aria-labelledby="bd-theme">
+                    <li>
+                        <button type="button" class="dropdown-item d-flex align-items-center"
+                            data-bs-theme-value="light" aria-pressed="false">
+                            <i class="me-2 opacity-50 theme-icon bi bi-sun-fill"></i>
+                            Light<i class="bi bi-check2 ms-auto d-none"></i>
+                        </button>
+                    </li>
+                    <li>
+                        <button type="button" class="dropdown-item d-flex align-items-center"
+                            data-bs-theme-value="dark" aria-pressed="false">
+                            <i class="me-2 opacity-50 theme-icon bi bi-moon-stars-fill"></i>
+                            Dark<i class="bi bi-check2 ms-auto d-none"></i>
+                        </button>
+                    </li>
+                    <li>
+                        <button type="button" class="dropdown-item d-flex align-items-center active"
+                            data-bs-theme-value="auto" aria-pressed="true">
+                            <i class="me-2 opacity-50 theme-icon bi bi-circle-half"></i>
+                            Auto<i class="bi bi-check2 ms-auto d-none"></i>
+                        </button>
+                    </li>
+                </ul>
+            </div>
+            <button class="btn btn-outline-secondary btn-sm sidebar-toggle"
+                    type="button"
+                    data-bs-toggle="collapse"
+                    data-bs-target="#sidebar"
+                    aria-expanded="true"
+                    aria-controls="sidebar"
+                    aria-label="Toggle metadata sidebar"
+                    title="Toggle metadata sidebar">
+            <i class="bi bi-arrow-bar-left sidebar-shown"></i>
+            <i class="bi bi-arrow-bar-right sidebar-collapsed"></i>
+            </button>
+        </div>
+        <nav class="navbar bg-light-subtle px-1 fixed-top d-print-none d-md-none">
+            <a class="nav-link ps-1"
+               href="/doc/draft-ygb-ivy-passive-network-inventory/">
+                 
+                    draft-ygb-ivy-passive-network-inventory-05
+                
+                <br class="d-sm-none">
+
+                <span class="ms-sm-3 badge rounded-pill badge-draft">
+                    
+                        None
+                    
+                </span>
+            </a>
+            <button class="navbar-toggler p-1"
+                    type="button"
+                    data-bs-toggle="collapse"
+                    data-bs-target="#docinfo-collapse"
+                    aria-controls="docinfo-collapse"
+                    aria-expanded="false"
+                    aria-label="Show document information">
+                <span class="navbar-toggler-icon small"></span>
+            </button>
+            <div class="navbar-nav navbar-nav-scroll overscroll-none collapse pt-1" id="docinfo-collapse">
+                <div class="bg-light-subtle p-0">
+                    <table class="table table-sm table-borderless small">
+                        <tbody class="meta align-top">
+                            <tr>
+                                <th scope="row"></th>
+                                <th scope="row">Title</th>
+                                <td class="edit"></td>
+                                <td>A YANG Data Model for Passive Network Inventory</td>
+                            </tr>
+                        </tbody>
+                        
+
+
+
+
+
+
+
+<tbody class="meta align-top ">
+    <tr>
+        <th scope="row">Document</th>
+        <th scope="row">Document type</th>
+        <td class="edit"></td>
+        <td>
+            
+
+
+
+
+
+
+
+    <span class="text-success">Active Internet-Draft</span>
+    (individual)
+    
+
+            
+            
+            
+                
+
+
+
+
+    <div class="alert alert-warning small p-2 mt-2" role="alert">
+        This document is an Internet-Draft (I-D).
+        Anyone may submit an I-D to the IETF.
+        This I-D is <strong>not endorsed by the IETF</strong> and has <strong>no formal standing</strong> in the
+        <a href="/doc/rfc2026/">IETF standards process</a>.
+    </div>
+
+
+            
+        </td>
+    </tr>
+    
+        <tr>
+            <td></td>
+            <th scope="row">Select version</th>
+            <td class="edit"></td>
+            <td>
+                
+
+
+
+    <ul class="revision-list pagination pagination-sm text-center flex-wrap my-0">
+        
+            
+                 
+                    <li class="page-item ">
+                        <a class="page-link"
+                        href="/doc/html/draft-ygb-ivy-passive-network-inventory-00"
+                        >
+                            00
+                        </a>
+                    </li>
+                
+            
+                 
+                    <li class="page-item ">
+                        <a class="page-link"
+                        href="/doc/html/draft-ygb-ivy-passive-network-inventory-01"
+                        rel="nofollow">
+                            01
+                        </a>
+                    </li>
+                
+            
+                 
+                    <li class="page-item ">
+                        <a class="page-link"
+                        href="/doc/html/draft-ygb-ivy-passive-network-inventory-02"
+                        rel="nofollow">
+                            02
+                        </a>
+                    </li>
+                
+            
+                 
+                    <li class="page-item ">
+                        <a class="page-link"
+                        href="/doc/html/draft-ygb-ivy-passive-network-inventory-03"
+                        rel="nofollow">
+                            03
+                        </a>
+                    </li>
+                
+            
+                 
+                    <li class="page-item ">
+                        <a class="page-link"
+                        href="/doc/html/draft-ygb-ivy-passive-network-inventory-04"
+                        rel="nofollow">
+                            04
+                        </a>
+                    </li>
+                
+            
+                 
+                    <li class="page-item active">
+                        <a class="page-link"
+                        href="/doc/html/draft-ygb-ivy-passive-network-inventory-05"
+                        >
+                            05
+                        </a>
+                    </li>
+                
+            
+            
+        
+    </ul>
+
+            </td>
+        </tr>
+        
+            <tr>
+                <td></td>
+                <th scope="row">Compare versions</th>
+                <td class="edit"></td>
+                <td>
+                    
+
+
+
+<form class="form-horizontal diff-form"
+      action="https://author-tools.ietf.org/iddiff"
+      method="get"
+      target="_blank">
+
+            <select class="form-select form-select-sm mb-1 select2-field"
+                    data-max-entries="1"
+                    data-width="resolve"
+                    data-allow-clear="false"
+                    data-minimum-input-length="0"
+                    aria-label="From revision"
+                    name="url1">
+                
+                    <option value="draft-ygb-ivy-passive-network-inventory-05">
+                        draft-ygb-ivy-passive-network-inventory-05
+                        
+                    </option>
+                
+                    <option value="draft-ygb-ivy-passive-network-inventory-04" selected>
+                        draft-ygb-ivy-passive-network-inventory-04
+                        
+                    </option>
+                
+                    <option value="draft-ygb-ivy-passive-network-inventory-03">
+                        draft-ygb-ivy-passive-network-inventory-03
+                        
+                    </option>
+                
+                    <option value="draft-ygb-ivy-passive-network-inventory-02">
+                        draft-ygb-ivy-passive-network-inventory-02
+                        
+                    </option>
+                
+                    <option value="draft-ygb-ivy-passive-network-inventory-01">
+                        draft-ygb-ivy-passive-network-inventory-01
+                        
+                    </option>
+                
+                    <option value="draft-ygb-ivy-passive-network-inventory-00">
+                        draft-ygb-ivy-passive-network-inventory-00
+                        
+                    </option>
+                
+                
+            </select>
+
+            <select class="form-select form-select-sm mb-1 select2-field"
+                    data-max-entries="1"
+                    data-width="resolve"
+                    data-allow-clear="false"
+                    data-minimum-input-length="0"
+                    aria-label="To revision"
+                    name="url2">
+                
+                    <option value="draft-ygb-ivy-passive-network-inventory-05" selected>
+                        draft-ygb-ivy-passive-network-inventory-05
+                        
+                    </option>
+                
+                    <option value="draft-ygb-ivy-passive-network-inventory-04">
+                        draft-ygb-ivy-passive-network-inventory-04
+                        
+                    </option>
+                
+                    <option value="draft-ygb-ivy-passive-network-inventory-03">
+                        draft-ygb-ivy-passive-network-inventory-03
+                        
+                    </option>
+                
+                    <option value="draft-ygb-ivy-passive-network-inventory-02">
+                        draft-ygb-ivy-passive-network-inventory-02
+                        
+                    </option>
+                
+                    <option value="draft-ygb-ivy-passive-network-inventory-01">
+                        draft-ygb-ivy-passive-network-inventory-01
+                        
+                    </option>
+                
+                    <option value="draft-ygb-ivy-passive-network-inventory-00">
+                        draft-ygb-ivy-passive-network-inventory-00
+                        
+                    </option>
+                
+                
+            </select>
+
+            <button type="submit"
+                    class="btn btn-primary btn-sm"
+                    value="--html"
+                    name="difftype">
+                Side-by-side
+            </button>
+            
+            <button type="submit"
+                    class="btn btn-primary btn-sm"
+                    value="--hwdiff"
+                    name="difftype">
+                Inline
+            </button>
+
+</form>
+                </td>
+            </tr>
+        
+    
+    <tr>
+        <td></td>
+        <th scope="row">Authors</th>
+        <td class="edit">
+            
+        </td>
+        <td>
+            
+            
+                <span ><a 
+           title="Datatracker profile of Aihua Guo"
+            href="/person/aihuaguo.ietf@gmail.com" >Aihua Guo</a> <a 
+               href="mailto:aihuaguo.ietf%40gmail.com"
+               aria-label="Compose email to aihuaguo.ietf@gmail.com"
+               title="Compose email to aihuaguo.ietf@gmail.com">
+                <i class="bi bi-envelope"></i></a></span>,
+            
+                <span ><a 
+           title="Datatracker profile of tom van caenegem"
+            href="/person/tom.van_caenegem@nokia.com" >tom van caenegem</a> <a 
+               href="mailto:tom.van_caenegem%40nokia.com"
+               aria-label="Compose email to tom.van_caenegem@nokia.com"
+               title="Compose email to tom.van_caenegem@nokia.com">
+                <i class="bi bi-envelope"></i></a></span>,
+            
+                <span ><a 
+           title="Datatracker profile of Nigel Davis"
+            href="/person/ndavis@ciena.com" >Nigel Davis</a> <a 
+               href="mailto:ndavis%40ciena.com"
+               aria-label="Compose email to ndavis@ciena.com"
+               title="Compose email to ndavis@ciena.com">
+                <i class="bi bi-envelope"></i></a></span>,
+            
+                <span ><a 
+           title="Datatracker profile of Mauro Tilocca"
+            href="/person/mauro.tilocca@fibercop.it" >Mauro Tilocca</a> <a 
+               href="mailto:mauro.tilocca%40fibercop.it"
+               aria-label="Compose email to mauro.tilocca@fibercop.it"
+               title="Compose email to mauro.tilocca@fibercop.it">
+                <i class="bi bi-envelope"></i></a></span>,
+            
+                <span ><a 
+           title="Datatracker profile of Brad Peters"
+            href="/person/bradpeters@nbnco.com.au" >Brad Peters</a> <a 
+               href="mailto:bradpeters%40nbnco.com.au"
+               aria-label="Compose email to bradpeters@nbnco.com.au"
+               title="Compose email to bradpeters@nbnco.com.au">
+                <i class="bi bi-envelope"></i></a></span>
+            
+            
+                <br>
+                <a class="btn btn-primary btn-sm mt-1" href="mailto:draft-ygb-ivy-passive-network-inventory@ietf.org?subject=draft-ygb-ivy-passive-network-inventory" title="Send email to the document authors">Email authors</a>
+            
+        </td>
+    </tr>
+    
+    
+        
+        
+        
+    
+    <tr>
+        <td></td>
+        <th scope="row">
+            RFC stream
+        </th>
+        <td class="edit">
+            
+        </td>
+        <td class="text-body-secondary">
+            
+                (None)
+            
+        </td>
+    </tr>
+    
+        <tr>
+            <td></td>
+            <th scope="row">
+                Intended RFC status
+            </th>
+            <td class="edit">
+                
+            </td>
+            <td>
+                
+                    <span class="text-body-secondary">
+                        (None)
+                    </span>
+                
+            </td>
+        </tr>
+    
+    <tr>
+        <td></td>
+        <th scope="row">
+            Other formats
+        </th>
+        <td class="edit">
+        </td>
+        <td>
+            
+                
+    <div class="buttonlist">
+    
+        
+        <a class="btn btn-primary btn-sm"
+          
+          target="_blank"
+          href="https://www.ietf.org/archive/id/draft-ygb-ivy-passive-network-inventory-05.txt">
+            
+                <i class="bi bi-file-text"></i> txt
+            
+        </a>
+        
+    
+        
+        <a class="btn btn-primary btn-sm"
+          
+          target="_blank"
+          href="https://www.ietf.org/archive/id/draft-ygb-ivy-passive-network-inventory-05.html">
+            
+                <i class="bi bi-file-code"></i> html
+            
+        </a>
+        
+    
+        
+        <a class="btn btn-primary btn-sm"
+          
+          target="_blank"
+          href="https://www.ietf.org/archive/id/draft-ygb-ivy-passive-network-inventory-05.xml">
+            
+                <i class="bi bi-file-code"></i> xml
+            
+        </a>
+        
+    
+        
+    
+        
+        <a class="btn btn-primary btn-sm"
+          
+          target="_blank"
+          href="/doc/draft-ygb-ivy-passive-network-inventory/05/bibtex/">
+            
+                <i class="bi bi-file-ruled"></i> bibtex
+            
+        </a>
+        
+    
+        
+        <a class="btn btn-primary btn-sm"
+          
+          target="_blank"
+          href="/doc/bibxml3/draft-ygb-ivy-passive-network-inventory-05.xml">
+            
+                <i class="bi bi-file-code"></i> bibxml
+            
+        </a>
+        
+    
+</div>
+
+            
+        </td>
+    </tr>
+    
+    
+        
+    
+</tbody>
+                        <tr>
+                            <th scope="row"></th>
+                            <th scope="row"></th>
+                            <td class="edit"></td>
+                            <td>
+                                <a class="btn btn-sm btn-warning mb-3"
+                                target="_blank"
+                                href="https://github.com/ietf-tools/datatracker/issues/new/choose">
+                                    Report a bug
+                                    <i class="bi bi-bug"></i>
+                                </a>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+        </nav>
+        <div class="row g-0">
+            <div class="col-md-9 d-flex justify-content-center lh-sm"
+                 data-bs-spy="scroll"
+                 data-bs-target="#toc-nav"
+                 data-bs-smooth-scroll="true"
+                 tabindex="0"
+                 id="content">
+                
+                    <div class="rfchtml">
+                        <br class="noprint">
+                        <div class="xml2rfc">
+<table class="ears">
+<thead><tr>
+<td class="left">Internet-Draft</td>
+<td class="center">Passive Network Inventory YANG Model</td>
+<td class="right">May 2026</td>
+</tr></thead>
+<tfoot><tr>
+<td class="left">Guo, et al.</td>
+<td class="center">Expires 27 November 2026</td>
+<td class="right">[Page]</td>
+</tr></tfoot>
+</table>
+<div id="external-metadata" class="document-information"></div>
+<div id="internal-metadata" class="document-information">
+<dl id="identifiers">
+<dt class="label-workgroup">Workgroup:</dt>
+<dd class="workgroup">Network Inventory YANG</dd>
+<dt class="label-internet-draft">Internet-Draft:</dt>
+<dd class="internet-draft">draft-ygb-ivy-passive-network-inventory-05</dd>
+<dt class="label-published">Published:</dt>
+<dd class="published">
+<time datetime="2026-05-26" class="published">26 May 2026</time>
+    </dd>
+<dt class="label-intended-status">Intended Status:</dt>
+<dd class="intended-status">Standards Track</dd>
+<dt class="label-expires">Expires:</dt>
+<dd class="expires"><time datetime="2026-11-27">27 November 2026</time></dd>
+<dt class="label-authors">Authors:</dt>
+<dd class="authors">
+<div class="author">
+      <div class="author-name">A. Guo</div>
+<div class="org">Futurewei</div>
+</div>
+<div class="author">
+      <div class="author-name">T. V. Caenegem</div>
+<div class="org">Nokia</div>
+</div>
+<div class="author">
+      <div class="author-name">N. Davis</div>
+<div class="org">Ciena</div>
+</div>
+<div class="author">
+      <div class="author-name">M. Tilocca</div>
+<div class="org">FiberCop</div>
+</div>
+<div class="author">
+      <div class="author-name">B. Peters</div>
+<div class="org">NBN</div>
+</div>
+</dd>
+</dl>
+</div>
+<h1 id="title">A YANG Data Model for Passive Network Inventory</h1>
+<section id="section-abstract">
+      <h2 id="abstract"><a href="#abstract" class="selfRef">Abstract</a></h2>
+<p id="section-abstract-1">This document presents a YANG data model for tracking and managing passive network
+inventory. The model augments the base network inventory model.<a href="#section-abstract-1" class="pilcrow">¶</a></p>
+</section>
+<section class="note rfcEditorRemove" id="section-note.1">
+      <h2 id="name-about-this-document">
+<a href="#name-about-this-document" class="section-name selfRef">About This Document</a>
+      </h2>
+<p id="section-note.1-1">This note is to be removed before publishing as an RFC.<a href="#section-note.1-1" class="pilcrow">¶</a></p>
+<p id="section-note.1-2">
+        The latest revision of this draft can be found at <span><a href="https://aguoietf.github.io/draft-ygb-ivy-passive-network-inventory/draft-ygb-ivy-passive-network-inventory.html">https://aguoietf.github.io/draft-ygb-ivy-passive-network-inventory/draft-ygb-ivy-passive-network-inventory.html</a></span>.
+        Status information for this document may be found at <span><a href="https://datatracker.ietf.org/doc/draft-ygb-ivy-passive-network-inventory/">https://datatracker.ietf.org/doc/draft-ygb-ivy-passive-network-inventory/</a></span>.<a href="#section-note.1-2" class="pilcrow">¶</a></p>
+<p id="section-note.1-3">
+        Discussion of this document takes place on the
+        Network Inventory YANG Working Group mailing list (<span><a href="mailto:ivy@ietf.org">mailto:ivy@ietf.org</a></span>),
+        which is archived at <span><a href="https://mailarchive.ietf.org/arch/browse/ivy">https://mailarchive.ietf.org/arch/browse/ivy</a></span>.
+        Subscribe at <span><a href="https://www.ietf.org/mailman/listinfo/ivy/">https://www.ietf.org/mailman/listinfo/ivy/</a></span>.<a href="#section-note.1-3" class="pilcrow">¶</a></p>
+<p id="section-note.1-4">Source for this draft and an issue tracker can be found at
+        <span><a href="https://github.com/aguoietf/draft-ygb-ivy-passive-network-inventory">https://github.com/aguoietf/draft-ygb-ivy-passive-network-inventory</a></span>.<a href="#section-note.1-4" class="pilcrow">¶</a></p>
+</section>
+<div id="status-of-memo">
+<section id="section-boilerplate.1">
+        <h2 id="name-status-of-this-memo">
+<a href="#name-status-of-this-memo" class="section-name selfRef">Status of This Memo</a>
+        </h2>
+<p id="section-boilerplate.1-1">
+        This Internet-Draft is submitted in full conformance with the
+        provisions of BCP 78 and BCP 79.<a href="#section-boilerplate.1-1" class="pilcrow">¶</a></p>
+<p id="section-boilerplate.1-2">
+        Internet-Drafts are working documents of the Internet Engineering Task
+        Force (IETF). Note that other groups may also distribute working
+        documents as Internet-Drafts. The list of current Internet-Drafts is
+        at <span><a href="https://datatracker.ietf.org/drafts/current/">https://datatracker.ietf.org/drafts/current/</a></span>.<a href="#section-boilerplate.1-2" class="pilcrow">¶</a></p>
+<p id="section-boilerplate.1-3">
+        Internet-Drafts are draft documents valid for a maximum of six months
+        and may be updated, replaced, or obsoleted by other documents at any
+        time. It is inappropriate to use Internet-Drafts as reference
+        material or to cite them other than as "work in progress."<a href="#section-boilerplate.1-3" class="pilcrow">¶</a></p>
+<p id="section-boilerplate.1-4">
+        This Internet-Draft will expire on 27 November 2026.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
+</section>
+</div>
+<div id="copyright">
+<section id="section-boilerplate.2">
+        <h2 id="name-copyright-notice">
+<a href="#name-copyright-notice" class="section-name selfRef">Copyright Notice</a>
+        </h2>
+<p id="section-boilerplate.2-1">
+            Copyright (c) 2026 IETF Trust and the persons identified as the
+            document authors. All rights reserved.<a href="#section-boilerplate.2-1" class="pilcrow">¶</a></p>
+<p id="section-boilerplate.2-2">
+            This document is subject to BCP 78 and the IETF Trust's Legal
+            Provisions Relating to IETF Documents
+            (<span><a href="https://trustee.ietf.org/license-info">https://trustee.ietf.org/license-info</a></span>) in effect on the date of
+            publication of this document. Please review these documents
+            carefully, as they describe your rights and restrictions with
+            respect to this document. Code Components extracted from this
+            document must include Revised BSD License text as described in
+            Section 4.e of the Trust Legal Provisions and are provided without
+            warranty as described in the Revised BSD License.<a href="#section-boilerplate.2-2" class="pilcrow">¶</a></p>
+</section>
+</div>
+<div id="toc">
+<section id="section-toc.1">
+        <a href="#" onclick="scroll(0,0)" class="toplink">▲</a><h2 id="name-table-of-contents">
+<a href="#name-table-of-contents" class="section-name selfRef">Table of Contents</a>
+        </h2>
+<nav class="toc"><ul class="compact toc ulBare ulEmpty">
+<li class="compact toc ulBare ulEmpty" id="section-toc.1-1.1">
+            <p id="section-toc.1-1.1.1" class="keepWithNext"><a href="#section-1" class="auto internal xref">1</a>.  <a href="#name-introduction" class="internal xref">Introduction</a></p>
+</li>
+          <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.2">
+            <p id="section-toc.1-1.2.1"><a href="#section-2" class="auto internal xref">2</a>.  <a href="#name-examples-of-passive-network" class="internal xref">Examples of Passive Network Inventory</a></p>
+<ul class="compact toc ulBare ulEmpty">
+<li class="compact toc ulBare ulEmpty" id="section-toc.1-1.2.2.1">
+                <p id="section-toc.1-1.2.2.1.1" class="keepWithNext"><a href="#section-2.1" class="auto internal xref">2.1</a>.  <a href="#name-passive-infrastructure-in-o" class="internal xref">Passive Infrastructure in Optical Transport Networks</a></p>
+</li>
+              <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.2.2.2">
+                <p id="section-toc.1-1.2.2.2.1" class="keepWithNext"><a href="#section-2.2" class="auto internal xref">2.2</a>.  <a href="#name-passive-infrastructure-in-op" class="internal xref">Passive Infrastructure in Optical Access Networks</a></p>
+</li>
+              <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.2.2.3">
+                <p id="section-toc.1-1.2.2.3.1"><a href="#section-2.3" class="auto internal xref">2.3</a>.  <a href="#name-passive-infrastructure-in-m" class="internal xref">Passive Infrastructure in Microwave Networks</a></p>
+</li>
+              <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.2.2.4">
+                <p id="section-toc.1-1.2.2.4.1"><a href="#section-2.4" class="auto internal xref">2.4</a>.  <a href="#name-editorial-note-to-be-remove" class="internal xref">Editorial Note (To be removed by RFC Editor)</a></p>
+</li>
+            </ul>
+</li>
+          <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.3">
+            <p id="section-toc.1-1.3.1"><a href="#section-3" class="auto internal xref">3</a>.  <a href="#name-terminology-and-notations" class="internal xref">Terminology and Notations</a></p>
+<ul class="compact toc ulBare ulEmpty">
+<li class="compact toc ulBare ulEmpty" id="section-toc.1-1.3.2.1">
+                <p id="section-toc.1-1.3.2.1.1"><a href="#section-3.1" class="auto internal xref">3.1</a>.  <a href="#name-terminology" class="internal xref">Terminology</a></p>
+</li>
+              <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.3.2.2">
+                <p id="section-toc.1-1.3.2.2.1"><a href="#section-3.2" class="auto internal xref">3.2</a>.  <a href="#name-tree-diagram" class="internal xref">Tree Diagram</a></p>
+</li>
+              <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.3.2.3">
+                <p id="section-toc.1-1.3.2.3.1"><a href="#section-3.3" class="auto internal xref">3.3</a>.  <a href="#name-prefixes-in-data-node-names" class="internal xref">Prefixes in Data Node Names</a></p>
+</li>
+            </ul>
+</li>
+          <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.4">
+            <p id="section-toc.1-1.4.1"><a href="#section-4" class="auto internal xref">4</a>.  <a href="#name-modeling-considerations" class="internal xref">Modeling Considerations</a></p>
+<ul class="compact toc ulBare ulEmpty">
+<li class="compact toc ulBare ulEmpty" id="section-toc.1-1.4.2.1">
+                <p id="section-toc.1-1.4.2.1.1"><a href="#section-4.1" class="auto internal xref">4.1</a>.  <a href="#name-relationship-with-network-i" class="internal xref">Relationship with Network Inventory</a></p>
+</li>
+              <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.4.2.2">
+                <p id="section-toc.1-1.4.2.2.1"><a href="#section-4.2" class="auto internal xref">4.2</a>.  <a href="#name-relationship-with-topology" class="internal xref">Relationship with Topology</a></p>
+</li>
+            </ul>
+</li>
+          <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.5">
+            <p id="section-toc.1-1.5.1"><a href="#section-5" class="auto internal xref">5</a>.  <a href="#name-yang-model-overview" class="internal xref">YANG Model Overview</a></p>
+</li>
+          <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.6">
+            <p id="section-toc.1-1.6.1"><a href="#section-6" class="auto internal xref">6</a>.  <a href="#name-yang-modules" class="internal xref">YANG Modules</a></p>
+<ul class="compact toc ulBare ulEmpty">
+<li class="compact toc ulBare ulEmpty" id="section-toc.1-1.6.2.1">
+                <p id="section-toc.1-1.6.2.1.1"><a href="#section-6.1" class="auto internal xref">6.1</a>.  <a href="#name-yang-data-model-for-passive" class="internal xref">YANG Data Model for Passive Device Inventory</a></p>
+</li>
+            </ul>
+</li>
+          <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.7">
+            <p id="section-toc.1-1.7.1"><a href="#section-7" class="auto internal xref">7</a>.  <a href="#name-operational-considerations" class="internal xref">Operational Considerations</a></p>
+</li>
+          <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.8">
+            <p id="section-toc.1-1.8.1"><a href="#section-8" class="auto internal xref">8</a>.  <a href="#name-security-considerations" class="internal xref">Security Considerations</a></p>
+</li>
+          <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.9">
+            <p id="section-toc.1-1.9.1"><a href="#section-9" class="auto internal xref">9</a>.  <a href="#name-iana-considerations" class="internal xref">IANA Considerations</a></p>
+</li>
+          <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.10">
+            <p id="section-toc.1-1.10.1"><a href="#section-10" class="auto internal xref">10</a>. <a href="#name-references" class="internal xref">References</a></p>
+<ul class="compact toc ulBare ulEmpty">
+<li class="compact toc ulBare ulEmpty" id="section-toc.1-1.10.2.1">
+                <p id="section-toc.1-1.10.2.1.1"><a href="#section-10.1" class="auto internal xref">10.1</a>.  <a href="#name-normative-references" class="internal xref">Normative References</a></p>
+</li>
+              <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.10.2.2">
+                <p id="section-toc.1-1.10.2.2.1"><a href="#section-10.2" class="auto internal xref">10.2</a>.  <a href="#name-informative-references" class="internal xref">Informative References</a></p>
+</li>
+            </ul>
+</li>
+          <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.11">
+            <p id="section-toc.1-1.11.1"><a href="#appendix-A" class="auto internal xref">Appendix A</a>.  <a href="#name-the-complete-schema-trees" class="internal xref">The Complete Schema Trees</a></p>
+</li>
+          <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.12">
+            <p id="section-toc.1-1.12.1"><a href="#appendix-B" class="auto internal xref"></a><a href="#name-acknowledgments" class="internal xref">Acknowledgments</a></p>
+</li>
+          <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.13">
+            <p id="section-toc.1-1.13.1"><a href="#appendix-C" class="auto internal xref"></a><a href="#name-contributors" class="internal xref">Contributors</a></p>
+</li>
+          <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.14">
+            <p id="section-toc.1-1.14.1"><a href="#appendix-D" class="auto internal xref"></a><a href="#name-authors-addresses" class="internal xref">Authors' Addresses</a></p>
+</li>
+        </ul>
+</nav>
+</section>
+</div>
+<div id="introduction">
+<section id="section-1">
+      <h2 id="name-introduction">
+<a href="#section-1" class="section-number selfRef">1. </a><a href="#name-introduction" class="section-name selfRef">Introduction</a>
+      </h2>
+<p id="section-1-1">Passive infrastructure refers to the underlying infrastructure of a telecommunication network that is
+not actively detectable or manageable. It typically includes non-powered, non-communicating devices and components,
+such as cabinets, cables, connectors, splitters, antennas, distribution frames, etc., that are either hosted
+within an actively managed device or deployed along the physical pathway between active devices.
+Passive infrastructure serves as physical connections between active network devices, forming the
+backbone for network topology. As a crucial part of communication networks,the inventory information
+for these devices is also essential for inventory management.<a href="#section-1-1" class="pilcrow">¶</a></p>
+<p id="section-1-2">Passive inventory contains a collection of inventory objects pertaining to the physical network infrastructure that are not powered and may have no direct management communication, and that are used to realize the underlying physical infrastructure carrying signals through a network. Passive inventory includes elements such as optical cables, fiber segments, splice points, closures, ducts, and supporting structures that do not perform active processing, forwarding, or control functions. These objects are maintained for purposes such as identification, location, connectivity, and lifecycle management.<a href="#section-1-2" class="pilcrow">¶</a></p>
+<p id="section-1-3">While passive inventory generally refers to non-powered infrastructure with no direct management
+communication, certain exceptions exist within the scope of passive inventory with respect to
+these characteristics. Following are a non-exhausive list of exceptions:<a href="#section-1-3" class="pilcrow">¶</a></p>
+<ul class="normal">
+<li class="normal" id="section-1-4.1">
+          <p id="section-1-4.1.1">Fibers used in Raman amplification, where the fiber itself participates in amplification stimulated by an externally supplied pump laser. In this scenario, the fiber is still considered as a passive element.<a href="#section-1-4.1.1" class="pilcrow">¶</a></p>
+</li>
+        <li class="normal" id="section-1-4.2">
+          <p id="section-1-4.2.1">Passive optical components embedded within an active device, such as an optical splitter located inside a managed network element.<a href="#section-1-4.2.1" class="pilcrow">¶</a></p>
+</li>
+        <li class="normal" id="section-1-4.3">
+          <p id="section-1-4.3.1">Fibers or other passive elements that are not currently lit or carrying traffic, but are still part of the physical infrastructure and require inventory representation.<a href="#section-1-4.3.1" class="pilcrow">¶</a></p>
+</li>
+        <li class="normal" id="section-1-4.4">
+          <p id="section-1-4.4.1">Passive devices that may have auxiliary or incidental powering (e.g., for environmental monitoring or enclosure heating) but do not perform active forwarding, processing, or control functions.
+<span>[<a href="#I-D.ietf-ivy-network-inventory-yang" class="cite xref">I-D.ietf-ivy-network-inventory-yang</a>]</span> incorporates the component concept from <span>[<a href="#RFC8348" class="cite xref">RFC8348</a>]</span> to detail the equipment and holder information of a NE. This encompasses chassis, slot/sub-slot, board/sub-board, port, and transceiver. As these items are recognized by the NE through internal protocols, the passive devices that cannot be discovered by the NE are thus not included in the modeling and needs to be addressed.<a href="#section-1-4.4.1" class="pilcrow">¶</a></p>
+</li>
+      </ul>
+<p id="section-1-5"><span>[<a href="#I-D.ietf-ivy-network-inventory-location" class="cite xref">I-D.ietf-ivy-network-inventory-location</a>]</span> emphasizes the relative and geographic location, e.g. equipment room, geo-loation for NE. A passive device is deployed in a certain location visible by the operator, and thus can reference the location defined by <span>[<a href="#I-D.ietf-ivy-network-inventory-location" class="cite xref">I-D.ietf-ivy-network-inventory-location</a>]</span>.<a href="#section-1-5" class="pilcrow">¶</a></p>
+<p id="section-1-6">This document focuses on modeling passive device inventory. The scope of this model is intended to be applicable to a varity types of networks, including but not limited to, IP/MPLS, optical access, optical transport and microwave networks.
+The methods for learning about these devices are implementation-specific and fall outside the scope of this document.<a href="#section-1-6" class="pilcrow">¶</a></p>
+</section>
+</div>
+<div id="examples-of-passive-network-inventory">
+<section id="section-2">
+      <h2 id="name-examples-of-passive-network">
+<a href="#section-2" class="section-number selfRef">2. </a><a href="#name-examples-of-passive-network" class="section-name selfRef">Examples of Passive Network Inventory</a>
+      </h2>
+<p id="section-2-1">Network segments built on different technologies share many common passive infrastructure components across the system. To explore the practical applications of these components, we can examine example scenarios for optical access networks, optical transport systems, and microwave networks.<a href="#section-2-1" class="pilcrow">¶</a></p>
+<div id="passive-infrastructure-in-optical-transport-networks">
+<section id="section-2.1">
+        <h3 id="name-passive-infrastructure-in-o">
+<a href="#section-2.1" class="section-number selfRef">2.1. </a><a href="#name-passive-infrastructure-in-o" class="section-name selfRef">Passive Infrastructure in Optical Transport Networks</a>
+        </h3>
+<p id="section-2.1-1">Passive infrastructure in optical transport networks serves as the backbone for high-capacity data transmission. Key components include fiber optic cables, which act as the primary medium of long distance transmission. Optical connectors, patch panels, and splice enclosures are crucial for joining and managing fiber links. Couplers and splitters are used for signal distribution and combining.<a href="#section-2.1-1" class="pilcrow">¶</a></p>
+<p id="section-2.1-2">Within a phyical network element (NE) there are also presence of passive components. For example, fiber optic cables are used to connect the ports of different modules within the same or between different chassises. Attenuators, on the other hand, are placed at places through connectors or built-in modules for reducing optical power.<a href="#section-2.1-2" class="pilcrow">¶</a></p>
+<p id="section-2.1-3"><a href="#fig-example-optical-transport" class="auto internal xref">Figure 1</a> illustrates a typical passive infrastructure for a point-to-point optical transport network.<a href="#section-2.1-3" class="pilcrow">¶</a></p>
+<span id="name-passive-infrastructure-for-"></span><div id="fig-example-optical-transport">
+<figure id="figure-1">
+          <div id="section-2.1-4.1">
+            <div class="alignLeft art-svg artwork" id="section-2.1-4.1.1">
+<svg xmlns="http://www.w3.org/2000/svg" version="1.1" height="320" width="568" viewbox="0 0 568 320" class="diagram" text-anchor="middle" font-family="monospace" font-size="13px" stroke-linecap="round">
+                <path d="M 8,48 L 8,272" fill="none" stroke="black"></path>
+                <path d="M 24,64 L 24,128" fill="none" stroke="black"></path>
+                <path d="M 24,176 L 24,240" fill="none" stroke="black"></path>
+                <path d="M 48,80 L 48,96" fill="none" stroke="black"></path>
+                <path d="M 48,192 L 48,208" fill="none" stroke="black"></path>
+                <path d="M 56,64 L 56,128" fill="none" stroke="black"></path>
+                <path d="M 56,176 L 56,240" fill="none" stroke="black"></path>
+                <path d="M 64,80 L 64,96" fill="none" stroke="black"></path>
+                <path d="M 64,192 L 64,208" fill="none" stroke="black"></path>
+                <path d="M 72,112 L 72,128" fill="none" stroke="black"></path>
+                <path d="M 72,160 L 72,176" fill="none" stroke="black"></path>
+                <path d="M 80,96 L 80,208" fill="none" stroke="black"></path>
+                <path d="M 88,112 L 88,128" fill="none" stroke="black"></path>
+                <path d="M 88,160 L 88,176" fill="none" stroke="black"></path>
+                <path d="M 104,128 L 104,160" fill="none" stroke="black"></path>
+                <path d="M 112,96 L 112,128" fill="none" stroke="black"></path>
+                <path d="M 112,160 L 112,208" fill="none" stroke="black"></path>
+                <path d="M 120,128 L 120,160" fill="none" stroke="black"></path>
+                <path d="M 128,48 L 128,272" fill="none" stroke="black"></path>
+                <path d="M 168,128 L 168,160" fill="none" stroke="black"></path>
+                <path d="M 184,128 L 184,160" fill="none" stroke="black"></path>
+                <path d="M 224,128 L 224,160" fill="none" stroke="black"></path>
+                <path d="M 232,64 L 232,128" fill="none" stroke="black"></path>
+                <path d="M 232,160 L 232,240" fill="none" stroke="black"></path>
+                <path d="M 240,128 L 240,160" fill="none" stroke="black"></path>
+                <path d="M 280,48 L 280,80" fill="none" stroke="black"></path>
+                <path d="M 280,224 L 280,256" fill="none" stroke="black"></path>
+                <path d="M 296,48 L 296,80" fill="none" stroke="black"></path>
+                <path d="M 296,224 L 296,256" fill="none" stroke="black"></path>
+                <path d="M 328,128 L 328,160" fill="none" stroke="black"></path>
+                <path d="M 336,64 L 336,128" fill="none" stroke="black"></path>
+                <path d="M 336,160 L 336,240" fill="none" stroke="black"></path>
+                <path d="M 344,128 L 344,160" fill="none" stroke="black"></path>
+                <path d="M 376,128 L 376,160" fill="none" stroke="black"></path>
+                <path d="M 392,128 L 392,160" fill="none" stroke="black"></path>
+                <path d="M 440,48 L 440,272" fill="none" stroke="black"></path>
+                <path d="M 448,128 L 448,160" fill="none" stroke="black"></path>
+                <path d="M 456,96 L 456,128" fill="none" stroke="black"></path>
+                <path d="M 456,160 L 456,208" fill="none" stroke="black"></path>
+                <path d="M 464,128 L 464,160" fill="none" stroke="black"></path>
+                <path d="M 480,112 L 480,128" fill="none" stroke="black"></path>
+                <path d="M 480,160 L 480,176" fill="none" stroke="black"></path>
+                <path d="M 488,96 L 488,208" fill="none" stroke="black"></path>
+                <path d="M 496,112 L 496,128" fill="none" stroke="black"></path>
+                <path d="M 496,160 L 496,176" fill="none" stroke="black"></path>
+                <path d="M 504,80 L 504,96" fill="none" stroke="black"></path>
+                <path d="M 504,192 L 504,208" fill="none" stroke="black"></path>
+                <path d="M 512,64 L 512,128" fill="none" stroke="black"></path>
+                <path d="M 512,176 L 512,240" fill="none" stroke="black"></path>
+                <path d="M 520,80 L 520,96" fill="none" stroke="black"></path>
+                <path d="M 520,192 L 520,208" fill="none" stroke="black"></path>
+                <path d="M 544,64 L 544,128" fill="none" stroke="black"></path>
+                <path d="M 544,176 L 544,240" fill="none" stroke="black"></path>
+                <path d="M 560,48 L 560,272" fill="none" stroke="black"></path>
+                <path d="M 8,48 L 128,48" fill="none" stroke="black"></path>
+                <path d="M 280,48 L 296,48" fill="none" stroke="black"></path>
+                <path d="M 440,48 L 560,48" fill="none" stroke="black"></path>
+                <path d="M 24,64 L 48,64" fill="none" stroke="black"></path>
+                <path d="M 232,64 L 280,64" fill="none" stroke="black"></path>
+                <path d="M 296,64 L 336,64" fill="none" stroke="black"></path>
+                <path d="M 520,64 L 544,64" fill="none" stroke="black"></path>
+                <path d="M 48,80 L 64,80" fill="none" stroke="black"></path>
+                <path d="M 136,80 L 152,80" fill="none" stroke="black"></path>
+                <path d="M 200,80 L 224,80" fill="none" stroke="black"></path>
+                <path d="M 280,80 L 296,80" fill="none" stroke="black"></path>
+                <path d="M 344,80 L 360,80" fill="none" stroke="black"></path>
+                <path d="M 408,80 L 432,80" fill="none" stroke="black"></path>
+                <path d="M 504,80 L 520,80" fill="none" stroke="black"></path>
+                <path d="M 88,96 L 112,96" fill="none" stroke="black"></path>
+                <path d="M 456,96 L 480,96" fill="none" stroke="black"></path>
+                <path d="M 80,112 L 88,112" fill="none" stroke="black"></path>
+                <path d="M 480,112 L 488,112" fill="none" stroke="black"></path>
+                <path d="M 24,128 L 56,128" fill="none" stroke="black"></path>
+                <path d="M 104,128 L 112,128" fill="none" stroke="black"></path>
+                <path d="M 136,128 L 160,128" fill="none" stroke="black"></path>
+                <path d="M 192,128 L 240,128" fill="none" stroke="black"></path>
+                <path d="M 328,128 L 344,128" fill="none" stroke="black"></path>
+                <path d="M 400,128 L 432,128" fill="none" stroke="black"></path>
+                <path d="M 456,128 L 464,128" fill="none" stroke="black"></path>
+                <path d="M 512,128 L 544,128" fill="none" stroke="black"></path>
+                <path d="M 136,144 L 160,144" fill="none" stroke="black"></path>
+                <path d="M 192,144 L 216,144" fill="none" stroke="black"></path>
+                <path d="M 248,144 L 320,144" fill="none" stroke="black"></path>
+                <path d="M 352,144 L 368,144" fill="none" stroke="black"></path>
+                <path d="M 400,144 L 432,144" fill="none" stroke="black"></path>
+                <path d="M 72,160 L 88,160" fill="none" stroke="black"></path>
+                <path d="M 104,160 L 112,160" fill="none" stroke="black"></path>
+                <path d="M 136,160 L 160,160" fill="none" stroke="black"></path>
+                <path d="M 192,160 L 240,160" fill="none" stroke="black"></path>
+                <path d="M 328,160 L 368,160" fill="none" stroke="black"></path>
+                <path d="M 400,160 L 432,160" fill="none" stroke="black"></path>
+                <path d="M 456,160 L 464,160" fill="none" stroke="black"></path>
+                <path d="M 480,160 L 496,160" fill="none" stroke="black"></path>
+                <path d="M 24,176 L 48,176" fill="none" stroke="black"></path>
+                <path d="M 520,176 L 544,176" fill="none" stroke="black"></path>
+                <path d="M 48,208 L 64,208" fill="none" stroke="black"></path>
+                <path d="M 80,208 L 112,208" fill="none" stroke="black"></path>
+                <path d="M 456,208 L 488,208" fill="none" stroke="black"></path>
+                <path d="M 504,208 L 520,208" fill="none" stroke="black"></path>
+                <path d="M 288,224 L 296,224" fill="none" stroke="black"></path>
+                <path d="M 24,240 L 56,240" fill="none" stroke="black"></path>
+                <path d="M 232,240 L 280,240" fill="none" stroke="black"></path>
+                <path d="M 296,240 L 336,240" fill="none" stroke="black"></path>
+                <path d="M 512,240 L 544,240" fill="none" stroke="black"></path>
+                <path d="M 280,256 L 296,256" fill="none" stroke="black"></path>
+                <path d="M 8,272 L 128,272" fill="none" stroke="black"></path>
+                <path d="M 440,272 L 560,272" fill="none" stroke="black"></path>
+                <path d="M 48,80 L 84,152" fill="none" stroke="black"></path>
+                <path d="M 236,136 L 280,224" fill="none" stroke="black"></path>
+                <path d="M 296,80 L 332,152" fill="none" stroke="black"></path>
+                <path d="M 484,136 L 516,200" fill="none" stroke="black"></path>
+                <path d="M 48,208 L 84,136" fill="none" stroke="black"></path>
+                <path d="M 236,152 L 256,112" fill="none" stroke="black"></path>
+                <path d="M 272,96 L 280,80" fill="none" stroke="black"></path>
+                <path d="M 292,216 L 332,136" fill="none" stroke="black"></path>
+                <path d="M 484,152 L 520,80" fill="none" stroke="black"></path>
+                <path d="M 48,64 C 56.83064,64 64,71.16936 64,80" fill="none" stroke="black"></path>
+                <path d="M 520,64 C 511.16936,64 504,71.16936 504,80" fill="none" stroke="black"></path>
+                <path d="M 64,80 C 55.16936,80 48,87.16936 48,96" fill="none" stroke="black"></path>
+                <path d="M 504,80 C 512.83064,80 520,87.16936 520,96" fill="none" stroke="black"></path>
+                <path d="M 48,96 C 56.83064,96 64,88.83064 64,80" fill="none" stroke="black"></path>
+                <path d="M 88,96 C 79.16936,96 72,103.16936 72,112" fill="none" stroke="black"></path>
+                <path d="M 480,96 C 488.83064,96 496,103.16936 496,112" fill="none" stroke="black"></path>
+                <path d="M 520,96 C 511.16936,96 504,88.83064 504,80" fill="none" stroke="black"></path>
+                <path d="M 72,112 C 80.83064,112 88,119.16936 88,128" fill="none" stroke="black"></path>
+                <path d="M 496,112 C 487.16936,112 480,119.16936 480,128" fill="none" stroke="black"></path>
+                <path d="M 88,128 C 79.16936,128 72,120.83064 72,112" fill="none" stroke="black"></path>
+                <path d="M 104,128 C 112.83064,128 120,135.16936 120,144" fill="none" stroke="black"></path>
+                <path d="M 120,128 C 111.16936,128 104,135.16936 104,144" fill="none" stroke="black"></path>
+                <path d="M 112,128 C 120.83064,128 128,135.16936 128,144" fill="none" stroke="black"></path>
+                <path d="M 112,128 C 120.83064,128 128,120.83064 128,112" fill="none" stroke="black"></path>
+                <path d="M 224,128 C 232.83064,128 240,135.16936 240,144" fill="none" stroke="black"></path>
+                <path d="M 240,128 C 231.16936,128 224,135.16936 224,144" fill="none" stroke="black"></path>
+                <path d="M 328,128 C 336.83064,128 344,135.16936 344,144" fill="none" stroke="black"></path>
+                <path d="M 344,128 C 335.16936,128 328,135.16936 328,144" fill="none" stroke="black"></path>
+                <path d="M 456,128 C 447.16936,128 440,135.16936 440,144" fill="none" stroke="black"></path>
+                <path d="M 456,128 C 447.16936,128 440,120.83064 440,112" fill="none" stroke="black"></path>
+                <path d="M 448,128 C 456.83064,128 464,135.16936 464,144" fill="none" stroke="black"></path>
+                <path d="M 464,128 C 455.16936,128 448,135.16936 448,144" fill="none" stroke="black"></path>
+                <path d="M 480,128 C 488.83064,128 496,120.83064 496,112" fill="none" stroke="black"></path>
+                <path d="M 216,144 C 224.83064,144 232,151.16936 232,160" fill="none" stroke="black"></path>
+                <path d="M 216,144 C 224.83064,144 232,136.83064 232,128" fill="none" stroke="black"></path>
+                <path d="M 352,144 C 343.16936,144 336,151.16936 336,160" fill="none" stroke="black"></path>
+                <path d="M 352,144 C 343.16936,144 336,136.83064 336,128" fill="none" stroke="black"></path>
+                <path d="M 72,160 C 80.83064,160 88,167.16936 88,176" fill="none" stroke="black"></path>
+                <path d="M 104,160 C 112.83064,160 120,152.83064 120,144" fill="none" stroke="black"></path>
+                <path d="M 120,160 C 111.16936,160 104,152.83064 104,144" fill="none" stroke="black"></path>
+                <path d="M 112,160 C 120.83064,160 128,167.16936 128,176" fill="none" stroke="black"></path>
+                <path d="M 112,160 C 120.83064,160 128,152.83064 128,144" fill="none" stroke="black"></path>
+                <path d="M 216,160 C 224.83064,160 232,167.16936 232,176" fill="none" stroke="black"></path>
+                <path d="M 224,160 C 232.83064,160 240,152.83064 240,144" fill="none" stroke="black"></path>
+                <path d="M 240,160 C 231.16936,160 224,152.83064 224,144" fill="none" stroke="black"></path>
+                <path d="M 328,160 C 336.83064,160 344,152.83064 344,144" fill="none" stroke="black"></path>
+                <path d="M 344,160 C 335.16936,160 328,152.83064 328,144" fill="none" stroke="black"></path>
+                <path d="M 352,160 C 343.16936,160 336,167.16936 336,176" fill="none" stroke="black"></path>
+                <path d="M 456,160 C 447.16936,160 440,167.16936 440,176" fill="none" stroke="black"></path>
+                <path d="M 456,160 C 447.16936,160 440,152.83064 440,144" fill="none" stroke="black"></path>
+                <path d="M 448,160 C 456.83064,160 464,152.83064 464,144" fill="none" stroke="black"></path>
+                <path d="M 464,160 C 455.16936,160 448,152.83064 448,144" fill="none" stroke="black"></path>
+                <path d="M 496,160 C 487.16936,160 480,167.16936 480,176" fill="none" stroke="black"></path>
+                <path d="M 48,176 C 56.83064,176 64,183.16936 64,192" fill="none" stroke="black"></path>
+                <path d="M 88,176 C 79.16936,176 72,168.83064 72,160" fill="none" stroke="black"></path>
+                <path d="M 480,176 C 488.83064,176 496,168.83064 496,160" fill="none" stroke="black"></path>
+                <path d="M 520,176 C 511.16936,176 504,183.16936 504,192" fill="none" stroke="black"></path>
+                <path d="M 48,208 C 56.83064,208 64,200.83064 64,192" fill="none" stroke="black"></path>
+                <path d="M 64,208 C 55.16936,208 48,200.83064 48,192" fill="none" stroke="black"></path>
+                <path d="M 504,208 C 512.83064,208 520,200.83064 520,192" fill="none" stroke="black"></path>
+                <path d="M 520,208 C 511.16936,208 504,200.83064 504,192" fill="none" stroke="black"></path>
+                <polygon class="arrowhead" points="440,128 428,122.4 428,133.6" fill="black" transform="rotate(0,432,128)"></polygon>
+                <polygon class="arrowhead" points="440,80 428,74.4 428,85.6" fill="black" transform="rotate(0,432,80)"></polygon>
+                <polygon class="arrowhead" points="408,128 396,122.4 396,133.6" fill="black" transform="rotate(180,400,128)"></polygon>
+                <polygon class="arrowhead" points="352,80 340,74.4 340,85.6" fill="black" transform="rotate(180,344,80)"></polygon>
+                <polygon class="arrowhead" points="232,80 220,74.4 220,85.6" fill="black" transform="rotate(0,224,80)"></polygon>
+                <polygon class="arrowhead" points="224,128 212,122.4 212,133.6" fill="black" transform="rotate(0,216,128)"></polygon>
+                <polygon class="arrowhead" points="200,128 188,122.4 188,133.6" fill="black" transform="rotate(180,192,128)"></polygon>
+                <polygon class="arrowhead" points="168,128 156,122.4 156,133.6" fill="black" transform="rotate(0,160,128)"></polygon>
+                <polygon class="arrowhead" points="144,128 132,122.4 132,133.6" fill="black" transform="rotate(180,136,128)"></polygon>
+                <polygon class="arrowhead" points="144,80 132,74.4 132,85.6" fill="black" transform="rotate(180,136,80)"></polygon>
+                <circle cx="56" cy="192" r="6" class="closeddot" fill="black"></circle>
+                <circle cx="64" cy="96" r="6" class="closeddot" fill="black"></circle>
+                <circle cx="72" cy="128" r="6" class="closeddot" fill="black"></circle>
+                <circle cx="72" cy="176" r="6" class="closeddot" fill="black"></circle>
+                <circle cx="280" cy="224" r="6" class="closeddot" fill="black"></circle>
+                <circle cx="496" cy="128" r="6" class="closeddot" fill="black"></circle>
+                <circle cx="496" cy="176" r="6" class="closeddot" fill="black"></circle>
+                <circle cx="504" cy="96" r="6" class="closeddot" fill="black"></circle>
+                <circle cx="512" cy="192" r="6" class="closeddot" fill="black"></circle>
+                <g class="text">
+                  <text x="292" y="36">Port</text>
+                  <text x="176" y="84">Cable</text>
+                  <text x="384" y="84">Cable</text>
+                  <text x="36" y="116">NE</text>
+                  <text x="156" y="116">Cable-</text>
+                  <text x="208" y="116">Cable</text>
+                  <text x="364" y="116">Cable-</text>
+                  <text x="416" y="116">Cable</text>
+                  <text x="532" y="116">NE</text>
+                  <text x="360" y="132">&lt;-&gt;</text>
+                  <text x="176" y="180">-</text>
+                  <text x="384" y="180">-</text>
+                  <text x="96" y="196">ODF</text>
+                  <text x="184" y="196">Joint</text>
+                  <text x="392" y="196">Joint</text>
+                  <text x="472" y="196">ODF</text>
+                  <text x="176" y="212">Box</text>
+                  <text x="384" y="212">Box</text>
+                  <text x="36" y="228">NE</text>
+                  <text x="532" y="228">NE</text>
+                  <text x="40" y="260">Central</text>
+                  <text x="100" y="260">Office</text>
+                  <text x="472" y="260">Central</text>
+                  <text x="532" y="260">Office</text>
+                  <text x="264" y="276">Fiber</text>
+                  <text x="292" y="292">Distribution</text>
+                  <text x="276" y="308">Terminal</text>
+                </g>
+              </svg><a href="#section-2.1-4.1.1" class="pilcrow">¶</a>
+</div>
+</div>
+<figcaption><a href="#figure-1" class="selfRef">Figure 1</a>:
+<a href="#name-passive-infrastructure-for-" class="selfRef">Passive Infrastructure for Optical Transport Networks</a>
+          </figcaption></figure>
+</div>
+</section>
+</div>
+<div id="passive-infrastructure-in-optical-access-networks">
+<section id="section-2.2">
+        <h3 id="name-passive-infrastructure-in-op">
+<a href="#section-2.2" class="section-number selfRef">2.2. </a><a href="#name-passive-infrastructure-in-op" class="section-name selfRef">Passive Infrastructure in Optical Access Networks</a>
+        </h3>
+<p id="section-2.2-1">Passive Optical Networks (PONs) are a typical type of optical access network with significant passive infrastructure. The passive infrastructure in PON, often referred to as Optical Distribution Network (ODN), is the physical optical fiber-based network that connects the Optical Line Terminal (OLT) typically hosted in a central office to the Optical Network Unit/Terminal (ONU/ONT) typically deployed at the user's location. The ODN is equipped with one or multiple cascaded passive optical splitter thus creating a physical point-to-multipoint fiber network between an OLT port and the multiple connected ONU/ONTs.<a href="#section-2.2-1" class="pilcrow">¶</a></p>
+<p id="section-2.2-2">The feeder segment of an ODN refers to the cabling between the OLT and the first splitter, whereas the distribution segment of the ODN comprises the fiber cabling between the first and second splitter stage. The drop segment comprises the drop fibers between the ONT/ONU and the second splitter stage.<a href="#section-2.2-2" class="pilcrow">¶</a></p>
+<p id="section-2.2-3">The PON ODN hence comprises optical fiber cables and splitters but also many auxiliary components, such as connectors, fiber distribution terminals (FDT), fiber access terminals (FAT), wavelength co-existence elements, etc. The passive components where the optical signals entering or leaving the optical fibers are split/combined or cross-connected are typically hosted in mini cabinets e.g. at street corners, manholes, attached to utility poles, etc.<a href="#section-2.2-3" class="pilcrow">¶</a></p>
+<p id="section-2.2-4"><a href="#fig-example-optical-access" class="auto internal xref">Figure 2</a> illustrates a typical passive infrastructure for optical access networks.<a href="#section-2.2-4" class="pilcrow">¶</a></p>
+<span id="name-passive-infrastructure-for-o"></span><div id="fig-example-optical-access">
+<figure id="figure-2">
+          <div id="section-2.2-5.1">
+            <div class="alignLeft art-svg artwork" id="section-2.2-5.1.1">
+<svg xmlns="http://www.w3.org/2000/svg" version="1.1" height="320" width="552" viewbox="0 0 552 320" class="diagram" text-anchor="middle" font-family="monospace" font-size="13px" stroke-linecap="round">
+                <path d="M 8,32 L 8,288" fill="none" stroke="black"></path>
+                <path d="M 24,48 L 24,120" fill="none" stroke="black"></path>
+                <path d="M 24,160 L 24,232" fill="none" stroke="black"></path>
+                <path d="M 48,64 L 48,80" fill="none" stroke="black"></path>
+                <path d="M 48,176 L 48,192" fill="none" stroke="black"></path>
+                <path d="M 56,48 L 56,120" fill="none" stroke="black"></path>
+                <path d="M 56,160 L 56,232" fill="none" stroke="black"></path>
+                <path d="M 64,64 L 64,80" fill="none" stroke="black"></path>
+                <path d="M 64,176 L 64,192" fill="none" stroke="black"></path>
+                <path d="M 72,96 L 72,112" fill="none" stroke="black"></path>
+                <path d="M 72,144 L 72,160" fill="none" stroke="black"></path>
+                <path d="M 80,80 L 80,192" fill="none" stroke="black"></path>
+                <path d="M 88,96 L 88,112" fill="none" stroke="black"></path>
+                <path d="M 88,144 L 88,160" fill="none" stroke="black"></path>
+                <path d="M 104,112 L 104,144" fill="none" stroke="black"></path>
+                <path d="M 112,80 L 112,112" fill="none" stroke="black"></path>
+                <path d="M 112,144 L 112,192" fill="none" stroke="black"></path>
+                <path d="M 120,112 L 120,144" fill="none" stroke="black"></path>
+                <path d="M 128,32 L 128,288" fill="none" stroke="black"></path>
+                <path d="M 184,128 L 184,144" fill="none" stroke="black"></path>
+                <path d="M 200,128 L 200,144" fill="none" stroke="black"></path>
+                <path d="M 288,96 L 288,192" fill="none" stroke="black"></path>
+                <path d="M 344,160 L 344,224" fill="none" stroke="black"></path>
+                <path d="M 416,64 L 416,128" fill="none" stroke="black"></path>
+                <path d="M 504,64 L 504,80" fill="none" stroke="black"></path>
+                <path d="M 504,128 L 504,144" fill="none" stroke="black"></path>
+                <path d="M 504,208 L 504,224" fill="none" stroke="black"></path>
+                <path d="M 520,64 L 520,80" fill="none" stroke="black"></path>
+                <path d="M 520,128 L 520,144" fill="none" stroke="black"></path>
+                <path d="M 520,208 L 520,224" fill="none" stroke="black"></path>
+                <path d="M 8,32 L 128,32" fill="none" stroke="black"></path>
+                <path d="M 424,32 L 440,32" fill="none" stroke="black"></path>
+                <path d="M 480,32 L 496,32" fill="none" stroke="black"></path>
+                <path d="M 24,48 L 48,48" fill="none" stroke="black"></path>
+                <path d="M 48,64 L 64,64" fill="none" stroke="black"></path>
+                <path d="M 296,64 L 312,64" fill="none" stroke="black"></path>
+                <path d="M 360,64 L 384,64" fill="none" stroke="black"></path>
+                <path d="M 424,64 L 520,64" fill="none" stroke="black"></path>
+                <path d="M 88,80 L 112,80" fill="none" stroke="black"></path>
+                <path d="M 504,80 L 520,80" fill="none" stroke="black"></path>
+                <path d="M 80,96 L 88,96" fill="none" stroke="black"></path>
+                <path d="M 296,96 L 384,96" fill="none" stroke="black"></path>
+                <path d="M 24,112 L 56,112" fill="none" stroke="black"></path>
+                <path d="M 104,112 L 112,112" fill="none" stroke="black"></path>
+                <path d="M 136,112 L 176,112" fill="none" stroke="black"></path>
+                <path d="M 208,112 L 248,112" fill="none" stroke="black"></path>
+                <path d="M 136,128 L 176,128" fill="none" stroke="black"></path>
+                <path d="M 208,128 L 248,128" fill="none" stroke="black"></path>
+                <path d="M 424,128 L 520,128" fill="none" stroke="black"></path>
+                <path d="M 72,144 L 88,144" fill="none" stroke="black"></path>
+                <path d="M 104,144 L 112,144" fill="none" stroke="black"></path>
+                <path d="M 136,144 L 176,144" fill="none" stroke="black"></path>
+                <path d="M 208,144 L 248,144" fill="none" stroke="black"></path>
+                <path d="M 504,144 L 520,144" fill="none" stroke="black"></path>
+                <path d="M 24,160 L 48,160" fill="none" stroke="black"></path>
+                <path d="M 48,192 L 64,192" fill="none" stroke="black"></path>
+                <path d="M 80,192 L 112,192" fill="none" stroke="black"></path>
+                <path d="M 368,208 L 392,208" fill="none" stroke="black"></path>
+                <path d="M 480,208 L 520,208" fill="none" stroke="black"></path>
+                <path d="M 24,224 L 56,224" fill="none" stroke="black"></path>
+                <path d="M 368,224 L 520,224" fill="none" stroke="black"></path>
+                <path d="M 8,288 L 128,288" fill="none" stroke="black"></path>
+                <path d="M 48,64 L 84,136" fill="none" stroke="black"></path>
+                <path d="M 264,160 L 280,192" fill="none" stroke="black"></path>
+                <path d="M 328,208 L 336,224" fill="none" stroke="black"></path>
+                <path d="M 400,112 L 408,128" fill="none" stroke="black"></path>
+                <path d="M 48,192 L 84,120" fill="none" stroke="black"></path>
+                <path d="M 264,128 L 280,96" fill="none" stroke="black"></path>
+                <path d="M 328,176 L 336,160" fill="none" stroke="black"></path>
+                <path d="M 400,80 L 408,64" fill="none" stroke="black"></path>
+                <path d="M 48,48 C 56.83064,48 64,55.16936 64,64" fill="none" stroke="black"></path>
+                <path d="M 64,64 C 55.16936,64 48,71.16936 48,80" fill="none" stroke="black"></path>
+                <path d="M 48,80 C 56.83064,80 64,72.83064 64,64" fill="none" stroke="black"></path>
+                <path d="M 88,80 C 79.16936,80 72,87.16936 72,96" fill="none" stroke="black"></path>
+                <path d="M 72,96 C 80.83064,96 88,103.16936 88,112" fill="none" stroke="black"></path>
+                <path d="M 88,112 C 79.16936,112 72,104.83064 72,96" fill="none" stroke="black"></path>
+                <path d="M 104,112 C 112.83064,112 120,119.16936 120,128" fill="none" stroke="black"></path>
+                <path d="M 120,112 C 111.16936,112 104,119.16936 104,128" fill="none" stroke="black"></path>
+                <path d="M 112,112 C 120.83064,112 128,119.16936 128,128" fill="none" stroke="black"></path>
+                <path d="M 112,112 C 120.83064,112 128,104.83064 128,96" fill="none" stroke="black"></path>
+                <path d="M 72,144 C 80.83064,144 88,151.16936 88,160" fill="none" stroke="black"></path>
+                <path d="M 104,144 C 112.83064,144 120,136.83064 120,128" fill="none" stroke="black"></path>
+                <path d="M 120,144 C 111.16936,144 104,136.83064 104,128" fill="none" stroke="black"></path>
+                <path d="M 112,144 C 120.83064,144 128,151.16936 128,160" fill="none" stroke="black"></path>
+                <path d="M 112,144 C 120.83064,144 128,136.83064 128,128" fill="none" stroke="black"></path>
+                <path d="M 48,160 C 56.83064,160 64,167.16936 64,176" fill="none" stroke="black"></path>
+                <path d="M 88,160 C 79.16936,160 72,152.83064 72,144" fill="none" stroke="black"></path>
+                <path d="M 48,192 C 56.83064,192 64,184.83064 64,176" fill="none" stroke="black"></path>
+                <path d="M 64,192 C 55.16936,192 48,184.83064 48,176" fill="none" stroke="black"></path>
+                <polygon class="arrowhead" points="504,208 492,202.4 492,213.6" fill="black" transform="rotate(0,496,208)"></polygon>
+                <polygon class="arrowhead" points="504,32 492,26.4 492,37.6" fill="black" transform="rotate(0,496,32)"></polygon>
+                <polygon class="arrowhead" points="432,32 420,26.4 420,37.6" fill="black" transform="rotate(180,424,32)"></polygon>
+                <polygon class="arrowhead" points="392,64 380,58.4 380,69.6" fill="black" transform="rotate(0,384,64)"></polygon>
+                <polygon class="arrowhead" points="376,208 364,202.4 364,213.6" fill="black" transform="rotate(180,368,208)"></polygon>
+                <polygon class="arrowhead" points="304,64 292,58.4 292,69.6" fill="black" transform="rotate(180,296,64)"></polygon>
+                <polygon class="arrowhead" points="256,112 244,106.4 244,117.6" fill="black" transform="rotate(0,248,112)"></polygon>
+                <polygon class="arrowhead" points="216,112 204,106.4 204,117.6" fill="black" transform="rotate(180,208,112)"></polygon>
+                <polygon class="arrowhead" points="184,112 172,106.4 172,117.6" fill="black" transform="rotate(0,176,112)"></polygon>
+                <polygon class="arrowhead" points="144,112 132,106.4 132,117.6" fill="black" transform="rotate(180,136,112)"></polygon>
+                <circle cx="56" cy="176" r="6" class="closeddot" fill="black"></circle>
+                <circle cx="64" cy="80" r="6" class="closeddot" fill="black"></circle>
+                <circle cx="72" cy="112" r="6" class="closeddot" fill="black"></circle>
+                <circle cx="72" cy="160" r="6" class="closeddot" fill="black"></circle>
+                <g class="text">
+                  <text x="460" y="36">Drop</text>
+                  <text x="464" y="52">Cable</text>
+                  <text x="164" y="68">&lt;-Feeder</text>
+                  <text x="232" y="68">Cable-&gt;</text>
+                  <text x="336" y="68">Distr</text>
+                  <text x="536" y="68">ONU</text>
+                  <text x="336" y="84">Cable</text>
+                  <text x="36" y="100">NE</text>
+                  <text x="160" y="100">Cable</text>
+                  <text x="192" y="100">-</text>
+                  <text x="232" y="100">Cable</text>
+                  <text x="392" y="100">x</text>
+                  <text x="432" y="100">FDT</text>
+                  <text x="184" y="116">/</text>
+                  <text x="200" y="116">\</text>
+                  <text x="40" y="132">(OLT)</text>
+                  <text x="256" y="132">x</text>
+                  <text x="536" y="132">ONU</text>
+                  <text x="256" y="148">x</text>
+                  <text x="332" y="148">cccccccc</text>
+                  <text x="184" y="164">\</text>
+                  <text x="200" y="164">/</text>
+                  <text x="304" y="164">c</text>
+                  <text x="360" y="164">c</text>
+                  <text x="96" y="180">ODF</text>
+                  <text x="192" y="180">-</text>
+                  <text x="304" y="180">c</text>
+                  <text x="360" y="180">c</text>
+                  <text x="192" y="196">Joint</text>
+                  <text x="308" y="196">-c-x</text>
+                  <text x="360" y="196">c</text>
+                  <text x="36" y="212">NE</text>
+                  <text x="184" y="212">Box</text>
+                  <text x="272" y="212">FDT</text>
+                  <text x="304" y="212">c</text>
+                  <text x="360" y="212">c</text>
+                  <text x="412" y="212">Drop</text>
+                  <text x="456" y="212">Cable</text>
+                  <text x="536" y="212">ONU</text>
+                  <text x="304" y="228">c</text>
+                  <text x="356" y="228">-c</text>
+                  <text x="40" y="244">(OLT)</text>
+                  <text x="304" y="244">c</text>
+                  <text x="328" y="244">FDT</text>
+                  <text x="356" y="244">&lt;c</text>
+                  <text x="304" y="260">c</text>
+                  <text x="360" y="260">c</text>
+                  <text x="40" y="276">Central</text>
+                  <text x="100" y="276">Office</text>
+                  <text x="332" y="276">cccccccc</text>
+                  <text x="328" y="292">Cabinet</text>
+                </g>
+              </svg><a href="#section-2.2-5.1.1" class="pilcrow">¶</a>
+</div>
+</div>
+<figcaption><a href="#figure-2" class="selfRef">Figure 2</a>:
+<a href="#name-passive-infrastructure-for-o" class="selfRef">Passive Infrastructure for Optical Access Networks</a>
+          </figcaption></figure>
+</div>
+</section>
+</div>
+<div id="passive-infrastructure-in-microwave-networks">
+<section id="section-2.3">
+        <h3 id="name-passive-infrastructure-in-m">
+<a href="#section-2.3" class="section-number selfRef">2.3. </a><a href="#name-passive-infrastructure-in-m" class="section-name selfRef">Passive Infrastructure in Microwave Networks</a>
+        </h3>
+<p id="section-2.3-1">To be developed.<a href="#section-2.3-1" class="pilcrow">¶</a></p>
+</section>
+</div>
+<div id="editorial-note-to-be-removed-by-rfc-editor">
+<section id="section-2.4">
+        <h3 id="name-editorial-note-to-be-remove">
+<a href="#section-2.4" class="section-number selfRef">2.4. </a><a href="#name-editorial-note-to-be-remove" class="section-name selfRef">Editorial Note (To be removed by RFC Editor)</a>
+        </h3>
+<ul class="normal ulEmpty">
+<li class="normal ulEmpty" id="section-2.4-1.1">
+            <p id="section-2.4-1.1.1">Note to the RFC Editor: This section is to be removed prior to publication.<a href="#section-2.4-1.1.1" class="pilcrow">¶</a></p>
+</li>
+        </ul>
+<p id="section-2.4-2">This document contains placeholder values that need to be replaced with finalized values at the time of publication. This note summarizes all of the substitutions that are needed.<a href="#section-2.4-2" class="pilcrow">¶</a></p>
+<p id="section-2.4-3">Please apply the following replacements:<a href="#section-2.4-3" class="pilcrow">¶</a></p>
+<ul class="normal">
+<li class="normal" id="section-2.4-4.1">
+            <p id="section-2.4-4.1.1">XXXX --&gt; the assigned RFC number for this I-D<a href="#section-2.4-4.1.1" class="pilcrow">¶</a></p>
+</li>
+          <li class="normal" id="section-2.4-4.2">
+            <p id="section-2.4-4.2.1">YYYY --&gt; the assigned RFC number for <span>[<a href="#I-D.ietf-ivy-network-inventory-yang" class="cite xref">I-D.ietf-ivy-network-inventory-yang</a>]</span><a href="#section-2.4-4.2.1" class="pilcrow">¶</a></p>
+</li>
+          <li class="normal" id="section-2.4-4.3">
+            <p id="section-2.4-4.3.1">ZZZZ --&gt; the assigned RFC number for <span>[<a href="#I-D.ietf-ivy-network-inventory-location" class="cite xref">I-D.ietf-ivy-network-inventory-location</a>]</span><a href="#section-2.4-4.3.1" class="pilcrow">¶</a></p>
+</li>
+        </ul>
+<p id="section-2.4-5">Please replace the revision date of the latest revision of the 'ietf-nwi-passive-inventory' module with the publication date of this I-D, using the the format (year-month-day).<a href="#section-2.4-5" class="pilcrow">¶</a></p>
+<p id="section-2.4-6">Please manually fix the YANG trees in <a href="#yang-tree" class="auto internal xref">Appendix A</a> which have been generated by pyang and have some bugs.<a href="#section-2.4-6" class="pilcrow">¶</a></p>
+</section>
+</div>
+</section>
+</div>
+<div id="terminology-and-notations">
+<section id="section-3">
+      <h2 id="name-terminology-and-notations">
+<a href="#section-3" class="section-number selfRef">3. </a><a href="#name-terminology-and-notations" class="section-name selfRef">Terminology and Notations</a>
+      </h2>
+<div id="terminology">
+<section id="section-3.1">
+        <h3 id="name-terminology">
+<a href="#section-3.1" class="section-number selfRef">3.1. </a><a href="#name-terminology" class="section-name selfRef">Terminology</a>
+        </h3>
+<p id="section-3.1-1">The following terms are defined in <span>[<a href="#RFC7950" class="cite xref">RFC7950</a>]</span> and are not redefined here:<a href="#section-3.1-1" class="pilcrow">¶</a></p>
+<ul class="normal">
+<li class="normal" id="section-3.1-2.1">
+            <p id="section-3.1-2.1.1">client<a href="#section-3.1-2.1.1" class="pilcrow">¶</a></p>
+</li>
+          <li class="normal" id="section-3.1-2.2">
+            <p id="section-3.1-2.2.1">server<a href="#section-3.1-2.2.1" class="pilcrow">¶</a></p>
+</li>
+          <li class="normal" id="section-3.1-2.3">
+            <p id="section-3.1-2.3.1">augment<a href="#section-3.1-2.3.1" class="pilcrow">¶</a></p>
+</li>
+          <li class="normal" id="section-3.1-2.4">
+            <p id="section-3.1-2.4.1">data model<a href="#section-3.1-2.4.1" class="pilcrow">¶</a></p>
+</li>
+          <li class="normal" id="section-3.1-2.5">
+            <p id="section-3.1-2.5.1">data node<a href="#section-3.1-2.5.1" class="pilcrow">¶</a></p>
+</li>
+        </ul>
+<p id="section-3.1-3">The following terms are defined in <span>[<a href="#RFC6241" class="cite xref">RFC6241</a>]</span> and are not redefined here:<a href="#section-3.1-3" class="pilcrow">¶</a></p>
+<ul class="normal">
+<li class="normal" id="section-3.1-4.1">
+            <p id="section-3.1-4.1.1">configuration data<a href="#section-3.1-4.1.1" class="pilcrow">¶</a></p>
+</li>
+          <li class="normal" id="section-3.1-4.2">
+            <p id="section-3.1-4.2.1">state data<a href="#section-3.1-4.2.1" class="pilcrow">¶</a></p>
+</li>
+        </ul>
+<p id="section-3.1-5">The following terms are defined and used in this document.<a href="#section-3.1-5" class="pilcrow">¶</a></p>
+<ul class="normal">
+<li class="normal" id="section-3.1-6.1">
+            <p id="section-3.1-6.1.1">Passive device: refers to a physical device within a network that does not require external power to function, and simply manipulates signals through processes like transmission, reflection, splitting, filtering, or attenuation without actively amplifying or generating the signal. Examples include optical fibers, splitters, couplers, and optical filters, all of which are used to direct signals within a system without needing power. A passive device typically does not have management interfaces and is typically deployed in a location tracked by the network operator.<a href="#section-3.1-6.1.1" class="pilcrow">¶</a></p>
+</li>
+          <li class="normal" id="section-3.1-6.2">
+            <p id="section-3.1-6.2.1">Active device: refers to a physical device that contains hardware and software and is managable through communication interfaces. Network elements defined by <span>[<a href="#I-D.ietf-ivy-network-inventory-yang" class="cite xref">I-D.ietf-ivy-network-inventory-yang</a>]</span> are examples of active device.<a href="#section-3.1-6.2.1" class="pilcrow">¶</a></p>
+</li>
+          <li class="normal" id="section-3.1-6.3">
+            <p id="section-3.1-6.3.1">Guiding media: refers to physical transmission pathways - such as optical fiber cables, electrical cables, and coaxial cables - that direct and confine electromagnetic signals along a specific route. These media provide a bounded channel for data transmission, ensuring signal integrity, minimizing interference, and enabling high-speed communication over varying distances. This category is also commonly known as guided media or wired transmission media. Guiding media can be concatenated to form longer guiding media.<a href="#section-3.1-6.3.1" class="pilcrow">¶</a></p>
+</li>
+          <li class="normal" id="section-3.1-6.4">
+            <p id="section-3.1-6.4.1">Optical Cable: refers to a type of guiding media that uses optical fiber as media to transmit optical signals. An optical cable can contain one or multiple fiber cores, also known as fiber strands, each serving as an independent guiding media for data transmission. Optical cables can be spliced or fused through joint boxes, optical distribution frames (ODF), or fiber jumpers.<a href="#section-3.1-6.4.1" class="pilcrow">¶</a></p>
+</li>
+          <li class="normal" id="section-3.1-6.5">
+            <p id="section-3.1-6.5.1">Electrical Cable: refers to a type of guiding media that uses metal conductors (such as copper or aluminum wires) as a medium to carry electrical signals for communication or power distribution. Common examples include twisted-pair cables (such as CAT-5/6 and DSL cables), and coaxial cables, which feature a single-core conductor commonly used in DOCSIS and MoCA-based broadband access networks. Electrical cables can be connected through splicing, connectors, or junction boxes.<a href="#section-3.1-6.5.1" class="pilcrow">¶</a></p>
+</li>
+        </ul>
+</section>
+</div>
+<div id="tree-diagram">
+<section id="section-3.2">
+        <h3 id="name-tree-diagram">
+<a href="#section-3.2" class="section-number selfRef">3.2. </a><a href="#name-tree-diagram" class="section-name selfRef">Tree Diagram</a>
+        </h3>
+<p id="section-3.2-1">Tree diagrams used in this document follow the notation defined in <span>[<a href="#RFC8340" class="cite xref">RFC8340</a>]</span>.<a href="#section-3.2-1" class="pilcrow">¶</a></p>
+</section>
+</div>
+<div id="prefixes-in-data-node-names">
+<section id="section-3.3">
+        <h3 id="name-prefixes-in-data-node-names">
+<a href="#section-3.3" class="section-number selfRef">3.3. </a><a href="#name-prefixes-in-data-node-names" class="section-name selfRef">Prefixes in Data Node Names</a>
+        </h3>
+<p id="section-3.3-1">In this document, names of data nodes and other data model objects
+are prefixed using the standard prefix associated with the
+corresponding YANG imported modules, as shown in <a href="#tab-prefixes" class="auto internal xref">Table 1</a>.<a href="#section-3.3-1" class="pilcrow">¶</a></p>
+<span id="name-prefixes-and-corresponding-"></span><div id="tab-prefixes">
+<table class="center" id="table-1">
+          <caption>
+<a href="#table-1" class="selfRef">Table 1</a>:
+<a href="#name-prefixes-and-corresponding-" class="selfRef">Prefixes and corresponding YANG module</a>
+          </caption>
+<thead>
+            <tr>
+              <th class="text-left" rowspan="1" colspan="1">Prefix</th>
+              <th class="text-left" rowspan="1" colspan="1">YANG module</th>
+              <th class="text-left" rowspan="1" colspan="1">Reference</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="text-left" rowspan="1" colspan="1">nwi</td>
+              <td class="text-left" rowspan="1" colspan="1">ietf-network-inventory</td>
+              <td class="text-left" rowspan="1" colspan="1">[RFCYYYY]</td>
+            </tr>
+            <tr>
+              <td class="text-left" rowspan="1" colspan="1">nil</td>
+              <td class="text-left" rowspan="1" colspan="1">ietf-ni-location</td>
+              <td class="text-left" rowspan="1" colspan="1">[RFCZZZZ]</td>
+            </tr>
+            <tr>
+              <td class="text-left" rowspan="1" colspan="1">l0-types</td>
+              <td class="text-left" rowspan="1" colspan="1">ietf-layer0-types</td>
+              <td class="text-left" rowspan="1" colspan="1">RFC XXXX</td>
+            </tr>
+          </tbody>
+        </table>
+</div>
+</section>
+</div>
+</section>
+</div>
+<div id="modeling-considerations">
+<section id="section-4">
+      <h2 id="name-modeling-considerations">
+<a href="#section-4" class="section-number selfRef">4. </a><a href="#name-modeling-considerations" class="section-name selfRef">Modeling Considerations</a>
+      </h2>
+<div id="relationship-with-network-inventory">
+<section id="section-4.1">
+        <h3 id="name-relationship-with-network-i">
+<a href="#section-4.1" class="section-number selfRef">4.1. </a><a href="#name-relationship-with-network-i" class="section-name selfRef">Relationship with Network Inventory</a>
+        </h3>
+<p id="section-4.1-1">TBD<a href="#section-4.1-1" class="pilcrow">¶</a></p>
+</section>
+</div>
+<div id="relationship-with-topology">
+<section id="section-4.2">
+        <h3 id="name-relationship-with-topology">
+<a href="#section-4.2" class="section-number selfRef">4.2. </a><a href="#name-relationship-with-topology" class="section-name selfRef">Relationship with Topology</a>
+        </h3>
+<p id="section-4.2-1">TBD<a href="#section-4.2-1" class="pilcrow">¶</a></p>
+</section>
+</div>
+</section>
+</div>
+<div id="yang-model-overview">
+<section id="section-5">
+      <h2 id="name-yang-model-overview">
+<a href="#section-5" class="section-number selfRef">5. </a><a href="#name-yang-model-overview" class="section-name selfRef">YANG Model Overview</a>
+      </h2>
+<p id="section-5-1">The YANG data model in this draft augments the model defined in <span>[<a href="#I-D.ietf-ivy-network-inventory-yang" class="cite xref">I-D.ietf-ivy-network-inventory-yang</a>]</span> with the following information:<a href="#section-5-1" class="pilcrow">¶</a></p>
+<ul class="normal">
+<li class="normal" id="section-5-2.1">
+          <p id="section-5-2.1.1">Passive devices: a list of passive devices with extended attributed reported by the domain controller.<a href="#section-5-2.1.1" class="pilcrow">¶</a></p>
+</li>
+        <li class="normal" id="section-5-2.2">
+          <p id="section-5-2.2.1">Cables: a list of cables with each containing an optional list of child cables.<a href="#section-5-2.2.1" class="pilcrow">¶</a></p>
+</li>
+      </ul>
+</section>
+</div>
+<div id="yang-modules">
+<section id="section-6">
+      <h2 id="name-yang-modules">
+<a href="#section-6" class="section-number selfRef">6. </a><a href="#name-yang-modules" class="section-name selfRef">YANG Modules</a>
+      </h2>
+<div id="yang-data-model-for-passive-device-inventory">
+<section id="section-6.1">
+        <h3 id="name-yang-data-model-for-passive">
+<a href="#section-6.1" class="section-number selfRef">6.1. </a><a href="#name-yang-data-model-for-passive" class="section-name selfRef">YANG Data Model for Passive Device Inventory</a>
+        </h3>
+<span id="name-yang-model-for-passive-netw"></span><div id="fig-nwi-passive-yang">
+<figure id="figure-3">
+          <div class="breakable lang-yang sourcecode" id="section-6.1-1.1">
+<pre>&lt;CODE BEGINS&gt; file "ietf-nwi-passive-inventory@2026-03-19.yang"
+
+module ietf-nwi-passive-inventory {
+  yang-version 1.1;
+  namespace "urn:ietf:params:xml:ns:yang:ietf-nwi-passive-inventory";
+  prefix nwi-passive;
+
+  import ietf-network-inventory {
+    prefix nwi;
+    reference
+      "RFC YYYY: A YANG Data Model for Network Inventory";
+  }
+  import ietf-ni-location {
+    prefix nil;
+    reference
+      "RFC ZZZZ: A YANG Data Model for Network Inventory Location";
+  }
+
+  organization
+    "IETF Network Inventory YANG (IVY) Working Group";
+  contact
+    "WG Web:   &lt;https://datatracker.ietf.org/wg/ivy/&gt;
+     WG List:  &lt;mailto:inventory-yang@ietf.org&gt;
+
+     Editor:   Chaode Yu
+               &lt;yuchaode@huawei.com&gt;
+
+     Editor:   Aihua Guo
+               &lt;aihuaguo.ietf@gmail.com&gt;
+
+     Editor:   Italo Busi
+               &lt;italo.busi@huawei.com&gt;";
+  description
+    "This YANG module specifies a data model for passive
+     devices, such as fibers, cables, and passive sites,
+     deployed within and between network elements.
+
+     Copyright (c) 2026 IETF Trust and the persons
+     identified as authors of the code.  All rights reserved.
+
+     Redistribution and use in source and binary forms, with or
+     without modification, is permitted pursuant to, and subject
+     to the license terms contained in, the Revised BSD License
+     set forth in Section 4.c of the IETF Trust's Legal Provisions
+     Relating to IETF Documents
+     (https://trustee.ietf.org/license-info).
+
+     This version of this YANG module is part of RFC XXXX; see
+     the RFC itself for full legal notices.";
+
+  revision 2026-03-19 {
+    description
+      "Initial version";
+    reference
+      "RFC XXXX: A YANG Data Model for Passive Device Info in
+                 Network Inventory.";
+  }
+
+  /* Identities */
+
+  identity fiber-type {
+    description
+      "Base identity for fiber types.";
+  }
+
+  identity G652A {
+    base fiber-type;
+    description
+      "ITU-T G.652A fiber.";
+  }
+
+  identity G652B {
+    base fiber-type;
+    description
+      "ITU-T G.652B fiber.";
+  }
+
+  identity G652C {
+    base fiber-type;
+    description
+      "ITU-T G.652C fiber.";
+  }
+
+  identity G652D {
+    base fiber-type;
+    description
+      "ITU-T G.652D fiber.";
+  }
+
+  identity G653 {
+    base fiber-type;
+    description
+      "ITU-T G.653 fiber.";
+  }
+
+  identity G654 {
+    base fiber-type;
+    description
+      "ITU-T G.654 fiber.";
+  }
+
+  identity G655 {
+    base fiber-type;
+    description
+      "ITU-T G.655 fiber.";
+  }
+
+  identity G656 {
+    base fiber-type;
+    description
+      "ITU-T G.656 fiber.";
+  }
+
+  identity G657A1 {
+    base fiber-type;
+    description
+      "ITU-T G.657A1 fiber.";
+  }
+
+  identity G657A2 {
+    base fiber-type;
+    description
+      "ITU-T G.657A2 fiber.";
+  }
+
+  identity G657B {
+    base fiber-type;
+    description
+      "ITU-T G.657B fiber.";
+  }
+
+  identity other {
+    base fiber-type;
+    description
+      "Other type of fiber.";
+  }
+
+  identity cable-type {
+    description
+      "Base identity for cable types.";
+  }
+
+  identity optical-fiber {
+    base cable-type;
+    description
+      "Fiber optic cable.";
+  }
+
+  identity electrical-cable {
+    base cable-type;
+    description
+      "Electrical cable.";
+  }
+
+  identity coaxial-cable {
+    base electrical-cable;
+    description
+      "Coaxial cable.";
+  }
+
+  identity cable-role {
+    description
+      "Base identity for cable roles.";
+  }
+
+  identity backbone {
+    base cable-role;
+    description
+      "Backbone cable.";
+  }
+
+  identity aggregation {
+    base cable-role;
+    description
+      "Aggregation cable.";
+  }
+
+  identity access {
+    base cable-role;
+    description
+      "Access cable.";
+  }
+
+  identity trunk {
+    base cable-role;
+    description
+      "Trunk cable.";
+  }
+
+  identity distribution {
+    base cable-role;
+    description
+      "Distribution cable.";
+  }
+
+  identity branch {
+    base cable-role;
+    description
+      "Branch cable.";
+  }
+
+  identity passive-port-type {
+    description
+      "Base identity for passive port types.";
+  }
+
+  identity service-port {
+    base passive-port-type;
+    description
+      "Service port.";
+  }
+
+  identity input-port {
+    base passive-port-type;
+    description
+      "Input port.";
+  }
+
+  identity output-port {
+    base passive-port-type;
+    description
+      "Output port.";
+  }
+
+  identity p2mp-port {
+    base passive-port-type;
+    description
+      "Input port.";
+  }
+
+  identity connected-device-type {
+    description
+      "Base identity for connected device types.";
+  }
+
+  identity passive-device {
+    base connected-device-type;
+    description
+      "Passive/unmanaged device.";
+  }
+
+  identity active-device {
+    base connected-device-type;
+    description
+      "Active device, e.g. network element.";
+  }
+
+  identity passive-device-type {
+    description
+      "Base identity for passive device types.";
+  }
+
+  identity ODF {
+    base passive-device-type;
+    description
+      "Optical Distribution Frame.";
+  }
+
+  identity WDM {
+    base passive-device-type;
+    description
+      "Wavelength Division Multiplexer.";
+  }
+
+  identity FAT {
+    base passive-device-type;
+    description
+      "Fiber Access Terminal.";
+  }
+
+  identity FDT {
+    base passive-device-type;
+    description
+      "Fiber Distribution Terminal.";
+  }
+
+  identity ATB {
+    base passive-device-type;
+    description
+      "Access Terminal Box.";
+  }
+
+  /* Groupings */
+
+  grouping connected-device-end {
+    description
+      "Attributes applicable to connected device end.";
+    leaf device-type {
+      type identityref {
+        base connected-device-type;
+      }
+      description
+        "Type of connected device.";
+    }
+    choice connected-device-type {
+      description
+        "Device end based on the type of connected device.";
+      case passive {
+        leaf device-id {
+          type string;
+          must "derived-from-or-self(../device-type,
+                'nwi-passive:passive-device')";
+          description
+            "Connected passive device identifier.";
+        }
+      }
+      case active {
+        leaf ne-ref {
+          type leafref {
+            path "/nwi:network-inventory/nwi:network-elements"
+               + "/nwi:network-element/nwi:ne-id";
+          }
+          must "derived-from-or-self(../device-type,
+                'nwi-passive:active-device')";
+          description
+            "Referenced Network Element (NE).";
+        }
+        leaf component-ref {
+          type leafref {
+            path "/nwi:network-inventory/nwi:network-elements"
+               + "/nwi:network-element[nwi:ne-id=current()/.."
+               + "/ne-ref]/nwi:components/nwi:component"
+               + "/nwi:component-id";
+          }
+          must "derived-from-or-self(../device-type,
+                'nwi-passive:active-device')";
+          description
+            "Referenced connected active device's component,
+             e.g. port component.";
+        }
+      }
+    }
+  }
+
+  grouping connected-device-ref {
+    description
+      "Attributes applicable to connected devices.";
+    container a-end {
+      description
+        "A-end device reference";
+      uses connected-device-end;
+    }
+    container z-end {
+      description
+        "Z-end device reference";
+      uses connected-device-end;
+    }
+  }
+
+  grouping common-cable-attributes {
+    description
+      "Common attributes of cables applicable to the cable
+       and its child cables.";
+    leaf id {
+      type string;
+      description
+        "Cable identifier.";
+    }
+    leaf length {
+      type uint32;
+      units "meter";
+      description
+        "Length of the cable in meter.";
+    }
+    uses connected-device-ref;
+  }
+
+  grouping optical-cable-attributes {
+    description
+      "Attributes applicable to fiber optic cables.";
+    container optical-cable {
+      when "derived-from-or-self(../cable-type, 'optical-fiber')";
+      description
+        "Container for attributes associated with fiber
+         optic cables.";
+      leaf fiber-core-num {
+        type uint32;
+        description
+          "Number of fiber cores within the cable.";
+      }
+      leaf fiber-type {
+        type identityref {
+          base fiber-type;
+        }
+        description
+          "Type of fiber contained in the cable.";
+      }
+      leaf attenuation {
+        type decimal64 {
+          fraction-digits 2;
+        }
+        units "dB";
+        description
+          "The fiber attenuation in dB.";
+      }
+    }
+  }
+
+  grouping cable-attributes {
+    description
+      "Attributes of cables.";
+    uses common-cable-attributes;
+    uses nwi:basic-common-entity-attributes;
+    leaf cable-type {
+      type identityref {
+        base cable-type;
+      }
+      description
+        "Type of cable.";
+    }
+    leaf cable-role {
+      type identityref {
+        base cable-role;
+      }
+      description
+        "Role of cable.";
+    }
+    uses optical-cable-attributes;
+  }
+
+  grouping child-cables {
+    description
+      "Attributes applicable to child cables that are concatnated
+       to form the cable.";
+    list child-cable {
+      key "index";
+      min-elements 2;
+      description
+        "Ordered list of concatenated child cables.";
+      leaf index {
+        type uint8;
+        description
+          "An index number used to identify the concatenation
+           order of the child cables.";
+      }
+      uses common-cable-attributes;
+    }
+  }
+
+  grouping cables {
+    description
+      "Attributes applicable to cables.";
+    list cable {
+      key "id";
+      description
+        "List of cables.";
+      uses cable-attributes;
+      uses child-cables;
+    }
+  }
+
+  grouping passive-device-ports {
+    description
+      "Attributes applicable to passive device ports.";
+    list passive-port {
+      key "id";
+      description
+        "List of ports on a passive device.";
+      leaf id {
+        type string;
+        description
+          "Port identifier.";
+      }
+      uses nwi:basic-common-entity-attributes;
+      leaf port-type {
+        type identityref {
+          base passive-port-type;
+        }
+        description
+          "Type of passive port.";
+      }
+      leaf fiber-core-num {
+        type uint32;
+        description
+          "Number of fiber cores within the port.";
+      }
+    }
+  }
+
+  grouping passive-devices {
+    description
+      "Attributes applicable to passive devices.";
+    list passive-device {
+      key "id";
+      description
+        "List of passive devices.";
+      leaf id {
+        type string;
+        description
+          "Cable identifier.";
+      }
+      uses nwi:basic-common-entity-attributes;
+      leaf device-type {
+        type identityref {
+          base passive-device-type;
+        }
+        description
+          "Type of passive device.";
+      }
+      leaf-list custom-tags {
+        type string;
+        description
+          "Customized tags, e.g. RFID, QR code that are
+           attached to the device.";
+      }
+      leaf location-ref {
+        type nil:ni-location-ref;
+        description
+          "Referenced location for the passive device.";
+      }
+      uses passive-device-ports;
+    }
+  }
+
+  /* Augmentation */
+
+  augment "/nwi:network-inventory" {
+    description
+      "Augment network inventory with information
+       for optical cables and passive devices.";
+    uses cables;
+    uses passive-devices;
+  }
+}
+
+&lt;CODE ENDS&gt;</pre>
+</div>
+<figcaption><a href="#figure-3" class="selfRef">Figure 3</a>:
+<a href="#name-yang-model-for-passive-netw" class="selfRef">YANG model for passive network inventory</a>
+          </figcaption></figure>
+</div>
+</section>
+</div>
+</section>
+</div>
+<div id="operational-considerations">
+<section id="section-7">
+      <h2 id="name-operational-considerations">
+<a href="#section-7" class="section-number selfRef">7. </a><a href="#name-operational-considerations" class="section-name selfRef">Operational Considerations</a>
+      </h2>
+<p id="section-7-1">TBC per <span>[<a href="#I-D.opsarea-rfc5706bis" class="cite xref">I-D.opsarea-rfc5706bis</a>]</span>.<a href="#section-7-1" class="pilcrow">¶</a></p>
+</section>
+</div>
+<div id="security-considerations">
+<section id="section-8">
+      <h2 id="name-security-considerations">
+<a href="#section-8" class="section-number selfRef">8. </a><a href="#name-security-considerations" class="section-name selfRef">Security Considerations</a>
+      </h2>
+<p id="section-8-1">The YANG module specified in this document defines a schema for data
+that is designed to be accessed via network management protocols such
+as NETCONF <span>[<a href="#RFC6241" class="cite xref">RFC6241</a>]</span> or RESTCONF <span>[<a href="#RFC8040" class="cite xref">RFC8040</a>]</span>.  The lowest NETCONF layer
+is the secure transport layer, and the mandatory-to-implement secure
+transport is Secure Shell (SSH) <span>[<a href="#RFC6242" class="cite xref">RFC6242</a>]</span>.  The lowest RESTCONF layer
+is HTTPS, and the mandatory-to-implement secure transport is TLS
+<span>[<a href="#RFC8446" class="cite xref">RFC8446</a>]</span>.<a href="#section-8-1" class="pilcrow">¶</a></p>
+<p id="section-8-2">The NETCONF access control model <span>[<a href="#RFC8341" class="cite xref">RFC8341</a>]</span> provides the means to
+restrict access for particular NETCONF or RESTCONF users to a
+preconfigured subset of all available NETCONF or RESTCONF protocol
+operations and content.<a href="#section-8-2" class="pilcrow">¶</a></p>
+<p id="section-8-3">There are a number of data nodes defined in this YANG module that are
+writable/creatable/deletable (i.e., config true, which is the
+default).  These data nodes may be considered sensitive or vulnerable
+in some network environments.  Write operations (e.g., edit-config)
+to these data nodes without proper protection can have a negative
+effect on network operations.  Considerations in Section 8 of
+<span>[<a href="#RFC8795" class="cite xref">RFC8795</a>]</span> are also applicable to their subtrees in the module defined
+in this document.<a href="#section-8-3" class="pilcrow">¶</a></p>
+<p id="section-8-4">Some of the readable data nodes in this YANG module may be considered
+sensitive or vulnerable in some network environments.  It is thus
+important to control read access (e.g., via get, get-config, or
+notification) to these data nodes.  Considerations in Section 8 of
+<span>[<a href="#RFC8795" class="cite xref">RFC8795</a>]</span> are also applicable to their subtrees in the module defined
+in this document.<a href="#section-8-4" class="pilcrow">¶</a></p>
+</section>
+</div>
+<div id="iana-considerations">
+<section id="section-9">
+      <h2 id="name-iana-considerations">
+<a href="#section-9" class="section-number selfRef">9. </a><a href="#name-iana-considerations" class="section-name selfRef">IANA Considerations</a>
+      </h2>
+<p id="section-9-1">IANA is requested to register the following URI in the "ns"
+registry within the "IETF XML Registry" group <span>[<a href="#RFC3688" class="cite xref">RFC3688</a>]</span>:<a href="#section-9-1" class="pilcrow">¶</a></p>
+<div class="alignLeft art-text artwork" id="section-9-2">
+<pre>
+   URI: urn:ietf:params:xml:ns:yang:ietf-nwi-passive-inventory
+   Registrant Contact: The IESG
+   XML: N/A; the requested URI is an XML namespace.
+</pre><a href="#section-9-2" class="pilcrow">¶</a>
+</div>
+<p id="section-9-3">IANA is requested to register the following YANG module in the "YANG
+Module Names" registry <span>[<a href="#RFC6020" class="cite xref">RFC6020</a>]</span> within the "YANG Parameters"
+registry group.<a href="#section-9-3" class="pilcrow">¶</a></p>
+<div class="alignLeft art-text artwork" id="section-9-4">
+<pre>
+   name: ietf-nwi-passive-inventory
+   Maintained by IANA? N
+   namespace: urn:ietf:params:xml:ns:yang:ietf-nwi-passive-inventory
+   prefix: nwi-passive
+   reference: RFC XXXX
+</pre><a href="#section-9-4" class="pilcrow">¶</a>
+</div>
+</section>
+</div>
+<div id="sec-combined-references">
+<section id="section-10">
+      <h2 id="name-references">
+<a href="#section-10" class="section-number selfRef">10. </a><a href="#name-references" class="section-name selfRef">References</a>
+      </h2>
+<div id="sec-normative-references">
+<section id="section-10.1">
+        <h3 id="name-normative-references">
+<a href="#section-10.1" class="section-number selfRef">10.1. </a><a href="#name-normative-references" class="section-name selfRef">Normative References</a>
+        </h3>
+<dl class="references">
+<dt id="I-D.ietf-ivy-network-inventory-location">[I-D.ietf-ivy-network-inventory-location]</dt>
+        <dd>
+<span class="refAuthor">Wu, B.</span>, <span class="refAuthor">Belotti, S.</span>, <span class="refAuthor">Bouquier, J.</span>, <span class="refAuthor">Peruzzini, F.</span>, and <span class="refAuthor">P. Bedard</span>, <span class="refTitle">"A YANG Data Model for Network Inventory Location"</span>, <span class="refContent">Work in Progress</span>, <span class="seriesInfo">Internet-Draft, draft-ietf-ivy-network-inventory-location-05</span>, <time datetime="2026-02-28" class="refDate">28 February 2026</time>, <span>&lt;<a href="https://datatracker.ietf.org/doc/html/draft-ietf-ivy-network-inventory-location-05">https://datatracker.ietf.org/doc/html/draft-ietf-ivy-network-inventory-location-05</a>&gt;</span>. </dd>
+<dd class="break"></dd>
+<dt id="I-D.ietf-ivy-network-inventory-yang">[I-D.ietf-ivy-network-inventory-yang]</dt>
+        <dd>
+<span class="refAuthor">Yu, C.</span>, <span class="refAuthor">Belotti, S.</span>, <span class="refAuthor">Bouquier, J.</span>, <span class="refAuthor">Peruzzini, F.</span>, and <span class="refAuthor">P. Bedard</span>, <span class="refTitle">"A Base YANG Data Model for Network Inventory"</span>, <span class="refContent">Work in Progress</span>, <span class="seriesInfo">Internet-Draft, draft-ietf-ivy-network-inventory-yang-17</span>, <time datetime="2026-05-13" class="refDate">13 May 2026</time>, <span>&lt;<a href="https://datatracker.ietf.org/doc/html/draft-ietf-ivy-network-inventory-yang-17">https://datatracker.ietf.org/doc/html/draft-ietf-ivy-network-inventory-yang-17</a>&gt;</span>. </dd>
+<dd class="break"></dd>
+<dt id="RFC6241">[RFC6241]</dt>
+        <dd>
+<span class="refAuthor">Enns, R., Ed.</span>, <span class="refAuthor">Bjorklund, M., Ed.</span>, <span class="refAuthor">Schoenwaelder, J., Ed.</span>, and <span class="refAuthor">A. Bierman, Ed.</span>, <span class="refTitle">"Network Configuration Protocol (NETCONF)"</span>, <span class="seriesInfo">RFC 6241</span>, <span class="seriesInfo">DOI 10.17487/RFC6241</span>, <time datetime="2011-06" class="refDate">June 2011</time>, <span>&lt;<a href="https://www.rfc-editor.org/rfc/rfc6241">https://www.rfc-editor.org/rfc/rfc6241</a>&gt;</span>. </dd>
+<dd class="break"></dd>
+<dt id="RFC6242">[RFC6242]</dt>
+        <dd>
+<span class="refAuthor">Wasserman, M.</span>, <span class="refTitle">"Using the NETCONF Protocol over Secure Shell (SSH)"</span>, <span class="seriesInfo">RFC 6242</span>, <span class="seriesInfo">DOI 10.17487/RFC6242</span>, <time datetime="2011-06" class="refDate">June 2011</time>, <span>&lt;<a href="https://www.rfc-editor.org/rfc/rfc6242">https://www.rfc-editor.org/rfc/rfc6242</a>&gt;</span>. </dd>
+<dd class="break"></dd>
+<dt id="RFC7950">[RFC7950]</dt>
+        <dd>
+<span class="refAuthor">Bjorklund, M., Ed.</span>, <span class="refTitle">"The YANG 1.1 Data Modeling Language"</span>, <span class="seriesInfo">RFC 7950</span>, <span class="seriesInfo">DOI 10.17487/RFC7950</span>, <time datetime="2016-08" class="refDate">August 2016</time>, <span>&lt;<a href="https://www.rfc-editor.org/rfc/rfc7950">https://www.rfc-editor.org/rfc/rfc7950</a>&gt;</span>. </dd>
+<dd class="break"></dd>
+<dt id="RFC8040">[RFC8040]</dt>
+        <dd>
+<span class="refAuthor">Bierman, A.</span>, <span class="refAuthor">Bjorklund, M.</span>, and <span class="refAuthor">K. Watsen</span>, <span class="refTitle">"RESTCONF Protocol"</span>, <span class="seriesInfo">RFC 8040</span>, <span class="seriesInfo">DOI 10.17487/RFC8040</span>, <time datetime="2017-01" class="refDate">January 2017</time>, <span>&lt;<a href="https://www.rfc-editor.org/rfc/rfc8040">https://www.rfc-editor.org/rfc/rfc8040</a>&gt;</span>. </dd>
+<dd class="break"></dd>
+<dt id="RFC8340">[RFC8340]</dt>
+        <dd>
+<span class="refAuthor">Bjorklund, M.</span> and <span class="refAuthor">L. Berger, Ed.</span>, <span class="refTitle">"YANG Tree Diagrams"</span>, <span class="seriesInfo">BCP 215</span>, <span class="seriesInfo">RFC 8340</span>, <span class="seriesInfo">DOI 10.17487/RFC8340</span>, <time datetime="2018-03" class="refDate">March 2018</time>, <span>&lt;<a href="https://www.rfc-editor.org/rfc/rfc8340">https://www.rfc-editor.org/rfc/rfc8340</a>&gt;</span>. </dd>
+<dd class="break"></dd>
+<dt id="RFC8341">[RFC8341]</dt>
+        <dd>
+<span class="refAuthor">Bierman, A.</span> and <span class="refAuthor">M. Bjorklund</span>, <span class="refTitle">"Network Configuration Access Control Model"</span>, <span class="seriesInfo">STD 91</span>, <span class="seriesInfo">RFC 8341</span>, <span class="seriesInfo">DOI 10.17487/RFC8341</span>, <time datetime="2018-03" class="refDate">March 2018</time>, <span>&lt;<a href="https://www.rfc-editor.org/rfc/rfc8341">https://www.rfc-editor.org/rfc/rfc8341</a>&gt;</span>. </dd>
+<dd class="break"></dd>
+<dt id="RFC8348">[RFC8348]</dt>
+        <dd>
+<span class="refAuthor">Bierman, A.</span>, <span class="refAuthor">Bjorklund, M.</span>, <span class="refAuthor">Dong, J.</span>, and <span class="refAuthor">D. Romascanu</span>, <span class="refTitle">"A YANG Data Model for Hardware Management"</span>, <span class="seriesInfo">RFC 8348</span>, <span class="seriesInfo">DOI 10.17487/RFC8348</span>, <time datetime="2018-03" class="refDate">March 2018</time>, <span>&lt;<a href="https://www.rfc-editor.org/rfc/rfc8348">https://www.rfc-editor.org/rfc/rfc8348</a>&gt;</span>. </dd>
+<dd class="break"></dd>
+<dt id="RFC8446">[RFC8446]</dt>
+        <dd>
+<span class="refAuthor">Rescorla, E.</span>, <span class="refTitle">"The Transport Layer Security (TLS) Protocol Version 1.3"</span>, <span class="seriesInfo">RFC 8446</span>, <span class="seriesInfo">DOI 10.17487/RFC8446</span>, <time datetime="2018-08" class="refDate">August 2018</time>, <span>&lt;<a href="https://www.rfc-editor.org/rfc/rfc8446">https://www.rfc-editor.org/rfc/rfc8446</a>&gt;</span>. </dd>
+<dd class="break"></dd>
+<dt id="RFC8795">[RFC8795]</dt>
+      <dd>
+<span class="refAuthor">Liu, X.</span>, <span class="refAuthor">Bryskin, I.</span>, <span class="refAuthor">Beeram, V.</span>, <span class="refAuthor">Saad, T.</span>, <span class="refAuthor">Shah, H.</span>, and <span class="refAuthor">O. Gonzalez de Dios</span>, <span class="refTitle">"YANG Data Model for Traffic Engineering (TE) Topologies"</span>, <span class="seriesInfo">RFC 8795</span>, <span class="seriesInfo">DOI 10.17487/RFC8795</span>, <time datetime="2020-08" class="refDate">August 2020</time>, <span>&lt;<a href="https://www.rfc-editor.org/rfc/rfc8795">https://www.rfc-editor.org/rfc/rfc8795</a>&gt;</span>. </dd>
+<dd class="break"></dd>
+</dl>
+</section>
+</div>
+<div id="sec-informative-references">
+<section id="section-10.2">
+        <h3 id="name-informative-references">
+<a href="#section-10.2" class="section-number selfRef">10.2. </a><a href="#name-informative-references" class="section-name selfRef">Informative References</a>
+        </h3>
+<dl class="references">
+<dt id="I-D.opsarea-rfc5706bis">[I-D.opsarea-rfc5706bis]</dt>
+        <dd>
+<span class="refAuthor">Claise, B.</span>, <span class="refAuthor">Clarke, J.</span>, <span class="refAuthor">Farrel, A.</span>, <span class="refAuthor">Barguil, S.</span>, <span class="refAuthor">Pignataro, C.</span>, and <span class="refAuthor">R. Chen</span>, <span class="refTitle">"Guidelines for Considering Operations and Management in IETF Specifications"</span>, <span class="refContent">Work in Progress</span>, <span class="seriesInfo">Internet-Draft, draft-opsarea-rfc5706bis-06</span>, <time datetime="2025-10-20" class="refDate">20 October 2025</time>, <span>&lt;<a href="https://datatracker.ietf.org/doc/html/draft-opsarea-rfc5706bis-06">https://datatracker.ietf.org/doc/html/draft-opsarea-rfc5706bis-06</a>&gt;</span>. </dd>
+<dd class="break"></dd>
+<dt id="RFC3688">[RFC3688]</dt>
+        <dd>
+<span class="refAuthor">Mealling, M.</span>, <span class="refTitle">"The IETF XML Registry"</span>, <span class="seriesInfo">BCP 81</span>, <span class="seriesInfo">RFC 3688</span>, <span class="seriesInfo">DOI 10.17487/RFC3688</span>, <time datetime="2004-01" class="refDate">January 2004</time>, <span>&lt;<a href="https://www.rfc-editor.org/rfc/rfc3688">https://www.rfc-editor.org/rfc/rfc3688</a>&gt;</span>. </dd>
+<dd class="break"></dd>
+<dt id="RFC6020">[RFC6020]</dt>
+      <dd>
+<span class="refAuthor">Bjorklund, M., Ed.</span>, <span class="refTitle">"YANG - A Data Modeling Language for the Network Configuration Protocol (NETCONF)"</span>, <span class="seriesInfo">RFC 6020</span>, <span class="seriesInfo">DOI 10.17487/RFC6020</span>, <time datetime="2010-10" class="refDate">October 2010</time>, <span>&lt;<a href="https://www.rfc-editor.org/rfc/rfc6020">https://www.rfc-editor.org/rfc/rfc6020</a>&gt;</span>. </dd>
+<dd class="break"></dd>
+</dl>
+</section>
+</div>
+</section>
+</div>
+<div id="yang-tree">
+<section id="appendix-A">
+      <h2 id="name-the-complete-schema-trees">
+<a href="#appendix-A" class="section-number selfRef">Appendix A. </a><a href="#name-the-complete-schema-trees" class="section-name selfRef">The Complete Schema Trees</a>
+      </h2>
+<p id="appendix-A-1">This appendix presents the complete tree of the Passive Network Inventory data model. See <span>[<a href="#RFC8340" class="cite xref">RFC8340</a>]</span> for an explanation of the symbols used. The data type of every leaf node is shown near the right end of the corresponding line.<a href="#appendix-A-1" class="pilcrow">¶</a></p>
+<span id="name-tree-diagram-for-passive-ne"></span><div id="fig-nwi-passive-tree">
+<figure id="figure-4">
+        <div class="alignLeft art-ascii-art art-text artwork" id="appendix-A-2.1">
+<pre>
+module: ietf-nwi-passive-inventory
+
+  augment /nwi:network-inventory:
+    +--rw cable* [id]
+    |  +--rw id               string
+    |  +--rw length?          uint32
+    |  +--rw a-end
+    |  |  +--rw device-type?           identityref
+    |  |  +--rw (connected-device-type)?
+    |  |     +--:(passive)
+    |  |     |  +--rw device-id?       string
+    |  |     +--:(active)
+    |  |        +--rw ne-ref?          leafref
+    |  |        +--rw component-ref?   leafref
+    |  +--rw z-end
+    |  |  +--rw device-type?           identityref
+    |  |  +--rw (connected-device-type)?
+    |  |     +--:(passive)
+    |  |     |  +--rw device-id?       string
+    |  |     +--:(active)
+    |  |        +--rw ne-ref?          leafref
+    |  |        +--rw component-ref?   leafref
+    |  +--ro uuid?            yang:uuid
+    |  +--rw name?            string
+    |  +--rw description?     string
+    |  +--rw alias?           string
+    |  +--rw cable-type?      identityref
+    |  +--rw cable-role?      identityref
+    |  +--rw optical-cable
+    |  |  +--rw fiber-core-num?   uint32
+    |  |  +--rw fiber-type?       identityref
+    |  |  +--rw attenuation?      decimal64
+    |  +--rw child-cable* [index]
+    |     +--rw index     uint8
+    |     +--rw id?       string
+    |     +--rw length?   uint32
+    |     +--rw a-end
+    |     |  +--rw device-type?           identityref
+    |     |  +--rw (connected-device-type)?
+    |     |     +--:(passive)
+    |     |     |  +--rw device-id?       string
+    |     |     +--:(active)
+    |     |        +--rw ne-ref?          leafref
+    |     |        +--rw component-ref?   leafref
+    |     +--rw z-end
+    |        +--rw device-type?           identityref
+    |        +--rw (connected-device-type)?
+    |           +--:(passive)
+    |           |  +--rw device-id?       string
+    |           +--:(active)
+    |              +--rw ne-ref?          leafref
+    |              +--rw component-ref?   leafref
+    +--rw passive-device* [id]
+       +--rw id              string
+       +--ro uuid?           yang:uuid
+       +--rw name?           string
+       +--rw description?    string
+       +--rw alias?          string
+       +--rw device-type?    identityref
+       +--rw custom-tags*    string
+       +--rw location-ref?   nil:ni-location-ref
+       +--rw passive-port* [id]
+          +--rw id                string
+          +--ro uuid?             yang:uuid
+          +--rw name?             string
+          +--rw description?      string
+          +--rw alias?            string
+          +--rw port-type?        identityref
+          +--rw fiber-core-num?   uint32
+
+  grouping connected-device-end:
+    +-- device-type?           identityref
+    +-- (connected-device-type)?
+       +--:(passive)
+       |  +-- device-id?       string
+       +--:(active)
+          +-- ne-ref?          leafref
+          +-- component-ref?   leafref
+  grouping connected-device-ref:
+    +-- a-end
+    |  +-- device-type?           identityref
+    |  +-- (connected-device-type)?
+    |     +--:(passive)
+    |     |  +-- device-id?       string
+    |     +--:(active)
+    |        +-- ne-ref?          leafref
+    |        +-- component-ref?   leafref
+    +-- z-end
+       +-- device-type?           identityref
+       +-- (connected-device-type)?
+          +--:(passive)
+          |  +-- device-id?       string
+          +--:(active)
+             +-- ne-ref?          leafref
+             +-- component-ref?   leafref
+  grouping common-cable-attributes:
+    +-- id?       string
+    +-- length?   uint32
+    +-- a-end
+    |  +-- device-type?           identityref
+    |  +-- (connected-device-type)?
+    |     +--:(passive)
+    |     |  +-- device-id?       string
+    |     +--:(active)
+    |        +-- ne-ref?          leafref
+    |        +-- component-ref?   leafref
+    +-- z-end
+       +-- device-type?           identityref
+       +-- (connected-device-type)?
+          +--:(passive)
+          |  +-- device-id?       string
+          +--:(active)
+             +-- ne-ref?          leafref
+             +-- component-ref?   leafref
+  grouping optical-cable-attributes:
+    +-- optical-cable
+       +-- fiber-core-num?   uint32
+       +-- fiber-type?       identityref
+       +-- attenuation?      decimal64
+  grouping cable-attributes:
+    +-- id?              string
+    +-- length?          uint32
+    +-- a-end
+    |  +-- device-type?           identityref
+    |  +-- (connected-device-type)?
+    |     +--:(passive)
+    |     |  +-- device-id?       string
+    |     +--:(active)
+    |        +-- ne-ref?          leafref
+    |        +-- component-ref?   leafref
+    +-- z-end
+    |  +-- device-type?           identityref
+    |  +-- (connected-device-type)?
+    |     +--:(passive)
+    |     |  +-- device-id?       string
+    |     +--:(active)
+    |        +-- ne-ref?          leafref
+    |        +-- component-ref?   leafref
+    +--ro uuid?            yang:uuid
+    +-- name?            string
+    +-- description?     string
+    +-- alias?           string
+    +-- cable-type?      identityref
+    +-- cable-role?      identityref
+    +-- optical-cable
+       +-- fiber-core-num?   uint32
+       +-- fiber-type?       identityref
+       +-- attenuation?      decimal64
+  grouping child-cables:
+    +-- child-cable* [index]
+       +-- index     uint8
+       +-- id?       string
+       +-- length?   uint32
+       +-- a-end
+       |  +-- device-type?           identityref
+       |  +-- (connected-device-type)?
+       |     +--:(passive)
+       |     |  +-- device-id?       string
+       |     +--:(active)
+       |        +-- ne-ref?          leafref
+       |        +-- component-ref?   leafref
+       +-- z-end
+          +-- device-type?           identityref
+          +-- (connected-device-type)?
+             +--:(passive)
+             |  +-- device-id?       string
+             +--:(active)
+                +-- ne-ref?          leafref
+                +-- component-ref?   leafref
+  grouping cables:
+    +-- cable* [id]
+       +-- id?              string
+       +-- length?          uint32
+       +-- a-end
+       |  +-- device-type?           identityref
+       |  +-- (connected-device-type)?
+       |     +--:(passive)
+       |     |  +-- device-id?       string
+       |     +--:(active)
+       |        +-- ne-ref?          leafref
+       |        +-- component-ref?   leafref
+       +-- z-end
+       |  +-- device-type?           identityref
+       |  +-- (connected-device-type)?
+       |     +--:(passive)
+       |     |  +-- device-id?       string
+       |     +--:(active)
+       |        +-- ne-ref?          leafref
+       |        +-- component-ref?   leafref
+       +--ro uuid?            yang:uuid
+       +-- name?            string
+       +-- description?     string
+       +-- alias?           string
+       +-- cable-type?      identityref
+       +-- cable-role?      identityref
+       +-- optical-cable
+       |  +-- fiber-core-num?   uint32
+       |  +-- fiber-type?       identityref
+       |  +-- attenuation?      decimal64
+       +-- child-cable* [index]
+          +-- index     uint8
+          +-- id?       string
+          +-- length?   uint32
+          +-- a-end
+          |  +-- device-type?           identityref
+          |  +-- (connected-device-type)?
+          |     +--:(passive)
+          |     |  +-- device-id?       string
+          |     +--:(active)
+          |        +-- ne-ref?          leafref
+          |        +-- component-ref?   leafref
+          +-- z-end
+             +-- device-type?           identityref
+             +-- (connected-device-type)?
+                +--:(passive)
+                |  +-- device-id?       string
+                +--:(active)
+                   +-- ne-ref?          leafref
+                   +-- component-ref?   leafref
+  grouping passive-device-ports:
+    +-- passive-port* [id]
+       +-- id                string
+       +--ro uuid?             yang:uuid
+       +-- name?             string
+       +-- description?      string
+       +-- alias?            string
+       +-- port-type?        identityref
+       +-- fiber-core-num?   uint32
+  grouping passive-devices:
+    +-- passive-device* [id]
+       +-- id              string
+       +--ro uuid?           yang:uuid
+       +-- name?           string
+       +-- description?    string
+       +-- alias?          string
+       +-- device-type?    identityref
+       +-- custom-tags*    string
+       +-- location-ref?   nil:ni-location-ref
+       +-- passive-port* [id]
+          +-- id                string
+          +--ro uuid?             yang:uuid
+          +-- name?             string
+          +-- description?      string
+          +-- alias?            string
+          +-- port-type?        identityref
+          +-- fiber-core-num?   uint32
+</pre>
+</div>
+<figcaption><a href="#figure-4" class="selfRef">Figure 4</a>:
+<a href="#name-tree-diagram-for-passive-ne" class="selfRef">Tree diagram for passive network inventory</a>
+        </figcaption></figure>
+</div>
+</section>
+</div>
+<div id="acknowledgments">
+<section id="appendix-B">
+      <h2 id="name-acknowledgments">
+<a href="#name-acknowledgments" class="section-name selfRef">Acknowledgments</a>
+      </h2>
+<p id="appendix-B-1">TODO acknowledge.<a href="#appendix-B-1" class="pilcrow">¶</a></p>
+</section>
+</div>
+<div id="contributors">
+<section id="appendix-C">
+      <h2 id="name-contributors">
+<a href="#name-contributors" class="section-name selfRef">Contributors</a>
+      </h2>
+<address class="vcard">
+        <div dir="auto" class="left"><span class="fn nameRole">Chaode Yu</span></div>
+<div dir="auto" class="left"><span class="org">Huawei</span></div>
+<div class="email">
+<span>Email:</span>
+<a href="mailto:yuchaode@huawei.com" class="email">yuchaode@huawei.com</a>
+</div>
+</address>
+<address class="vcard">
+        <div dir="auto" class="left"><span class="fn nameRole">Mohammad Boroon</span></div>
+<div dir="auto" class="left"><span class="org">Highstreet</span></div>
+<div class="email">
+<span>Email:</span>
+<a href="mailto:mohammad.boroon@highstreet-technologies.com" class="email">mohammad.boroon@highstreet-technologies.com</a>
+</div>
+</address>
+<address class="vcard">
+        <div dir="auto" class="left"><span class="fn nameRole">Italo Busi</span></div>
+<div dir="auto" class="left"><span class="org">Huawei</span></div>
+<div class="email">
+<span>Email:</span>
+<a href="mailto:italo.busi@huawei.com" class="email">italo.busi@huawei.com</a>
+</div>
+</address>
+<address class="vcard">
+        <div dir="auto" class="left"><span class="fn nameRole">Sergio Belotti</span></div>
+<div dir="auto" class="left"><span class="org">Nokia</span></div>
+<div class="email">
+<span>Email:</span>
+<a href="mailto:sergio.belotti@nokia.com" class="email">sergio.belotti@nokia.com</a>
+</div>
+</address>
+<address class="vcard">
+        <div dir="auto" class="left"><span class="fn nameRole">Swaminathan 1. S.</span></div>
+<div dir="auto" class="left"><span class="org">Nokia</span></div>
+<div class="email">
+<span>Email:</span>
+<a href="mailto:swaminathan.1.s@nokia.com" class="email">swaminathan.1.s@nokia.com</a>
+</div>
+</address>
+<address class="vcard">
+        <div dir="auto" class="left"><span class="fn nameRole">Swaminathan B.</span></div>
+<div dir="auto" class="left"><span class="org">Nokia</span></div>
+<div class="email">
+<span>Email:</span>
+<a href="mailto:swaminathan.b@nokia.com" class="email">swaminathan.b@nokia.com</a>
+</div>
+</address>
+<address class="vcard">
+        <div dir="auto" class="left"><span class="fn nameRole">Bin Yu Yun</span></div>
+<div dir="auto" class="left"><span class="org">ETRI</span></div>
+<div class="email">
+<span>Email:</span>
+<a href="mailto:byyun@etri.re.kr" class="email">byyun@etri.re.kr</a>
+</div>
+</address>
+<address class="vcard">
+        <div dir="auto" class="left"><span class="fn nameRole">Yucong Liu</span></div>
+<div dir="auto" class="left"><span class="org">China Mobile</span></div>
+<div class="email">
+<span>Email:</span>
+<a href="mailto:liuyucongyjy@chinamobile.com" class="email">liuyucongyjy@chinamobile.com</a>
+</div>
+</address>
+<address class="vcard">
+        <div dir="auto" class="left"><span class="fn nameRole">Yang Zhao</span></div>
+<div dir="auto" class="left"><span class="org">China Mobile</span></div>
+<div class="email">
+<span>Email:</span>
+<a href="mailto:zhaoyangyjy@chinamobile.com" class="email">zhaoyangyjy@chinamobile.com</a>
+</div>
+</address>
+<address class="vcard">
+        <div dir="auto" class="left"><span class="fn nameRole">Avinash Sakalabhaktula</span></div>
+<div dir="auto" class="left"><span class="org">Radisys</span></div>
+<div class="email">
+<span>Email:</span>
+<a href="mailto:Avinash.Sakalabhaktula@radisys.com" class="email">Avinash.Sakalabhaktula@radisys.com</a>
+</div>
+</address>
+</section>
+</div>
+<div id="authors-addresses">
+<section id="appendix-D">
+      <h2 id="name-authors-addresses">
+<a href="#name-authors-addresses" class="section-name selfRef">Authors' Addresses</a>
+      </h2>
+<address class="vcard">
+        <div dir="auto" class="left"><span class="fn nameRole">Aihua Guo</span></div>
+<div dir="auto" class="left"><span class="org">Futurewei</span></div>
+<div class="email">
+<span>Email:</span>
+<a href="mailto:aihuaguo.ietf@gmail.com" class="email">aihuaguo.ietf@gmail.com</a>
+</div>
+</address>
+<address class="vcard">
+        <div dir="auto" class="left"><span class="fn nameRole">Tom Van Caenegem</span></div>
+<div dir="auto" class="left"><span class="org">Nokia</span></div>
+<div class="email">
+<span>Email:</span>
+<a href="mailto:tom.van_caenegem@nokia.com" class="email">tom.van_caenegem@nokia.com</a>
+</div>
+</address>
+<address class="vcard">
+        <div dir="auto" class="left"><span class="fn nameRole">Nigel Davis</span></div>
+<div dir="auto" class="left"><span class="org">Ciena</span></div>
+<div class="email">
+<span>Email:</span>
+<a href="mailto:ndavis@ciena.com" class="email">ndavis@ciena.com</a>
+</div>
+</address>
+<address class="vcard">
+        <div dir="auto" class="left"><span class="fn nameRole">Mauro Tilocca</span></div>
+<div dir="auto" class="left"><span class="org">FiberCop</span></div>
+<div class="email">
+<span>Email:</span>
+<a href="mailto:mauro.tilocca@fibercop.it" class="email">mauro.tilocca@fibercop.it</a>
+</div>
+</address>
+<address class="vcard">
+        <div dir="auto" class="left"><span class="fn nameRole">Brad Peters</span></div>
+<div dir="auto" class="left"><span class="org">NBN</span></div>
+<div class="email">
+<span>Email:</span>
+<a href="mailto:bradpeters@nbnco.com.au" class="email">bradpeters@nbnco.com.au</a>
+</div>
+</address>
+</section>
+</div>
+</div>
+
+                    </div>
+                
+            </div>
+            <div class="d-print-none col-md-3 bg-light-subtle collapse show" id="sidebar">
+                <div class="position-fixed border-start sidebar overflow-scroll overscroll-none no-scrollbar">
+                    <div class="d-flex flex-column vh-100 pt-2 pt-lg-3 ps-3 pl-md-2 pl-lg-3">
+                        <div>
+                            <a class="btn btn-primary btn-sm" href="/doc/draft-ygb-ivy-passive-network-inventory/">Datatracker</a>
+                            <p class="fw-bold pt-2">
+                                
+                                    draft-ygb-ivy-passive-network-inventory-05
+                                
+                                <br>
+                                
+
+
+
+
+
+
+
+    <span class="text-success">Active Internet-Draft</span>
+    (individual)
+    
+
+                            </p>
+                        </div>
+                        
+                        <ul class="nav nav-tabs nav-fill small me-2" role="tablist">
+                            <li class="nav-item" role="presentation" title="Document information">
+                                <button class="nav-link px-2"
+                                        id="docinfo-tab"
+                                        data-bs-toggle="tab"
+                                        data-bs-target="#docinfo-tab-pane"
+                                        type="button"
+                                        role="tab"
+                                        aria-controls="docinfo-tab-pane"
+                                        aria-selected="true">
+                                    <i class="bi bi-info-circle"></i><span class="d-none d-md-block d-xl-inline ms-xl-1">Info</span>
+                                </button>
+                            </li>
+                            <li class="nav-item" role="presentation" title="Table of contents">
+                                <button class="nav-link px-2"
+                                        id="toc-tab"
+                                        data-bs-toggle="tab"
+                                        data-bs-target="#toc-tab-pane"
+                                        type="button"
+                                        role="tab"
+                                        aria-controls="toc-tab-pane"
+                                        aria-selected="false">
+                                    <i class="bi bi-list-ol"></i><span class="d-none d-md-block d-xl-inline ms-xl-1">Contents</span>
+                                </button>
+                            </li>
+                            <li class="nav-item" role="presentation" title="Preferences">
+                                <button class="nav-link px-2"
+                                        id="pref-tab"
+                                        data-bs-toggle="tab"
+                                        data-bs-target="#pref-tab-pane"
+                                        type="button"
+                                        role="tab"
+                                        aria-controls="pref-tab-pane"
+                                        aria-selected="false">
+                                    <i class="bi bi-gear"></i><span class="d-none d-md-block d-xl-inline ms-xl-1">Prefs</span>
+                                </button>
+                            </li>
+                        </ul>
+                        <div class="overflow-auto tab-content pt-2 me-2">
+                            <div class="tab-pane"
+                                 id="docinfo-tab-pane"
+                                 role="tabpanel"
+                                 aria-labelledby="docinfo-tab"
+                                 tabindex="0">
+                                <table class="table table-sm table-borderless">
+                                    
+
+
+
+
+
+
+
+<tbody class="meta align-top ">
+    <tr>
+        <th scope="row">Document</th>
+        <th scope="row">Document type</th>
+        <td class="edit"></td>
+        <td>
+            
+
+
+
+
+
+
+
+    <span class="text-success">Active Internet-Draft</span>
+    (individual)
+    
+
+            
+            
+            
+                
+
+
+
+
+    <div class="alert alert-warning small p-2 mt-2" role="alert">
+        This document is an Internet-Draft (I-D).
+        Anyone may submit an I-D to the IETF.
+        This I-D is <strong>not endorsed by the IETF</strong> and has <strong>no formal standing</strong> in the
+        <a href="/doc/rfc2026/">IETF standards process</a>.
+    </div>
+
+
+            
+        </td>
+    </tr>
+    
+        <tr>
+            <td></td>
+            <th scope="row">Select version</th>
+            <td class="edit"></td>
+            <td>
+                
+
+
+
+    <ul class="revision-list pagination pagination-sm text-center flex-wrap my-0">
+        
+            
+                 
+                    <li class="page-item ">
+                        <a class="page-link"
+                        href="/doc/html/draft-ygb-ivy-passive-network-inventory-00"
+                        >
+                            00
+                        </a>
+                    </li>
+                
+            
+                 
+                    <li class="page-item ">
+                        <a class="page-link"
+                        href="/doc/html/draft-ygb-ivy-passive-network-inventory-01"
+                        rel="nofollow">
+                            01
+                        </a>
+                    </li>
+                
+            
+                 
+                    <li class="page-item ">
+                        <a class="page-link"
+                        href="/doc/html/draft-ygb-ivy-passive-network-inventory-02"
+                        rel="nofollow">
+                            02
+                        </a>
+                    </li>
+                
+            
+                 
+                    <li class="page-item ">
+                        <a class="page-link"
+                        href="/doc/html/draft-ygb-ivy-passive-network-inventory-03"
+                        rel="nofollow">
+                            03
+                        </a>
+                    </li>
+                
+            
+                 
+                    <li class="page-item ">
+                        <a class="page-link"
+                        href="/doc/html/draft-ygb-ivy-passive-network-inventory-04"
+                        rel="nofollow">
+                            04
+                        </a>
+                    </li>
+                
+            
+                 
+                    <li class="page-item active">
+                        <a class="page-link"
+                        href="/doc/html/draft-ygb-ivy-passive-network-inventory-05"
+                        >
+                            05
+                        </a>
+                    </li>
+                
+            
+            
+        
+    </ul>
+
+            </td>
+        </tr>
+        
+            <tr>
+                <td></td>
+                <th scope="row">Compare versions</th>
+                <td class="edit"></td>
+                <td>
+                    
+
+
+
+<form class="form-horizontal diff-form"
+      action="https://author-tools.ietf.org/iddiff"
+      method="get"
+      target="_blank">
+
+            <select class="form-select form-select-sm mb-1 select2-field"
+                    data-max-entries="1"
+                    data-width="resolve"
+                    data-allow-clear="false"
+                    data-minimum-input-length="0"
+                    aria-label="From revision"
+                    name="url1">
+                
+                    <option value="draft-ygb-ivy-passive-network-inventory-05">
+                        draft-ygb-ivy-passive-network-inventory-05
+                        
+                    </option>
+                
+                    <option value="draft-ygb-ivy-passive-network-inventory-04" selected>
+                        draft-ygb-ivy-passive-network-inventory-04
+                        
+                    </option>
+                
+                    <option value="draft-ygb-ivy-passive-network-inventory-03">
+                        draft-ygb-ivy-passive-network-inventory-03
+                        
+                    </option>
+                
+                    <option value="draft-ygb-ivy-passive-network-inventory-02">
+                        draft-ygb-ivy-passive-network-inventory-02
+                        
+                    </option>
+                
+                    <option value="draft-ygb-ivy-passive-network-inventory-01">
+                        draft-ygb-ivy-passive-network-inventory-01
+                        
+                    </option>
+                
+                    <option value="draft-ygb-ivy-passive-network-inventory-00">
+                        draft-ygb-ivy-passive-network-inventory-00
+                        
+                    </option>
+                
+                
+            </select>
+
+            <select class="form-select form-select-sm mb-1 select2-field"
+                    data-max-entries="1"
+                    data-width="resolve"
+                    data-allow-clear="false"
+                    data-minimum-input-length="0"
+                    aria-label="To revision"
+                    name="url2">
+                
+                    <option value="draft-ygb-ivy-passive-network-inventory-05" selected>
+                        draft-ygb-ivy-passive-network-inventory-05
+                        
+                    </option>
+                
+                    <option value="draft-ygb-ivy-passive-network-inventory-04">
+                        draft-ygb-ivy-passive-network-inventory-04
+                        
+                    </option>
+                
+                    <option value="draft-ygb-ivy-passive-network-inventory-03">
+                        draft-ygb-ivy-passive-network-inventory-03
+                        
+                    </option>
+                
+                    <option value="draft-ygb-ivy-passive-network-inventory-02">
+                        draft-ygb-ivy-passive-network-inventory-02
+                        
+                    </option>
+                
+                    <option value="draft-ygb-ivy-passive-network-inventory-01">
+                        draft-ygb-ivy-passive-network-inventory-01
+                        
+                    </option>
+                
+                    <option value="draft-ygb-ivy-passive-network-inventory-00">
+                        draft-ygb-ivy-passive-network-inventory-00
+                        
+                    </option>
+                
+                
+            </select>
+
+            <button type="submit"
+                    class="btn btn-primary btn-sm"
+                    value="--html"
+                    name="difftype">
+                Side-by-side
+            </button>
+            
+            <button type="submit"
+                    class="btn btn-primary btn-sm"
+                    value="--hwdiff"
+                    name="difftype">
+                Inline
+            </button>
+
+</form>
+                </td>
+            </tr>
+        
+    
+    <tr>
+        <td></td>
+        <th scope="row">Authors</th>
+        <td class="edit">
+            
+        </td>
+        <td>
+            
+            
+                <span ><a 
+           title="Datatracker profile of Aihua Guo"
+            href="/person/aihuaguo.ietf@gmail.com" >Aihua Guo</a> <a 
+               href="mailto:aihuaguo.ietf%40gmail.com"
+               aria-label="Compose email to aihuaguo.ietf@gmail.com"
+               title="Compose email to aihuaguo.ietf@gmail.com">
+                <i class="bi bi-envelope"></i></a></span>,
+            
+                <span ><a 
+           title="Datatracker profile of tom van caenegem"
+            href="/person/tom.van_caenegem@nokia.com" >tom van caenegem</a> <a 
+               href="mailto:tom.van_caenegem%40nokia.com"
+               aria-label="Compose email to tom.van_caenegem@nokia.com"
+               title="Compose email to tom.van_caenegem@nokia.com">
+                <i class="bi bi-envelope"></i></a></span>,
+            
+                <span ><a 
+           title="Datatracker profile of Nigel Davis"
+            href="/person/ndavis@ciena.com" >Nigel Davis</a> <a 
+               href="mailto:ndavis%40ciena.com"
+               aria-label="Compose email to ndavis@ciena.com"
+               title="Compose email to ndavis@ciena.com">
+                <i class="bi bi-envelope"></i></a></span>,
+            
+                <span ><a 
+           title="Datatracker profile of Mauro Tilocca"
+            href="/person/mauro.tilocca@fibercop.it" >Mauro Tilocca</a> <a 
+               href="mailto:mauro.tilocca%40fibercop.it"
+               aria-label="Compose email to mauro.tilocca@fibercop.it"
+               title="Compose email to mauro.tilocca@fibercop.it">
+                <i class="bi bi-envelope"></i></a></span>,
+            
+                <span ><a 
+           title="Datatracker profile of Brad Peters"
+            href="/person/bradpeters@nbnco.com.au" >Brad Peters</a> <a 
+               href="mailto:bradpeters%40nbnco.com.au"
+               aria-label="Compose email to bradpeters@nbnco.com.au"
+               title="Compose email to bradpeters@nbnco.com.au">
+                <i class="bi bi-envelope"></i></a></span>
+            
+            
+                <br>
+                <a class="btn btn-primary btn-sm mt-1" href="mailto:draft-ygb-ivy-passive-network-inventory@ietf.org?subject=draft-ygb-ivy-passive-network-inventory" title="Send email to the document authors">Email authors</a>
+            
+        </td>
+    </tr>
+    
+    
+        
+        
+        
+    
+    <tr>
+        <td></td>
+        <th scope="row">
+            RFC stream
+        </th>
+        <td class="edit">
+            
+        </td>
+        <td class="text-body-secondary">
+            
+                (None)
+            
+        </td>
+    </tr>
+    
+        <tr>
+            <td></td>
+            <th scope="row">
+                Intended RFC status
+            </th>
+            <td class="edit">
+                
+            </td>
+            <td>
+                
+                    <span class="text-body-secondary">
+                        (None)
+                    </span>
+                
+            </td>
+        </tr>
+    
+    <tr>
+        <td></td>
+        <th scope="row">
+            Other formats
+        </th>
+        <td class="edit">
+        </td>
+        <td>
+            
+                
+    <div class="buttonlist">
+    
+        
+        <a class="btn btn-primary btn-sm"
+          
+          target="_blank"
+          href="https://www.ietf.org/archive/id/draft-ygb-ivy-passive-network-inventory-05.txt">
+            
+                <i class="bi bi-file-text"></i> txt
+            
+        </a>
+        
+    
+        
+        <a class="btn btn-primary btn-sm"
+          
+          target="_blank"
+          href="https://www.ietf.org/archive/id/draft-ygb-ivy-passive-network-inventory-05.html">
+            
+                <i class="bi bi-file-code"></i> html
+            
+        </a>
+        
+    
+        
+        <a class="btn btn-primary btn-sm"
+          
+          target="_blank"
+          href="https://www.ietf.org/archive/id/draft-ygb-ivy-passive-network-inventory-05.xml">
+            
+                <i class="bi bi-file-code"></i> xml
+            
+        </a>
+        
+    
+        
+    
+        
+        <a class="btn btn-primary btn-sm"
+          
+          target="_blank"
+          href="/doc/draft-ygb-ivy-passive-network-inventory/05/bibtex/">
+            
+                <i class="bi bi-file-ruled"></i> bibtex
+            
+        </a>
+        
+    
+        
+        <a class="btn btn-primary btn-sm"
+          
+          target="_blank"
+          href="/doc/bibxml3/draft-ygb-ivy-passive-network-inventory-05.xml">
+            
+                <i class="bi bi-file-code"></i> bibxml
+            
+        </a>
+        
+    
+</div>
+
+            
+        </td>
+    </tr>
+    
+    
+        
+    
+</tbody>
+                                </table>
+                                <a class="btn btn-sm btn-warning mb-3"
+                                target="_blank"
+                                href="https://github.com/ietf-tools/datatracker/issues/new/choose">
+                                    Report a datatracker bug
+                                    <i class="bi bi-bug"></i>
+                                </a>
+                            </div>
+                            <div class="tab-pane mb-5"
+                                 id="toc-tab-pane"
+                                 role="tabpanel"
+                                 aria-labelledby="toc-tab"
+                                 tabindex="0">
+                                <nav class="nav nav-pills flex-column small" id="toc-nav">
+                                </nav>
+                            </div>
+                            <div class="tab-pane mb-5 small"
+                                 id="pref-tab-pane"
+                                 role="tabpanel"
+                                 aria-labelledby="pref-tab"
+                                 tabindex="0">
+                                <label class="form-label fw-bold mb-2">Show sidebar by default</label>
+                                <div class="btn-group-vertical btn-group-sm d-flex" role="group">
+                                    <input type="radio" class="btn-check" name="sidebar" id="on-radio">
+                                    <label class="btn btn-outline-primary" for="on-radio">Yes</label>
+                                    <input type="radio" class="btn-check" name="sidebar" id="off-radio">
+                                    <label class="btn btn-outline-primary" for="off-radio">No</label>
+                                </div>
+                                <label class="form-label fw-bold mt-4 mb-2">Tab to show by default</label>
+                                <div class="btn-group-vertical btn-group-sm d-flex" role="group">
+                                    <input type="radio" class="btn-check" name="deftab" id="docinfo-radio">
+                                    <label class="btn btn-outline-primary" for="docinfo-radio">
+                                        <i class="bi bi-info-circle me-1"></i>Info
+                                    </label>
+                                    <input type="radio" class="btn-check" name="deftab" id="toc-radio">
+                                    <label class="btn btn-outline-primary" for="toc-radio">
+                                        <i class="bi bi-list-ol me-1"></i>Contents
+                                    </label>
+                                </div>
+                                <label class="form-label fw-bold mt-4 mb-2">HTMLization configuration</label>
+                                <div class="btn-group-vertical btn-group-sm d-flex" role="group">
+                                    <input type="radio" class="btn-check" name="htmlconf" id="txt-radio">
+                                    <label class="btn btn-outline-primary" for="txt-radio" title="This is the traditional HTMLization method.">
+                                        <i class="bi bi-badge-sd me-1"></i>HTMLize the plaintext
+                                    </label>
+                                    <input type="radio" class="btn-check" name="htmlconf" id="html-radio">
+                                    <label class="btn btn-outline-primary" for="html-radio" title="This is the modern HTMLization method.">
+                                        <i class="bi bi-badge-hd me-1"></i>Plaintextify the HTML
+                                    </label>
+                                </div>
+                                <label class="form-label fw-bold mt-4 mb-2" for="ptsize">Maximum font size</label>
+                                <input type="range" class="form-range" min="7" max="16" id="ptsize" oninput="ptdemo.value = ptsize.value">
+                                <label class="form-label fw-bold mt-4 mb-2">Page dependencies</label>
+                                <div class="btn-group-vertical btn-group-sm d-flex" role="group">
+                                    <input type="radio" class="btn-check" name="pagedeps" id="inline-radio">
+                                    <label class="btn btn-outline-primary" for="inline-radio" title="Generate larger, standalone web pages that do not require network access to render.">
+                                        <i class="bi bi-box me-1"></i>Inline
+                                    </label>
+                                    <input type="radio" class="btn-check" name="pagedeps" id="reference-radio">
+                                    <label class="btn btn-outline-primary" for="reference-radio" title="Generate regular web pages that require network access to render.">
+                                        <i class="bi bi-link-45deg me-1"></i>Reference
+                                    </label>
+                                </div>
+                                <label class="form-label fw-bold mt-4 mb-2">Citation links</label>
+                                <div class="btn-group-vertical btn-group-sm d-flex" role="group">
+                                    <input type="radio" class="btn-check" name="reflinks" id="refsection-radio">
+                                    <label class="btn btn-outline-primary" for="refsection-radio" title="Citation links go to the reference section.">
+                                        <i class="bi bi-arrow-clockwise"></i> Go to reference section
+                                    </label>
+                                    <input type="radio" class="btn-check" name="reflinks" id="citation-radio">
+                                    <label class="btn btn-outline-primary" for="citation-radio" title="Citation links go directly to the cited document.">
+                                        <i class="bi bi-link-45deg me-1"></i>Go to linked document
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    
+<script>
+  var _paq = window._paq || [];
+  
+  _paq.push(['disableCookies']);
+  _paq.push(['trackPageView']);
+  _paq.push(['enableLinkTracking']);
+  (function() {
+    var u="//analytics.ietf.org/";
+    _paq.push(['setTrackerUrl', u+'matomo.php']);
+    _paq.push(['setSiteId', 7]);
+    var d=document, g=d.createElement('script'), s=d.getElementsByTagName('script')[0];
+    g.type='text/javascript'; g.async=true; g.defer=true; g.src=u+'matomo.js'; s.parentNode.insertBefore(g,s);
+  })();
+</script>
+<noscript><p><img src="//analytics.ietf.org/matomo.php?idsite=7" style="border:0;" alt="" /></p></noscript>
+
+    <script>(function(){function c(){var b=a.contentDocument||(a.contentWindow&&a.contentWindow.document);if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'a25ce5656e1ab4cd',t:'MTc4NTgzOTUyNA=='};var a=document.createElement('script');a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+</html>
