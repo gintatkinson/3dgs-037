@@ -1,64 +1,61 @@
-# Implementation Plan - Phase 1: Structural Extraction for RFC 9179 & `ietf-geo-location@2022-02-11.yang`
+# Implementation Plan - Phase 2: User Story Extraction for `us-21-building-floor-room-positioning.md`
 
-**Specification Target:** RFC 9179 & `ietf-geo-location@2022-02-11.yang`
-**Normative Reference:** https://datatracker.ietf.org/doc/rfc9179/
-**Structural Schema:** https://github.com/YangModels/yang/blob/main/standard/ietf/RFC/ietf-geo-location%402022-02-11.yang
-**Output Directory:** `docs/epics/`, `docs/features/`, `.pipeline/domain_specs/`
-
-## 1. Specification Artifacts to Extract
-
-### Features (4 Items)
-1. **Feature 09 (`docs/features/feat-09-geodetic-reference-frame.md`)**: `[ietf-geo-location]: Geodetic Reference Frame`
-   - **Schema Container:** `ietf-geo-location:geo-location/reference-frame`
-   - **Nodes Covered:** `reference-frame`, `alternate-system`, `alternate-systems` (if-feature guard), `astronomical-body`.
-   - **Interface Type:** `api`
-   - **Generation Mode:** `subagent`
-
-2. **Feature 10 (`docs/features/feat-10-geodetic-system-and-accuracy.md`)**: `[ietf-geo-location]: Geodetic System and Accuracy Bounds`
-   - **Schema Container:** `ietf-geo-location:geo-location/reference-frame/geodetic-system`
-   - **Nodes Covered:** `geodetic-system`, `geodetic-datum`, `coord-accuracy`, `height-accuracy`.
-   - **Interface Type:** `api`
-   - **Generation Mode:** `subagent`
-
-3. **Feature 11 (`docs/features/feat-11-coordinates-and-altitude.md`)**: `[ietf-geo-location]: Geographic Coordinates and Altitude`
-   - **Schema Container:** `ietf-geo-location:geo-location`
-   - **Nodes Covered:** `geo-location`, `location` (choice), `ellipsoid` (`latitude`, `longitude`, `height`), `cartesian` (`x`, `y`, `z`), `timestamp`, `valid-until`.
-   - **Interface Type:** `api`
-   - **Generation Mode:** `subagent`
-
-4. **Feature 12 (`docs/features/feat-12-motion-and-velocity-vectors.md`)**: `[ietf-geo-location]: Motion and Velocity Vectors`
-   - **Schema Container:** `ietf-geo-location:geo-location/velocity`
-   - **Nodes Covered:** `velocity`, `v-north`, `v-east`, `v-up`.
-   - **Interface Type:** `api`
-   - **Generation Mode:** `subagent`
-
-### Epic (1 Item)
-1. **Epic 03 (`docs/epics/epic-03-ietf-geo-location.md`)**: `[ietf-geo-location]: Geographic Location Management`
-   - **Child Features:** Features 09, 10, 11, 12.
-   - **Generation Mode:** `subagent`
+**Target File Path:** `docs/user-stories/us-21-building-floor-room-positioning.md` (and copy to `.pipeline/domain_specs/us-21-building-floor-room-positioning.md`)
+**Title:** `[ietf-ni-location]: Building, Floor, and Room Spatial Hierarchy Navigation, Room Name Assignment, and Physical Access Bounds`
+**Type:** `user-story`
+**Generation Mode:** `subagent`
+**Spec Source:** `draft-ietf-ivy-network-inventory-location & ietf-ni-location.yang`
+**Parent Epic:** Issue #51 - `[ietf-ni-location]: Network Inventory Location Management` (`https://github.com/gintatkinson/3dgs-037/blob/main/docs/epics/epic-04-ietf-ni-location.md`)
 
 ---
 
-## 2. Item-Level Subagent Dispatch Strategy
+## 1. User Story Artifact Specification
 
-Per the **Role Boundary Lock** and **Item-Level Subagent Isolation Mandate**:
-- The coordinator will NOT directly write target specification files (`docs/epics/`, `docs/features/`).
-- Each Feature (Features 09-12) and Epic 03 will be extracted by an isolated, fresh subagent dispatched with at most 1 item per prompt.
-- Every subagent prompt will instruct the subagent to execute `view_file` on `skills/schema-specification-engineering/SKILL.md` as Step 1.
-- Each subagent will write standard UML Class Diagrams, Given-When-Then BDD acceptance criteria, verbatim specification text from `schema/rfc9179.txt`, exact schema paths, and YAML frontmatter (`generation_mode: "subagent"`).
-- Keywords `PROCEED` appended to authorise subagent file modifications.
+### User Story Details
+- **Identifier:** `us-21-building-floor-room-positioning.md`
+- **Domain Objects:** `Location`, `PhysicalAddress`, `BuildingPosition`
+- **Actor/Role:** `UserActor` (Facility manager / site operator)
+
+### BDD Acceptance Scenarios (Given-When-Then)
+1. **Indoor Building, Floor, and Room Attribute Specification:** Setting building name/ID (`building`), floor number/designation (`floor`), and room name/number (`room`).
+2. **Compound `room-building-position` String Derivation/Formatting:** Dynamic string formatting ("Building B, Floor 3, Room 302") combining position components.
+3. **Spatial Hierarchy Navigation:** Navigating parent-child relationships (Site -> Building -> Floor -> Room) via `parent` leafref resolution.
+4. **Invalid Parent / Orphaned Hierarchy Rejection:** Rejecting non-existent parent location references and validating hierarchy integrity.
+
+### UML Modeling Specifications
+- **Sequence Diagram (`sequenceDiagram`):**
+  - Lifelines: `actor userActor as "userActor : UserActor"`, `participant location as "location : Location"`, `participant buildingPosition as "buildingPosition : BuildingPosition"`, `participant physicalAddress as "physicalAddress : PhysicalAddress"`.
+  - Operations: typed method signatures with open return arrows (`-->`) and typed return signatures (`isValid : Boolean`, `formattedPosition : String`).
+  - Guards & Alt Blocks: Explicit validation logic for parent resolution and position string derivation.
+- **State Machine Diagram (`stateDiagram-v2`):**
+  - States: `Unconfigured`, `BuildingAssigned`, `FloorAssigned`, `RoomBound`, `PositioningActive`.
+  - Transitions: Annotated with `event [guard] / action`.
+
+### Feature Intersect Matrix
+- `#48` - `[ietf-ni-location: Building and Floor Position Specs]` (`docs/features/feat-14-building-and-floor-position-specs.md`)
+- `#47` - `[ietf-ni-location: Location Inventory Base and Postal Address]` (`docs/features/feat-13-location-inventory-base-and-postal-address.md`)
 
 ---
 
-## 3. Verification & Registration Workflow
+## 2. Execution Strategy & Subagent Dispatch
 
-1. **Local Model Coverage Verification:** Run `python3 skills/spec-orchestrator/scripts/verify_model_coverage.py --spec-only --allow-missing-specs` to ensure 100% schema node coverage and strict template compliance.
-2. **Feature GitHub Registration FIRST:** Register Features 09-12 as GitHub issues via `create_issue.sh`, verify body content using `gh issue view <ID> --json body`.
-3. **Epic Issue Linkage:** Inject live Feature Issue IDs into Epic 03 checklist tasklist.
-4. **Epic GitHub Registration LAST:** Register Epic 03 as a GitHub issue via `create_issue.sh`, verify body content using `gh issue view <ID> --json body`.
-5. **Backfill Parent Epic ID:** Update `## Parent Epic` in Features 09-12 with Epic 03 Issue ID and sync issue body.
-6. **Backlog Reconciliation:** Execute `python3 skills/spec-orchestrator/scripts/reconcile_backlog.py`.
-7. **Git Commit & Push:** Commit generated specs with conventional commit message `docs: extract Phase 1 specifications for RFC 9179 and ietf-geo-location@2022-02-11.yang`, push to `origin/main`, and confirm clean remote diff.
+Per the **Role Boundary Lock**, **Coordinator Direct Writing Lock**, and **Strict Plan Enforcement**:
+1. The coordinator will NOT directly write `docs/user-stories/us-21-building-floor-room-positioning.md` or `.pipeline/domain_specs/us-21-building-floor-room-positioning.md`.
+2. A context-isolated subagent (`User Story Implementer`) will be launched using `invoke_subagent`.
+3. The subagent prompt will instruct it to:
+   - Read `skills/spec-user-story-engineering/SKILL.md` as its very first step.
+   - Include a 4-point compliance table in output prior to file generation.
+   - Write the markdown user story to `docs/user-stories/us-21-building-floor-room-positioning.md` and copy to `.pipeline/domain_specs/us-21-building-floor-room-positioning.md`.
+   - Run linter verification `python3 skills/spec-orchestrator/scripts/verify_model_coverage.py --spec-only`.
+   - Reconcile backlog using `python3 skills/spec-orchestrator/scripts/reconcile_backlog.py` or `gh issue` commands if needed.
+   - Commit and push to git.
+
+---
+
+## 3. Verification & Acceptance Criteria
+1. `python3 skills/spec-orchestrator/scripts/verify_model_coverage.py --spec-only` passes with exit code 0.
+2. File exists in both `docs/user-stories/us-21-building-floor-room-positioning.md` and `.pipeline/domain_specs/us-21-building-floor-room-positioning.md`.
+3. Remote git sync verified with `git diff origin/main` clean.
 
 ---
 

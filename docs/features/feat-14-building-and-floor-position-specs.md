@@ -37,6 +37,9 @@ classDiagram
         +String id "[1]"
         +String type "[0..1]"
         +String parent "[0..1]"
+        +Status setBuildingPosition(String building, String floor, String room) "[1]"
+        +Boolean setParentLocation(String parentId) "[1]"
+        +Boolean validateParentHierarchy(String parentId) "[1]"
     }
     class PhysicalAddress {
         +String address "[0..1]"
@@ -50,6 +53,8 @@ classDiagram
         +String floor "[0..1]"
         +String room "[0..1]"
         +String roomBuildingPosition "[0..1]"
+        +Status setPositionDetails(String building, String floor, String room) "[1]"
+        +String formatRoomBuildingPosition(String building, String floor, String room) "[1]"
     }
     Location "1" *-- "0..1" PhysicalAddress : physicalAddress
     Location "1" *-- "0..1" BuildingPosition : buildingPosition

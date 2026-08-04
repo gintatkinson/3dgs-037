@@ -24,6 +24,8 @@ This feature specifies the base network inventory location management and physic
 classDiagram
     class Locations {
         +Boolean isConfig "[0..1]"
+        +Status createLocation(String id, String uuid) "[1]"
+        +Boolean setParentLocation(String parentId) "[1]"
     }
     class Location {
         +String id "[1]"
@@ -35,6 +37,9 @@ classDiagram
         +String parent "[0..1]"
         +String timestamp "[0..1]"
         +String validUntil "[0..1]"
+        +Status initialize(String id, String uuid) "[1]"
+        +Status setPhysicalAddress(String address, String postalCode, String city, String state, String countryCode) "[1]"
+        +Status bindContainedChassis(String chassisId, String neRef, String componentRef) "[1]"
     }
     class PhysicalAddress {
         +String address "[0..1]"
@@ -42,6 +47,7 @@ classDiagram
         +String state "[0..1]"
         +String city "[0..1]"
         +String countryCode "[0..1]"
+        +Boolean validateCountryCode(String countryCode) "[1]"
     }
     class ContainedChassis {
         +Integer chassisId "[1]"

@@ -33,6 +33,7 @@ The `ietf-geo-location` module models reference frames, geodetic systems, spatia
 - [ ] #40 - [[ietf-geo-location]: 3D Coordinates and Altitude Parsing](https://github.com/gintatkinson/3dgs-037/blob/main/docs/user-stories/us-17-3d-coordinates-and-altitude-parsing.md) (Validates latitude, longitude, and height coordinate bounds)
 - [ ] #41 - [[ietf-geo-location]: Motion Vector Velocity Calculation](https://github.com/gintatkinson/3dgs-037/blob/main/docs/user-stories/us-18-motion-vector-velocity-calculation.md) (Validates motion vectors, speed, and heading calculations)
 - [ ] #42 - [[ietf-geo-location]: Location Uncertainty Ellipse Bounds](https://github.com/gintatkinson/3dgs-037/blob/main/docs/user-stories/us-19-location-uncertainty-ellipse-bounds.md) (Validates coordinate and height accuracy uncertainty bounds)
+- [ ] #55 - [[ietf-ni-location]: Geodetic Location Binding (ietf-geo-location augmentation), Spatial Coordinate Synchronization, and Altitude Offset Verification](https://github.com/gintatkinson/3dgs-037/blob/main/docs/user-stories/us-23-geodetic-location-augment-binding.md) (Validates geodetic location binding for network inventory racks via ietf-geo-location augmentation)
 ## 3. Architecture
 
 ### Subsystem Component Definition

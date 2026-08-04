@@ -36,6 +36,7 @@ classDiagram
     class Locations {
     }
     class Racks {
+        +Boolean createRack(String id, Integer height, Integer width, Integer depth, String rackClass) "[1]"
     }
     class RackClass {
         <<identity>>
@@ -63,11 +64,15 @@ classDiagram
         +Integer maxAllocatedPower "[0..1]"
         +String timestamp "[0..1]"
         +String validUntil "[0..1]"
+        +Boolean configureDimensionsAndClass(Integer height, Integer width, Integer depth, String rackClass) "[1]"
+        +Boolean validatePower(Integer maxVoltage, Integer maxAllocatedPower) "[1]"
+        +Boolean mountChassis(Integer relativePosition, String neRef, String componentRef) "[1]"
     }
     class ContainedChassis {
         +Integer relativePosition "[1]"
         +String neRef "[0..1]"
         +String componentRef "[0..1]"
+        +Boolean bindChassis(Integer relativePosition, String neRef, String componentRef) "[1]"
     }
     Locations "1" *-- "1" Racks : racks
     Racks "1" *-- "0..*" Rack : rack

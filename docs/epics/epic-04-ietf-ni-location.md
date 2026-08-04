@@ -27,8 +27,10 @@ The `ietf-ni-location` model extends standard inventory management paradigms by 
 (Leave placeholder list if none yet created)
 
 #### Associated User Stories
-*To be populated after Phase 3*
-(Leave placeholder list if none yet created)
+- [ ] #52 - [[ietf-ni-location]: Facility Location Creation, Unique Identifier Generation, and Postal Address Formatting/Validation](https://github.com/gintatkinson/3dgs-037/blob/main/docs/user-stories/us-20-location-inventory-onboarding.md) (Validates facility location creation, unique identifier generation, postal address formatting, ISO country code regex, parent hierarchy, and contained chassis assignment)
+- [ ] #53 - [[ietf-ni-location]: Building, Floor, and Room Spatial Hierarchy Navigation, Room Name Assignment, and Physical Access Bounds](https://github.com/gintatkinson/3dgs-037/blob/main/docs/user-stories/us-21-building-floor-room-positioning.md) (Validates indoor building, floor, room spatial hierarchy navigation, room name assignment, compound position formatting, and parent access bounds)
+- [ ] #54 - [[ietf-ni-location]: Rack Identification, Bay Position Assignment, U-Position Alignment (1U..48U), and Vertical Slot Constraint Enforcement](https://github.com/gintatkinson/3dgs-037/blob/main/docs/user-stories/us-22-rack-unit-bay-positioning-bounds.md) (Validates equipment rack identification, physical dimensions, security classification identityrefs, electrical limits, vertical U-slot relative position alignment, and collision detection)
+- [ ] #55 - [[ietf-ni-location]: Geodetic Location Binding (ietf-geo-location augmentation), Spatial Coordinate Synchronization, and Altitude Offset Verification](https://github.com/gintatkinson/3dgs-037/blob/main/docs/user-stories/us-23-geodetic-location-augment-binding.md) (Validates rack-location row/column grid positioning, location-ref leafref binding, geodetic 3D coordinate binding via ietf-geo-location, and altitude offset verification)
 
 ## 3. Architecture
 

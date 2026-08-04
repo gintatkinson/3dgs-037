@@ -38,15 +38,21 @@ classDiagram
     }
     class LocationRef {
         +String locationRef "[0..1]"
+        +Boolean validateLocationRef(String locationRefId) "[1]"
     }
     class GeoLocation {
         +Real latitude "[0..1]"
         +Real longitude "[0..1]"
         +Real height "[0..1]"
+        +Boolean validateCoordinates(Decimal latitude, Decimal longitude, Decimal height) "[1]"
+        +Status verifyAltitudeOffset(Decimal height) "[1]"
     }
     class RackLocation {
         +Integer rowNumber "[0..1]"
         +Integer columnNumber "[0..1]"
+        +Status setGridPosition(UnsignedInt rowNumber, UnsignedInt columnNumber) "[1]"
+        +Status setLocationRef(String locationRefId) "[1]"
+        +Status bindGeoLocation(Decimal latitude, Decimal longitude, Decimal height) "[1]"
     }
     Locations "1" *-- "1" Racks : racks
     Racks "1" *-- "0..*" Rack : rack
