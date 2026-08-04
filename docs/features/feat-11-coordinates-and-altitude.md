@@ -28,6 +28,7 @@ classDiagram
     class GeoLocation {
         +String timestamp "[0..1]"
         +String validUntil "[0..1]"
+        +Boolean setCoordinates(Real lat, Real long, Real height) "[1]"
     }
     class LocationChoice {
         <<choice>>
@@ -40,6 +41,7 @@ classDiagram
         +Real latitude "[1]"
         +Real longitude "[1]"
         +Real height "[0..1]"
+        +Boolean validateBounds(Real lat, Real long) "[1]"
     }
     class CartesianCoordinates {
         +Real x "[1]"
@@ -181,6 +183,11 @@ classDiagram
 - **Given** a `geo-location` record with `timestamp = "2026-08-04T12:00:00Z"` and `valid-until = "2026-08-04T18:00:00Z"`
 - **When** a query evaluates `check-temporal-validity` at system time `"2026-08-04T14:00:00Z"`
 - **Then** the result returns true indicating the location data is active and valid.
+
+
+
+### Associated User Stories
+- [ ] #40 - [[ietf-geo-location]: 3D Coordinates and Altitude Parsing](https://github.com/gintatkinson/3dgs-037/blob/main/docs/user-stories/us-17-3d-coordinates-and-altitude-parsing.md) (Validates 3D ellipsoidal and cartesian coordinate bounds)
 
 ## Specification Context (Verbatim)
 This is the location on, or relative to, the astronomical object. It is specified using two or three coordinate values. These values are given either as 'latitude', 'longitude', and an optional 'height', or as Cartesian coordinates of 'x', 'y', and 'z'. For the standard location choice, 'latitude' and 'longitude' are specified as decimal degrees, and the 'height' value is in fractions of meters. For the Cartesian choice, 'x', 'y', and 'z' are in fractions of meters. In both choices, the exact meanings of all the values are defined by the 'geodetic-datum' value in Section 2.1.

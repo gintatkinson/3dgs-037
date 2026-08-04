@@ -31,11 +31,15 @@ From these 3D velocity vector components, two-dimensional speed ($speed = \sqrt{
 ```mermaid
 classDiagram
     class GeoLocation {
+        +Boolean setVelocity(Real vNorth, Real vEast, Real vUp) "[1]"
+        +Real getSpeed() "[1]"
+        +Real getHeading() "[1]"
     }
     class Velocity {
         +Real vNorth "[0..1]"
         +Real vEast "[0..1]"
         +Real vUp "[0..1]"
+        +Boolean updateVelocity(Real vNorth, Real vEast, Real vUp) "[1]"
         +Real calculateSpeed() "[1]"
         +Real calculateHeading() "[1]"
     }
@@ -122,6 +126,11 @@ classDiagram
 - **When** the system computes 2D speed and heading
 - **Then** speed is calculated as `0.0` m/s
 - **And** heading calculation handles division by zero gracefully without throwing an exception, reporting zero or undefined heading.
+
+
+
+### Associated User Stories
+- [ ] #41 - [[ietf-geo-location]: Motion Vector Velocity Calculation](https://github.com/gintatkinson/3dgs-037/blob/main/docs/user-stories/us-18-motion-vector-velocity-calculation.md) (Validates 3D motion vector decomposition and 2D speed/heading derivation)
 
 ## Specification Context (Verbatim)
 Support is added for objects in relatively stable motion. For objects in relatively stable motion, the grouping provides a three-dimensional vector value. The components of the vector are 'v-north', 'v-east', and 'v-up', which are all given in fractional meters per second. The values 'v-north' and 'v-east' are relative to true north as defined by the reference frame for the astronomical body; 'v-up' is perpendicular to the plane defined by 'v-north' and 'v-east', and is pointed away from the center of mass.

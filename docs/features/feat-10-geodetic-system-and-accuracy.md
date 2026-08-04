@@ -39,6 +39,7 @@ classDiagram
         +Boolean validateGeodeticDatum(String datum) "[1]"
         +Boolean validateCoordAccuracy(Real accuracy) "[1]"
         +Boolean validateHeightAccuracy(Real accuracy) "[1]"
+        +Boolean checkTemporalValidity() "[1]"
     }
     GeoLocation "1" *-- "0..1" ReferenceFrame : referenceFrame
     ReferenceFrame "1" *-- "0..1" GeodeticSystem : geodeticSystem
@@ -98,6 +99,13 @@ classDiagram
 - **Given** a payload attempting to set `geodetic-datum` with prohibited control characters or non-matching pattern strings
 - **When** input validation is executed
 - **Then** the operation MUST fail with exception state `INVALID_GEODETIC_DATUM`.
+
+
+
+### Associated User Stories
+- [ ] #39 - [[ietf-geo-location]: Geodetic Reference Frame Validation](https://github.com/gintatkinson/3dgs-037/blob/main/docs/user-stories/us-16-geodetic-reference-frame-validation.md) (Validates geodetic datum reference system)
+- [ ] #40 - [[ietf-geo-location]: 3D Coordinates and Altitude Parsing](https://github.com/gintatkinson/3dgs-037/blob/main/docs/user-stories/us-17-3d-coordinates-and-altitude-parsing.md) (Validates geodetic system precision bounds)
+- [ ] #42 - [[ietf-geo-location]: Location Uncertainty Ellipse Bounds](https://github.com/gintatkinson/3dgs-037/blob/main/docs/user-stories/us-19-location-uncertainty-ellipse-bounds.md) (Validates coordinate and height accuracy override bounds)
 
 ## Specification Context (Verbatim)
 In addition to identifying the astronomical body, we also need to define the meaning of the coordinates (e.g., latitude and longitude) and the definition of 0-height. This is done with a 'geodetic-datum' value. The default value for 'geodetic-datum' is 'wgs-84' (i.e., the World Geodetic System [WGS84]), which is used by the Global Positioning System (GPS) among many others. We define an IANA registry for specifying standard values for the 'geodetic-datum'.

@@ -114,6 +114,11 @@ classDiagram
 - **When** a client sends a payload containing an `alternate-system` leaf,
 - **Then** the system MUST reject the operation with error `ERR_FEATURE_DISABLED_ALTERNATE_SYSTEM`.
 
+
+
+### Associated User Stories
+- [ ] #39 - [[ietf-geo-location]: Geodetic Reference Frame Validation](https://github.com/gintatkinson/3dgs-037/blob/main/docs/user-stories/us-16-geodetic-reference-frame-validation.md) (Validates geodetic reference frame datum selection and ellipsoid parameters)
+
 ## Specification Context (Verbatim)
 The frame of reference ('reference-frame') defines what the location values refer to and their meaning. The referred-to object can be any astronomical body. It could be a planet such as Earth or Mars, a moon such as Enceladus, an asteroid such as Ceres, or even a comet such as 1P/Halley. This value is specified in 'astronomical-body' and is defined by the International Astronomical Union <http://www.iau.org>. The default 'astronomical-body' value is 'earth'.
 In addition to identifying the astronomical body, we also need to define the meaning of the coordinates (e.g., latitude and longitude) and the definition of 0-height. This is done with a 'geodetic-datum' value.
