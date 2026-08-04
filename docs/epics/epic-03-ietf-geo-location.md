@@ -23,7 +23,10 @@ The `ietf-geo-location` module models reference frames, geodetic systems, spatia
 ### Associated Use Cases & User Stories
 
 #### Associated Use Cases
-*To be populated after Phase 3*
+- [ ] #44 - [[ietf-geo-location]: Geodetic Reference Frame Configuration](https://github.com/gintatkinson/3dgs-037/blob/main/docs/use-cases/uc-09-geodetic-reference-frame-configuration.md) (Configures astronomical body assignment, geodetic reference frame, and optional alternate coordinate systems)
+- [ ] #45 - [[ietf-geo-location]: Geodetic System and Accuracy Assessment](https://github.com/gintatkinson/3dgs-037/blob/main/docs/use-cases/uc-10-geodetic-system-and-accuracy-assessment.md) (Selects geodetic datum and evaluates horizontal coordinate and vertical height accuracy precision bounds)
+- [ ] #43 - [[ietf-geo-location]: Geographic Coordinates and Altitude Ingestion](https://github.com/gintatkinson/3dgs-037/blob/main/docs/use-cases/uc-11-geographic-coordinates-and-altitude-ingestion.md) (Ingests 3D geodetic or Cartesian coordinates, parses ellipsoidal height, and tracks temporal validity)
+- [ ] #46 - [[ietf-geo-location]: Motion and Velocity Telemetry Processing](https://github.com/gintatkinson/3dgs-037/blob/main/docs/use-cases/uc-12-motion-and-velocity-telemetry-processing.md) (Processes 3D velocity vectors, calculates scalar speed, and derives 2D heading angle)
 
 #### Associated User Stories
 - [ ] #39 - [[ietf-geo-location]: Geodetic Reference Frame Validation](https://github.com/gintatkinson/3dgs-037/blob/main/docs/user-stories/us-16-geodetic-reference-frame-validation.md) (Validates reference frame datum selection and ellipsoid parameters)
