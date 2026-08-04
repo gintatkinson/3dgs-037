@@ -37,6 +37,9 @@ The `ietf-nwi-passive-inventory` model extends the base network equipment invent
 - [ ] #82 - [[ietf-nwi-passive-inventory]: Fiber Cable Core Count Tracking, Multi-Tube Hierarchy Navigation, and Optical Attenuation Profiling (G.652 to G.657)](https://github.com/gintatkinson/3dgs-037/blob/main/docs/user-stories/us-29-fiber-cable-strand-inventory.md) (Provides fiber cable core count tracking and optical attenuation profiling)
 - [ ] #83 - [[ietf-nwi-passive-inventory]: Splice Tray Capacity Monitoring, Fusion Joint Loss Calculation, and Fiber Strand Splicing Operations](https://github.com/gintatkinson/3dgs-037/blob/main/docs/user-stories/us-30-splice-tray-fusion-joint-connection.md) (Provides splice tray capacity monitoring and fusion joint loss calculation)
 - [ ] #84 - [[ietf-nwi-passive-inventory]: Patch Panel Port Allocation, Optical Connector Insertion Loss Tracking, and Passive Port Classification](https://github.com/gintatkinson/3dgs-037/blob/main/docs/user-stories/us-31-connector-patch-panel-inventory.md) (Provides patch panel port allocation and optical connector insertion loss tracking)
+- [ ] #79 - [[ietf-nwi-passive-inventory]: Fiber Cable Ingestion, Strand Count Allocation, Strand Color Code Schema Validation, and Attenuation Coefficient Calculation](https://github.com/gintatkinson/3dgs-037/blob/main/docs/user-stories/us-29-fiber-cable-and-strand-inventory.md) (semantic linkage justification)
+- [ ] #80 - [[ietf-nwi-passive-inventory]: Splice Tray Capacity Management, Fiber Strand Fusion Splicing Joint Creation, and Splice Loss Bounds Evaluation](https://github.com/gintatkinson/3dgs-037/blob/main/docs/user-stories/us-30-splice-tray-and-fusion-jointing.md) (semantic linkage justification)
+- [ ] #81 - [[ietf-nwi-passive-inventory]: Optical Patch Panel Port Provisioning, Connector Type Validation (LC/SC/MPO), Insertion Loss Limits, and Fiber Patch Cord Cross-Connection](https://github.com/gintatkinson/3dgs-037/blob/main/docs/user-stories/us-31-patch-panel-connector-cross-connect.md) (semantic linkage justification)
 
 ## 3. Architecture
 
@@ -157,5 +160,5 @@ The model defines four primary structural augmentations:
 4. `augment "/nwi:equipment/nwi:component"` adds `patch-panel` with port count density, optical connector classifications (LC, SC, FC, ST, MPO, E2000), insertion loss dB, and passive port operational classifications.
 
 ## 6. Source References
-Structural Schema: https://github.com/aguoietf/draft-ygb-ivy-passive-network-inventory/blob/main/yang/ietf-nwi-passive-inventory.yang (Clause: Section 5)
+Structural Schema: https://github.com/gintatkinson/3dgs-037/blob/main/yang/ietf-nwi-passive-inventory.yang (Clause: Section 5)
 Normative Specification: https://datatracker.ietf.org/doc/draft-ygb-ivy-passive-network-inventory/ (Clause: Section 6.1)

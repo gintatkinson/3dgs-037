@@ -1,8 +1,8 @@
 {
   "meta": {
     "version": "1.0.0",
-    "schema_name": "ietf-ni-location",
-    "yang_source": "/Users/perkunas/jail/3dgs-037/schema/ietf-ni-location.yang"
+    "schema_name": "ietf-nwi-passive-inventory",
+    "yang_source": "/Users/perkunas/jail/3dgs-037/schema/ietf-nwi-passive-inventory.yang"
   },
   "theme": {
     "modes": [
@@ -28,44 +28,52 @@
           "props": {
             "hierarchy": [
               {
-                "id": "physical-address",
-                "label": "Physical Address"
+                "id": "a-end",
+                "label": "A End"
               },
               {
-                "id": "locations",
-                "label": "Locations",
-                "children": [
-                  {
-                    "id": "location",
-                    "label": "Location",
-                    "children": [
-                      {
-                        "id": "contained-chassis",
-                        "label": "Contained Chassis"
-                      }
-                    ]
-                  }
-                ]
+                "id": "z-end",
+                "label": "Z End"
               },
               {
-                "id": "racks",
-                "label": "Racks",
-                "children": [
-                  {
-                    "id": "rack",
-                    "label": "Rack",
-                    "children": [
-                      {
-                        "id": "rack-location",
-                        "label": "Rack Location"
-                      },
-                      {
-                        "id": "contained-chassis",
-                        "label": "Contained Chassis"
-                      }
-                    ]
-                  }
-                ]
+                "id": "a-end",
+                "label": "A End"
+              },
+              {
+                "id": "z-end",
+                "label": "Z End"
+              },
+              {
+                "id": "optical-cable",
+                "label": "Optical Cable"
+              },
+              {
+                "id": "a-end",
+                "label": "A End"
+              },
+              {
+                "id": "z-end",
+                "label": "Z End"
+              },
+              {
+                "id": "optical-cable",
+                "label": "Optical Cable"
+              },
+              {
+                "id": "child-cable",
+                "label": "Child Cable"
+              },
+              {
+                "id": "cable",
+                "label": "Cable"
+              },
+              {
+                "id": "passive-port",
+                "label": "Passive Port"
+              },
+              {
+                "id": "passive-device",
+                "label": "Passive Device"
               }
             ]
           },
@@ -133,205 +141,172 @@
   },
   "attributes": [
     {
-      "key": "physical-address/address",
-      "label": "Address",
+      "key": "device-type",
+      "label": "Device Type",
       "type": "string",
-      "sectionGroup": "physical-address",
+      "sectionGroup": "General",
       "isRequired": false
     },
     {
-      "key": "physical-address/postal-code",
-      "label": "Postal Code",
+      "key": "device-id",
+      "label": "Device Id",
       "type": "string",
-      "sectionGroup": "physical-address",
+      "sectionGroup": "General",
       "isRequired": false
     },
     {
-      "key": "physical-address/state",
-      "label": "State",
-      "type": "string",
-      "sectionGroup": "physical-address",
-      "isRequired": false
-    },
-    {
-      "key": "physical-address/city",
-      "label": "City",
-      "type": "string",
-      "sectionGroup": "physical-address",
-      "isRequired": false
-    },
-    {
-      "key": "physical-address/country-code",
-      "label": "Country Code",
-      "type": "string",
-      "sectionGroup": "physical-address",
-      "isRequired": false,
-      "pattern": "[A-Z]{2}"
-    },
-    {
-      "key": "locations/location/id",
-      "label": "Id",
-      "type": "string",
-      "sectionGroup": "locations",
-      "isRequired": false
-    },
-    {
-      "key": "locations/location/type",
-      "label": "Type",
-      "type": "string",
-      "sectionGroup": "locations",
-      "isRequired": false
-    },
-    {
-      "key": "locations/location/parent",
-      "label": "Parent",
-      "type": "string",
-      "sectionGroup": "locations",
-      "isRequired": false
-    },
-    {
-      "key": "locations/location/timestamp",
-      "label": "Timestamp",
-      "type": "string",
-      "sectionGroup": "locations",
-      "isRequired": false,
-      "pattern": "[0-9]{4}-(1[0-2]|0[1-9])-(0[1-9]|[1-2][0-9]|3[0-1])T(0[0-9]|1[0-9]|2[0-3]):[0-5][0-9]:([0-5][0-9]|60)(\\.[0-9]+)?(Z|[\\+\\-]((1[0-3]|0[0-9]):([0-5][0-9])|14:00))?"
-    },
-    {
-      "key": "locations/location/valid-until",
-      "label": "Valid Until",
-      "type": "string",
-      "sectionGroup": "locations",
-      "isRequired": false,
-      "pattern": "[0-9]{4}-(1[0-2]|0[1-9])-(0[1-9]|[1-2][0-9]|3[0-1])T(0[0-9]|1[0-9]|2[0-3]):[0-5][0-9]:([0-5][0-9]|60)(\\.[0-9]+)?(Z|[\\+\\-]((1[0-3]|0[0-9]):([0-5][0-9])|14:00))?"
-    },
-    {
-      "key": "locations/location/contained-chassis/chassis-id",
-      "label": "Chassis Id",
-      "type": "int",
-      "sectionGroup": "locations",
-      "isRequired": false
-    },
-    {
-      "key": "locations/location/contained-chassis/ne-ref",
+      "key": "ne-ref",
       "label": "Ne Ref",
       "type": "string",
-      "sectionGroup": "locations",
+      "sectionGroup": "General",
       "isRequired": false
     },
     {
-      "key": "locations/location/contained-chassis/component-ref",
+      "key": "component-ref",
       "label": "Component Ref",
       "type": "string",
-      "sectionGroup": "locations",
+      "sectionGroup": "General",
       "isRequired": false
     },
     {
-      "key": "racks/rack/id",
+      "key": "id",
       "label": "Id",
       "type": "string",
-      "sectionGroup": "racks",
+      "sectionGroup": "General",
       "isRequired": false
     },
     {
-      "key": "racks/rack/rack-class",
-      "label": "Rack Class",
+      "key": "length",
+      "label": "Length",
+      "type": "int",
+      "sectionGroup": "General",
+      "isRequired": false
+    },
+    {
+      "key": "optical-cable/fiber-core-num",
+      "label": "Fiber Core Num",
+      "type": "int",
+      "sectionGroup": "optical-cable",
+      "isRequired": false
+    },
+    {
+      "key": "optical-cable/fiber-type",
+      "label": "Fiber Type",
       "type": "string",
-      "sectionGroup": "racks",
+      "sectionGroup": "optical-cable",
       "isRequired": false
     },
     {
-      "key": "racks/rack/rack-location/location-ref",
+      "key": "optical-cable/attenuation",
+      "label": "Attenuation",
+      "type": "double",
+      "sectionGroup": "optical-cable",
+      "isRequired": false
+    },
+    {
+      "key": "id",
+      "label": "Id",
+      "type": "string",
+      "sectionGroup": "General",
+      "isRequired": false
+    },
+    {
+      "key": "length",
+      "label": "Length",
+      "type": "int",
+      "sectionGroup": "General",
+      "isRequired": false
+    },
+    {
+      "key": "cable-type",
+      "label": "Cable Type",
+      "type": "string",
+      "sectionGroup": "General",
+      "isRequired": false
+    },
+    {
+      "key": "cable-role",
+      "label": "Cable Role",
+      "type": "string",
+      "sectionGroup": "General",
+      "isRequired": false
+    },
+    {
+      "key": "optical-cable/fiber-core-num",
+      "label": "Fiber Core Num",
+      "type": "int",
+      "sectionGroup": "optical-cable",
+      "isRequired": false
+    },
+    {
+      "key": "optical-cable/fiber-type",
+      "label": "Fiber Type",
+      "type": "string",
+      "sectionGroup": "optical-cable",
+      "isRequired": false
+    },
+    {
+      "key": "optical-cable/attenuation",
+      "label": "Attenuation",
+      "type": "double",
+      "sectionGroup": "optical-cable",
+      "isRequired": false
+    },
+    {
+      "key": "child-cable/index",
+      "label": "Index",
+      "type": "int",
+      "sectionGroup": "child-cable",
+      "isRequired": false
+    },
+    {
+      "key": "passive-port/id",
+      "label": "Id",
+      "type": "string",
+      "sectionGroup": "passive-port",
+      "isRequired": false
+    },
+    {
+      "key": "passive-port/port-type",
+      "label": "Port Type",
+      "type": "string",
+      "sectionGroup": "passive-port",
+      "isRequired": false
+    },
+    {
+      "key": "passive-port/fiber-core-num",
+      "label": "Fiber Core Num",
+      "type": "int",
+      "sectionGroup": "passive-port",
+      "isRequired": false
+    },
+    {
+      "key": "passive-device/id",
+      "label": "Id",
+      "type": "string",
+      "sectionGroup": "passive-device",
+      "isRequired": false
+    },
+    {
+      "key": "passive-device/device-type",
+      "label": "Device Type",
+      "type": "string",
+      "sectionGroup": "passive-device",
+      "isRequired": false
+    },
+    {
+      "key": "passive-device/custom-tags",
+      "label": "Custom Tags",
+      "type": "string",
+      "sectionGroup": "passive-device",
+      "isRequired": false
+    },
+    {
+      "key": "passive-device/location-ref",
       "label": "Location Ref",
       "type": "string",
-      "sectionGroup": "racks",
+      "sectionGroup": "passive-device",
       "isRequired": false
-    },
-    {
-      "key": "racks/rack/rack-location/row-number",
-      "label": "Row Number",
-      "type": "int",
-      "sectionGroup": "racks",
-      "isRequired": false
-    },
-    {
-      "key": "racks/rack/rack-location/column-number",
-      "label": "Column Number",
-      "type": "int",
-      "sectionGroup": "racks",
-      "isRequired": false
-    },
-    {
-      "key": "racks/rack/height",
-      "label": "Height",
-      "type": "int",
-      "sectionGroup": "racks",
-      "isRequired": false
-    },
-    {
-      "key": "racks/rack/width",
-      "label": "Width",
-      "type": "int",
-      "sectionGroup": "racks",
-      "isRequired": false
-    },
-    {
-      "key": "racks/rack/depth",
-      "label": "Depth",
-      "type": "int",
-      "sectionGroup": "racks",
-      "isRequired": false
-    },
-    {
-      "key": "racks/rack/max-voltage",
-      "label": "Max Voltage",
-      "type": "int",
-      "sectionGroup": "racks",
-      "isRequired": false
-    },
-    {
-      "key": "racks/rack/max-allocated-power",
-      "label": "Max Allocated Power",
-      "type": "int",
-      "sectionGroup": "racks",
-      "isRequired": false
-    },
-    {
-      "key": "racks/rack/contained-chassis/relative-position",
-      "label": "Relative Position",
-      "type": "int",
-      "sectionGroup": "racks",
-      "isRequired": false
-    },
-    {
-      "key": "racks/rack/contained-chassis/ne-ref",
-      "label": "Ne Ref",
-      "type": "string",
-      "sectionGroup": "racks",
-      "isRequired": false
-    },
-    {
-      "key": "racks/rack/contained-chassis/component-ref",
-      "label": "Component Ref",
-      "type": "string",
-      "sectionGroup": "racks",
-      "isRequired": false
-    },
-    {
-      "key": "racks/rack/timestamp",
-      "label": "Timestamp",
-      "type": "string",
-      "sectionGroup": "racks",
-      "isRequired": false,
-      "pattern": "[0-9]{4}-(1[0-2]|0[1-9])-(0[1-9]|[1-2][0-9]|3[0-1])T(0[0-9]|1[0-9]|2[0-3]):[0-5][0-9]:([0-5][0-9]|60)(\\.[0-9]+)?(Z|[\\+\\-]((1[0-3]|0[0-9]):([0-5][0-9])|14:00))?"
-    },
-    {
-      "key": "racks/rack/valid-until",
-      "label": "Valid Until",
-      "type": "string",
-      "sectionGroup": "racks",
-      "isRequired": false,
-      "pattern": "[0-9]{4}-(1[0-2]|0[1-9])-(0[1-9]|[1-2][0-9]|3[0-1])T(0[0-9]|1[0-9]|2[0-3]):[0-5][0-9]:([0-5][0-9]|60)(\\.[0-9]+)?(Z|[\\+\\-]((1[0-3]|0[0-9]):([0-5][0-9])|14:00))?"
     }
   ]
 }

@@ -49,14 +49,17 @@ classDiagram
         +Boolean active "[0..1]"
         +Boolean passiveDevices "[0..1]"
         +Boolean isPassive() "[1]"
+        +Boolean classifyPassiveComponent(String componentId, String passiveType) "[1]"
     }
     class PassiveDevice {
         +String deviceType "[1]"
         +String deviceId "[1]"
+        +Boolean validateDeviceType(String deviceType) "[1]"
     }
     class ActiveDevice {
         +String neRef "[1]"
         +String componentRef "[0..1]"
+        +Status setNeRef(String neRef) "[1]"
     }
     class ConnectedDeviceRef {
         +String endType "[1]"
