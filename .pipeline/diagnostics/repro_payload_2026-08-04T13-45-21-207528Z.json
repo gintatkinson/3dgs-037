@@ -1,0 +1,24 @@
+{
+  "timestamp": "2026-08-04T13:45:21.207528Z",
+  "tooling": {
+    "name": "parity_auditor",
+    "version": "1.0.0"
+  },
+  "context": {
+    "command": "./skills/spec-orchestrator/scripts/verify_model_coverage.py --spec-only --allow-missing-specs",
+    "exit_code": 1,
+    "downstream_repo": "https://github.com/gintatkinson/3dgs-037.git",
+    "commit_hash": "8b6b5d10b4c6f812f3693a542922d12d794fcef9"
+  },
+  "failure": {
+    "traceback": "",
+    "error_summary": [
+      "Use Case uc-28-directional-link-topology-processing.md must contain at least 12 detailed Alternate/Exception flows. Found only 3 flows. (Referenced features define 12 schema validation constraints, requiring at least that many alternate flows, with a minimum floor of 2.)"
+    ]
+  },
+  "reproduction_case": {
+    "target_file": "",
+    "snippet_type": "text",
+    "snippet_content": ""
+  }
+}

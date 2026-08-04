@@ -21,8 +21,10 @@ This Epic defines the foundational network and topology base models derived from
 ### Associated Use Cases & User Stories
 
 #### Associated Use Cases
-*To be populated after Phase 3*
-- (To be linked upon Use Case generation)
+- [ ] #95 - [Network Topology Instance Onboarding, Network-ID Registration, and Extensible Type Tagging](https://github.com/gintatkinson/3dgs-037/blob/main/docs/use-cases/uc-25-network-topology-instance-onboarding.md)
+- [ ] #96 - [Multi-Layer Network Node Provisioning, Node-ID Unique Verification, and Supporting Node Underlay Mapping](https://github.com/gintatkinson/3dgs-037/blob/main/docs/use-cases/uc-26-multi-layer-node-provisioning-and-underlay-mapping.md)
+- [ ] #97 - [Directional Termination Point Provisioning, TP-ID Alignment, and Cross-Layer Supporting TP Resolution](https://github.com/gintatkinson/3dgs-037/blob/main/docs/use-cases/uc-27-termination-point-hierarchy-management.md)
+- [ ] #98 - [Directional Link Topology Processing, Source/Destination TP Binding, and Supporting Link Underlay Traversal](https://github.com/gintatkinson/3dgs-037/blob/main/docs/use-cases/uc-28-directional-link-topology-processing.md)
 
 #### Associated User Stories
 - [ ] #91 - [ietf-network: Base Network Instance Onboarding, Network-ID String Syntax Checking, and Supporting Network Multi-Layer Overlay Hierarchy Resolution](https://github.com/gintatkinson/3dgs-037/blob/main/docs/user-stories/us-32-network-instance-lifecycle.md)
