@@ -121,30 +121,37 @@ class _TabbedContainerState extends State<TabbedContainer>
     }
 
     final panelOpacity = context.watch<ThemeController>().panelOpacity;
-    return Container(
-      color: Theme.of(context).cardColor.withOpacity(panelOpacity),
-      child: Column(
-        children: [
-          Material(
-            color: Colors.transparent,
-            child: TabBar(
-              controller: _tabController!,
-              tabs: tabs.map((t) => Tab(text: t.label)).toList(),
-            ),
+    return LayoutBuilder(
+      builder: (context, constraints) {
+        if (constraints.maxHeight < 48) {
+          return const SizedBox.shrink();
+        }
+        return Container(
+          color: Theme.of(context).cardColor.withOpacity(panelOpacity),
+          child: Column(
+            children: [
+              Material(
+                color: Colors.transparent,
+                child: TabBar(
+                  controller: _tabController!,
+                  tabs: tabs.map((t) => Tab(text: t.label)).toList(),
+                ),
+              ),
+              Expanded(
+                child: TabBarView(
+                  controller: _tabController!,
+                  children: List.generate(tabs.length, (idx) {
+                    return LazyTab(
+                      isSelected: _tabController!.index == idx,
+                      child: const TableViewWidget(),
+                    );
+                  }),
+                ),
+              ),
+            ],
           ),
-          Expanded(
-            child: TabBarView(
-              controller: _tabController!,
-              children: List.generate(tabs.length, (idx) {
-                return LazyTab(
-                  isSelected: _tabController!.index == idx,
-                  child: const TableViewWidget(),
-                );
-              }),
-            ),
-          ),
-        ],
-      ),
+        );
+      },
     );
   }
 
