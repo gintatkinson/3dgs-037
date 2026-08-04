@@ -1,8 +1,8 @@
 {
   "meta": {
     "version": "1.0.0",
-    "schema_name": "ietf-yang-types@2025-12-22",
-    "yang_source": "/Users/perkunas/jail/3dgs-037/schema/ietf-yang-types@2025-12-22.yang"
+    "schema_name": "ietf-inet-types@2013-07-15",
+    "yang_source": "/Users/perkunas/jail/3dgs-037/schema/ietf-inet-types@2013-07-15.yang"
   },
   "theme": {
     "modes": [

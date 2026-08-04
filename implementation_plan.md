@@ -1,47 +1,62 @@
-# Implementation Plan - Phase 2: Behavioral Extraction (BDD User Stories)
+# Implementation Plan - Phase 1: Structural Extraction for RFC 6021 & `ietf-inet-types@2013-07-15.yang`
 
-**Specification Target:** RFC 9911 & `ietf-yang-types@2025-12-22.yang`
-**Parent Epic:** Issue #5 - `docs/epics/epic-01-ietf-yang-types.md`
-**Features Covered:**
-- Feature 01 (Issue #1): `docs/features/feat-01-counter-and-gauge-types.md`
-- Feature 02 (Issue #2): `docs/features/feat-02-identifier-types.md`
-- Feature 03 (Issue #3): `docs/features/feat-03-date-and-time-types.md`
-- Feature 04 (Issue #4): `docs/features/feat-04-address-and-string-types.md`
+**Specification Target:** RFC 6021 & `ietf-inet-types@2013-07-15.yang`
+**Normative Reference:** https://datatracker.ietf.org/doc/rfc6021/
+**Structural Schema:** https://github.com/YangModels/yang/blob/main/standard/ietf/RFC/ietf-inet-types%402013-07-15.yang
+**Output Directory:** `docs/epics/`, `docs/features/`, `.pipeline/domain_specs/`
 
-## 1. User Story Extraction List (10 Atomic Packages)
+## 1. Specification Artifacts to Extract
 
-### Scope 1: Counter & Gauge Behaviors (Feature 01 / Issue #1)
-- **US-01**: `docs/user-stories/us-01-counter-monotonic-wrap.md` - Counter Monotonic Increment and Wraparound Behavior (`counter32` and `counter64`).
-- **US-02**: `docs/user-stories/us-02-zero-based-counter-initialization.md` - Zero-Based Counter Default Initialization and Initial Delta (`zero-based-counter32` and `zero-based-counter64`).
-- **US-03**: `docs/user-stories/us-03-gauge-min-max-latching.md` - Gauge Dynamic Range and Min/Max Bound Latching (`gauge32` and `gauge64`).
+### Features (4 Items)
+1. **Feature 05 (`docs/features/feat-05-ip-address-types.md`)**: `[ietf-inet-types]: IP Address Data Types`
+   - **Data Types Covered:** `ip-version`, `ip-address`, `ipv4-address`, `ipv6-address`, `ip-prefix`, `ipv4-prefix`, `ipv6-prefix`, `ip-address-no-zone`, `ipv4-address-no-zone`, `ipv6-address-no-zone`.
+   - **Interface Type:** `api`
+   - **Generation Mode:** `subagent`
 
-### Scope 2: Identifier Types Behaviors (Feature 02 / Issue #2)
-- **US-04**: `docs/user-stories/us-04-object-identifier-asn1-validation.md` - Object Identifier ASN.1 Arc Hierarchy & 128-Subidentifier Limit Validation (`object-identifier` & `object-identifier-128`).
-- **US-05**: `docs/user-stories/us-05-uuid-formatting-canonicalization.md` - RFC 9562 UUID Pattern Validation and Canonicalization (`uuid`).
-- **US-06**: `docs/user-stories/us-06-yang-identifier-syntax-validation.md` - RFC 7950 YANG Identifier Syntax Rules and Length Validation (`yang-identifier`).
+2. **Feature 06 (`docs/features/feat-06-domain-name-and-host-types.md`)**: `[ietf-inet-types]: Domain Name and Host Data Types`
+   - **Data Types Covered:** `domain-name`, `host`, `uri`.
+   - **Interface Type:** `api`
+   - **Generation Mode:** `subagent`
 
-### Scope 3: Date & Time Types Behaviors (Feature 03 / Issue #3)
-- **US-07**: `docs/user-stories/us-07-date-time-timestamp-parsing.md` - RFC 3339 Timestamp Parsing, Fractional Seconds, and RFC 9557 Timezone Offset Semantics (`date-and-time`, `date`, `time`).
-- **US-08**: `docs/user-stories/us-08-timeticks-wrap-timestamp-reset.md` - Timeticks Modulo 2^32 Arithmetic and Associated Timestamp Reset (`timeticks` & `timestamp`).
+3. **Feature 07 (`docs/features/feat-07-autonomous-system-and-port-types.md`)**: `[ietf-inet-types]: Autonomous System and Port Number Data Types`
+   - **Data Types Covered:** `as-number`, `port-number`.
+   - **Interface Type:** `api`
+   - **Generation Mode:** `subagent`
 
-### Scope 4: Address & String Types Behaviors (Feature 04 / Issue #4)
-- **US-09**: `docs/user-stories/us-09-mac-and-phys-address-canonicalization.md` - IEEE 802 MAC Address and Physical Media Address Validation and Canonicalization (`mac-address` & `phys-address`).
-- **US-10**: `docs/user-stories/us-10-dotted-quad-and-xpath-validation.md` - Dotted-Quad Decimal Parsing to Uint32 and XPath 1.0 Expression Syntax Validation (`dotted-quad` & `xpath1.0`).
+4. **Feature 08 (`docs/features/feat-08-ip-unicast-multicast-and-scope-types.md`)**: `[ietf-inet-types]: IP Unicast, Multicast, and Scope Data Types`
+   - **Data Types Covered:** `ipv6-flow-label`, `dscp`, and related IP address scope/unicast/multicast representations.
+   - **Interface Type:** `api`
+   - **Generation Mode:** `subagent`
 
-## 2. Subagent Dispatch Strategy
+### Epic (1 Item)
+1. **Epic 02 (`docs/epics/epic-02-ietf-inet-types.md`)**: `[ietf-inet-types]: Common Internet Data Types`
+   - **Child Features:** Features 05, 06, 07, 08.
+   - **Generation Mode:** `subagent`
 
-For each of the 10 User Stories above:
-1. Dispatch a fresh context-isolated subagent targeting exactly 1 User Story.
-2. Direct the subagent to execute `view_file` on `/Users/perkunas/jail/3dgs-037/.agents/skills/spec-user-story-engineering/SKILL.md` as step 1.
-3. Ensure exact compliance with UML sequence diagram notation (`actor userActor as "userActor : UserActor"`, open return arrows `-->`, return signatures `value : Type`, operation signatures matching feature classes).
-4. Save markdown file under `docs/user-stories/` (and `.pipeline/domain_specs/` as required).
+---
+
+## 2. Item-Level Subagent Dispatch Strategy
+
+Per the **Role Boundary Lock** and **Item-Level Subagent Isolation Mandate**:
+- The coordinator will NOT directly write target specification files.
+- Each Feature and Epic will be extracted by an isolated, fresh subagent.
+- Max 1 specification item per subagent dispatch.
+- Every subagent prompt will instruct the subagent to execute `view_file` on `skills/schema-specification-engineering/SKILL.md` as Step 1.
+- Each subagent will include standard UML Class Diagrams, Given-When-Then BDD acceptance criteria, verbatim specification text from `schema/rfc6021.txt`, exact schema paths, and YAML frontmatter (`generation_mode: "subagent"`).
+
+---
 
 ## 3. Verification & Registration Workflow
 
-1. Execute model coverage linter: `python3 skills/spec-orchestrator/scripts/verify_model_coverage.py --spec-only --allow-missing-specs`.
-2. Register each User Story as a GitHub issue using `skills/spec-orchestrator/scripts/create_issue.sh` (or `gh issue create`).
-3. Post-register verification: `gh issue view <ID> --json body`.
-4. Back-fill registered User Story issue IDs into Feature checklists (#1, #2, #3, #4) and Epic checklist (#5).
-5. Run backlog reconciliation: `python3 skills/spec-orchestrator/scripts/reconcile_backlog.py`.
-6. Commit all generated files and changes with standard commit message format (`docs: extract BDD User Stories for RFC 9911`).
-7. Push commit to remote `origin/main` and verify clean diff.
+1. **Local Model Coverage Verification:** Run `python3 skills/spec-orchestrator/scripts/verify_model_coverage.py --spec-only --allow-missing-specs` to ensure 100% schema type coverage and strict template compliance.
+2. **Feature GitHub Registration FIRST:** Register Features 05-08 as GitHub issues via `gh issue create`, verify body content using `gh issue view <ID> --json body`.
+3. **Epic Issue Linkage:** Inject live Feature Issue IDs into Epic checklist tasklist.
+4. **Epic GitHub Registration LAST:** Register Epic 02 as a GitHub issue via `gh issue create`, verify body content using `gh issue view <ID> --json body`.
+5. **Backfill Parent Epic ID:** Update `## Parent Epic` in Features 05-08 with Epic Issue ID and sync issue body.
+6. **Backlog Reconciliation:** Execute `python3 skills/spec-orchestrator/scripts/reconcile_backlog.py`.
+7. **Git Commit & Push:** Commit generated specs with conventional commit message `docs: extract Phase 1 specifications for RFC 6021 and ietf-inet-types@2013-07-15.yang`, push to `origin/main`, and confirm clean remote diff.
+
+---
+
+## User Approval Request
+Please review this implementation plan. Once approved, reply with **PROCEED** (or **Approved**) to authorize subagent dispatches and execution.

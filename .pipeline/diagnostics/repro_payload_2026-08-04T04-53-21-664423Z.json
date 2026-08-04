@@ -1,0 +1,29 @@
+{
+  "timestamp": "2026-08-04T04:53:21.664423Z",
+  "tooling": {
+    "name": "parity_auditor",
+    "version": "1.0.0"
+  },
+  "context": {
+    "command": "skills/spec-orchestrator/scripts/verify_model_coverage.py --spec-only --allow-missing-specs",
+    "exit_code": 1,
+    "downstream_repo": "https://github.com/gintatkinson/3dgs-037.git",
+    "commit_hash": "88ab5cd4af3dd97585fc3baa79b58d4d6820322d"
+  },
+  "failure": {
+    "traceback": "",
+    "error_summary": [
+      "Feature feat-08-ip-unicast-multicast-and-scope-types.md class 'IPv6FlowLabel' method '\"[1]\"' is missing a multiplicity (e.g. [1], [0..1], [0..*]) in its return signature.",
+      "Feature feat-08-ip-unicast-multicast-and-scope-types.md class 'Dscp' method '\"[1]\"' is missing a multiplicity (e.g. [1], [0..1], [0..*]) in its return signature.",
+      "Feature feat-08-ip-unicast-multicast-and-scope-types.md class 'Ipv4MulticastAddress' method '\"[1]\"' is missing a multiplicity (e.g. [1], [0..1], [0..*]) in its return signature.",
+      "Feature feat-08-ip-unicast-multicast-and-scope-types.md class 'Ipv6MulticastAddress' method '\"[1]\"' is missing a multiplicity (e.g. [1], [0..1], [0..*]) in its return signature.",
+      "Epic epic-02-ietf-inet-types.md contains a UML Class Diagram with no relationships. Isolated classes are prohibited; you must illustrate containment/inheritance/choice composition.",
+      "Epic epic-02-ietf-inet-types.md contains class 'InternetTypesComponent' with zero relationships. Isolated classes are prohibited."
+    ]
+  },
+  "reproduction_case": {
+    "target_file": "",
+    "snippet_type": "text",
+    "snippet_content": ""
+  }
+}
