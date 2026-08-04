@@ -1,0 +1,2929 @@
+
+<!DOCTYPE html>
+
+
+
+
+
+
+
+<html data-bs-theme="auto" lang="en">
+    <head>
+        
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title>
+            
+                draft-ietf-ivy-network-inventory-location-06
+            
+        </title>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link href="https://static.ietf.org/fonts/inter/import.css" rel="stylesheet">
+        <link href="https://static.ietf.org/fonts/noto-sans-mono/import.css" rel="stylesheet">
+        
+            <link rel="stylesheet" href="https://static.ietf.org/dt/12.69.0/ietf/css/document_html_referenced.css">
+            
+                <link rel="stylesheet" href="https://static.ietf.org/dt/12.69.0/ietf/css/document_html_txt.css">
+            
+            <script type="module" crossorigin="" src="https://static.ietf.org/dt/12.69.0/assets/embedded-f7f04c22.js"></script>
+<link href="https://static.ietf.org/dt/12.69.0/assets/create-pinia-singleton-e1887cc7.js" type="text/javascript" crossorigin="anonymous" rel="modulepreload" as="script" />
+<link href="https://static.ietf.org/dt/12.69.0/assets/Scrollbar-f0f599a2.js" type="text/javascript" crossorigin="anonymous" rel="modulepreload" as="script" />
+            <script src="https://static.ietf.org/dt/12.69.0/ietf/js/document_html.js"></script>
+            <script src="https://static.ietf.org/dt/12.69.0/ietf/js/theme.js"></script>
+        
+        <link rel="alternate" type="application/atom+xml" title="Document changes" href="/feed/document-changes/draft-ietf-ivy-network-inventory-location/">
+        <meta name="description"
+            
+                content="A YANG Data Model for Network Inventory Location (Internet-Draft, 2026)"
+            >
+        
+
+<link rel="apple-touch-icon"
+      sizes="180x180"
+      href="https://static.ietf.org/dt/12.69.0/ietf/images/ietf-logo-nor-180.png">
+<link rel="icon"
+      sizes="32x32"
+      href="https://static.ietf.org/dt/12.69.0/ietf/images/ietf-logo-nor-32.png">
+<link rel="icon"
+      sizes="16x16"
+      href="https://static.ietf.org/dt/12.69.0/ietf/images/ietf-logo-nor-16.png">
+<link rel="manifest" href="/site.webmanifest">
+<link rel="mask-icon"
+      href="https://static.ietf.org/dt/12.69.0/ietf/images/ietf-logo-nor-mask.svg"
+      color="#ffffff">
+<meta name="msapplication-TileColor"
+      content="#ffffff">
+<meta name="theme-color"
+      content="#ffffff">
+        
+
+
+
+
+<meta property="og:title" content="A YANG Data Model for Network Inventory Location">
+<meta property="og:url" content="https://datatracker.ietf.org/doc/html/draft-ietf-ivy-network-inventory-location">
+<link rel="canonical" href="https://datatracker.ietf.org/doc/html/draft-ietf-ivy-network-inventory-location">
+<meta property="og:site_name" content="IETF Datatracker">
+<meta property="og:description" content="This document defines a YANG data model for Network Inventory location (e.g., site, room, rack, geo-location data), which provides location information with different granularity levels for inventoried network elements. Accurate location information is useful for network planning, deployment, and maintenance. However, such information cannot be obtained or verified from the Network Elements themselves. This document defines a location model for network inventory that extends the base inventory with comprehensive location data.">
+<meta property="og:type" content="article">
+
+<meta property="og:image" content="https://static.ietf.org/dt/12.69.0/ietf/images/ietf-logo-card.png">
+<meta property="og:image:alt" content="Logo of the IETF">
+<meta property="article:section" content="IETF - Internet Engineering Task Force">
+<meta property="og:image:type" content="image/png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+
+<meta property="article:author" content="Bo Wu">
+<meta property="article:author" content="Sergio Belotti">
+<meta property="article:author" content="Jean-Francois Bouquier">
+<meta property="article:author" content="Fabio Peruzzini">
+<meta property="article:author" content="Phil Bedard">
+
+
+
+        
+        <style>
+            
+            .diff-form .select2-selection__rendered {
+                direction: rtl;
+                text-align: left;
+            }
+        </style>
+    </head>
+    <body>
+        
+        <noscript><iframe class="status" title="Site status" src="/status/latest"></iframe></noscript>
+<div class="vue-embed" data-component="Status"></div>
+        <div class="btn-toolbar sidebar-toolbar position-fixed top-0 end-0 m-2 m-lg-3 d-print-none">
+            <div class="dropdown">
+                <button class="btn btn-outline-secondary btn-sm me-1 dropdown-toggle d-flex align-items-center"
+                    id="bd-theme" type="button" aria-expanded="false" data-bs-toggle="dropdown"
+                    aria-label="Toggle theme">
+                        <i class="theme-icon-active bi bi-circle-half"></i>
+                </button>
+
+                <ul class="dropdown-menu" aria-labelledby="bd-theme">
+                    <li>
+                        <button type="button" class="dropdown-item d-flex align-items-center"
+                            data-bs-theme-value="light" aria-pressed="false">
+                            <i class="me-2 opacity-50 theme-icon bi bi-sun-fill"></i>
+                            Light<i class="bi bi-check2 ms-auto d-none"></i>
+                        </button>
+                    </li>
+                    <li>
+                        <button type="button" class="dropdown-item d-flex align-items-center"
+                            data-bs-theme-value="dark" aria-pressed="false">
+                            <i class="me-2 opacity-50 theme-icon bi bi-moon-stars-fill"></i>
+                            Dark<i class="bi bi-check2 ms-auto d-none"></i>
+                        </button>
+                    </li>
+                    <li>
+                        <button type="button" class="dropdown-item d-flex align-items-center active"
+                            data-bs-theme-value="auto" aria-pressed="true">
+                            <i class="me-2 opacity-50 theme-icon bi bi-circle-half"></i>
+                            Auto<i class="bi bi-check2 ms-auto d-none"></i>
+                        </button>
+                    </li>
+                </ul>
+            </div>
+            <button class="btn btn-outline-secondary btn-sm sidebar-toggle"
+                    type="button"
+                    data-bs-toggle="collapse"
+                    data-bs-target="#sidebar"
+                    aria-expanded="true"
+                    aria-controls="sidebar"
+                    aria-label="Toggle metadata sidebar"
+                    title="Toggle metadata sidebar">
+            <i class="bi bi-arrow-bar-left sidebar-shown"></i>
+            <i class="bi bi-arrow-bar-right sidebar-collapsed"></i>
+            </button>
+        </div>
+        <nav class="navbar bg-light-subtle px-1 fixed-top d-print-none d-md-none">
+            <a class="nav-link ps-1"
+               href="/doc/draft-ietf-ivy-network-inventory-location/">
+                 
+                    draft-ietf-ivy-network-inventory-location-06
+                
+                <br class="d-sm-none">
+
+                <span class="ms-sm-3 badge rounded-pill badge-draft">
+                    
+                        None
+                    
+                </span>
+            </a>
+            <button class="navbar-toggler p-1"
+                    type="button"
+                    data-bs-toggle="collapse"
+                    data-bs-target="#docinfo-collapse"
+                    aria-controls="docinfo-collapse"
+                    aria-expanded="false"
+                    aria-label="Show document information">
+                <span class="navbar-toggler-icon small"></span>
+            </button>
+            <div class="navbar-nav navbar-nav-scroll overscroll-none collapse pt-1" id="docinfo-collapse">
+                <div class="bg-light-subtle p-0">
+                    <table class="table table-sm table-borderless small">
+                        <tbody class="meta align-top">
+                            <tr>
+                                <th scope="row"></th>
+                                <th scope="row">Title</th>
+                                <td class="edit"></td>
+                                <td>A YANG Data Model for Network Inventory Location</td>
+                            </tr>
+                        </tbody>
+                        
+
+
+
+
+
+
+
+<tbody class="meta align-top ">
+    <tr>
+        <th scope="row">Document</th>
+        <th scope="row">Document type</th>
+        <td class="edit"></td>
+        <td>
+            
+
+
+
+
+
+
+
+    <span class="text-success">Active Internet-Draft</span>
+    (<a href="/wg/ivy/about/">ivy WG</a>)
+    
+
+            
+            
+            
+                
+
+
+
+
+    
+
+
+            
+        </td>
+    </tr>
+    
+        <tr>
+            <td></td>
+            <th scope="row">Select version</th>
+            <td class="edit"></td>
+            <td>
+                
+
+
+
+    <ul class="revision-list pagination pagination-sm text-center flex-wrap my-0">
+        
+            
+                 
+                    <li class="page-item ">
+                        <a class="page-link"
+                        href="/doc/html/draft-ietf-ivy-network-inventory-location-00"
+                        >
+                            00
+                        </a>
+                    </li>
+                
+            
+                 
+                    <li class="page-item ">
+                        <a class="page-link"
+                        href="/doc/html/draft-ietf-ivy-network-inventory-location-01"
+                        rel="nofollow">
+                            01
+                        </a>
+                    </li>
+                
+            
+                 
+                    <li class="page-item ">
+                        <a class="page-link"
+                        href="/doc/html/draft-ietf-ivy-network-inventory-location-02"
+                        rel="nofollow">
+                            02
+                        </a>
+                    </li>
+                
+            
+                 
+                    <li class="page-item ">
+                        <a class="page-link"
+                        href="/doc/html/draft-ietf-ivy-network-inventory-location-03"
+                        rel="nofollow">
+                            03
+                        </a>
+                    </li>
+                
+            
+                 
+                    <li class="page-item ">
+                        <a class="page-link"
+                        href="/doc/html/draft-ietf-ivy-network-inventory-location-04"
+                        rel="nofollow">
+                            04
+                        </a>
+                    </li>
+                
+            
+                 
+                    <li class="page-item ">
+                        <a class="page-link"
+                        href="/doc/html/draft-ietf-ivy-network-inventory-location-05"
+                        rel="nofollow">
+                            05
+                        </a>
+                    </li>
+                
+            
+                 
+                    <li class="page-item active">
+                        <a class="page-link"
+                        href="/doc/html/draft-ietf-ivy-network-inventory-location-06"
+                        >
+                            06
+                        </a>
+                    </li>
+                
+            
+            
+        
+    </ul>
+
+            </td>
+        </tr>
+        
+            <tr>
+                <td></td>
+                <th scope="row">Compare versions</th>
+                <td class="edit"></td>
+                <td>
+                    
+
+
+
+<form class="form-horizontal diff-form"
+      action="https://author-tools.ietf.org/iddiff"
+      method="get"
+      target="_blank">
+
+            <select class="form-select form-select-sm mb-1 select2-field"
+                    data-max-entries="1"
+                    data-width="resolve"
+                    data-allow-clear="false"
+                    data-minimum-input-length="0"
+                    aria-label="From revision"
+                    name="url1">
+                
+                    <option value="draft-ietf-ivy-network-inventory-location-06">
+                        draft-ietf-ivy-network-inventory-location-06
+                        
+                    </option>
+                
+                    <option value="draft-ietf-ivy-network-inventory-location-05" selected>
+                        draft-ietf-ivy-network-inventory-location-05
+                        
+                    </option>
+                
+                    <option value="draft-ietf-ivy-network-inventory-location-04">
+                        draft-ietf-ivy-network-inventory-location-04
+                        
+                    </option>
+                
+                    <option value="draft-ietf-ivy-network-inventory-location-03">
+                        draft-ietf-ivy-network-inventory-location-03
+                        
+                    </option>
+                
+                    <option value="draft-ietf-ivy-network-inventory-location-02">
+                        draft-ietf-ivy-network-inventory-location-02
+                        
+                    </option>
+                
+                    <option value="draft-ietf-ivy-network-inventory-location-01">
+                        draft-ietf-ivy-network-inventory-location-01
+                        
+                    </option>
+                
+                    <option value="draft-ietf-ivy-network-inventory-location-00">
+                        draft-ietf-ivy-network-inventory-location-00
+                        
+                    </option>
+                
+                    <option value="draft-wbbpb-ivy-network-inventory-location-02">
+                        draft-wbbpb-ivy-network-inventory-location-02
+                        
+                    </option>
+                
+                    <option value="draft-wbbpb-ivy-network-inventory-location-01">
+                        draft-wbbpb-ivy-network-inventory-location-01
+                        
+                    </option>
+                
+                    <option value="draft-wbbpb-ivy-network-inventory-location-00">
+                        draft-wbbpb-ivy-network-inventory-location-00
+                        
+                    </option>
+                
+                
+            </select>
+
+            <select class="form-select form-select-sm mb-1 select2-field"
+                    data-max-entries="1"
+                    data-width="resolve"
+                    data-allow-clear="false"
+                    data-minimum-input-length="0"
+                    aria-label="To revision"
+                    name="url2">
+                
+                    <option value="draft-ietf-ivy-network-inventory-location-06" selected>
+                        draft-ietf-ivy-network-inventory-location-06
+                        
+                    </option>
+                
+                    <option value="draft-ietf-ivy-network-inventory-location-05">
+                        draft-ietf-ivy-network-inventory-location-05
+                        
+                    </option>
+                
+                    <option value="draft-ietf-ivy-network-inventory-location-04">
+                        draft-ietf-ivy-network-inventory-location-04
+                        
+                    </option>
+                
+                    <option value="draft-ietf-ivy-network-inventory-location-03">
+                        draft-ietf-ivy-network-inventory-location-03
+                        
+                    </option>
+                
+                    <option value="draft-ietf-ivy-network-inventory-location-02">
+                        draft-ietf-ivy-network-inventory-location-02
+                        
+                    </option>
+                
+                    <option value="draft-ietf-ivy-network-inventory-location-01">
+                        draft-ietf-ivy-network-inventory-location-01
+                        
+                    </option>
+                
+                    <option value="draft-ietf-ivy-network-inventory-location-00">
+                        draft-ietf-ivy-network-inventory-location-00
+                        
+                    </option>
+                
+                    <option value="draft-wbbpb-ivy-network-inventory-location-02">
+                        draft-wbbpb-ivy-network-inventory-location-02
+                        
+                    </option>
+                
+                    <option value="draft-wbbpb-ivy-network-inventory-location-01">
+                        draft-wbbpb-ivy-network-inventory-location-01
+                        
+                    </option>
+                
+                    <option value="draft-wbbpb-ivy-network-inventory-location-00">
+                        draft-wbbpb-ivy-network-inventory-location-00
+                        
+                    </option>
+                
+                
+            </select>
+
+            <button type="submit"
+                    class="btn btn-primary btn-sm"
+                    value="--html"
+                    name="difftype">
+                Side-by-side
+            </button>
+            
+            <button type="submit"
+                    class="btn btn-primary btn-sm"
+                    value="--hwdiff"
+                    name="difftype">
+                Inline
+            </button>
+
+</form>
+                </td>
+            </tr>
+        
+    
+    <tr>
+        <td></td>
+        <th scope="row">Authors</th>
+        <td class="edit">
+            
+        </td>
+        <td>
+            
+            
+                <span ><a 
+           title="Datatracker profile of Bo Wu"
+            href="/person/lana.wubo@huawei.com" >Bo Wu</a> <a 
+               href="mailto:lana.wubo%40huawei.com"
+               aria-label="Compose email to lana.wubo@huawei.com"
+               title="Compose email to lana.wubo@huawei.com">
+                <i class="bi bi-envelope"></i></a></span>,
+            
+                <span ><a 
+           title="Datatracker profile of Sergio Belotti"
+            href="/person/s.belotti.ietf@gmail.com" >Sergio Belotti</a> <a 
+               href="mailto:s.belotti.ietf%40gmail.com"
+               aria-label="Compose email to s.belotti.ietf@gmail.com"
+               title="Compose email to s.belotti.ietf@gmail.com">
+                <i class="bi bi-envelope"></i></a></span>,
+            
+                <span ><a 
+           title="Datatracker profile of Jean-Francois Bouquier"
+            href="/person/jeff.bouquier@vodafone.com" >Jean-Francois Bouquier</a> <a 
+               href="mailto:jeff.bouquier%40vodafone.com"
+               aria-label="Compose email to jeff.bouquier@vodafone.com"
+               title="Compose email to jeff.bouquier@vodafone.com">
+                <i class="bi bi-envelope"></i></a></span>,
+            
+                <span ><a 
+           title="Datatracker profile of Fabio Peruzzini"
+            href="/person/fabio.peruzzini@fibercop.com" >Fabio Peruzzini</a> <a 
+               href="mailto:fabio.peruzzini%40fibercop.com"
+               aria-label="Compose email to fabio.peruzzini@fibercop.com"
+               title="Compose email to fabio.peruzzini@fibercop.com">
+                <i class="bi bi-envelope"></i></a></span>,
+            
+                <span ><a 
+           title="Datatracker profile of Phil Bedard"
+            href="/person/phbedard@cisco.com" >Phil Bedard</a> <a 
+               href="mailto:phbedard%40cisco.com"
+               aria-label="Compose email to phbedard@cisco.com"
+               title="Compose email to phbedard@cisco.com">
+                <i class="bi bi-envelope"></i></a></span>
+            
+            
+                <br>
+                <a class="btn btn-primary btn-sm mt-1" href="mailto:draft-ietf-ivy-network-inventory-location@ietf.org?subject=draft-ietf-ivy-network-inventory-location" title="Send email to the document authors">Email authors</a>
+            
+        </td>
+    </tr>
+    
+    
+        
+            <tr>
+                <td></td>
+                <th scope="row">Replaces</th>
+                <td class="edit">
+                    
+                </td>
+                <td>
+                    
+                        
+                            <a href="/doc/html/draft-wbbpb-ivy-network-inventory-location" title="A YANG Data Model for Network Inventory Location">draft-wbbpb-ivy-network-inventory-location</a>
+                        
+                    
+                </td>
+            </tr>
+        
+        
+        
+    
+    <tr>
+        <td></td>
+        <th scope="row">
+            RFC stream
+        </th>
+        <td class="edit">
+            
+        </td>
+        <td >
+            
+                
+                
+                    
+                        
+
+
+
+<img alt="IETF Logo"
+     class="d-lm-none w-25 mt-1"
+     
+     
+        
+             src="https://static.ietf.org/dt/12.69.0/ietf/images/ietf-logo-nor-white.svg"
+        
+     
+     >
+
+<img alt="IETF Logo"
+     class="d-dm-none w-25 mt-1"
+     
+     
+        
+             src="https://static.ietf.org/dt/12.69.0/ietf/images/ietf-logo-nor.svg"
+        
+     
+     >
+                    
+                
+                
+            
+        </td>
+    </tr>
+    
+        <tr>
+            <td></td>
+            <th scope="row">
+                Intended RFC status
+            </th>
+            <td class="edit">
+                
+            </td>
+            <td>
+                
+                    <span class="text-body-secondary">
+                        (None)
+                    </span>
+                
+            </td>
+        </tr>
+    
+    <tr>
+        <td></td>
+        <th scope="row">
+            Other formats
+        </th>
+        <td class="edit">
+        </td>
+        <td>
+            
+                
+    <div class="buttonlist">
+    
+        
+        <a class="btn btn-primary btn-sm"
+          
+          target="_blank"
+          href="https://www.ietf.org/archive/id/draft-ietf-ivy-network-inventory-location-06.txt">
+            
+                <i class="bi bi-file-text"></i> txt
+            
+        </a>
+        
+    
+        
+        <a class="btn btn-primary btn-sm"
+          
+          target="_blank"
+          href="https://www.ietf.org/archive/id/draft-ietf-ivy-network-inventory-location-06.html">
+            
+                <i class="bi bi-file-code"></i> html
+            
+        </a>
+        
+    
+        
+        <a class="btn btn-primary btn-sm"
+          
+          target="_blank"
+          href="https://www.ietf.org/archive/id/draft-ietf-ivy-network-inventory-location-06.xml">
+            
+                <i class="bi bi-file-code"></i> xml
+            
+        </a>
+        
+    
+        
+    
+        
+        <a class="btn btn-primary btn-sm"
+          
+          target="_blank"
+          href="/doc/draft-ietf-ivy-network-inventory-location/06/bibtex/">
+            
+                <i class="bi bi-file-ruled"></i> bibtex
+            
+        </a>
+        
+    
+        
+        <a class="btn btn-primary btn-sm"
+          
+          target="_blank"
+          href="/doc/bibxml3/draft-ietf-ivy-network-inventory-location-06.xml">
+            
+                <i class="bi bi-file-code"></i> bibxml
+            
+        </a>
+        
+    
+</div>
+
+            
+        </td>
+    </tr>
+    
+    
+        
+            <tr>
+                <td>
+                </td>
+                <th scope="row">
+                    Additional resources
+                </th>
+                <td class="edit">
+                    
+                </td>
+                <td>
+                    
+                        
+                        
+                            
+                                <a href="https://mailarchive.ietf.org/arch/browse/ivy?q=draft-ietf-ivy-network-inventory-location">
+                                    Mailing list discussion
+                                </a>
+                            
+                        
+                    
+                </td>
+            </tr>
+        
+    
+</tbody>
+                        <tr>
+                            <th scope="row"></th>
+                            <th scope="row"></th>
+                            <td class="edit"></td>
+                            <td>
+                                <a class="btn btn-sm btn-warning mb-3"
+                                target="_blank"
+                                href="https://github.com/ietf-tools/datatracker/issues/new/choose">
+                                    Report a bug
+                                    <i class="bi bi-bug"></i>
+                                </a>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+        </nav>
+        <div class="row g-0">
+            <div class="col-md-9 d-flex justify-content-center lh-sm"
+                 data-bs-spy="scroll"
+                 data-bs-target="#toc-nav"
+                 data-bs-smooth-scroll="true"
+                 tabindex="0"
+                 id="content">
+                
+                    <div class="rfchtml">
+                        <br class="noprint">
+                        <div class="xml2rfc">
+<table class="ears">
+<thead><tr>
+<td class="left">Internet-Draft</td>
+<td class="center">Network Inventory Location</td>
+<td class="right">July 2026</td>
+</tr></thead>
+<tfoot><tr>
+<td class="left">Wu, et al.</td>
+<td class="center">Expires 7 January 2027</td>
+<td class="right">[Page]</td>
+</tr></tfoot>
+</table>
+<div id="external-metadata" class="document-information"></div>
+<div id="internal-metadata" class="document-information">
+<dl id="identifiers">
+<dt class="label-workgroup">Workgroup:</dt>
+<dd class="workgroup">Network Inventory YANG</dd>
+<dt class="label-internet-draft">Internet-Draft:</dt>
+<dd class="internet-draft">draft-ietf-ivy-network-inventory-location-06</dd>
+<dt class="label-published">Published:</dt>
+<dd class="published">
+<time datetime="2026-07-06" class="published">6 July 2026</time>
+    </dd>
+<dt class="label-intended-status">Intended Status:</dt>
+<dd class="intended-status">Standards Track</dd>
+<dt class="label-expires">Expires:</dt>
+<dd class="expires"><time datetime="2027-01-07">7 January 2027</time></dd>
+<dt class="label-authors">Authors:</dt>
+<dd class="authors">
+<div class="author">
+      <div class="author-name">B. Wu</div>
+<div class="org">Huawei</div>
+</div>
+<div class="author">
+      <div class="author-name">S. Belotti</div>
+<div class="org">Nokia</div>
+</div>
+<div class="author">
+      <div class="author-name">J.-F. Bouquier</div>
+<div class="org">Vodafone</div>
+</div>
+<div class="author">
+      <div class="author-name">F. Peruzzini</div>
+<div class="org">FiberCop</div>
+</div>
+<div class="author">
+      <div class="author-name">P. Bedard</div>
+<div class="org">Cisco</div>
+</div>
+</dd>
+</dl>
+</div>
+<h1 id="title">A YANG Data Model for Network Inventory Location</h1>
+<section id="section-abstract">
+      <h2 id="abstract"><a href="#abstract" class="selfRef">Abstract</a></h2>
+<p id="section-abstract-1">This document defines a YANG data model for Network Inventory
+location (e.g., site, room, rack, geo-location data), which provides
+location information with different granularity levels for
+inventoried network elements.<a href="#section-abstract-1" class="pilcrow">¶</a></p>
+<p id="section-abstract-2">Accurate location information is useful for network planning,
+deployment, and maintenance. However, such information cannot be
+obtained or verified from the Network Elements themselves. This
+document defines a location model for network inventory that extends
+the base inventory with comprehensive location data.<a href="#section-abstract-2" class="pilcrow">¶</a></p>
+</section>
+<section class="note rfcEditorRemove" id="section-note.1">
+      <h2 id="name-discussion-venues">
+<a href="#name-discussion-venues" class="section-name selfRef">Discussion Venues</a>
+      </h2>
+<p id="section-note.1-1">This note is to be removed before publishing as an RFC.<a href="#section-note.1-1" class="pilcrow">¶</a></p>
+<p id="section-note.1-2">Discussion of this document takes place on the
+    Network Inventory YANG Working Group mailing list (inventory-yang@ietf.org),
+    which is archived at <span><a href="https://mailarchive.ietf.org/arch/browse/inventory-yang/">https://mailarchive.ietf.org/arch/browse/inventory-yang/</a></span>.<a href="#section-note.1-2" class="pilcrow">¶</a></p>
+<p id="section-note.1-3">Source for this draft and an issue tracker can be found at
+    <span><a href="https://github.com/ietf-ivy-wg/network-inventory-location">https://github.com/ietf-ivy-wg/network-inventory-location</a></span>.<a href="#section-note.1-3" class="pilcrow">¶</a></p>
+</section>
+<div id="status-of-memo">
+<section id="section-boilerplate.1">
+        <h2 id="name-status-of-this-memo">
+<a href="#name-status-of-this-memo" class="section-name selfRef">Status of This Memo</a>
+        </h2>
+<p id="section-boilerplate.1-1">
+        This Internet-Draft is submitted in full conformance with the
+        provisions of BCP 78 and BCP 79.<a href="#section-boilerplate.1-1" class="pilcrow">¶</a></p>
+<p id="section-boilerplate.1-2">
+        Internet-Drafts are working documents of the Internet Engineering Task
+        Force (IETF). Note that other groups may also distribute working
+        documents as Internet-Drafts. The list of current Internet-Drafts is
+        at <span><a href="https://datatracker.ietf.org/drafts/current/">https://datatracker.ietf.org/drafts/current/</a></span>.<a href="#section-boilerplate.1-2" class="pilcrow">¶</a></p>
+<p id="section-boilerplate.1-3">
+        Internet-Drafts are draft documents valid for a maximum of six months
+        and may be updated, replaced, or obsoleted by other documents at any
+        time. It is inappropriate to use Internet-Drafts as reference
+        material or to cite them other than as "work in progress."<a href="#section-boilerplate.1-3" class="pilcrow">¶</a></p>
+<p id="section-boilerplate.1-4">
+        This Internet-Draft will expire on 7 January 2027.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
+</section>
+</div>
+<div id="copyright">
+<section id="section-boilerplate.2">
+        <h2 id="name-copyright-notice">
+<a href="#name-copyright-notice" class="section-name selfRef">Copyright Notice</a>
+        </h2>
+<p id="section-boilerplate.2-1">
+            Copyright (c) 2026 IETF Trust and the persons identified as the
+            document authors. All rights reserved.<a href="#section-boilerplate.2-1" class="pilcrow">¶</a></p>
+<p id="section-boilerplate.2-2">
+            This document is subject to BCP 78 and the IETF Trust's Legal
+            Provisions Relating to IETF Documents
+            (<span><a href="https://trustee.ietf.org/license-info">https://trustee.ietf.org/license-info</a></span>) in effect on the date of
+            publication of this document. Please review these documents
+            carefully, as they describe your rights and restrictions with
+            respect to this document. Code Components extracted from this
+            document must include Revised BSD License text as described in
+            Section 4.e of the Trust Legal Provisions and are provided without
+            warranty as described in the Revised BSD License.<a href="#section-boilerplate.2-2" class="pilcrow">¶</a></p>
+</section>
+</div>
+<div id="toc">
+<section id="section-toc.1">
+        <a href="#" onclick="scroll(0,0)" class="toplink">▲</a><h2 id="name-table-of-contents">
+<a href="#name-table-of-contents" class="section-name selfRef">Table of Contents</a>
+        </h2>
+<nav class="toc"><ul class="compact toc ulBare ulEmpty">
+<li class="compact toc ulBare ulEmpty" id="section-toc.1-1.1">
+            <p id="section-toc.1-1.1.1" class="keepWithNext"><a href="#section-1" class="auto internal xref">1</a>.  <a href="#name-introduction" class="internal xref">Introduction</a></p>
+<ul class="compact toc ulBare ulEmpty">
+<li class="compact toc ulBare ulEmpty" id="section-toc.1-1.1.2.1">
+                <p id="section-toc.1-1.1.2.1.1" class="keepWithNext"><a href="#section-1.1" class="auto internal xref">1.1</a>.  <a href="#name-editorial-note-to-be-remove" class="internal xref">Editorial Note (To be removed by RFC Editor)</a></p>
+</li>
+              <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.1.2.2">
+                <p id="section-toc.1-1.1.2.2.1" class="keepWithNext"><a href="#section-1.2" class="auto internal xref">1.2</a>.  <a href="#name-terminology-and-notations" class="internal xref">Terminology and Notations</a></p>
+</li>
+            </ul>
+</li>
+          <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.2">
+            <p id="section-toc.1-1.2.1"><a href="#section-2" class="auto internal xref">2</a>.  <a href="#name-hierarchical-locations-of-n" class="internal xref">Hierarchical Locations of Network Inventory</a></p>
+</li>
+          <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.3">
+            <p id="section-toc.1-1.3.1"><a href="#section-3" class="auto internal xref">3</a>.  <a href="#name-rack" class="internal xref">Rack</a></p>
+</li>
+          <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.4">
+            <p id="section-toc.1-1.4.1"><a href="#section-4" class="auto internal xref">4</a>.  <a href="#name-network-inventory-location-" class="internal xref">Network Inventory Location Tree</a></p>
+</li>
+          <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.5">
+            <p id="section-toc.1-1.5.1"><a href="#section-5" class="auto internal xref">5</a>.  <a href="#name-yang-data-model-for-network" class="internal xref">YANG Data model for Network Inventory Location</a></p>
+</li>
+          <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.6">
+            <p id="section-toc.1-1.6.1"><a href="#section-6" class="auto internal xref">6</a>.  <a href="#name-operational-considerations" class="internal xref">Operational Considerations</a></p>
+</li>
+          <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.7">
+            <p id="section-toc.1-1.7.1"><a href="#section-7" class="auto internal xref">7</a>.  <a href="#name-security-considerations" class="internal xref">Security Considerations</a></p>
+</li>
+          <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.8">
+            <p id="section-toc.1-1.8.1"><a href="#section-8" class="auto internal xref">8</a>.  <a href="#name-iana-considerations" class="internal xref">IANA Considerations</a></p>
+</li>
+          <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.9">
+            <p id="section-toc.1-1.9.1"><a href="#section-9" class="auto internal xref">9</a>.  <a href="#name-references" class="internal xref">References</a></p>
+<ul class="compact toc ulBare ulEmpty">
+<li class="compact toc ulBare ulEmpty" id="section-toc.1-1.9.2.1">
+                <p id="section-toc.1-1.9.2.1.1"><a href="#section-9.1" class="auto internal xref">9.1</a>.  <a href="#name-normative-references" class="internal xref">Normative References</a></p>
+</li>
+              <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.9.2.2">
+                <p id="section-toc.1-1.9.2.2.1"><a href="#section-9.2" class="auto internal xref">9.2</a>.  <a href="#name-informative-references" class="internal xref">Informative References</a></p>
+</li>
+            </ul>
+</li>
+          <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.10">
+            <p id="section-toc.1-1.10.1"><a href="#appendix-A" class="auto internal xref">Appendix A</a>.  <a href="#name-examples" class="internal xref">Examples</a></p>
+<ul class="compact toc ulBare ulEmpty">
+<li class="compact toc ulBare ulEmpty" id="section-toc.1-1.10.2.1">
+                <p id="section-toc.1-1.10.2.1.1"><a href="#appendix-A.1" class="auto internal xref">A.1</a>.  <a href="#name-non-rack-deployment-access-" class="internal xref">Non-Rack Deployment: Access Point</a></p>
+</li>
+              <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.10.2.2">
+                <p id="section-toc.1-1.10.2.2.1"><a href="#appendix-A.2" class="auto internal xref">A.2</a>.  <a href="#name-distributed-multi-chassis-n" class="internal xref">Distributed Multi-Chassis Network Element</a></p>
+</li>
+            </ul>
+</li>
+          <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.11">
+            <p id="section-toc.1-1.11.1"><a href="#appendix-B" class="auto internal xref"></a><a href="#name-acknowledgments" class="internal xref">Acknowledgments</a></p>
+</li>
+          <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.12">
+            <p id="section-toc.1-1.12.1"><a href="#appendix-C" class="auto internal xref"></a><a href="#name-contributors" class="internal xref">Contributors</a></p>
+</li>
+          <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.13">
+            <p id="section-toc.1-1.13.1"><a href="#appendix-D" class="auto internal xref"></a><a href="#name-authors-addresses" class="internal xref">Authors' Addresses</a></p>
+</li>
+        </ul>
+</nav>
+</section>
+</div>
+<div id="introduction">
+<section id="section-1">
+      <h2 id="name-introduction">
+<a href="#section-1" class="section-number selfRef">1. </a><a href="#name-introduction" class="section-name selfRef">Introduction</a>
+      </h2>
+<p id="section-1-1">Network Elements (NEs) can be grouped by location to provide more information for
+network planning, deployment, and maintenance (e.g., easily locate
+problematic NEs, optimize network resources, or help planning
+forecasts). The location can reflect outdoor or indoor information.
+An indoor location may be represented as a building, room, or other
+similar organizational structures. Outdoor locations can be walls,
+poles, or other mount places.<a href="#section-1-1" class="pilcrow">¶</a></p>
+<p id="section-1-2">The information about sites, equipment rooms, and other more precise
+locations is critical, but it cannot be automatically populated and
+retrieved from NEs. Instead, it is usually configured manually.<a href="#section-1-2" class="pilcrow">¶</a></p>
+<p id="section-1-3">The Network Inventory location model is to record physical locations,
+such as sites, building, equipment rooms, racks, and so on.
+Additionally, it includes provisions for physical addresses or geo-
+location data (geographic coordinates). The location model augments the base network inventory <span>[<a href="#I-D.ietf-ivy-network-inventory-yang" class="cite xref">I-D.ietf-ivy-network-inventory-yang</a>]</span> to enrich NEs with location information.<a href="#section-1-3" class="pilcrow">¶</a></p>
+<p id="section-1-4">The Network Inventory location model is classified as a network model (Section 3.5.1 of <span>[<a href="#I-D.ietf-netmod-rfc8407bis" class="cite xref">I-D.ietf-netmod-rfc8407bis</a>]</span>).<a href="#section-1-4" class="pilcrow">¶</a></p>
+<p id="section-1-5">The YANG data model in this document conforms to the Network
+Management Datastore Architecture (NMDA) defined in <span>[<a href="#RFC8342" class="cite xref">RFC8342</a>]</span>.<a href="#section-1-5" class="pilcrow">¶</a></p>
+<div id="editorial-note-to-be-removed-by-rfc-editor">
+<section id="section-1.1">
+        <h3 id="name-editorial-note-to-be-remove">
+<a href="#section-1.1" class="section-number selfRef">1.1. </a><a href="#name-editorial-note-to-be-remove" class="section-name selfRef">Editorial Note (To be removed by RFC Editor)</a>
+        </h3>
+<p id="section-1.1-1">Note to the RFC Editor: This section is to be removed prior to publication.<a href="#section-1.1-1" class="pilcrow">¶</a></p>
+<p id="section-1.1-2">This document contains placeholder values that need to be replaced with finalized values at the time of publication. This note summarizes all of the substitutions that are needed.<a href="#section-1.1-2" class="pilcrow">¶</a></p>
+<p id="section-1.1-3">Please apply the following replacements:<a href="#section-1.1-3" class="pilcrow">¶</a></p>
+<ul class="normal">
+<li class="normal" id="section-1.1-4.1">
+            <p id="section-1.1-4.1.1">XXXX --&gt; the assigned RFC number for this document<a href="#section-1.1-4.1.1" class="pilcrow">¶</a></p>
+</li>
+          <li class="normal" id="section-1.1-4.2">
+            <p id="section-1.1-4.2.1">AAAA --&gt; the assigned RFC number for <span>[<a href="#I-D.ietf-ivy-network-inventory-yang" class="cite xref">I-D.ietf-ivy-network-inventory-yang</a>]</span><a href="#section-1.1-4.2.1" class="pilcrow">¶</a></p>
+</li>
+        </ul>
+</section>
+</div>
+<div id="terminology-and-notations">
+<section id="section-1.2">
+        <h3 id="name-terminology-and-notations">
+<a href="#section-1.2" class="section-number selfRef">1.2. </a><a href="#name-terminology-and-notations" class="section-name selfRef">Terminology and Notations</a>
+        </h3>
+<p id="section-1.2-1">The following terms are defined in <span>[<a href="#RFC7950" class="cite xref">RFC7950</a>]</span> and are not
+redefined here:<a href="#section-1.2-1" class="pilcrow">¶</a></p>
+<ul class="normal">
+<li class="normal" id="section-1.2-2.1">
+            <p id="section-1.2-2.1.1">client<a href="#section-1.2-2.1.1" class="pilcrow">¶</a></p>
+</li>
+          <li class="normal" id="section-1.2-2.2">
+            <p id="section-1.2-2.2.1">server<a href="#section-1.2-2.2.1" class="pilcrow">¶</a></p>
+</li>
+          <li class="normal" id="section-1.2-2.3">
+            <p id="section-1.2-2.3.1">augment<a href="#section-1.2-2.3.1" class="pilcrow">¶</a></p>
+</li>
+          <li class="normal" id="section-1.2-2.4">
+            <p id="section-1.2-2.4.1">data model<a href="#section-1.2-2.4.1" class="pilcrow">¶</a></p>
+</li>
+          <li class="normal" id="section-1.2-2.5">
+            <p id="section-1.2-2.5.1">data node
+The following terms are defined in <span>[<a href="#RFC6241" class="cite xref">RFC6241</a>]</span> and are not redefined
+here:<a href="#section-1.2-2.5.1" class="pilcrow">¶</a></p>
+</li>
+          <li class="normal" id="section-1.2-2.6">
+            <p id="section-1.2-2.6.1">configuration data<a href="#section-1.2-2.6.1" class="pilcrow">¶</a></p>
+</li>
+          <li class="normal" id="section-1.2-2.7">
+            <p id="section-1.2-2.7.1">state data
+The tree diagram used in this document follows the notation defined
+in <span>[<a href="#RFC8340" class="cite xref">RFC8340</a>]</span>.<a href="#section-1.2-2.7.1" class="pilcrow">¶</a></p>
+</li>
+        </ul>
+<p id="section-1.2-3">Also, this document uses terms defined in <span>[<a href="#I-D.ietf-ivy-network-inventory-yang" class="cite xref">I-D.ietf-ivy-network-inventory-yang</a>]</span>.<a href="#section-1.2-3" class="pilcrow">¶</a></p>
+</section>
+</div>
+</section>
+</div>
+<div id="hierarchical-locations-of-network-inventory">
+<section id="section-2">
+      <h2 id="name-hierarchical-locations-of-n">
+<a href="#section-2" class="section-number selfRef">2. </a><a href="#name-hierarchical-locations-of-n" class="section-name selfRef">Hierarchical Locations of Network Inventory</a>
+      </h2>
+<p id="section-2-1">The "location" list is generalized to support a variety of geographic
+location, such as sites, rooms, buildings.<a href="#section-2-1" class="pilcrow">¶</a></p>
+<p id="section-2-2">A site represents a general geographic location to group a set of NEs
+and corresponding inventory components. NEs, racks, equipment rooms,
+and buildings can be grouped within a site.<a href="#section-2-2" class="pilcrow">¶</a></p>
+<p id="section-2-3">A room is a facility, a space for network elements and other
+equipment (such as servers, storage) with power supply systems, air
+conditioning system, etc.<a href="#section-2-3" class="pilcrow">¶</a></p>
+<p id="section-2-4">Locations can be nested to form a hierarchy. For example, buildings
+may be within a site, and a room may be within a building.<a href="#section-2-4" class="pilcrow">¶</a></p>
+<p id="section-2-5">The "location-type" is defined as a YANG identity to identify the
+type of an inventory location, which may be site, equipment room,
+building, etc.<a href="#section-2-5" class="pilcrow">¶</a></p>
+<span id="name-yang-subtree-of-location"></span><div id="fig-ni-location-tree">
+<figure id="figure-1">
+        <div class="alignLeft art-ascii-art art-text artwork" id="section-2-6.1">
+<pre>
++--ro locations
+   +--ro location* [id]
+   |  +--ro id                   string
+   |  +--ro uuid?                yang:uuid
+   |  +--ro name?                string
+   |  +--ro alias?               string
+   |  +--ro description?         string
+   |  +--ro type?                string
+   |  +--ro parent?              -&gt; ../../location/id
+   |  +--ro timestamp?           yang:date-and-time
+   |  +--ro valid-until?         yang:date-and-time
+   |  +--ro physical-address
+   |  |     ...
+   |  +--ro geo-location
+   |  |     ...
+   |  +--ro contained-chassis* [chassis-id]
+   |        ...
+</pre>
+</div>
+<figcaption><a href="#figure-1" class="selfRef">Figure 1</a>:
+<a href="#name-yang-subtree-of-location" class="selfRef">YANG Subtree of Location</a>
+        </figcaption></figure>
+</div>
+</section>
+</div>
+<div id="rack">
+<section id="section-3">
+      <h2 id="name-rack">
+<a href="#section-3" class="section-number selfRef">3. </a><a href="#name-rack" class="section-name selfRef">Rack</a>
+      </h2>
+<p id="section-3-1">"racks" represent physical equipment racks in which NEs can be
+installed, which facilitate device maintenance. Through "rack-
+location", each rack can be assigned to a site or a specific location
+within a site, such as an equipment room.<a href="#section-3-1" class="pilcrow">¶</a></p>
+<p id="section-3-2">Each rack is assigned a unique ID and a name in the context of a
+facility, e.g. a site. A rack may have some specific attributes,
+such as appearance-related attributes and electricity-related
+attributes. The height, depth and width are described by Figure 2
+(please consider that the door of the rack is facing the user).<a href="#section-3-2" class="pilcrow">¶</a></p>
+<p id="section-3-3">Note: Further discussion is needed to decide whether to separate
+"racks" from the list of "location".<a href="#section-3-3" class="pilcrow">¶</a></p>
+<span id="name-height-width-and-depth-of-r"></span><div id="fig-rack">
+<figure id="figure-2">
+        <div id="section-3-4.1">
+          <div class="alignCenter art-svg artwork" id="section-3-4.1.1">
+<svg xmlns="http://www.w3.org/2000/svg" version="1.1" height="528" width="256" viewbox="0 0 256 528" class="diagram" text-anchor="middle" font-family="monospace" font-size="13px" stroke-linecap="round">
+              <path d="M 8,104 L 8,456" fill="none" stroke="black"></path>
+              <path d="M 8,472 L 8,496" fill="none" stroke="black"></path>
+              <path d="M 40,40 L 40,384" fill="none" stroke="black"></path>
+              <path d="M 136,96 L 136,456" fill="none" stroke="black"></path>
+              <path d="M 136,472 L 136,496" fill="none" stroke="black"></path>
+              <path d="M 168,48 L 168,392" fill="none" stroke="black"></path>
+              <path d="M 224,40 L 224,176" fill="none" stroke="black"></path>
+              <path d="M 224,208 L 224,392" fill="none" stroke="black"></path>
+              <path d="M 32,32 L 152,32" fill="none" stroke="black"></path>
+              <path d="M 208,32 L 224,32" fill="none" stroke="black"></path>
+              <path d="M 8,96 L 32,96" fill="none" stroke="black"></path>
+              <path d="M 48,96 L 128,96" fill="none" stroke="black"></path>
+              <path d="M 48,400 L 128,400" fill="none" stroke="black"></path>
+              <path d="M 144,400 L 168,400" fill="none" stroke="black"></path>
+              <path d="M 216,400 L 232,400" fill="none" stroke="black"></path>
+              <path d="M 8,464 L 136,464" fill="none" stroke="black"></path>
+              <path d="M 192,464 L 208,464" fill="none" stroke="black"></path>
+              <path d="M 12,88 L 36,40" fill="none" stroke="black"></path>
+              <path d="M 136,96 L 160,48" fill="none" stroke="black"></path>
+              <path d="M 12,456 L 40,400" fill="none" stroke="black"></path>
+              <path d="M 152,448 L 168,416" fill="none" stroke="black"></path>
+              <path d="M 8,488 L 60,488" fill="none" stroke="black"></path>
+              <path d="M 100,488 L 136,488" fill="none" stroke="black"></path>
+              <g class="text">
+                <text x="228" y="196">height</text>
+                <text x="68" y="260">Door</text>
+                <text x="120" y="260">Q</text>
+                <text x="120" y="276">Q</text>
+                <text x="224" y="420">/</text>
+                <text x="232" y="436">depth</text>
+                <text x="208" y="452">/</text>
+                <text x="80" y="484">width</text>
+              </g>
+            </svg><a href="#section-3-4.1.1" class="pilcrow">¶</a>
+</div>
+</div>
+<figcaption><a href="#figure-2" class="selfRef">Figure 2</a>:
+<a href="#name-height-width-and-depth-of-r" class="selfRef">Height, Width and Depth of Rack</a>
+        </figcaption></figure>
+</div>
+<p id="section-3-5">The rack attributes include:<a href="#section-3-5" class="pilcrow">¶</a></p>
+<span id="name-yang-subtree-of-rack"></span><div id="tree">
+<figure id="figure-3">
+        <div class="alignCenter art-ascii-art art-text artwork" id="section-3-6.1">
+<pre>
+ +--ro racks
+    +--ro rack* [id]
+       +--ro id                     string
+       +--ro rack-class?            identityref
+       +--ro uuid?                  yang:uuid
+       +--ro name?                  string
+       +--ro alias?                 string
+       +--ro description?           string
+       +--ro rack-location
+       |     ...
+       +--ro height?                uint16
+       +--ro width?                 uint16
+       +--ro depth?                 uint16
+       +--ro max-voltage?           uint16
+       +--ro max-allocated-power?   uint16
+       +--ro contained-chassis* [relative-position]
+       |     ...
+       +--ro timestamp?             yang:date-and-time
+       +--ro valid-until?           yang:date-and-time
+</pre>
+</div>
+<figcaption><a href="#figure-3" class="selfRef">Figure 3</a>:
+<a href="#name-yang-subtree-of-rack" class="selfRef">YANG Subtree of Rack</a>
+        </figcaption></figure>
+</div>
+<p id="section-3-7">Max-voltage: the maximum voltage supported by the rack.<a href="#section-3-7" class="pilcrow">¶</a></p>
+</section>
+</div>
+<div id="sec-module">
+<section id="section-4">
+      <h2 id="name-network-inventory-location-">
+<a href="#section-4" class="section-number selfRef">4. </a><a href="#name-network-inventory-location-" class="section-name selfRef">Network Inventory Location Tree</a>
+      </h2>
+<p id="section-4-1"><a href="#full-tree" class="auto internal xref">Figure 4</a> provides an overview of the data model for "ietf-ni-location" module.<a href="#section-4-1" class="pilcrow">¶</a></p>
+<span id="name-network-inventory-location-t"></span><div id="full-tree">
+<figure id="figure-4">
+        <div class="alignCenter art-text artwork" id="section-4-2.1">
+<pre>
+module: ietf-ni-location
+
+  augment /nwi:network-inventory:
+    +--ro locations
+       +--ro location* [id]
+       |  +--ro id                   string
+       |  +--ro uuid?                yang:uuid
+       |  +--ro name?                string
+       |  +--ro alias?               string
+       |  +--ro description?         string
+       |  +--ro type?                string
+       |  +--ro parent?              -&gt; ../../location/id
+       |  +--ro timestamp?           yang:date-and-time
+       |  +--ro valid-until?         yang:date-and-time
+       |  +--ro physical-address
+       |  |  +--ro address?        string
+       |  |  +--ro postal-code?    string
+       |  |  +--ro state?          string
+       |  |  +--ro city?           string
+       |  |  +--ro country-code?   string
+       |  +--ro geo-location
+       |  |  +--ro reference-frame
+       |  |  |  +--ro alternate-system?    string
+       |  |  |  |       {alternate-systems}?
+       |  |  |  +--ro astronomical-body?   string
+       |  |  |  +--ro geodetic-system
+       |  |  |     +--ro geodetic-datum?    string
+       |  |  |     +--ro coord-accuracy?    decimal64
+       |  |  |     +--ro height-accuracy?   decimal64
+       |  |  +--ro (location)?
+       |  |  |  +--:(ellipsoid)
+       |  |  |  |  +--ro latitude?    decimal64
+       |  |  |  |  +--ro longitude?   decimal64
+       |  |  |  |  +--ro height?      decimal64
+       |  |  |  +--:(cartesian)
+       |  |  |     +--ro x?           decimal64
+       |  |  |     +--ro y?           decimal64
+       |  |  |     +--ro z?           decimal64
+       |  |  +--ro velocity
+       |  |  |  +--ro v-north?   decimal64
+       |  |  |  +--ro v-east?    decimal64
+       |  |  |  +--ro v-up?      decimal64
+       |  |  +--ro timestamp?         yang:date-and-time
+       |  |  +--ro valid-until?       yang:date-and-time
+       |  +--ro contained-chassis* [chassis-id]
+       |     +--ro chassis-id       uint32
+       |     +--ro ne-ref?          leafref
+       |     +--ro component-ref?   leafref
+       +--ro racks
+          +--ro rack* [id]
+             +--ro id                     string
+             +--ro rack-class?            identityref
+             +--ro uuid?                  yang:uuid
+             +--ro name?                  string
+             +--ro alias?                 string
+             +--ro description?           string
+             +--ro rack-location
+             |  +--ro location-ref?    ni-location-ref
+             |  +--ro row-number?      uint32
+             |  +--ro column-number?   uint32
+             +--ro height?                uint16
+             +--ro width?                 uint16
+             +--ro depth?                 uint16
+             +--ro max-voltage?           uint16
+             +--ro max-allocated-power?   uint16
+             +--ro contained-chassis* [relative-position]
+             |  +--ro relative-position    uint8
+             |  +--ro ne-ref?              leafref
+             |  +--ro component-ref?       leafref
+             +--ro timestamp?             yang:date-and-time
+             +--ro valid-until?           yang:date-and-time
+</pre>
+</div>
+<figcaption><a href="#figure-4" class="selfRef">Figure 4</a>:
+<a href="#name-network-inventory-location-t" class="selfRef">Network Inventory Location Tree Structure</a>
+        </figcaption></figure>
+</div>
+</section>
+</div>
+<div id="yang-data-model-for-network-inventory-location">
+<section id="section-5">
+      <h2 id="name-yang-data-model-for-network">
+<a href="#section-5" class="section-number selfRef">5. </a><a href="#name-yang-data-model-for-network" class="section-name selfRef">YANG Data model for Network Inventory Location</a>
+      </h2>
+<p id="section-5-1">The "ietf-ni-location" module uses types defined in <span>[<a href="#RFC9911" class="cite xref">RFC9911</a>]</span>, <span>[<a href="#RFC9179" class="cite xref">RFC9179</a>]</span>, and <span>[<a href="#I-D.ietf-ivy-network-inventory-yang" class="cite xref">I-D.ietf-ivy-network-inventory-yang</a>]</span>.<a href="#section-5-1" class="pilcrow">¶</a></p>
+<div class="breakable lang-yang sourcecode" id="section-5-2">
+<pre>&lt;CODE BEGINS&gt; file "ietf-ni-location@2026-07-06.yang"
+
+module ietf-ni-location {
+  yang-version 1.1;
+  namespace "urn:ietf:params:xml:ns:yang:ietf-ni-location";
+  prefix nil;
+
+  import ietf-yang-types {
+    prefix yang;
+    reference
+      "RFC 9911: Common YANG Data Types";
+  }
+  import ietf-network-inventory {
+    prefix nwi;
+    reference
+      "RFCAAAA: A YANG Data Model for Network Inventory";
+  }
+  import ietf-geo-location {
+    prefix geo;
+    reference
+      "RFC 9179: A YANG Grouping for Geographic Locations";
+  }
+
+  organization
+    "IETF Network Inventory YANG (ivy) Working Group";
+  contact
+    "WG Web:   &lt;https://datatracker.ietf.org/wg/ivy&gt;
+     WG List:  &lt;mailto:inventory-yang@ietf.org&gt;
+
+     Editor: Bo Wu
+          &lt;lana.wubo@huawei.com&gt;
+     Editor: Sergio Belotti
+          &lt;sergio.belotti@nokia.com&gt;
+     Editor: Jean-Francois Bouquier
+          &lt;jeff.bouquier@vodafone.com&gt;
+     Editor: Fabio Peruzzini
+          &lt;fabio.peruzzini@telecomitalia.it&gt;
+     Editor: Phil Bedard
+          &lt;phbedard@cisco.com&gt;";
+  description
+    "This YANG module defines a model for Network Inventory
+     location.
+
+     Copyright (c) 2026 IETF Trust and the persons
+     identified as authors of the code.  All rights reserved.
+
+     Redistribution and use in source and binary forms, with or
+     without modification, is permitted pursuant to, and subject
+     to the license terms contained in, the Revised BSD License
+     set forth in Section 4.c of the IETF Trust's Legal Provisions
+     Relating to IETF Documents
+     (https://trustee.ietf.org/license-info).
+
+     This version of this YANG module is part of RFC XXXX; see
+     the RFC itself for full legal notices.";
+
+  revision 2026-07-06 {
+    description
+      "Initial version";
+    reference
+      "RFC XXXX: A YANG Data Model for Network Inventory location.";
+    //RFC Editor: Please replace XXXX with actual RFC number,
+    //update date information and remove this note
+  }
+
+  /* Identities */
+  /* Identities for rack classification */
+
+  identity rack-class-type {
+    description
+      "Base identity for generic rack classification based on
+       physical security characteristics.
+       This identity is designed to be extended by regional
+       or vendor-specific rack classes.";
+  }
+
+  identity rack-standard {
+    base rack-class-type;
+    description
+      "Standard general-purpose rack without physical locking
+       mechanisms.";
+  }
+
+  identity rack-secure-baseline {
+    base rack-class-type;
+    description
+      "Baseline secure lockable rack.";
+  }
+
+  identity rack-secure-medium {
+    base rack-class-type;
+    description
+      "Medium security lockable rack.";
+  }
+
+  identity rack-secure-high {
+    base rack-class-type;
+    description
+      "High security lockable rack.";
+  }
+
+  /* Typedef */
+
+  typedef ni-location-ref {
+    type leafref {
+      path "/nwi:network-inventory/nil:locations/nil:location"
+         + "/nil:id";
+    }
+    description
+      "This type is used by data models that need to reference
+       network inventory location.";
+  }
+
+  /* Grouping */
+
+  grouping physical-address {
+    description
+      "Grouping for physical address information.";
+    container physical-address {
+      description
+        "Top-level container for the physical address.";
+      leaf address {
+        type string;
+        description
+          "Specifies an address (number and street).";
+      }
+      leaf postal-code {
+        type string;
+        description
+          "Specifies a postal code.";
+      }
+      leaf state {
+        type string;
+        description
+          "Specifies a state. This leaf can also be
+           used to describe a region for a country that
+           does not have states.";
+      }
+      leaf city {
+        type string;
+        description
+          "Specifies a city.";
+      }
+      leaf country-code {
+        type string {
+          pattern '[A-Z]{2}';
+        }
+        description
+          "Specifies a country.
+           Expressed as ISO ALPHA-2 code.";
+      }
+    }
+  }
+
+  grouping locations {
+    description
+      "Grouping for locations.";
+    container locations {
+      config false;
+      description
+        "Container for the location information.";
+      list location {
+        key "id";
+        description
+          "List of locations within the network.";
+        leaf id {
+          type string;
+          description
+            "An identifier of the location.";
+        }
+        uses nwi:basic-common-entity-attributes;
+        leaf type {
+          type string;
+          description
+            "The type of network inventory location, e.g.
+             equipment room, building, or site.
+             This allows operators to flexibly define custom location
+             types (e.g., 'pole', 'roof', 'floor') based on their
+             specific network scenarios without requiring model
+             extensions. String-based types enable dynamic adaptation
+             to heterogeneous organizational naming conventions.";
+        }
+        leaf parent {
+          type leafref {
+            path "../../location/id";
+          }
+          description
+            "The identifier of the location that physically contains
+             this location.";
+        }
+        leaf timestamp {
+          type yang:date-and-time;
+          description
+            "Timestamp when the location was recorded.";
+        }
+        leaf valid-until {
+          type yang:date-and-time;
+          description
+            "The timestamp for which this location is valid until.
+             If unspecified, the location has no specific
+             expiration time.";
+        }
+        uses physical-address;
+        uses geo:geo-location;
+        list contained-chassis {
+          key "chassis-id";
+          description
+            "Chassis directly deployed in this location without rack.
+             Also used for distributed chassis components that are
+             logically part of a network element but physically
+             located.";
+          leaf chassis-id {
+            type uint32;
+            description
+              "Unique identifier for this chassis instance in the
+               location.";
+          }
+          leaf ne-ref {
+            type leafref {
+              path "/nwi:network-inventory/nwi:network-elements"
+                 + "/nwi:network-element/nwi:ne-id";
+            }
+            description
+              "Reference to the network element this chassis
+               belongs to. Multiple chassis entries may reference
+               the same ne-ref for distributed systems.";
+          }
+          leaf component-ref {
+            type leafref {
+              path
+                "/nwi:network-inventory/nwi:network-elements"
+              + "/nwi:network-element[nwi:ne-id=current()/../ne-ref]"
+              + "/nwi:components/nwi:component/nwi:component-id";
+            }
+            description
+              "Reference to the specific chassis within the
+               network element.";
+          }
+        }
+      }
+      uses racks;
+    }
+  }
+
+  grouping racks {
+    description
+      "Grouping for rack attributes.";
+    container racks {
+      config false; // Enforce Read-Only
+      description
+        "Top-level container for the list of racks.";
+      list rack {
+        key "id";
+        description
+          "List of racks within the inventory (e.g., in an
+           equipment room).";
+        leaf id {
+          type string;
+          description
+            "An identifier that uniquely identifies the rack.";
+        }
+        leaf rack-class {
+          type identityref {
+            base rack-class-type;
+          }
+          description
+            "Classification of the rack.";
+        }
+        uses nwi:basic-common-entity-attributes;
+        container rack-location {
+          description
+            "The location information of the rack, which comprises
+             the location reference, row number, and column number.";
+          leaf location-ref {
+            type ni-location-ref;
+            description
+              "Reference to the location where this rack is placed.";
+          }
+          leaf row-number {
+            type uint32;
+            description
+              "Identifies the row within the location where
+               the rack is located.";
+          }
+          leaf column-number {
+            type uint32;
+            description
+              "Identifies the column within the location where
+               the rack is located.";
+          }
+        }
+        leaf height {
+          type uint16;
+          units "millimeter";
+          description
+            "Rack height.";
+        }
+        leaf width {
+          type uint16;
+          units "millimeter";
+          description
+            "Rack width.";
+        }
+        leaf depth {
+          type uint16;
+          units "millimeter";
+          description
+            "Rack depth.";
+        }
+        leaf max-voltage {
+          type uint16;
+          units "volt";
+          description
+            "The maximum voltage supported by the rack.";
+        }
+        leaf max-allocated-power {
+          type uint16;
+          units "watts";
+          description
+            "The maximum allocated power for the rack.";
+        }
+        list contained-chassis {
+          key "relative-position";
+          description
+            "The list of chassis within a rack.";
+          leaf relative-position {
+            type uint8;
+            description
+              "Relative position (e.g., U-slot) of chassis within
+               the rack.";
+          }
+          leaf ne-ref {
+            type leafref {
+              path "/nwi:network-inventory/nwi:network-elements"
+                 + "/nwi:network-element/nwi:ne-id";
+            }
+            description
+              "Reference to the network element containing
+               the chassis component.";
+          }
+          leaf component-ref {
+            type leafref {
+              path "/nwi:network-inventory/nwi:network-elements"
+                 + "/nwi:network-element[nwi:ne-id=current()/.."
+                 + "/ne-ref]/nwi:components/nwi:component"
+                 + "/nwi:component-id";
+            }
+            description
+              "The reference to the chassis component within
+               the network element and contained by the rack.";
+          }
+        }
+        leaf timestamp {
+          type yang:date-and-time;
+          description
+            "Timestamp when the rack information was recorded.";
+        }
+        leaf valid-until {
+          type yang:date-and-time;
+          description
+            "The timestamp for which this rack is valid until.
+             If unspecified, the rack has no specific
+             expiration time.";
+        }
+      }
+    }
+  }
+
+  augment "/nwi:network-inventory" {
+    description
+      "Provides location information for network inventory.";
+    uses locations;
+  }
+}
+
+&lt;CODE ENDS&gt;</pre><a href="#section-5-2" class="pilcrow">¶</a>
+</div>
+</section>
+</div>
+<div id="operational-considerations">
+<section id="section-6">
+      <h2 id="name-operational-considerations">
+<a href="#section-6" class="section-number selfRef">6. </a><a href="#name-operational-considerations" class="section-name selfRef">Operational Considerations</a>
+      </h2>
+<p id="section-6-1">This model serves as a complement to the base inventory, providing
+ a read-only perspective of network inventory location information
+ known to the controller. It reports the physical locations of network
+ elements and components installed in the network, enabling queries
+ for site, rack, and other location-related information associated
+ with network elements and components.<a href="#section-6-1" class="pilcrow">¶</a></p>
+<p id="section-6-2">When used in brownfield scenarios, it is worth noting that existing
+ deployments are based on proprietary inventory OSS solutions, and
+ the migration path is highly dependent on the specific proprietary
+ implementation.<a href="#section-6-2" class="pilcrow">¶</a></p>
+<p id="section-6-3">The model is designed based on the controller maintaining authoritative
+ location data through automated tooling, while OSS systems consume
+ this data as read-only operational state. Sources of controller location
+ data may include RFID (Radio Frequency IDentification) tooling, geolocation services, as well as manual
+ entry via controller interfaces.<a href="#section-6-3" class="pilcrow">¶</a></p>
+<p id="section-6-4">As this data is read-only, the controller does not support OSS modification
+ of controller location records.<a href="#section-6-4" class="pilcrow">¶</a></p>
+<p id="section-6-5">OSS systems and other management applications obtain location information
+ via standard YANG retrieval operations (NETCONF, RESTCONF), such as
+ querying network elements associated with a specific site or rack.<a href="#section-6-5" class="pilcrow">¶</a></p>
+<p id="section-6-6">In large-scale inventories containing numerous network elements and
+ components, querying location associations can impose a load on the
+ server. To optimize retrieval and avoid overwhelming the server, mechanisms
+ such as RESTCONF or NETCONF pagination should be utilized for queries
+ involving large result sets.<a href="#section-6-6" class="pilcrow">¶</a></p>
+<p id="section-6-7">Data quality is indicated through timestamps recording the last update
+ time, as well as an optional expiration time for location validity.<a href="#section-6-7" class="pilcrow">¶</a></p>
+<p id="section-6-8">Before using a location for field dispatch or planning, verification
+ is required to ensure at least one of physical-address or geo-location
+ is present, and that the valid-until leaf is either not present or indicates
+ a future time. Once the valid-until time has passed, the location MUST be
+ considered stale and MUST NOT be used for operational purposes.<a href="#section-6-8" class="pilcrow">¶</a></p>
+<p id="section-6-9">A parallel "location-planning" container (read-write) may be introduced
+ in future revisions to support intent-based configuration, where OSS provides
+ planning-level location targets. This is outside the scope of the current document.<a href="#section-6-9" class="pilcrow">¶</a></p>
+</section>
+</div>
+<div id="security-considerations">
+<section id="section-7">
+      <h2 id="name-security-considerations">
+<a href="#section-7" class="section-number selfRef">7. </a><a href="#name-security-considerations" class="section-name selfRef">Security Considerations</a>
+      </h2>
+<p id="section-7-1">This section is modeled after the template described in <span><a href="https://rfc-editor.org/rfc/rfc9907#section-3.7.1" class="relref">Section 3.7.1</a> of [<a href="#RFC9907" class="cite xref">RFC9907</a>]</span>.<a href="#section-7-1" class="pilcrow">¶</a></p>
+<p id="section-7-2">The "ietf-ni-location" YANG module defines a data model that is
+designed to be accessed via YANG-based management protocols, such as
+Network Configuration Protocol (NETCONF) <span>[<a href="#RFC6241" class="cite xref">RFC6241</a>]</span>
+and RESTCONF <span>[<a href="#RFC8040" class="cite xref">RFC8040</a>]</span>.  These YANG-based management protocols (1) have to
+use a secure transport layer (e.g., SSH <span>[<a href="#RFC6242" class="cite xref">RFC6242</a>]</span>, TLS <span>[<a href="#RFC8446" class="cite xref">RFC8446</a>]</span>, and
+QUIC <span>[<a href="#RFC9000" class="cite xref">RFC9000</a>]</span>) and (2) have to use mutual authentication.<a href="#section-7-2" class="pilcrow">¶</a></p>
+<p id="section-7-3">The Network Configuration Access Control Model (NACM) <span>[<a href="#RFC8341" class="cite xref">RFC8341</a>]</span>
+provides the means to restrict access for particular NETCONF or
+RESTCONF users to a preconfigured subset of all available NETCONF or
+RESTCONF protocol operations and content.<a href="#section-7-3" class="pilcrow">¶</a></p>
+<p id="section-7-4">Some of the readable data nodes in this YANG module may be considered
+sensitive or vulnerable in some network environments. It is thus
+important to control read access (e.g., via get, get-config, or
+notification) to these data nodes. Specifically, the following
+subtrees and data nodes have particular sensitivities/vulnerabilities:<a href="#section-7-4" class="pilcrow">¶</a></p>
+<p id="section-7-5">'locations': This list reports physical deployment
+information including facility structures (sites, buildings, rooms),
+rack physical attributes (dimensions, power capacity, security
+classification), and optionally geographic coordinates. The list also
+references network elements and components by their inventory
+identifiers (ne-id, component-id). Uncontrolled disclosure may:<a href="#section-7-5" class="pilcrow">¶</a></p>
+<ul class="normal">
+<li class="normal" id="section-7-6.1">
+          <p id="section-7-6.1.1">Enable association of inventory identifiers with physical facility
+structures and geographic coordinates<a href="#section-7-6.1.1" class="pilcrow">¶</a></p>
+</li>
+        <li class="normal" id="section-7-6.2">
+          <p id="section-7-6.2.1">Reveal facility layouts, equipment density, and rack physical
+security characteristics when combined with other network data<a href="#section-7-6.2.1" class="pilcrow">¶</a></p>
+</li>
+        <li class="normal" id="section-7-6.3">
+          <p id="section-7-6.3.1">Expose precise geographic coordinates (when configured), which may
+facilitate physical location identification<a href="#section-7-6.3.1" class="pilcrow">¶</a></p>
+</li>
+        <li class="normal" id="section-7-6.4">
+          <p id="section-7-6.4.1">Indicate physical protection levels through rack security
+classifications<a href="#section-7-6.4.1" class="pilcrow">¶</a></p>
+</li>
+      </ul>
+</section>
+</div>
+<div id="iana-considerations">
+<section id="section-8">
+      <h2 id="name-iana-considerations">
+<a href="#section-8" class="section-number selfRef">8. </a><a href="#name-iana-considerations" class="section-name selfRef">IANA Considerations</a>
+      </h2>
+<p id="section-8-1">IANA is requested to register the following URI in the "ns" registry within
+the "IETF XML Registry" group <span>[<a href="#RFC3688" class="cite xref">RFC3688</a>]</span>:<a href="#section-8-1" class="pilcrow">¶</a></p>
+<div class="alignLeft art-text artwork" id="section-8-2">
+<pre>
+URI:  urn:ietf:params:xml:ns:yang:ietf-ni-location
+Registrant Contact:  The IESG.
+XML:  N/A; the requested URI is an XML namespace.
+</pre><a href="#section-8-2" class="pilcrow">¶</a>
+</div>
+<p id="section-8-3">IANA is requested to register the following YANG module in the "YANG Module
+Names" registry <span>[<a href="#RFC6020" class="cite xref">RFC6020</a>]</span> within the "YANG Parameters" registry group.<a href="#section-8-3" class="pilcrow">¶</a></p>
+<div class="alignLeft art-text artwork" id="section-8-4">
+<pre>
+Name:  ietf-ni-location
+Maintained by IANA?  N
+Namespace:  urn:ietf:params:xml:ns:yang:ietf-ni-location
+Prefix:  nil
+Reference:  RFC XXXX
+</pre><a href="#section-8-4" class="pilcrow">¶</a>
+</div>
+</section>
+</div>
+<div id="sec-combined-references">
+<section id="section-9">
+      <h2 id="name-references">
+<a href="#section-9" class="section-number selfRef">9. </a><a href="#name-references" class="section-name selfRef">References</a>
+      </h2>
+<div id="sec-normative-references">
+<section id="section-9.1">
+        <h3 id="name-normative-references">
+<a href="#section-9.1" class="section-number selfRef">9.1. </a><a href="#name-normative-references" class="section-name selfRef">Normative References</a>
+        </h3>
+<dl class="references">
+<dt id="I-D.ietf-ivy-network-inventory-yang">[I-D.ietf-ivy-network-inventory-yang]</dt>
+        <dd>
+<span class="refAuthor">Yu, C.</span>, <span class="refAuthor">Belotti, S.</span>, <span class="refAuthor">Bouquier, J.</span>, <span class="refAuthor">Peruzzini, F.</span>, and <span class="refAuthor">P. Bedard</span>, <span class="refTitle">"A Base YANG Data Model for Network Inventory"</span>, <span class="refContent">Work in Progress</span>, <span class="seriesInfo">Internet-Draft, draft-ietf-ivy-network-inventory-yang-18</span>, <time datetime="2026-05-27" class="refDate">27 May 2026</time>, <span>&lt;<a href="https://datatracker.ietf.org/doc/html/draft-ietf-ivy-network-inventory-yang-18">https://datatracker.ietf.org/doc/html/draft-ietf-ivy-network-inventory-yang-18</a>&gt;</span>. </dd>
+<dd class="break"></dd>
+<dt id="RFC3688">[RFC3688]</dt>
+        <dd>
+<span class="refAuthor">Mealling, M.</span>, <span class="refTitle">"The IETF XML Registry"</span>, <span class="seriesInfo">BCP 81</span>, <span class="seriesInfo">RFC 3688</span>, <span class="seriesInfo">DOI 10.17487/RFC3688</span>, <time datetime="2004-01" class="refDate">January 2004</time>, <span>&lt;<a href="https://www.rfc-editor.org/rfc/rfc3688">https://www.rfc-editor.org/rfc/rfc3688</a>&gt;</span>. </dd>
+<dd class="break"></dd>
+<dt id="RFC6020">[RFC6020]</dt>
+        <dd>
+<span class="refAuthor">Bjorklund, M., Ed.</span>, <span class="refTitle">"YANG - A Data Modeling Language for the Network Configuration Protocol (NETCONF)"</span>, <span class="seriesInfo">RFC 6020</span>, <span class="seriesInfo">DOI 10.17487/RFC6020</span>, <time datetime="2010-10" class="refDate">October 2010</time>, <span>&lt;<a href="https://www.rfc-editor.org/rfc/rfc6020">https://www.rfc-editor.org/rfc/rfc6020</a>&gt;</span>. </dd>
+<dd class="break"></dd>
+<dt id="RFC6241">[RFC6241]</dt>
+        <dd>
+<span class="refAuthor">Enns, R., Ed.</span>, <span class="refAuthor">Bjorklund, M., Ed.</span>, <span class="refAuthor">Schoenwaelder, J., Ed.</span>, and <span class="refAuthor">A. Bierman, Ed.</span>, <span class="refTitle">"Network Configuration Protocol (NETCONF)"</span>, <span class="seriesInfo">RFC 6241</span>, <span class="seriesInfo">DOI 10.17487/RFC6241</span>, <time datetime="2011-06" class="refDate">June 2011</time>, <span>&lt;<a href="https://www.rfc-editor.org/rfc/rfc6241">https://www.rfc-editor.org/rfc/rfc6241</a>&gt;</span>. </dd>
+<dd class="break"></dd>
+<dt id="RFC6242">[RFC6242]</dt>
+        <dd>
+<span class="refAuthor">Wasserman, M.</span>, <span class="refTitle">"Using the NETCONF Protocol over Secure Shell (SSH)"</span>, <span class="seriesInfo">RFC 6242</span>, <span class="seriesInfo">DOI 10.17487/RFC6242</span>, <time datetime="2011-06" class="refDate">June 2011</time>, <span>&lt;<a href="https://www.rfc-editor.org/rfc/rfc6242">https://www.rfc-editor.org/rfc/rfc6242</a>&gt;</span>. </dd>
+<dd class="break"></dd>
+<dt id="RFC7950">[RFC7950]</dt>
+        <dd>
+<span class="refAuthor">Bjorklund, M., Ed.</span>, <span class="refTitle">"The YANG 1.1 Data Modeling Language"</span>, <span class="seriesInfo">RFC 7950</span>, <span class="seriesInfo">DOI 10.17487/RFC7950</span>, <time datetime="2016-08" class="refDate">August 2016</time>, <span>&lt;<a href="https://www.rfc-editor.org/rfc/rfc7950">https://www.rfc-editor.org/rfc/rfc7950</a>&gt;</span>. </dd>
+<dd class="break"></dd>
+<dt id="RFC8040">[RFC8040]</dt>
+        <dd>
+<span class="refAuthor">Bierman, A.</span>, <span class="refAuthor">Bjorklund, M.</span>, and <span class="refAuthor">K. Watsen</span>, <span class="refTitle">"RESTCONF Protocol"</span>, <span class="seriesInfo">RFC 8040</span>, <span class="seriesInfo">DOI 10.17487/RFC8040</span>, <time datetime="2017-01" class="refDate">January 2017</time>, <span>&lt;<a href="https://www.rfc-editor.org/rfc/rfc8040">https://www.rfc-editor.org/rfc/rfc8040</a>&gt;</span>. </dd>
+<dd class="break"></dd>
+<dt id="RFC8341">[RFC8341]</dt>
+        <dd>
+<span class="refAuthor">Bierman, A.</span> and <span class="refAuthor">M. Bjorklund</span>, <span class="refTitle">"Network Configuration Access Control Model"</span>, <span class="seriesInfo">STD 91</span>, <span class="seriesInfo">RFC 8341</span>, <span class="seriesInfo">DOI 10.17487/RFC8341</span>, <time datetime="2018-03" class="refDate">March 2018</time>, <span>&lt;<a href="https://www.rfc-editor.org/rfc/rfc8341">https://www.rfc-editor.org/rfc/rfc8341</a>&gt;</span>. </dd>
+<dd class="break"></dd>
+<dt id="RFC8342">[RFC8342]</dt>
+        <dd>
+<span class="refAuthor">Bjorklund, M.</span>, <span class="refAuthor">Schoenwaelder, J.</span>, <span class="refAuthor">Shafer, P.</span>, <span class="refAuthor">Watsen, K.</span>, and <span class="refAuthor">R. Wilton</span>, <span class="refTitle">"Network Management Datastore Architecture (NMDA)"</span>, <span class="seriesInfo">RFC 8342</span>, <span class="seriesInfo">DOI 10.17487/RFC8342</span>, <time datetime="2018-03" class="refDate">March 2018</time>, <span>&lt;<a href="https://www.rfc-editor.org/rfc/rfc8342">https://www.rfc-editor.org/rfc/rfc8342</a>&gt;</span>. </dd>
+<dd class="break"></dd>
+<dt id="RFC8446">[RFC8446]</dt>
+        <dd>
+<span class="refAuthor">Rescorla, E.</span>, <span class="refTitle">"The Transport Layer Security (TLS) Protocol Version 1.3"</span>, <span class="seriesInfo">RFC 8446</span>, <span class="seriesInfo">DOI 10.17487/RFC8446</span>, <time datetime="2018-08" class="refDate">August 2018</time>, <span>&lt;<a href="https://www.rfc-editor.org/rfc/rfc8446">https://www.rfc-editor.org/rfc/rfc8446</a>&gt;</span>. </dd>
+<dd class="break"></dd>
+<dt id="RFC9000">[RFC9000]</dt>
+        <dd>
+<span class="refAuthor">Iyengar, J., Ed.</span> and <span class="refAuthor">M. Thomson, Ed.</span>, <span class="refTitle">"QUIC: A UDP-Based Multiplexed and Secure Transport"</span>, <span class="seriesInfo">RFC 9000</span>, <span class="seriesInfo">DOI 10.17487/RFC9000</span>, <time datetime="2021-05" class="refDate">May 2021</time>, <span>&lt;<a href="https://www.rfc-editor.org/rfc/rfc9000">https://www.rfc-editor.org/rfc/rfc9000</a>&gt;</span>. </dd>
+<dd class="break"></dd>
+<dt id="RFC9179">[RFC9179]</dt>
+        <dd>
+<span class="refAuthor">Hopps, C.</span>, <span class="refTitle">"A YANG Grouping for Geographic Locations"</span>, <span class="seriesInfo">RFC 9179</span>, <span class="seriesInfo">DOI 10.17487/RFC9179</span>, <time datetime="2022-02" class="refDate">February 2022</time>, <span>&lt;<a href="https://www.rfc-editor.org/rfc/rfc9179">https://www.rfc-editor.org/rfc/rfc9179</a>&gt;</span>. </dd>
+<dd class="break"></dd>
+<dt id="RFC9911">[RFC9911]</dt>
+      <dd>
+<span class="refAuthor">Schönwälder, J., Ed.</span>, <span class="refTitle">"Common YANG Data Types"</span>, <span class="seriesInfo">RFC 9911</span>, <span class="seriesInfo">DOI 10.17487/RFC9911</span>, <time datetime="2025-12" class="refDate">December 2025</time>, <span>&lt;<a href="https://www.rfc-editor.org/rfc/rfc9911">https://www.rfc-editor.org/rfc/rfc9911</a>&gt;</span>. </dd>
+<dd class="break"></dd>
+</dl>
+</section>
+</div>
+<div id="sec-informative-references">
+<section id="section-9.2">
+        <h3 id="name-informative-references">
+<a href="#section-9.2" class="section-number selfRef">9.2. </a><a href="#name-informative-references" class="section-name selfRef">Informative References</a>
+        </h3>
+<dl class="references">
+<dt id="I-D.ietf-ccamp-network-inventory-yang">[I-D.ietf-ccamp-network-inventory-yang]</dt>
+        <dd>
+<span class="refAuthor">Yu, C.</span>, <span class="refAuthor">Belotti, S.</span>, <span class="refAuthor">Bouquier, J.</span>, <span class="refAuthor">Peruzzini, F.</span>, and <span class="refAuthor">P. Bedard</span>, <span class="refTitle">"A YANG Data Model for Network Hardware Inventory"</span>, <span class="refContent">Work in Progress</span>, <span class="seriesInfo">Internet-Draft, draft-ietf-ccamp-network-inventory-yang-02</span>, <time datetime="2023-07-09" class="refDate">9 July 2023</time>, <span>&lt;<a href="https://datatracker.ietf.org/doc/html/draft-ietf-ccamp-network-inventory-yang-02">https://datatracker.ietf.org/doc/html/draft-ietf-ccamp-network-inventory-yang-02</a>&gt;</span>. </dd>
+<dd class="break"></dd>
+<dt id="I-D.ietf-netmod-rfc8407bis">[I-D.ietf-netmod-rfc8407bis]</dt>
+        <dd>
+<span class="refAuthor">Bierman, A.</span>, <span class="refAuthor">Boucadair, M.</span>, and <span class="refAuthor">Q. Wu</span>, <span class="refTitle">"Guidelines for Authors and Reviewers of Documents Containing YANG Data Models"</span>, <span class="refContent">Work in Progress</span>, <span class="seriesInfo">Internet-Draft, draft-ietf-netmod-rfc8407bis-28</span>, <time datetime="2025-06-05" class="refDate">5 June 2025</time>, <span>&lt;<a href="https://datatracker.ietf.org/doc/html/draft-ietf-netmod-rfc8407bis-28">https://datatracker.ietf.org/doc/html/draft-ietf-netmod-rfc8407bis-28</a>&gt;</span>. </dd>
+<dd class="break"></dd>
+<dt id="RFC8340">[RFC8340]</dt>
+        <dd>
+<span class="refAuthor">Bjorklund, M.</span> and <span class="refAuthor">L. Berger, Ed.</span>, <span class="refTitle">"YANG Tree Diagrams"</span>, <span class="seriesInfo">BCP 215</span>, <span class="seriesInfo">RFC 8340</span>, <span class="seriesInfo">DOI 10.17487/RFC8340</span>, <time datetime="2018-03" class="refDate">March 2018</time>, <span>&lt;<a href="https://www.rfc-editor.org/rfc/rfc8340">https://www.rfc-editor.org/rfc/rfc8340</a>&gt;</span>. </dd>
+<dd class="break"></dd>
+<dt id="RFC9907">[RFC9907]</dt>
+      <dd>
+<span class="refAuthor">Bierman, A.</span>, <span class="refAuthor">Boucadair, M., Ed.</span>, and <span class="refAuthor">Q. Wu</span>, <span class="refTitle">"Guidelines for Authors and Reviewers of Documents Containing YANG Data Models"</span>, <span class="seriesInfo">BCP 216</span>, <span class="seriesInfo">RFC 9907</span>, <span class="seriesInfo">DOI 10.17487/RFC9907</span>, <time datetime="2026-03" class="refDate">March 2026</time>, <span>&lt;<a href="https://www.rfc-editor.org/rfc/rfc9907">https://www.rfc-editor.org/rfc/rfc9907</a>&gt;</span>. </dd>
+<dd class="break"></dd>
+</dl>
+</section>
+</div>
+</section>
+</div>
+<div id="examples">
+<section id="appendix-A">
+      <h2 id="name-examples">
+<a href="#appendix-A" class="section-number selfRef">Appendix A. </a><a href="#name-examples" class="section-name selfRef">Examples</a>
+      </h2>
+<p id="appendix-A-1">This section provides example usages of the Network Inventory Location
+ model for two common deployment scenarios: a non-rack-mounted Access Point
+ and a distributed multi-chassis network element.<a href="#appendix-A-1" class="pilcrow">¶</a></p>
+<div id="non-rack-deployment-access-point">
+<section id="appendix-A.1">
+        <h3 id="name-non-rack-deployment-access-">
+<a href="#appendix-A.1" class="section-number selfRef">A.1. </a><a href="#name-non-rack-deployment-access-" class="section-name selfRef">Non-Rack Deployment: Access Point</a>
+        </h3>
+<p id="appendix-A.1-1">This example illustrates a typical edge deployment scenario where a Wi-Fi
+ Access Point (AP) is mounted directly to a ceiling without a rack enclosure.<a href="#appendix-A.1-1" class="pilcrow">¶</a></p>
+<p id="appendix-A.1-2">The location hierarchy is as follows:<a href="#appendix-A.1-2" class="pilcrow">¶</a></p>
+<div id="appendix-A.1-3">
+          <div class="alignLeft art-svg artwork" id="appendix-A.1-3.1">
+<svg xmlns="http://www.w3.org/2000/svg" version="1.1" height="112" width="432" viewbox="0 0 432 112" class="diagram" text-anchor="middle" font-family="monospace" font-size="13px" stroke-linecap="round">
+              <g class="text">
+                <text x="24" y="36">Site:</text>
+                <text x="136" y="36">Foo-Enterprise-Campus</text>
+                <text x="16" y="52">└──</text>
+                <text x="72" y="52">Building:</text>
+                <text x="156" y="52">Building-A</text>
+                <text x="48" y="68">└──</text>
+                <text x="92" y="68">Floor:</text>
+                <text x="152" y="68">Floor-2</text>
+                <text x="80" y="84">└──</text>
+                <text x="120" y="84">Room:</text>
+                <text x="200" y="84">Corridor-East</text>
+                <text x="296" y="84">(corridor</text>
+                <text x="360" y="84">area)</text>
+                <text x="112" y="100">└──</text>
+                <text x="140" y="100">AP</text>
+                <text x="188" y="100">directly</text>
+                <text x="288" y="100">ceiling-mounted</text>
+                <text x="368" y="100">(no</text>
+                <text x="408" y="100">rack)</text>
+              </g>
+            </svg><a href="#appendix-A.1-3.1" class="pilcrow">¶</a>
+</div>
+</div>
+<p id="appendix-A.1-4">The following shows the location data instance:<a href="#appendix-A.1-4" class="pilcrow">¶</a></p>
+<div class="breakable lang-json sourcecode" id="appendix-A.1-5">
+<pre>
+{
+  "ietf-ni-location:locations": {
+    "location": [
+      {
+        "id": "Foo-Enterprise-Campus",
+        "uuid": "550e8400-e29b-41d4-a716-446655440000",
+        "name": "Foo Enterprise Campus",
+        "type": "site",
+        "timestamp": "2026-01-15T08:30:00Z"
+      },
+      {
+        "id": "Building-A",
+        "uuid": "550e8400-e29b-41d4-a716-446655440001",
+        "name": "Building A",
+        "type": "building",
+        "parent": "Foo-Enterprise-Campus",
+        "timestamp": "2026-01-15T08:30:00Z"
+      },
+      {
+        "id": "Floor-2",
+        "uuid": "550e8400-e29b-41d4-a716-446655440002",
+        "name": "Floor 2",
+        "type": "floor",
+        "parent": "Building-A",
+        "timestamp": "2026-01-15T08:30:00Z"
+      },
+      {
+        "id": "Corridor-East",
+        "uuid": "550e8400-e29b-41d4-a716-446655440003",
+        "name": "East Corridor",
+        "alias": "Corridor-2F-East",
+        "description": "East corridor on Floor 2, AP deployment area",
+        "type": "corridor",
+        "parent": "Floor-2",
+        "timestamp": "2026-01-15T08:30:00Z",
+        "valid-until": "2030-12-31T23:59:59Z",
+        "physical-address": {
+          "address": "123 Foo Street, Floor 2 East Corridor",
+          "postal-code": "12345",
+          "state": "Foo-State",
+          "city": "Foo-City",
+          "country-code": "ZZ"
+        },
+        "geo-location": {
+          "reference-frame": {
+            "astronomical-body": "earth",
+            "geodetic-system": {
+              "geodetic-datum": "WGS-84",
+              "coord-accuracy": 5.0,
+              "height-accuracy": 10.0
+            }
+          },
+          "ellipsoid": {
+            "latitude": 40.7128,
+            "longitude": -74.0060,
+            "height": 15.0
+          },
+          "velocity": {
+            "v-north": 0.0,
+            "v-east": 0.0,
+            "v-up": 0.0
+          },
+          "timestamp": "2026-01-15T08:30:00Z",
+          "valid-until": "2030-12-31T23:59:59Z"
+        },
+        "contained-chassis": [
+          {
+            "chassis-id": 1,
+            "ne-ref": "AP-Corridor-East-01",
+            "component-ref": "chassis-1"
+          }
+        ]
+      }
+    ],
+    "racks": []
+  }
+}
+</pre><a href="#appendix-A.1-5" class="pilcrow">¶</a>
+</div>
+</section>
+</div>
+<div id="distributed-multi-chassis-network-element">
+<section id="appendix-A.2">
+        <h3 id="name-distributed-multi-chassis-n">
+<a href="#appendix-A.2" class="section-number selfRef">A.2. </a><a href="#name-distributed-multi-chassis-n" class="section-name selfRef">Distributed Multi-Chassis Network Element</a>
+        </h3>
+<p id="appendix-A.2-1">This example illustrates a distributed deployment where a single
+ logical network element (NE-1, a stack switch) spans multiple
+ physical locations. The three chassis of the stack switch
+ are located in separate telecommunications rooms on different
+ floors, interconnected via stacking cables.
+The location hierarchy is as follows:<a href="#appendix-A.2-1" class="pilcrow">¶</a></p>
+<div id="appendix-A.2-2">
+          <div class="alignLeft art-svg artwork" id="appendix-A.2-2.1">
+<svg xmlns="http://www.w3.org/2000/svg" version="1.1" height="224" width="408" viewbox="0 0 408 224" class="diagram" text-anchor="middle" font-family="monospace" font-size="13px" stroke-linecap="round">
+              <g class="text">
+                <text x="24" y="36">Site:</text>
+                <text x="76" y="36">Foo-DC</text>
+                <text x="16" y="52">├──</text>
+                <text x="72" y="52">Location:</text>
+                <text x="148" y="52">Room-101</text>
+                <text x="212" y="52">(First</text>
+                <text x="264" y="52">Floor</text>
+                <text x="320" y="52">Telecom</text>
+                <text x="376" y="52">Room)</text>
+                <text x="8" y="68">│</text>
+                <text x="48" y="68">└──</text>
+                <text x="88" y="68">Rack:</text>
+                <text x="156" y="68">Rack-101-A</text>
+                <text x="8" y="84">│</text>
+                <text x="80" y="84">└──</text>
+                <text x="116" y="84">U10:</text>
+                <text x="156" y="84">NE-1</text>
+                <text x="216" y="84">chassis-1</text>
+                <text x="288" y="84">(Master</text>
+                <text x="352" y="84">switch)</text>
+                <text x="8" y="100">│</text>
+                <text x="16" y="116">├──</text>
+                <text x="72" y="116">Location:</text>
+                <text x="148" y="116">Room-201</text>
+                <text x="216" y="116">(Second</text>
+                <text x="272" y="116">Floor</text>
+                <text x="328" y="116">Telecom</text>
+                <text x="384" y="116">Room)</text>
+                <text x="8" y="132">│</text>
+                <text x="48" y="132">└──</text>
+                <text x="88" y="132">Rack:</text>
+                <text x="156" y="132">Rack-201-B</text>
+                <text x="8" y="148">│</text>
+                <text x="80" y="148">└──</text>
+                <text x="116" y="148">U15:</text>
+                <text x="156" y="148">NE-1</text>
+                <text x="216" y="148">chassis-2</text>
+                <text x="284" y="148">(Stack</text>
+                <text x="344" y="148">member)</text>
+                <text x="8" y="164">│</text>
+                <text x="16" y="180">└──</text>
+                <text x="72" y="180">Location:</text>
+                <text x="148" y="180">Room-301</text>
+                <text x="212" y="180">(Third</text>
+                <text x="264" y="180">Floor</text>
+                <text x="320" y="180">Telecom</text>
+                <text x="376" y="180">Room)</text>
+                <text x="48" y="196">└──</text>
+                <text x="88" y="196">Rack:</text>
+                <text x="156" y="196">Rack-301-C</text>
+                <text x="80" y="212">└──</text>
+                <text x="116" y="212">U20:</text>
+                <text x="156" y="212">NE-1</text>
+                <text x="216" y="212">chassis-3</text>
+                <text x="284" y="212">(Stack</text>
+                <text x="344" y="212">member)</text>
+              </g>
+            </svg><a href="#appendix-A.2-2.1" class="pilcrow">¶</a>
+</div>
+</div>
+<p id="appendix-A.2-3">The following shows the location data instance:<a href="#appendix-A.2-3" class="pilcrow">¶</a></p>
+<div class="breakable lang-json sourcecode" id="appendix-A.2-4">
+<pre>
+{
+  "ietf-ni-location:locations": {
+    "location": [
+      {
+        "id": "Foo-DC",
+        "name": "Foo Data Center",
+        "type": "site",
+        "timestamp": "2026-01-15T08:00:00Z"
+      },
+      {
+        "id": "Room-101",
+        "name": "First Floor Telecom Room",
+        "type": "room",
+        "parent": "Foo-DC",
+        "timestamp": "2026-01-15T08:00:00Z",
+        "contained-chassis": []
+      },
+      {
+        "id": "Room-201",
+        "name": "Second Floor Telecom Room",
+        "type": "room",
+        "parent": "Foo-DC",
+        "timestamp": "2026-01-15T08:00:00Z",
+        "contained-chassis": []
+      },
+      {
+        "id": "Room-301",
+        "name": "Third Floor Telecom Room",
+        "type": "room",
+        "parent": "Foo-DC",
+        "timestamp": "2026-01-15T08:00:00Z",
+        "contained-chassis": []
+      }
+    ],
+    "racks": {
+      "rack": [
+        {
+          "id": "Rack-101-A",
+          "uuid": "660e8400-e29b-41d4-a716-446655440010",
+          "name": "Rack A Room 101",
+          "rack-location": {
+            "location-ref": "Room-101",
+            "row-number": 1,
+            "column-number": 1
+          },
+          "height": 2200,
+          "width": 600,
+          "depth": 1200,
+          "max-voltage": 240,
+          "max-allocated-power": 8000,
+          "contained-chassis": [
+            {
+              "relative-position": 10,
+              "ne-ref": "NE-1",
+              "component-ref": "chassis-1"
+            }
+          ],
+          "timestamp": "2026-01-15T10:00:00Z",
+          "valid-until": "2028-01-15T10:00:00Z"
+        },
+        {
+          "id": "Rack-201-B",
+          "uuid": "660e8400-e29b-41d4-a716-446655440011",
+          "name": "Rack B Room 201",
+          "rack-location": {
+            "location-ref": "Room-201",
+            "row-number": 2,
+            "column-number": 1
+          },
+          "height": 2200,
+          "width": 600,
+          "depth": 1200,
+          "max-voltage": 240,
+          "max-allocated-power": 8000,
+          "contained-chassis": [
+            {
+              "relative-position": 15,
+              "ne-ref": "NE-1",
+              "component-ref": "chassis-2"
+            }
+          ],
+          "timestamp": "2026-01-15T10:00:00Z",
+          "valid-until": "2028-01-15T10:00:00Z"
+        },
+        {
+          "id": "Rack-301-C",
+          "uuid": "660e8400-e29b-41d4-a716-446655440012",
+          "name": "Rack C Room 301",
+          "rack-location": {
+            "location-ref": "Room-301",
+            "row-number": 3,
+            "column-number": 1
+          },
+          "height": 2200,
+          "width": 600,
+          "depth": 1200,
+          "max-voltage": 240,
+          "max-allocated-power": 8000,
+          "contained-chassis": [
+            {
+              "relative-position": 20,
+              "ne-ref": "NE-1",
+              "component-ref": "chassis-3"
+            }
+          ],
+          "timestamp": "2026-01-15T10:00:00Z",
+          "valid-until": "2028-01-15T10:00:00Z"
+        }
+      ]
+    }
+  }
+}
+
+</pre><a href="#appendix-A.2-4" class="pilcrow">¶</a>
+</div>
+</section>
+</div>
+</section>
+</div>
+<div id="acknowledgments">
+<section id="appendix-B">
+      <h2 id="name-acknowledgments">
+<a href="#name-acknowledgments" class="section-name selfRef">Acknowledgments</a>
+      </h2>
+<p id="appendix-B-1">The authors would like to thank the authors and contributors of
+<span>[<a href="#I-D.ietf-ccamp-network-inventory-yang" class="cite xref">I-D.ietf-ccamp-network-inventory-yang</a>]</span> to trigger this work.
+During the discussion of base Network Inventory (NI) model, it is agreed
+that the definition of the equipment room and rack can be a separate
+location model and support manual configuration, while the NI model
+aggregates the inventory data of the Network Elements (NEs) on the
+network. Usually the information about sites or equipment rooms is
+not detectable by network controller and configured manually.<a href="#appendix-B-1" class="pilcrow">¶</a></p>
+<p id="appendix-B-2">The authors wish to thank Mohamed Boucadair and many others for their helpful comments and suggestions.<a href="#appendix-B-2" class="pilcrow">¶</a></p>
+</section>
+</div>
+<div id="contributors">
+<section id="appendix-C">
+      <h2 id="name-contributors">
+<a href="#name-contributors" class="section-name selfRef">Contributors</a>
+      </h2>
+<address class="vcard">
+        <div dir="auto" class="left"><span class="fn nameRole">Italo Busi</span></div>
+<div dir="auto" class="left"><span class="org">Huawei Technologies</span></div>
+<div class="email">
+<span>Email:</span>
+<a href="mailto:italo.busi@huawei.com" class="email">italo.busi@huawei.com</a>
+</div>
+</address>
+<address class="vcard">
+        <div dir="auto" class="left"><span class="fn nameRole">Chaode Yu</span></div>
+<div dir="auto" class="left"><span class="org">Huawei</span></div>
+<div class="email">
+<span>Email:</span>
+<a href="mailto:yuchaode@huawei.com" class="email">yuchaode@huawei.com</a>
+</div>
+</address>
+</section>
+</div>
+<div id="authors-addresses">
+<section id="appendix-D">
+      <h2 id="name-authors-addresses">
+<a href="#name-authors-addresses" class="section-name selfRef">Authors' Addresses</a>
+      </h2>
+<address class="vcard">
+        <div dir="auto" class="left"><span class="fn nameRole">Bo Wu</span></div>
+<div dir="auto" class="left"><span class="org">Huawei</span></div>
+<div class="email">
+<span>Email:</span>
+<a href="mailto:lana.wubo@huawei.com" class="email">lana.wubo@huawei.com</a>
+</div>
+</address>
+<address class="vcard">
+        <div dir="auto" class="left"><span class="fn nameRole">Sergio Belotti</span></div>
+<div dir="auto" class="left"><span class="org">Nokia</span></div>
+<div class="email">
+<span>Email:</span>
+<a href="mailto:sergio.belotti@nokia.com" class="email">sergio.belotti@nokia.com</a>
+</div>
+</address>
+<address class="vcard">
+        <div dir="auto" class="left"><span class="fn nameRole">Jean-Francois Bouquier</span></div>
+<div dir="auto" class="left"><span class="org">Vodafone</span></div>
+<div class="email">
+<span>Email:</span>
+<a href="mailto:jeff.bouquier@vodafone.com" class="email">jeff.bouquier@vodafone.com</a>
+</div>
+</address>
+<address class="vcard">
+        <div dir="auto" class="left"><span class="fn nameRole">Fabio Peruzzini</span></div>
+<div dir="auto" class="left"><span class="org">FiberCop</span></div>
+<div class="email">
+<span>Email:</span>
+<a href="mailto:fabio.peruzzini@fibercop.com" class="email">fabio.peruzzini@fibercop.com</a>
+</div>
+</address>
+<address class="vcard">
+        <div dir="auto" class="left"><span class="fn nameRole">Phil Bedard</span></div>
+<div dir="auto" class="left"><span class="org">Cisco</span></div>
+<div class="email">
+<span>Email:</span>
+<a href="mailto:phbedard@cisco.com" class="email">phbedard@cisco.com</a>
+</div>
+</address>
+</section>
+</div>
+</div>
+
+                    </div>
+                
+            </div>
+            <div class="d-print-none col-md-3 bg-light-subtle collapse show" id="sidebar">
+                <div class="position-fixed border-start sidebar overflow-scroll overscroll-none no-scrollbar">
+                    <div class="d-flex flex-column vh-100 pt-2 pt-lg-3 ps-3 pl-md-2 pl-lg-3">
+                        <div>
+                            <a class="btn btn-primary btn-sm" href="/doc/draft-ietf-ivy-network-inventory-location/">Datatracker</a>
+                            <p class="fw-bold pt-2">
+                                
+                                    draft-ietf-ivy-network-inventory-location-06
+                                
+                                <br>
+                                
+
+
+
+
+
+
+
+    <span class="text-success">Active Internet-Draft</span>
+    (<a href="/wg/ivy/about/">ivy WG</a>)
+    
+
+                            </p>
+                        </div>
+                        
+                        <ul class="nav nav-tabs nav-fill small me-2" role="tablist">
+                            <li class="nav-item" role="presentation" title="Document information">
+                                <button class="nav-link px-2"
+                                        id="docinfo-tab"
+                                        data-bs-toggle="tab"
+                                        data-bs-target="#docinfo-tab-pane"
+                                        type="button"
+                                        role="tab"
+                                        aria-controls="docinfo-tab-pane"
+                                        aria-selected="true">
+                                    <i class="bi bi-info-circle"></i><span class="d-none d-md-block d-xl-inline ms-xl-1">Info</span>
+                                </button>
+                            </li>
+                            <li class="nav-item" role="presentation" title="Table of contents">
+                                <button class="nav-link px-2"
+                                        id="toc-tab"
+                                        data-bs-toggle="tab"
+                                        data-bs-target="#toc-tab-pane"
+                                        type="button"
+                                        role="tab"
+                                        aria-controls="toc-tab-pane"
+                                        aria-selected="false">
+                                    <i class="bi bi-list-ol"></i><span class="d-none d-md-block d-xl-inline ms-xl-1">Contents</span>
+                                </button>
+                            </li>
+                            <li class="nav-item" role="presentation" title="Preferences">
+                                <button class="nav-link px-2"
+                                        id="pref-tab"
+                                        data-bs-toggle="tab"
+                                        data-bs-target="#pref-tab-pane"
+                                        type="button"
+                                        role="tab"
+                                        aria-controls="pref-tab-pane"
+                                        aria-selected="false">
+                                    <i class="bi bi-gear"></i><span class="d-none d-md-block d-xl-inline ms-xl-1">Prefs</span>
+                                </button>
+                            </li>
+                        </ul>
+                        <div class="overflow-auto tab-content pt-2 me-2">
+                            <div class="tab-pane"
+                                 id="docinfo-tab-pane"
+                                 role="tabpanel"
+                                 aria-labelledby="docinfo-tab"
+                                 tabindex="0">
+                                <table class="table table-sm table-borderless">
+                                    
+
+
+
+
+
+
+
+<tbody class="meta align-top ">
+    <tr>
+        <th scope="row">Document</th>
+        <th scope="row">Document type</th>
+        <td class="edit"></td>
+        <td>
+            
+
+
+
+
+
+
+
+    <span class="text-success">Active Internet-Draft</span>
+    (<a href="/wg/ivy/about/">ivy WG</a>)
+    
+
+            
+            
+            
+                
+
+
+
+
+    
+
+
+            
+        </td>
+    </tr>
+    
+        <tr>
+            <td></td>
+            <th scope="row">Select version</th>
+            <td class="edit"></td>
+            <td>
+                
+
+
+
+    <ul class="revision-list pagination pagination-sm text-center flex-wrap my-0">
+        
+            
+                 
+                    <li class="page-item ">
+                        <a class="page-link"
+                        href="/doc/html/draft-ietf-ivy-network-inventory-location-00"
+                        >
+                            00
+                        </a>
+                    </li>
+                
+            
+                 
+                    <li class="page-item ">
+                        <a class="page-link"
+                        href="/doc/html/draft-ietf-ivy-network-inventory-location-01"
+                        rel="nofollow">
+                            01
+                        </a>
+                    </li>
+                
+            
+                 
+                    <li class="page-item ">
+                        <a class="page-link"
+                        href="/doc/html/draft-ietf-ivy-network-inventory-location-02"
+                        rel="nofollow">
+                            02
+                        </a>
+                    </li>
+                
+            
+                 
+                    <li class="page-item ">
+                        <a class="page-link"
+                        href="/doc/html/draft-ietf-ivy-network-inventory-location-03"
+                        rel="nofollow">
+                            03
+                        </a>
+                    </li>
+                
+            
+                 
+                    <li class="page-item ">
+                        <a class="page-link"
+                        href="/doc/html/draft-ietf-ivy-network-inventory-location-04"
+                        rel="nofollow">
+                            04
+                        </a>
+                    </li>
+                
+            
+                 
+                    <li class="page-item ">
+                        <a class="page-link"
+                        href="/doc/html/draft-ietf-ivy-network-inventory-location-05"
+                        rel="nofollow">
+                            05
+                        </a>
+                    </li>
+                
+            
+                 
+                    <li class="page-item active">
+                        <a class="page-link"
+                        href="/doc/html/draft-ietf-ivy-network-inventory-location-06"
+                        >
+                            06
+                        </a>
+                    </li>
+                
+            
+            
+        
+    </ul>
+
+            </td>
+        </tr>
+        
+            <tr>
+                <td></td>
+                <th scope="row">Compare versions</th>
+                <td class="edit"></td>
+                <td>
+                    
+
+
+
+<form class="form-horizontal diff-form"
+      action="https://author-tools.ietf.org/iddiff"
+      method="get"
+      target="_blank">
+
+            <select class="form-select form-select-sm mb-1 select2-field"
+                    data-max-entries="1"
+                    data-width="resolve"
+                    data-allow-clear="false"
+                    data-minimum-input-length="0"
+                    aria-label="From revision"
+                    name="url1">
+                
+                    <option value="draft-ietf-ivy-network-inventory-location-06">
+                        draft-ietf-ivy-network-inventory-location-06
+                        
+                    </option>
+                
+                    <option value="draft-ietf-ivy-network-inventory-location-05" selected>
+                        draft-ietf-ivy-network-inventory-location-05
+                        
+                    </option>
+                
+                    <option value="draft-ietf-ivy-network-inventory-location-04">
+                        draft-ietf-ivy-network-inventory-location-04
+                        
+                    </option>
+                
+                    <option value="draft-ietf-ivy-network-inventory-location-03">
+                        draft-ietf-ivy-network-inventory-location-03
+                        
+                    </option>
+                
+                    <option value="draft-ietf-ivy-network-inventory-location-02">
+                        draft-ietf-ivy-network-inventory-location-02
+                        
+                    </option>
+                
+                    <option value="draft-ietf-ivy-network-inventory-location-01">
+                        draft-ietf-ivy-network-inventory-location-01
+                        
+                    </option>
+                
+                    <option value="draft-ietf-ivy-network-inventory-location-00">
+                        draft-ietf-ivy-network-inventory-location-00
+                        
+                    </option>
+                
+                    <option value="draft-wbbpb-ivy-network-inventory-location-02">
+                        draft-wbbpb-ivy-network-inventory-location-02
+                        
+                    </option>
+                
+                    <option value="draft-wbbpb-ivy-network-inventory-location-01">
+                        draft-wbbpb-ivy-network-inventory-location-01
+                        
+                    </option>
+                
+                    <option value="draft-wbbpb-ivy-network-inventory-location-00">
+                        draft-wbbpb-ivy-network-inventory-location-00
+                        
+                    </option>
+                
+                
+            </select>
+
+            <select class="form-select form-select-sm mb-1 select2-field"
+                    data-max-entries="1"
+                    data-width="resolve"
+                    data-allow-clear="false"
+                    data-minimum-input-length="0"
+                    aria-label="To revision"
+                    name="url2">
+                
+                    <option value="draft-ietf-ivy-network-inventory-location-06" selected>
+                        draft-ietf-ivy-network-inventory-location-06
+                        
+                    </option>
+                
+                    <option value="draft-ietf-ivy-network-inventory-location-05">
+                        draft-ietf-ivy-network-inventory-location-05
+                        
+                    </option>
+                
+                    <option value="draft-ietf-ivy-network-inventory-location-04">
+                        draft-ietf-ivy-network-inventory-location-04
+                        
+                    </option>
+                
+                    <option value="draft-ietf-ivy-network-inventory-location-03">
+                        draft-ietf-ivy-network-inventory-location-03
+                        
+                    </option>
+                
+                    <option value="draft-ietf-ivy-network-inventory-location-02">
+                        draft-ietf-ivy-network-inventory-location-02
+                        
+                    </option>
+                
+                    <option value="draft-ietf-ivy-network-inventory-location-01">
+                        draft-ietf-ivy-network-inventory-location-01
+                        
+                    </option>
+                
+                    <option value="draft-ietf-ivy-network-inventory-location-00">
+                        draft-ietf-ivy-network-inventory-location-00
+                        
+                    </option>
+                
+                    <option value="draft-wbbpb-ivy-network-inventory-location-02">
+                        draft-wbbpb-ivy-network-inventory-location-02
+                        
+                    </option>
+                
+                    <option value="draft-wbbpb-ivy-network-inventory-location-01">
+                        draft-wbbpb-ivy-network-inventory-location-01
+                        
+                    </option>
+                
+                    <option value="draft-wbbpb-ivy-network-inventory-location-00">
+                        draft-wbbpb-ivy-network-inventory-location-00
+                        
+                    </option>
+                
+                
+            </select>
+
+            <button type="submit"
+                    class="btn btn-primary btn-sm"
+                    value="--html"
+                    name="difftype">
+                Side-by-side
+            </button>
+            
+            <button type="submit"
+                    class="btn btn-primary btn-sm"
+                    value="--hwdiff"
+                    name="difftype">
+                Inline
+            </button>
+
+</form>
+                </td>
+            </tr>
+        
+    
+    <tr>
+        <td></td>
+        <th scope="row">Authors</th>
+        <td class="edit">
+            
+        </td>
+        <td>
+            
+            
+                <span ><a 
+           title="Datatracker profile of Bo Wu"
+            href="/person/lana.wubo@huawei.com" >Bo Wu</a> <a 
+               href="mailto:lana.wubo%40huawei.com"
+               aria-label="Compose email to lana.wubo@huawei.com"
+               title="Compose email to lana.wubo@huawei.com">
+                <i class="bi bi-envelope"></i></a></span>,
+            
+                <span ><a 
+           title="Datatracker profile of Sergio Belotti"
+            href="/person/s.belotti.ietf@gmail.com" >Sergio Belotti</a> <a 
+               href="mailto:s.belotti.ietf%40gmail.com"
+               aria-label="Compose email to s.belotti.ietf@gmail.com"
+               title="Compose email to s.belotti.ietf@gmail.com">
+                <i class="bi bi-envelope"></i></a></span>,
+            
+                <span ><a 
+           title="Datatracker profile of Jean-Francois Bouquier"
+            href="/person/jeff.bouquier@vodafone.com" >Jean-Francois Bouquier</a> <a 
+               href="mailto:jeff.bouquier%40vodafone.com"
+               aria-label="Compose email to jeff.bouquier@vodafone.com"
+               title="Compose email to jeff.bouquier@vodafone.com">
+                <i class="bi bi-envelope"></i></a></span>,
+            
+                <span ><a 
+           title="Datatracker profile of Fabio Peruzzini"
+            href="/person/fabio.peruzzini@fibercop.com" >Fabio Peruzzini</a> <a 
+               href="mailto:fabio.peruzzini%40fibercop.com"
+               aria-label="Compose email to fabio.peruzzini@fibercop.com"
+               title="Compose email to fabio.peruzzini@fibercop.com">
+                <i class="bi bi-envelope"></i></a></span>,
+            
+                <span ><a 
+           title="Datatracker profile of Phil Bedard"
+            href="/person/phbedard@cisco.com" >Phil Bedard</a> <a 
+               href="mailto:phbedard%40cisco.com"
+               aria-label="Compose email to phbedard@cisco.com"
+               title="Compose email to phbedard@cisco.com">
+                <i class="bi bi-envelope"></i></a></span>
+            
+            
+                <br>
+                <a class="btn btn-primary btn-sm mt-1" href="mailto:draft-ietf-ivy-network-inventory-location@ietf.org?subject=draft-ietf-ivy-network-inventory-location" title="Send email to the document authors">Email authors</a>
+            
+        </td>
+    </tr>
+    
+    
+        
+            <tr>
+                <td></td>
+                <th scope="row">Replaces</th>
+                <td class="edit">
+                    
+                </td>
+                <td>
+                    
+                        
+                            <a href="/doc/html/draft-wbbpb-ivy-network-inventory-location" title="A YANG Data Model for Network Inventory Location">draft-wbbpb-ivy-network-inventory-location</a>
+                        
+                    
+                </td>
+            </tr>
+        
+        
+        
+    
+    <tr>
+        <td></td>
+        <th scope="row">
+            RFC stream
+        </th>
+        <td class="edit">
+            
+        </td>
+        <td >
+            
+                
+                
+                    
+                        
+
+
+
+<img alt="IETF Logo"
+     class="d-lm-none w-25 mt-1"
+     
+     
+        
+             src="https://static.ietf.org/dt/12.69.0/ietf/images/ietf-logo-nor-white.svg"
+        
+     
+     >
+
+<img alt="IETF Logo"
+     class="d-dm-none w-25 mt-1"
+     
+     
+        
+             src="https://static.ietf.org/dt/12.69.0/ietf/images/ietf-logo-nor.svg"
+        
+     
+     >
+                    
+                
+                
+            
+        </td>
+    </tr>
+    
+        <tr>
+            <td></td>
+            <th scope="row">
+                Intended RFC status
+            </th>
+            <td class="edit">
+                
+            </td>
+            <td>
+                
+                    <span class="text-body-secondary">
+                        (None)
+                    </span>
+                
+            </td>
+        </tr>
+    
+    <tr>
+        <td></td>
+        <th scope="row">
+            Other formats
+        </th>
+        <td class="edit">
+        </td>
+        <td>
+            
+                
+    <div class="buttonlist">
+    
+        
+        <a class="btn btn-primary btn-sm"
+          
+          target="_blank"
+          href="https://www.ietf.org/archive/id/draft-ietf-ivy-network-inventory-location-06.txt">
+            
+                <i class="bi bi-file-text"></i> txt
+            
+        </a>
+        
+    
+        
+        <a class="btn btn-primary btn-sm"
+          
+          target="_blank"
+          href="https://www.ietf.org/archive/id/draft-ietf-ivy-network-inventory-location-06.html">
+            
+                <i class="bi bi-file-code"></i> html
+            
+        </a>
+        
+    
+        
+        <a class="btn btn-primary btn-sm"
+          
+          target="_blank"
+          href="https://www.ietf.org/archive/id/draft-ietf-ivy-network-inventory-location-06.xml">
+            
+                <i class="bi bi-file-code"></i> xml
+            
+        </a>
+        
+    
+        
+    
+        
+        <a class="btn btn-primary btn-sm"
+          
+          target="_blank"
+          href="/doc/draft-ietf-ivy-network-inventory-location/06/bibtex/">
+            
+                <i class="bi bi-file-ruled"></i> bibtex
+            
+        </a>
+        
+    
+        
+        <a class="btn btn-primary btn-sm"
+          
+          target="_blank"
+          href="/doc/bibxml3/draft-ietf-ivy-network-inventory-location-06.xml">
+            
+                <i class="bi bi-file-code"></i> bibxml
+            
+        </a>
+        
+    
+</div>
+
+            
+        </td>
+    </tr>
+    
+    
+        
+            <tr>
+                <td>
+                </td>
+                <th scope="row">
+                    Additional resources
+                </th>
+                <td class="edit">
+                    
+                </td>
+                <td>
+                    
+                        
+                        
+                            
+                                <a href="https://mailarchive.ietf.org/arch/browse/ivy?q=draft-ietf-ivy-network-inventory-location">
+                                    Mailing list discussion
+                                </a>
+                            
+                        
+                    
+                </td>
+            </tr>
+        
+    
+</tbody>
+                                </table>
+                                <a class="btn btn-sm btn-warning mb-3"
+                                target="_blank"
+                                href="https://github.com/ietf-tools/datatracker/issues/new/choose">
+                                    Report a datatracker bug
+                                    <i class="bi bi-bug"></i>
+                                </a>
+                            </div>
+                            <div class="tab-pane mb-5"
+                                 id="toc-tab-pane"
+                                 role="tabpanel"
+                                 aria-labelledby="toc-tab"
+                                 tabindex="0">
+                                <nav class="nav nav-pills flex-column small" id="toc-nav">
+                                </nav>
+                            </div>
+                            <div class="tab-pane mb-5 small"
+                                 id="pref-tab-pane"
+                                 role="tabpanel"
+                                 aria-labelledby="pref-tab"
+                                 tabindex="0">
+                                <label class="form-label fw-bold mb-2">Show sidebar by default</label>
+                                <div class="btn-group-vertical btn-group-sm d-flex" role="group">
+                                    <input type="radio" class="btn-check" name="sidebar" id="on-radio">
+                                    <label class="btn btn-outline-primary" for="on-radio">Yes</label>
+                                    <input type="radio" class="btn-check" name="sidebar" id="off-radio">
+                                    <label class="btn btn-outline-primary" for="off-radio">No</label>
+                                </div>
+                                <label class="form-label fw-bold mt-4 mb-2">Tab to show by default</label>
+                                <div class="btn-group-vertical btn-group-sm d-flex" role="group">
+                                    <input type="radio" class="btn-check" name="deftab" id="docinfo-radio">
+                                    <label class="btn btn-outline-primary" for="docinfo-radio">
+                                        <i class="bi bi-info-circle me-1"></i>Info
+                                    </label>
+                                    <input type="radio" class="btn-check" name="deftab" id="toc-radio">
+                                    <label class="btn btn-outline-primary" for="toc-radio">
+                                        <i class="bi bi-list-ol me-1"></i>Contents
+                                    </label>
+                                </div>
+                                <label class="form-label fw-bold mt-4 mb-2">HTMLization configuration</label>
+                                <div class="btn-group-vertical btn-group-sm d-flex" role="group">
+                                    <input type="radio" class="btn-check" name="htmlconf" id="txt-radio">
+                                    <label class="btn btn-outline-primary" for="txt-radio" title="This is the traditional HTMLization method.">
+                                        <i class="bi bi-badge-sd me-1"></i>HTMLize the plaintext
+                                    </label>
+                                    <input type="radio" class="btn-check" name="htmlconf" id="html-radio">
+                                    <label class="btn btn-outline-primary" for="html-radio" title="This is the modern HTMLization method.">
+                                        <i class="bi bi-badge-hd me-1"></i>Plaintextify the HTML
+                                    </label>
+                                </div>
+                                <label class="form-label fw-bold mt-4 mb-2" for="ptsize">Maximum font size</label>
+                                <input type="range" class="form-range" min="7" max="16" id="ptsize" oninput="ptdemo.value = ptsize.value">
+                                <label class="form-label fw-bold mt-4 mb-2">Page dependencies</label>
+                                <div class="btn-group-vertical btn-group-sm d-flex" role="group">
+                                    <input type="radio" class="btn-check" name="pagedeps" id="inline-radio">
+                                    <label class="btn btn-outline-primary" for="inline-radio" title="Generate larger, standalone web pages that do not require network access to render.">
+                                        <i class="bi bi-box me-1"></i>Inline
+                                    </label>
+                                    <input type="radio" class="btn-check" name="pagedeps" id="reference-radio">
+                                    <label class="btn btn-outline-primary" for="reference-radio" title="Generate regular web pages that require network access to render.">
+                                        <i class="bi bi-link-45deg me-1"></i>Reference
+                                    </label>
+                                </div>
+                                <label class="form-label fw-bold mt-4 mb-2">Citation links</label>
+                                <div class="btn-group-vertical btn-group-sm d-flex" role="group">
+                                    <input type="radio" class="btn-check" name="reflinks" id="refsection-radio">
+                                    <label class="btn btn-outline-primary" for="refsection-radio" title="Citation links go to the reference section.">
+                                        <i class="bi bi-arrow-clockwise"></i> Go to reference section
+                                    </label>
+                                    <input type="radio" class="btn-check" name="reflinks" id="citation-radio">
+                                    <label class="btn btn-outline-primary" for="citation-radio" title="Citation links go directly to the cited document.">
+                                        <i class="bi bi-link-45deg me-1"></i>Go to linked document
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    
+<script>
+  var _paq = window._paq || [];
+  
+  _paq.push(['disableCookies']);
+  _paq.push(['trackPageView']);
+  _paq.push(['enableLinkTracking']);
+  (function() {
+    var u="//analytics.ietf.org/";
+    _paq.push(['setTrackerUrl', u+'matomo.php']);
+    _paq.push(['setSiteId', 7]);
+    var d=document, g=d.createElement('script'), s=d.getElementsByTagName('script')[0];
+    g.type='text/javascript'; g.async=true; g.defer=true; g.src=u+'matomo.js'; s.parentNode.insertBefore(g,s);
+  })();
+</script>
+<noscript><p><img src="//analytics.ietf.org/matomo.php?idsite=7" style="border:0;" alt="" /></p></noscript>
+
+    <script>(function(){function c(){var b=a.contentDocument||(a.contentWindow&&a.contentWindow.document);if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'a25be5b17b2e938e',t:'MTc4NTgyOTA1MQ=='};var a=document.createElement('script');a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+</html>

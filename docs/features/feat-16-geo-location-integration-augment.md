@@ -1,0 +1,200 @@
+---
+title: "[ietf-ni-location: Geo-Location Integration Augment]"
+epic: "epic-04-ietf-ni-location.md"
+issue_id: 50
+type: "feature"
+interface_type: "ui"
+generation_mode: "subagent"
+labels: ["feature", "ni-location"]
+schema_containers:
+  - path: "ietf-ni-location:locations/racks/rack/rack-location"
+    node_type: container
+---
+
+# Feature: [ietf-ni-location: Geo-Location Integration Augment]
+
+## Parent Epic
+- [ ] #51 - [ietf-ni-location: Network Inventory Location Management](https://github.com/gintatkinson/3dgs-037/blob/main/docs/epics/epic-04-ietf-ni-location.md)
+
+## Description
+This feature specifies the rack location structure (`rack-location`) and geographic location integration augment (`geo-location-augment`) defined in the `ietf-ni-location` YANG module. The `rack-location` container positions a physical equipment rack within an equipment room or facility grid using row/column indices and location references, while binding geographic coordinates via imported `ietf-geo-location` structures.
+
+The `rack-location` container comprises the following core attributes and imported augments:
+1. **location-ref**: A leaf of type `ni-location-ref` (leafref pointing to `/nwi:network-inventory/nil:locations/nil:location/nil:location-id`) specifying the facility or room where the rack is installed.
+2. **row-number**: An optional 32-bit unsigned integer (`uint32`) identifying the floor grid row index within the specified location.
+3. **column-number**: An optional 32-bit unsigned integer (`uint32`) identifying the floor grid column index within the specified location.
+4. **Geo-Location Augment (`geo-location`)**: Imported grouping from `ietf-geo-location` (RFC 9179) binding geodetic reference frames, 3D spatial coordinates (latitude, longitude, height), and velocity/motion vectors to the physical rack location.
+
+## UML Class Diagram
+```mermaid
+classDiagram
+    class Locations {
+    }
+    class Racks {
+    }
+    class Rack {
+        +String id "[1]"
+        +String name "[0..1]"
+    }
+    class LocationRef {
+        +String locationRef "[0..1]"
+    }
+    class GeoLocation {
+        +Real latitude "[0..1]"
+        +Real longitude "[0..1]"
+        +Real height "[0..1]"
+    }
+    class RackLocation {
+        +Integer rowNumber "[0..1]"
+        +Integer columnNumber "[0..1]"
+    }
+    Locations "1" *-- "1" Racks : racks
+    Racks "1" *-- "0..*" Rack : rack
+    Rack "1" *-- "0..1" RackLocation : rackLocation
+    RackLocation "1" *-- "0..1" LocationRef : locationRef
+    RackLocation "1" *-- "0..1" GeoLocation : geoLocation
+```
+
+## Interface Requirements
+
+### 1. Test Data Shape
+```json
+{
+  "ietf-ni-location:rack-location": {
+    "location-ref": "loc-building-a-floor-3",
+    "row-number": 12,
+    "column-number": 4,
+    "ietf-geo-location:geo-location": {
+      "reference-frame": {
+        "astronomical-body": "earth",
+        "geodetic-system": {
+          "geodetic-datum": "wgs-84",
+          "coord-system-axis-order": "north-east-up"
+        }
+      },
+      "location": {
+        "ellipsoid": {
+          "latitude": 37.7749,
+          "longitude": -122.4194,
+          "height": 15.5
+        }
+      }
+    }
+  }
+}
+```
+
+### 2. Validation & Constraints
+- **row-number**:
+  - Type: `Integer` (YANG `uint32`).
+  - Value Range: `0` to `4294967295`.
+  - Multiplicity: `[0..1]`.
+- **column-number**:
+  - Type: `Integer` (YANG `uint32`).
+  - Value Range: `0` to `4294967295`.
+  - Multiplicity: `[0..1]`.
+- **location-ref**:
+  - Type: `String` (YANG type `ni-location-ref` leafref).
+  - Target Path: `/nwi:network-inventory/nil:locations/nil:location/nil:location-id`.
+  - Multiplicity: `[0..1]`. Must resolve to an existing location identifier in the inventory database.
+- **Geodetic & Spatial Constraints**:
+  - Inherited from `ietf-geo-location` (RFC 9179).
+  - `latitude`: Real number between `-90.0` and `+90.0` degrees inclusive.
+  - `longitude`: Real number between `-180.0` and `+180.0` degrees inclusive.
+  - `height`: Altitude/elevation in meters relative to reference ellipsoid.
+- **Path Resolution**:
+  - Sub-tree location MUST resolve under `/nwi:network-inventory/nil:locations/nil:racks/nil:rack/nil:rack-location`.
+
+### 3. Visual Layout & Arrangement
+- **CSS Modules & BEM Scoping**:
+  - Component reset using `box-sizing: border-box`.
+  - Class naming convention following BEM patterns (`.rack-location-grid`, `.rack-location-grid__property-row`, `.rack-location-grid__label`, `.rack-location-grid__value`).
+- **Layout Containment Rules**:
+  - Layout containment MUST be restricted to outer layout splitters (`properties_view`).
+  - Strict prohibition on CSS containment parameters (`contain: content` or `contain: strict`) on scrollable child panels to preserve dynamic list virtualization and viewport calculation.
+- **PropertyGrid Integration**:
+  - Position grid properties (`row-number`, `column-number`, `location-ref`) rendered within structured field groups.
+  - Geodetic reference data (`latitude`, `longitude`, `height`, `astronomical-body`) nested in expandable spatial sections.
+  - Valid DOM nesting enforcing tree structures (lists nested within parent list-items).
+
+### 4. Interactive Flow & States
+- **Read-Only State**:
+  - Displays formatted grid indices (`Row 12, Column 4`), clickable location reference hyperlink (`loc-building-a-floor-3`), and formatted geographic coordinates (`37.7749° N, 122.4194° W, 15.5m`).
+- **Edit State**:
+  - Inline input controls for `row-number` and `column-number` with numeric stepper validation.
+  - Dropdown select / auto-complete picker for `location-ref` populated from active inventory locations.
+- **Empty State**:
+  - Placeholder displaying `"No Rack Location Assigned"` with action button to initialize location parameters.
+- **Loading State**:
+  - Animated skeleton rows rendered in `properties_view` while fetching rack details or resolving spatial bindings.
+- **Error State**:
+  - Highlighted border (`var(--color-error-border)`) and inline message when `row-number` or `column-number` exceeds uint32 bounds, or when `location-ref` fails leafref validation.
+  - Test guidelines MUST include computed-style assertions verifying highlight color codes and scroll dimensions under error states.
+
+## Given-When-Then Acceptance Criteria
+
+### Scenario 1: Valid row and column grid placement
+- **Given** a physical rack instance in the network inventory,
+- **When** an administrator updates `row-number` to `12` and `column-number` to `4`,
+- **Then** the system MUST accept the configuration, validate both values against `uint32` bounds (`0` to `4294967295`), and persist the position.
+
+### Scenario 2: Location reference leafref validation
+- **Given** an existing facility location with `location-id` set to `"loc-building-a-floor-3"`,
+- **When** a rack's `rack-location/location-ref` is set to `"loc-building-a-floor-3"`,
+- **Then** the leafref validator MUST resolve the reference target successfully and link the rack to the specified facility location.
+
+### Scenario 3: Rejection of invalid location reference
+- **Given** a request to set `rack-location/location-ref` to `"loc-nonexistent"`,
+- **When** the payload is processed by the inventory manager,
+- **Then** the system MUST reject the update with a leafref validation failure and retain the prior valid location.
+
+### Scenario 4: Binding of imported geo-location augment
+- **Given** a rack configured with `rack-location`,
+- **When** spatial coordinates (`latitude: 37.7749`, `longitude: -122.4194`, `height: 15.5`) are added via `ietf-geo-location`,
+- **Then** the PropertyGrid component MUST render both the grid position (`Row 12, Column 4`) and geodetic coordinate data within `properties_view`.
+
+## Specification Context (Verbatim)
+
+```text
+"racks" represent physical equipment racks in which NEs can be
+installed, which facilitate device maintenance. Through "rack-
+location", each rack can be assigned to a site or a specific location
+within a site, such as an equipment room.
+
+Each rack is assigned a unique ID and a name in the context of a
+facility, e.g. a site. A rack may have some specific attributes,
+such as appearance-related attributes and electricity-related
+attributes.
+
+container rack-location {
+  description
+    "The location information of the rack, which comprises
+     the location reference, row number, and column number.";
+  leaf location-ref {
+    type ni-location-ref;
+    description
+      "Reference to the location where this rack is placed.";
+  }
+  leaf row-number {
+    type uint32;
+    description
+      "Identifies the row within the location where
+       the rack is located.";
+  }
+  leaf column-number {
+    type uint32;
+    description
+      "Identifies the column within the location where
+       the rack is located.";
+  }
+}
+```
+
+## Source References
+Structural Schema: https://github.com/ietf-ivy-wg/network-inventory-location/blob/main/ietf-ni-location.yang (Clause: container rack-location & import ietf-geo-location)
+Normative Specification: https://datatracker.ietf.org/doc/html/draft-ietf-ivy-network-inventory-location (Clause: Section 3 & 4)
+
+## Logical UI & Layout Bindings
+- **Target LUI Component:** PropertyGrid
+- **Target Layout Container ID:** properties_view
+- **Data Source Bindings:** /nwi:network-inventory/nil:locations/nil:racks/nil:rack/nil:rack-location
