@@ -1,8 +1,8 @@
 {
   "meta": {
     "version": "1.0.0",
-    "schema_name": "ietf-nwi-passive-inventory",
-    "yang_source": "/Users/perkunas/jail/3dgs-037/schema/ietf-nwi-passive-inventory.yang"
+    "schema_name": "ietf-network@2018-02-26",
+    "yang_source": "/Users/perkunas/jail/3dgs-037/schema/ietf-network@2018-02-26.yang"
   },
   "theme": {
     "modes": [
@@ -28,52 +28,34 @@
           "props": {
             "hierarchy": [
               {
-                "id": "a-end",
-                "label": "A End"
-              },
-              {
-                "id": "z-end",
-                "label": "Z End"
-              },
-              {
-                "id": "a-end",
-                "label": "A End"
-              },
-              {
-                "id": "z-end",
-                "label": "Z End"
-              },
-              {
-                "id": "optical-cable",
-                "label": "Optical Cable"
-              },
-              {
-                "id": "a-end",
-                "label": "A End"
-              },
-              {
-                "id": "z-end",
-                "label": "Z End"
-              },
-              {
-                "id": "optical-cable",
-                "label": "Optical Cable"
-              },
-              {
-                "id": "child-cable",
-                "label": "Child Cable"
-              },
-              {
-                "id": "cable",
-                "label": "Cable"
-              },
-              {
-                "id": "passive-port",
-                "label": "Passive Port"
-              },
-              {
-                "id": "passive-device",
-                "label": "Passive Device"
+                "id": "networks",
+                "label": "Networks",
+                "children": [
+                  {
+                    "id": "network",
+                    "label": "Network",
+                    "children": [
+                      {
+                        "id": "network-types",
+                        "label": "Network Types"
+                      },
+                      {
+                        "id": "supporting-network",
+                        "label": "Supporting Network"
+                      },
+                      {
+                        "id": "node",
+                        "label": "Node",
+                        "children": [
+                          {
+                            "id": "supporting-node",
+                            "label": "Supporting Node"
+                          }
+                        ]
+                      }
+                    ]
+                  }
+                ]
               }
             ]
           },
@@ -141,171 +123,38 @@
   },
   "attributes": [
     {
-      "key": "device-type",
-      "label": "Device Type",
+      "key": "networks/network/network-id",
+      "label": "Network Id",
       "type": "string",
-      "sectionGroup": "General",
+      "sectionGroup": "networks",
       "isRequired": false
     },
     {
-      "key": "device-id",
-      "label": "Device Id",
+      "key": "networks/network/supporting-network/network-ref",
+      "label": "Network Ref",
       "type": "string",
-      "sectionGroup": "General",
+      "sectionGroup": "networks",
       "isRequired": false
     },
     {
-      "key": "ne-ref",
-      "label": "Ne Ref",
+      "key": "networks/network/node/node-id",
+      "label": "Node Id",
       "type": "string",
-      "sectionGroup": "General",
+      "sectionGroup": "networks",
       "isRequired": false
     },
     {
-      "key": "component-ref",
-      "label": "Component Ref",
+      "key": "networks/network/node/supporting-node/network-ref",
+      "label": "Network Ref",
       "type": "string",
-      "sectionGroup": "General",
+      "sectionGroup": "networks",
       "isRequired": false
     },
     {
-      "key": "id",
-      "label": "Id",
+      "key": "networks/network/node/supporting-node/node-ref",
+      "label": "Node Ref",
       "type": "string",
-      "sectionGroup": "General",
-      "isRequired": false
-    },
-    {
-      "key": "length",
-      "label": "Length",
-      "type": "int",
-      "sectionGroup": "General",
-      "isRequired": false
-    },
-    {
-      "key": "optical-cable/fiber-core-num",
-      "label": "Fiber Core Num",
-      "type": "int",
-      "sectionGroup": "optical-cable",
-      "isRequired": false
-    },
-    {
-      "key": "optical-cable/fiber-type",
-      "label": "Fiber Type",
-      "type": "string",
-      "sectionGroup": "optical-cable",
-      "isRequired": false
-    },
-    {
-      "key": "optical-cable/attenuation",
-      "label": "Attenuation",
-      "type": "double",
-      "sectionGroup": "optical-cable",
-      "isRequired": false
-    },
-    {
-      "key": "id",
-      "label": "Id",
-      "type": "string",
-      "sectionGroup": "General",
-      "isRequired": false
-    },
-    {
-      "key": "length",
-      "label": "Length",
-      "type": "int",
-      "sectionGroup": "General",
-      "isRequired": false
-    },
-    {
-      "key": "cable-type",
-      "label": "Cable Type",
-      "type": "string",
-      "sectionGroup": "General",
-      "isRequired": false
-    },
-    {
-      "key": "cable-role",
-      "label": "Cable Role",
-      "type": "string",
-      "sectionGroup": "General",
-      "isRequired": false
-    },
-    {
-      "key": "optical-cable/fiber-core-num",
-      "label": "Fiber Core Num",
-      "type": "int",
-      "sectionGroup": "optical-cable",
-      "isRequired": false
-    },
-    {
-      "key": "optical-cable/fiber-type",
-      "label": "Fiber Type",
-      "type": "string",
-      "sectionGroup": "optical-cable",
-      "isRequired": false
-    },
-    {
-      "key": "optical-cable/attenuation",
-      "label": "Attenuation",
-      "type": "double",
-      "sectionGroup": "optical-cable",
-      "isRequired": false
-    },
-    {
-      "key": "child-cable/index",
-      "label": "Index",
-      "type": "int",
-      "sectionGroup": "child-cable",
-      "isRequired": false
-    },
-    {
-      "key": "passive-port/id",
-      "label": "Id",
-      "type": "string",
-      "sectionGroup": "passive-port",
-      "isRequired": false
-    },
-    {
-      "key": "passive-port/port-type",
-      "label": "Port Type",
-      "type": "string",
-      "sectionGroup": "passive-port",
-      "isRequired": false
-    },
-    {
-      "key": "passive-port/fiber-core-num",
-      "label": "Fiber Core Num",
-      "type": "int",
-      "sectionGroup": "passive-port",
-      "isRequired": false
-    },
-    {
-      "key": "passive-device/id",
-      "label": "Id",
-      "type": "string",
-      "sectionGroup": "passive-device",
-      "isRequired": false
-    },
-    {
-      "key": "passive-device/device-type",
-      "label": "Device Type",
-      "type": "string",
-      "sectionGroup": "passive-device",
-      "isRequired": false
-    },
-    {
-      "key": "passive-device/custom-tags",
-      "label": "Custom Tags",
-      "type": "string",
-      "sectionGroup": "passive-device",
-      "isRequired": false
-    },
-    {
-      "key": "passive-device/location-ref",
-      "label": "Location Ref",
-      "type": "string",
-      "sectionGroup": "passive-device",
+      "sectionGroup": "networks",
       "isRequired": false
     }
   ]
