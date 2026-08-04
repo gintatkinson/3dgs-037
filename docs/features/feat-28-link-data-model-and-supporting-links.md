@@ -23,6 +23,11 @@ This feature specifies the Link Data Model defined by the `ietf-network-topology
 ## UML Class Diagram
 ```mermaid
 classDiagram
+    class SubsystemComponent {
+        <<component>>
+        +Boolean addLink(String networkId, String linkId, String sourceNode, String destNode) "[1]"
+        +Boolean addSupportingLink(String networkRef, String linkRef) "[1]"
+    }
     class Networks {
     }
     class Network {
@@ -30,20 +35,25 @@ classDiagram
     }
     class Link {
         +String linkId "[1]"
+        +Boolean setLinkId(String linkId) "[1]"
     }
     class Source {
         +String sourceNode "[0..1]"
         +String sourceTp "[0..1]"
+        +Boolean setSource(String sourceNode, String sourceTp) "[1]"
     }
     class Destination {
         +String destNode "[0..1]"
         +String destTp "[0..1]"
+        +Boolean setDestination(String destNode, String destTp) "[1]"
     }
     class SupportingLink {
         +String networkRef "[1]"
         +String linkRef "[1]"
+        +Boolean validateLinkRef(String networkRef, String linkRef) "[1]"
     }
 
+    SubsystemComponent "1" *-- "1" Networks : networks
     Networks "1" *-- "0..*" Network : network
     Network "1" *-- "0..*" Link : link
     Link "1" *-- "0..1" Source : source
@@ -188,6 +198,9 @@ classDiagram
 >     }
 >   }
 > }
+
+## User Stories
+- [ ] #94 - [ietf-network-topology: Directional Link Instantiation, Source/Destination TP Leafref Binding, and Underlay Supporting Link Path Resolution](https://github.com/gintatkinson/3dgs-037/blob/main/docs/user-stories/us-35-directional-link-instantiation-and-traversal.md)
 
 ## Source References
 Structural Schema: https://github.com/YangModels/yang/blob/main/standard/ietf/RFC/ietf-network-topology%402018-02-26.yang (Clause: Section 4.3)

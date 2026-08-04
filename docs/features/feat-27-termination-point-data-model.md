@@ -23,6 +23,11 @@ This feature specifies the data model for termination points within the `ietf-ne
 ## UML Class Diagram
 ```mermaid
 classDiagram
+    class SubsystemComponent {
+        <<component>>
+        +Boolean addTerminationPoint(String networkId, String nodeId, String tpId) "[1]"
+        +Boolean addSupportingTerminationPoint(String networkRef, String nodeRef, String tpRef) "[1]"
+    }
     class Networks {
     }
     class Network {
@@ -33,12 +38,15 @@ classDiagram
     }
     class TerminationPoint {
         +String tpId "[1]"
+        +Boolean setTpId(String tpId) "[1]"
     }
     class SupportingTerminationPoint {
         +String networkRef "[1]"
         +String nodeRef "[1]"
         +String tpRef "[1]"
+        +Boolean validateTpRef(String networkRef, String nodeRef, String tpRef) "[1]"
     }
+    SubsystemComponent "1" *-- "1" Networks : networks
     Networks "1" *-- "0..*" Network : network
     Network "1" *-- "0..*" Node : node
     Node "1" *-- "0..*" TerminationPoint : terminationPoint
@@ -157,6 +165,9 @@ classDiagram
 >   }
 > }
 > ```
+
+## User Stories
+- [ ] #93 - [ietf-network-topology: Directional Termination Point Provisioning, TP-ID Alignment, and Supporting Termination Point Cross-Layer Resolution](https://github.com/gintatkinson/3dgs-037/blob/main/docs/user-stories/us-34-termination-point-binding.md)
 
 ## Source References
 Structural Schema: https://github.com/YangModels/yang/blob/main/standard/ietf/RFC/ietf-network-topology%402018-02-26.yang (Clause: Section 4.4)

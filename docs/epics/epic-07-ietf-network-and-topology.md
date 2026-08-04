@@ -25,8 +25,10 @@ This Epic defines the foundational network and topology base models derived from
 - (To be linked upon Use Case generation)
 
 #### Associated User Stories
-*To be populated after Phase 3*
-- (To be linked upon User Story generation)
+- [ ] #91 - [ietf-network: Base Network Instance Onboarding, Network-ID String Syntax Checking, and Supporting Network Multi-Layer Overlay Hierarchy Resolution](https://github.com/gintatkinson/3dgs-037/blob/main/docs/user-stories/us-32-network-instance-lifecycle.md)
+- [ ] #92 - [ietf-network: Abstract and Physical Node Creation, Node-ID Uniqueness Verification, and Underlay Supporting Node Traversal](https://github.com/gintatkinson/3dgs-037/blob/main/docs/user-stories/us-33-node-creation-and-supporting-node-mapping.md)
+- [ ] #93 - [ietf-network-topology: Directional Termination Point Provisioning, TP-ID Alignment, and Supporting Termination Point Cross-Layer Resolution](https://github.com/gintatkinson/3dgs-037/blob/main/docs/user-stories/us-34-termination-point-binding.md)
+- [ ] #94 - [ietf-network-topology: Directional Link Instantiation, Source/Destination TP Leafref Binding, and Underlay Supporting Link Path Resolution](https://github.com/gintatkinson/3dgs-037/blob/main/docs/user-stories/us-35-directional-link-instantiation-and-traversal.md)
 
 ## 3. Architecture
 
@@ -37,8 +39,11 @@ classDiagram
         <<component>>
         +Boolean createNetwork(String networkId) "[1]"
         +Boolean addNode(String networkId, String nodeId) "[1]"
+        +Boolean addSupportingNode(String networkRef, String nodeRef) "[1]"
         +Boolean addTerminationPoint(String networkId, String nodeId, String tpId) "[1]"
+        +Boolean addSupportingTerminationPoint(String networkRef, String nodeRef, String tpRef) "[1]"
         +Boolean addLink(String networkId, String linkId, String sourceNode, String destNode) "[1]"
+        +Boolean addSupportingLink(String networkRef, String linkRef) "[1]"
     }
     class BaseNetwork {
         +String networkId "[1]"
@@ -65,46 +70,59 @@ classDiagram
         <<component>>
         +Boolean createNetwork(String networkId) "[1]"
         +Boolean addNode(String networkId, String nodeId) "[1]"
+        +Boolean addSupportingNode(String networkRef, String nodeRef) "[1]"
         +Boolean addTerminationPoint(String networkId, String nodeId, String tpId) "[1]"
+        +Boolean addSupportingTerminationPoint(String networkRef, String nodeRef, String tpRef) "[1]"
         +Boolean addLink(String networkId, String linkId, String sourceNode, String destNode) "[1]"
+        +Boolean addSupportingLink(String networkRef, String linkRef) "[1]"
     }
     class Networks {
     }
     class Network {
         +String networkId "[1]"
+        +Boolean setNetworkId(String networkId) "[1]"
     }
     class SupportingNetwork {
         +String networkRef "[1]"
+        +Boolean validateNetworkRef(String networkRef) "[1]"
     }
     class Node {
         +String nodeId "[1]"
+        +Boolean setNodeId(String nodeId) "[1]"
     }
     class SupportingNode {
         +String networkRef "[1]"
         +String nodeRef "[1]"
+        +Boolean validateNodeRef(String networkRef, String nodeRef) "[1]"
     }
     class TerminationPoint {
         +String tpId "[1]"
+        +Boolean setTpId(String tpId) "[1]"
     }
     class SupportingTerminationPoint {
         +String networkRef "[1]"
         +String nodeRef "[1]"
         +String tpRef "[1]"
+        +Boolean validateTpRef(String networkRef, String nodeRef, String tpRef) "[1]"
     }
     class Link {
         +String linkId "[1]"
+        +Boolean setLinkId(String linkId) "[1]"
     }
     class Source {
-        +String sourceNode "[1]"
+        +String sourceNode "[0..1]"
         +String sourceTp "[0..1]"
+        +Boolean setSource(String sourceNode, String sourceTp) "[1]"
     }
     class Destination {
-        +String destNode "[1]"
+        +String destNode "[0..1]"
         +String destTp "[0..1]"
+        +Boolean setDestination(String destNode, String destTp) "[1]"
     }
     class SupportingLink {
         +String networkRef "[1]"
         +String linkRef "[1]"
+        +Boolean validateLinkRef(String networkRef, String linkRef) "[1]"
     }
     SubsystemComponent "1" *-- "1" Networks : networks
     Networks "1" *-- "0..*" Network : network

@@ -28,16 +28,23 @@ The `networks` container contains a list of `network` instances, each representi
 ## UML Class Diagram
 ```mermaid
 classDiagram
+    class SubsystemComponent {
+        <<component>>
+        +Boolean createNetwork(String networkId) "[1]"
+    }
     class Networks {
     }
     class Network {
         +String networkId "[1]"
+        +Boolean setNetworkId(String networkId) "[1]"
     }
     class NetworkTypes {
     }
     class SupportingNetwork {
         +String networkRef "[1]"
+        +Boolean validateNetworkRef(String networkRef) "[1]"
     }
+    SubsystemComponent "1" *-- "1" Networks : networks
     Networks "1" *-- "0..*" Network : network
     Network "1" *-- "0..1" NetworkTypes : networkTypes
     Network "1" *-- "0..*" SupportingNetwork : supportingNetwork
@@ -156,6 +163,9 @@ container networks {
   }
 }
 ```
+
+## User Stories
+- [ ] #91 - [ietf-network: Base Network Instance Onboarding, Network-ID String Syntax Checking, and Supporting Network Multi-Layer Overlay Hierarchy Resolution](https://github.com/gintatkinson/3dgs-037/blob/main/docs/user-stories/us-32-network-instance-lifecycle.md)
 
 ## Source References
 Structural Schema: https://github.com/YangModels/yang/blob/main/standard/ietf/RFC/ietf-network%402018-02-26.yang (Clause: Section 4.1)

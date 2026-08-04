@@ -1,0 +1,36 @@
+{
+  "timestamp": "2026-08-04T13:13:52.558713Z",
+  "tooling": {
+    "name": "parity_auditor",
+    "version": "1.0.0"
+  },
+  "context": {
+    "command": "./skills/spec-orchestrator/scripts/verify_model_coverage.py --spec-only --allow-missing-specs",
+    "exit_code": 1,
+    "downstream_repo": "https://github.com/gintatkinson/3dgs-037.git",
+    "commit_hash": "db2fed22c1908d7a6c52691c23a8f3a6270b9d7f"
+  },
+  "failure": {
+    "traceback": "",
+    "error_summary": [
+      "User Story us-34-termination-point-binding.md sequence diagram message 'subsystemComponent->>terminationPoint: setTpId(tpId: String)' calls operation 'setTpId' which is not defined on class 'TerminationPoint' in any class diagram.",
+      "User Story us-34-termination-point-binding.md sequence diagram message 'userActor->>subsystemComponent: addSupportingTerminationPoint(networkRef: String, nodeRef: String, tpRef: String)' calls operation 'addSupportingTerminationPoint' which is not defined on class 'SubsystemComponent' in any class diagram.",
+      "User Story us-34-termination-point-binding.md sequence diagram message 'subsystemComponent->>supportingTerminationPoint: validateTpRef(networkRef: String, nodeRef: String, tpRef: String)' calls operation 'validateTpRef' which is not defined on class 'SupportingTerminationPoint' in any class diagram.",
+      "User Story us-32-network-instance-lifecycle.md sequence diagram message 'subsystemComponent->>network: setNetworkId(networkId: String)' calls operation 'setNetworkId' which is not defined on class 'Network' in any class diagram.",
+      "User Story us-32-network-instance-lifecycle.md sequence diagram message 'subsystemComponent->>supportingNetwork: validateNetworkRef(networkRef: String)' calls operation 'validateNetworkRef' which is not defined on class 'SupportingNetwork' in any class diagram.",
+      "User Story us-33-node-creation-and-supporting-node-mapping.md sequence diagram message 'subsystemComponent->>node: setNodeId(nodeId: String)' calls operation 'setNodeId' which is not defined on class 'Node' in any class diagram.",
+      "User Story us-33-node-creation-and-supporting-node-mapping.md sequence diagram message 'userActor->>subsystemComponent: addSupportingNode(networkRef: String, nodeRef: String)' calls operation 'addSupportingNode' which is not defined on class 'SubsystemComponent' in any class diagram.",
+      "User Story us-33-node-creation-and-supporting-node-mapping.md sequence diagram message 'subsystemComponent->>supportingNode: validateNodeRef(networkRef: String, nodeRef: String)' calls operation 'validateNodeRef' which is not defined on class 'SupportingNode' in any class diagram.",
+      "User Story us-35-directional-link-instantiation-and-traversal.md sequence diagram message 'subsystemComponent->>link: setLinkId(linkId: String)' calls operation 'setLinkId' which is not defined on class 'Link' in any class diagram.",
+      "User Story us-35-directional-link-instantiation-and-traversal.md sequence diagram message 'subsystemComponent->>source: setSource(sourceNode: String, sourceTp: String)' calls operation 'setSource' which is not defined on class 'Source' in any class diagram.",
+      "User Story us-35-directional-link-instantiation-and-traversal.md sequence diagram message 'subsystemComponent->>destination: setDestination(destNode: String, destTp: String)' calls operation 'setDestination' which is not defined on class 'Destination' in any class diagram.",
+      "User Story us-35-directional-link-instantiation-and-traversal.md sequence diagram message 'userActor->>subsystemComponent: addSupportingLink(networkRef: String, linkRef: String)' calls operation 'addSupportingLink' which is not defined on class 'SubsystemComponent' in any class diagram.",
+      "User Story us-35-directional-link-instantiation-and-traversal.md sequence diagram message 'subsystemComponent->>supportingLink: validateLinkRef(networkRef: String, linkRef: String)' calls operation 'validateLinkRef' which is not defined on class 'SupportingLink' in any class diagram."
+    ]
+  },
+  "reproduction_case": {
+    "target_file": "",
+    "snippet_type": "text",
+    "snippet_content": ""
+  }
+}

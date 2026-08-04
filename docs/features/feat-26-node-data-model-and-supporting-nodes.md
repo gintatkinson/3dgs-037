@@ -23,6 +23,11 @@ This feature specifies the Node Data Model defined by the `ietf-network` YANG mo
 ## UML Class Diagram
 ```mermaid
 classDiagram
+    class SubsystemComponent {
+        <<component>>
+        +Boolean addNode(String networkId, String nodeId) "[1]"
+        +Boolean addSupportingNode(String networkRef, String nodeRef) "[1]"
+    }
     class Networks {
     }
     class Network {
@@ -30,12 +35,15 @@ classDiagram
     }
     class Node {
         +String nodeId "[1]"
+        +Boolean setNodeId(String nodeId) "[1]"
     }
     class SupportingNode {
         +String networkRef "[1]"
         +String nodeRef "[1]"
+        +Boolean validateNodeRef(String networkRef, String nodeRef) "[1]"
     }
 
+    SubsystemComponent "1" *-- "1" Networks : networks
     Networks "1" *-- "0..*" Network : network
     Network "1" *-- "0..*" Node : node
     Node "1" *-- "0..*" SupportingNode : supportingNode
@@ -133,6 +141,9 @@ classDiagram
 >     }
 >   }
 > }
+
+## User Stories
+- [ ] #92 - [ietf-network: Abstract and Physical Node Creation, Node-ID Uniqueness Verification, and Underlay Supporting Node Traversal](https://github.com/gintatkinson/3dgs-037/blob/main/docs/user-stories/us-33-node-creation-and-supporting-node-mapping.md)
 
 ## Source References
 Structural Schema: https://github.com/YangModels/yang/blob/main/standard/ietf/RFC/ietf-network%402018-02-26.yang (Clause: Section 4.2)
