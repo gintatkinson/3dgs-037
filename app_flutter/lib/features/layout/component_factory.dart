@@ -100,11 +100,11 @@ class ComponentFactory {
       case 'SidebarLayout':
         final childrenList = node['children'] as List<dynamic>? ?? [];
         final sidebarChild = childrenList.firstWhere(
-          (c) => c['type'] == 'HierarchyTreeSelector',
+          (c) => c['type'] == 'HierarchyTreeSelector' || c['type'] == 'HierarchyTree',
           orElse: () => null,
         );
         final splitWorkspaceChild = childrenList.firstWhere(
-          (c) => c['type'] == 'SplitWorkspace',
+          (c) => c['type'] == 'SplitWorkspace' || c['type'] == 'ResizableSplitter',
           orElse: () => null,
         );
             return SplitWorkspace(
@@ -121,6 +121,7 @@ class ComponentFactory {
               paintLeadingOnTop: true,
             );
       case 'HierarchyTreeSelector':
+      case 'HierarchyTree':
         final tree = SidebarTree(
           workerResult: workerResult,
           onViewSelected: onViewSelected,
@@ -133,13 +134,14 @@ class ComponentFactory {
         }
         return tree;
       case 'SplitWorkspace':
+      case 'ResizableSplitter':
         final childrenList = node['children'] as List<dynamic>? ?? [];
         final topoChild = childrenList.firstWhere(
-          (c) => c['type'] == 'TopographicalView',
+          (c) => c['type'] == 'TopographicalView' || c['type'] == 'TopologyMap',
           orElse: () => null,
         );
         final tabbedChild = childrenList.firstWhere(
-          (c) => c['type'] == 'TabbedContainer',
+          (c) => c['type'] == 'TabbedContainer' || c['type'] == 'ResizableSplitter',
           orElse: () => null,
         );
         return SplitWorkspace(
@@ -155,6 +157,7 @@ class ComponentFactory {
           splitterKey: const Key('horizontal_splitter'),
         );
       case 'TopographicalView':
+      case 'TopologyMap':
         final treeData = treeViewModel?.treeData ?? [];
         final panelOpacity = context.watch<ThemeController>().panelOpacity;
         return TopographicalView(
