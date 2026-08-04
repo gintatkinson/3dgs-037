@@ -231,11 +231,29 @@ class RepositoryResolver {
       }
 
     // Initialize the SQLite database and inject DomainSeedStrategy to seed mock properties
-    final db = await DatabaseInitializer.create(
-      dbPath: dbPath,
-      seed: true,
-      seedStrategy: DomainSeedStrategy(),
-    );
-    return SqliteDataSource(db);
+    try {
+      final db = await DatabaseInitializer.create(
+        dbPath: dbPath,
+        seed: true,
+        seedStrategy: DomainSeedStrategy(),
+      );
+      return SqliteDataSource(db);
+    } catch (e) {
+      debugPrint('Database initializer error: $e. Recreating database at $dbPath...');
+      if (!kIsWeb && !inMemory && dbPath != inMemoryDatabasePath) {
+        final dbFile = File(dbPath);
+        if (await dbFile.exists()) {
+          try {
+            await dbFile.delete();
+          } catch (_) {}
+        }
+      }
+      final db = await DatabaseInitializer.create(
+        dbPath: dbPath,
+        seed: true,
+        seedStrategy: DomainSeedStrategy(),
+      );
+      return SqliteDataSource(db);
+    }
   }
 }
