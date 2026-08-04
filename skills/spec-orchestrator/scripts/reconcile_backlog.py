@@ -432,9 +432,14 @@ def deduplicate_markdown_sections(content):
 def rewrite_header_repository_urls(content, active_repo):
     if not content or not active_repo:
         return content
-    pattern = r'https://github\.com/[^/]+/[^/]+/blob/'
-    replacement = f'https://github.com/{active_repo}/blob/'
-    return re.sub(pattern, replacement, content)
+    external_orgs = {'YangModels', 'ietf-ivy-wg', 'aguoietf'}
+    pattern = r'https://github\.com/([^/]+)/([^/]+)/blob/'
+    def replacer(m):
+        org = m.group(1)
+        if org in external_orgs:
+            return m.group(0)
+        return f'https://github.com/{active_repo}/blob/'
+    return re.sub(pattern, replacer, content)
 
 def sanitize_source_references(content, workspace_dir=None, rules=None):
     if not content:

@@ -1,0 +1,330 @@
+| Metadata | Value |
+| --- | --- |
+| **title** | [ietf-yang-types]: Identifier Data Types |
+| **type** | feature |
+| **interface_type** | api |
+| **generation_mode** | subagent |
+| **spec_source** | Project Constitution |
+| **labels** | feature, ietf-yang-types |
+| **issue_id** | 2 |
+| **schema_containers** | {'path': 'ietf-yang-types:identifier-types', 'node_type': 'container'} |
+
+# Feature: [ietf-yang-types]: Identifier Data Types
+
+## Parent Epic
+- [ ] #5 - [[ietf-yang-types]: Common YANG Data Types](https://github.com/gintatkinson/3dgs-037/blob/main/docs/epics/epic-01-ietf-yang-types.md) (Parent Epic for common YANG data types)
+
+## Description
+This feature specifies the set of identifier data types defined in the `ietf-yang-types` YANG module (`ietf-yang-types@2025-12-22.yang`, RFC 9911). These identifier types provide standardized string representations for hierarchical registration names, RFC 9562 Universally Unique Identifiers (UUIDs), and RFC 7950 YANG language identifiers.
+
+The feature encompasses four canonical typedef specifications:
+
+1. **`object-identifier`**:
+   - Represents administratively assigned names in a registration-hierarchical-name tree as a sequence of dot-separated non-negative numerical sub-identifiers (e.g., `1.3.6.1.4.1`).
+   - **Sub-identifier Numeric Range:** Each sub-identifier MUST NOT exceed $2^{32}-1$ (4,294,967,295).
+   - **ASN.1 Standard Structural Restrictions:**
+     - The first sub-identifier MUST be `0`, `1`, or `2`.
+     - If the first sub-identifier is `0` or `1`, the second sub-identifier MUST be in the range `0` to `39` inclusive.
+     - An object identifier MUST contain at least two sub-identifiers.
+   - **Regex Pattern:** `(([0-1](\.[1-3]?[0-9]))|(2\.(0|([1-9][0-9]*))))(\.(0|([1-9][0-9]*)))*`
+   - **SMIv2 Super-Set:** Unlike SMIv2 `OBJECT IDENTIFIER`, `object-identifier` allows more than 128 sub-identifiers.
+
+2. **`object-identifier-128`**:
+   - Derived from `object-identifier` but strictly restricted to at most 128 sub-identifiers (1 to 128 sub-identifiers).
+   - **Regex Pattern:** `[0-9]*(\.[0-9]*){1,127}` (applied on top of `object-identifier`).
+   - **SMIv2 Equivalence:** Semantically equivalent to the SMIv2 `OBJECT IDENTIFIER` type defined in RFC 2578.
+
+3. **`uuid`**:
+   - Represents a Universally Unique IDentifier formatted as a 36-character string in accordance with RFC 9562 (8-4-4-4-12 hex digits separated by hyphens).
+   - **Canonical Form:** MUST use lowercase hexadecimal characters.
+   - **Regex Pattern:** `[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}`
+   - **Example:** `f81d4fae-7dec-11d0-a765-00a0c91e6bf6`
+
+4. **`yang-identifier`**:
+   - Represents a valid YANG identifier string as defined by Section 14 of RFC 7950 (YANG 1.1).
+   - **Length Restriction:** `1..max` (at least 1 character).
+   - **Syntax Rules:** MUST start with an alphabetic character (`a-z`, `A-Z`) or an underscore (`_`), followed by any combination of alphabetic characters, digits (`0-9`), underscores (`_`), hyphens (`-`), or dots (`.`).
+   - **Regex Pattern:** `[a-zA-Z_][a-zA-Z0-9\-_.]*`
+   - **YANG 1.1 Context:** Aligns with RFC 7950; the legacy YANG 1.0 (RFC 6020 / RFC 6991) restriction prohibiting leading `xml` prefixes is lifted in YANG 1.1 contexts.
+
+## UML Class Diagram
+```mermaid
+classDiagram
+    class IdentifierTypes {
+        +String containerId "[1]"
+    }
+    class ObjectIdentifier {
+        +String value "[1]"
+        +Boolean validateAsn1Restrictions() "[1]"
+        +Boolean validateSubIdentifierLimits() "[1]"
+    }
+    class ObjectIdentifier128 {
+        +Integer maxSubIdentifiers "[1]"
+        +Boolean validate128Limit() "[1]"
+    }
+    class Uuid {
+        +String value "[1]"
+        +Boolean validateRfc9562Format() "[1]"
+        +Boolean isCanonicalLowercase() "[1]"
+    }
+    class YangIdentifier {
+        +String value "[1]"
+        +Integer minLength "[1]"
+        +Boolean validateRfc7950Rules() "[1]"
+    }
+    IdentifierTypes "1" *-- "0..1" ObjectIdentifier : objectIdentifier
+    IdentifierTypes "1" *-- "0..1" ObjectIdentifier128 : objectIdentifier128
+    IdentifierTypes "1" *-- "0..1" Uuid : uuid
+    IdentifierTypes "1" *-- "0..1" YangIdentifier : yangIdentifier
+    ObjectIdentifier <|-- ObjectIdentifier128
+```
+
+## Interface Requirements
+
+### 1. Payload Schema
+```json
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "IdentifierTypesPayload",
+  "type": "object",
+  "properties": {
+    "objectIdentifier": {
+      "type": "string",
+      "pattern": "^(([0-1](\\.[1-3]?[0-9]))|(2\\.(0|([1-9][0-9]*))))(\\.(0|([1-9][0-9]*)))*$",
+      "description": "ASN.1 OID string with sub-identifiers up to 2^32-1"
+    },
+    "objectIdentifier128": {
+      "type": "string",
+      "pattern": "^(([0-1](\\.[1-3]?[0-9]))|(2\\.(0|([1-9][0-9]*))))(\\.(0|([1-9][0-9]*)))*$",
+      "maxLength": 1408,
+      "description": "ASN.1 OID string restricted to at most 128 sub-identifiers"
+    },
+    "uuid": {
+      "type": "string",
+      "pattern": "^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$",
+      "description": "RFC 9562 UUID string in hex notation"
+    },
+    "yangIdentifier": {
+      "type": "string",
+      "minLength": 1,
+      "pattern": "^[a-zA-Z_][a-zA-Z0-9\\-_.]*$",
+      "description": "YANG 1.1 identifier string per RFC 7950 Section 14"
+    }
+  },
+  "required": ["objectIdentifier", "uuid", "yangIdentifier"]
+}
+```
+
+### 2. Validation & Constraints
+- **`object-identifier` Validation Rules:**
+  - MUST contain at least two dot-separated numerical components.
+  - First sub-identifier MUST be `0`, `1`, or `2`.
+  - Second sub-identifier MUST be $\le 39$ if first sub-identifier is `0` or `1`.
+  - Every sub-identifier value MUST be in the range $[0, 4294967295]$.
+  - No leading zeroes allowed in sub-identifiers except for single digit `0`.
+  - No whitespace permitted anywhere in the string.
+- **`object-identifier-128` Validation Rules:**
+  - Inherits all `object-identifier` validation rules.
+  - Count of dot-separated sub-identifiers MUST NOT exceed 128.
+- **`uuid` Validation Rules:**
+  - String length MUST be exactly 36 characters (32 hex characters and 4 hyphens).
+  - Format MUST match `8-4-4-4-12` pattern.
+  - Canonical format SHOULD enforce lowercase hexadecimal characters (`0-9a-f`).
+- **`yang-identifier` Validation Rules:**
+  - Length MUST be at least 1 character (`1..max`).
+  - First character MUST be in set `[a-zA-Z_]`.
+  - Subsequent characters MUST be in set `[a-zA-Z0-9\-_.]`.
+
+### 3. Logical Operations & Interface Messages
+- **`validateIdentifier(type: String, value: String) -> ValidationResult`**:
+  - Validates a given identifier string against the constraints of the specified typedef (`object-identifier`, `object-identifier-128`, `uuid`, or `yang-identifier`).
+  - Returns `ValidationResult(isValid: Boolean, errorCode: String, message: String)`.
+- **`normalizeUuid(value: String) -> String`**:
+  - Converts a valid UUID string to its canonical lowercase representation.
+- **`parseOidSubIdentifiers(value: String) -> List<Integer>`**:
+  - Parses an OID string into a list of 32-bit unsigned sub-identifier integers. Throws `INVALID_OID_FORMAT` or `SUBIDENTIFIER_OVERFLOW` if validation fails.
+
+### 4. Logical Exception States & Validation Failures
+- **`INVALID_OID_FIRST_ARC`**:
+  - Triggered when the first sub-identifier of an OID is $> 2$.
+- **`INVALID_OID_SECOND_ARC`**:
+  - Triggered when the first sub-identifier is `0` or `1` and the second sub-identifier is $> 39$.
+- **`OID_SUBIDENTIFIER_OVERFLOW`**:
+  - Triggered when a sub-identifier value exceeds $2^{32}-1$ (4,294,967,295).
+- **`OID_TOO_FEW_SUBIDENTIFIERS`**:
+  - Triggered when an OID contains fewer than 2 sub-identifiers (e.g. `"1"`).
+- **`OID_128_LIMIT_EXCEEDED`**:
+  - Triggered when an `object-identifier-128` contains more than 128 sub-identifiers.
+- **`INVALID_UUID_FORMAT`**:
+  - Triggered when a UUID string fails the `8-4-4-4-12` regex pattern.
+- **`INVALID_YANG_IDENTIFIER_START`**:
+  - Triggered when a `yang-identifier` starts with an invalid character (e.g. digit, hyphen, or dot).
+- **`INVALID_YANG_IDENTIFIER_CHARACTER`**:
+  - Triggered when a `yang-identifier` contains illegal characters (e.g. spaces, colons, or slashes).
+
+## Given-When-Then Acceptance Criteria
+
+### Scenario 1: Validating Standard Object Identifiers (OIDs)
+- **Given** a data input stream expecting an `object-identifier` value
+- **When** the payload receives valid OID strings `"1.3.6.1.4.1"`, `"0.39.100"`, or `"2.999.4294967295"`
+- **Then** the validation engine SHALL accept the value as valid `object-identifier`
+- **And** confirm that all sub-identifiers satisfy ASN.1 arc limits and 32-bit unsigned boundaries.
+
+### Scenario 2: Rejecting Invalid OID First and Second Arc Combinations
+- **Given** an OID validator for `object-identifier`
+- **When** the input string is `"3.1.2"` (invalid first arc) or `"0.40.1"` (invalid second arc for root 0)
+- **Then** the validation engine SHALL reject the input
+- **And** raise error code `INVALID_OID_FIRST_ARC` or `INVALID_OID_SECOND_ARC` respectively.
+
+### Scenario 3: Rejecting Sub-identifier Overflow
+- **Given** an OID validator for `object-identifier`
+- **When** the input string contains a sub-identifier exceeding $2^{32}-1$, such as `"1.3.4294967296"`
+- **Then** the validation engine SHALL reject the input with `OID_SUBIDENTIFIER_OVERFLOW`.
+
+### Scenario 4: Validating `object-identifier-128` Boundary Limits
+- **Given** an `object-identifier-128` validator
+- **When** an OID string with 128 sub-identifiers is evaluated
+- **Then** the validation engine SHALL accept the value
+- **When** an OID string with 129 sub-identifiers is evaluated
+- **Then** the validation engine SHALL reject the input with error code `OID_128_LIMIT_EXCEEDED`.
+
+### Scenario 5: Validating and Normalizing RFC 9562 UUID Strings
+- **Given** a UUID validation function
+- **When** the input is `"f81d4fae-7dec-11d0-a765-00a0c91e6bf6"` or uppercase `"F81D4FAE-7DEC-11D0-A765-00A0C91E6BF6"`
+- **Then** the validation engine SHALL confirm it matches the RFC 9562 pattern
+- **And** normalize the uppercase input to canonical lowercase `"f81d4fae-7dec-11d0-a765-00a0c91e6bf6"`.
+
+### Scenario 6: Rejecting Malformed UUID Strings
+- **Given** a UUID validation function
+- **When** input strings `"f81d4fae-7dec-11d0-a765"` or `"f81d4fae-7dec-11d0-a765-00a0c91e6bf60"` are provided
+- **Then** the validation engine SHALL reject the input with `INVALID_UUID_FORMAT`.
+
+### Scenario 7: Validating RFC 7950 YANG Identifiers
+- **Given** a `yang-identifier` validator compliant with RFC 7950
+- **When** input strings `"interfaces"`, `"_bgp-peer.1"`, or `"xml-element"` are provided
+- **Then** the validation engine SHALL accept the inputs as valid `yang-identifier` values.
+
+### Scenario 8: Rejecting Invalid YANG Identifiers
+- **Given** a `yang-identifier` validator
+- **When** input strings `"123-node"` (starts with digit) or `"interface:eth0"` (contains colon) are provided
+- **Then** the validation engine SHALL reject `"123-node"` with `INVALID_YANG_IDENTIFIER_START`
+- **And** reject `"interface:eth0"` with `INVALID_YANG_IDENTIFIER_CHARACTER`.
+
+## Specification Context (Verbatim)
+
+From `schema/ietf-yang-types@2025-12-22.yang`:
+
+```yang
+  typedef object-identifier {
+    type string {
+      pattern '(([0-1](\.[1-3]?[0-9]))|(2\.(0|([1-9][0-9]*))))'
+            + '(\.(0|([1-9][0-9]*)))*';
+    }
+    description
+      "The object-identifier type represents administratively
+       assigned names in a registration-hierarchical-name tree.
+
+       Values of this type are denoted as a sequence of numerical
+       non-negative sub-identifier values.  Each sub-identifier
+       value MUST NOT exceed 2^32-1 (4294967295).  Sub-identifiers
+       are separated by single dots and without any intermediate
+       whitespace.
+
+       The ASN.1 standard restricts the value space of the first
+       sub-identifier to 0, 1, or 2.  Furthermore, the value space
+       of the second sub-identifier is restricted to the range
+       0 to 39 if the first sub-identifier is 0 or 1.  Finally,
+       the ASN.1 standard requires that an object identifier
+       has always at least two sub-identifiers.  The pattern
+       captures these restrictions.
+
+       Although the number of sub-identifiers is not limited,
+       module designers should realize that there may be
+       implementations that stick with the SMIv2 limit of 128
+       sub-identifiers.
+
+       This type is a superset of the SMIv2 OBJECT IDENTIFIER type
+       since it is not restricted to 128 sub-identifiers.  Hence,
+       this type SHOULD NOT be used to represent the SMIv2 OBJECT
+       IDENTIFIER type; the object-identifier-128 type SHOULD be
+       used instead.";
+    reference
+      "ISO 9834-1: Information technology -- Procedures for the
+       operation of object identifier registration authorities --
+       Part 1: General procedures and top arcs of the international
+       object identifier tree";
+  }
+
+  typedef object-identifier-128 {
+    type object-identifier {
+      pattern '[0-9]*(\.[0-9]*){1,127}';
+    }
+    description
+      "This type represents object-identifiers restricted to 128
+       sub-identifiers.
+
+       In the value set and its semantics, this type is equivalent
+       to the OBJECT IDENTIFIER type of the SMIv2.";
+    reference
+      "RFC 2578: Structure of Management Information Version 2
+                 (SMIv2)";
+  }
+
+  typedef uuid {
+    type string {
+      pattern '[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-'
+            + '[0-9a-fA-F]{4}-[0-9a-fA-F]{12}';
+    }
+    description
+      "A Universally Unique IDentifier in the string representation
+       defined in RFC 9562.  The canonical representation uses
+       lowercase characters.
+
+       The following is an example of a UUID in string
+       representation:
+       f81d4fae-7dec-11d0-a765-00a0c91e6bf6.
+      ";
+    reference
+      "RFC 9562: Universally Unique IDentifiers (UUIDs)";
+  }
+
+  typedef yang-identifier {
+    type string {
+      length "1..max";
+      pattern '[a-zA-Z_][a-zA-Z0-9\-_.]*';
+    }
+    description
+      "A YANG identifier string as defined by the 'identifier'
+       rule in Section 14 of RFC 7950.  An identifier must
+       start with an alphabetic character or an underscore
+       followed by an arbitrary sequence of alphabetic or
+       numeric characters, underscores, hyphens, or dots.
+
+       This definition conforms to YANG 1.1 defined in RFC
+       7950.  In RFC 6991, this definition excluded
+       all identifiers starting with any possible combination
+       of the lowercase or uppercase character sequence 'xml',
+       as required by YANG 1 defined in RFC 6020.  If this type
+       is used in a YANG 1 context, then this restriction still
+       applies.";
+    reference
+      "RFC 7950: The YANG 1.1 Data Modeling Language
+       RFC 6991: Common YANG Data Types
+       RFC 6020: YANG - A Data Modeling Language for the
+                 Network Configuration Protocol (NETCONF)";
+  }
+```
+
+## User Stories
+- [ ] #9 - [Object Identifier ASN.1 Arc Hierarchy and 128-Subidentifier Boundary Validation](https://github.com/gintatkinson/3dgs-037/blob/main/docs/user-stories/us-04-object-identifier-asn1-validation.md) (Validates object-identifier ASN.1 arc restrictions and object-identifier-128 sub-identifier limits)
+- [ ] #10 - [RFC 9562 UUID Pattern Validation and Canonical Lowercase Normalization](https://github.com/gintatkinson/3dgs-037/blob/main/docs/user-stories/us-05-uuid-formatting-canonicalization.md) (Validates RFC 9562 UUID format and canonical lowercase representation)
+- [ ] #11 - [RFC 7950 YANG Identifier Syntax Rules and Length Restriction Validation](https://github.com/gintatkinson/3dgs-037/blob/main/docs/user-stories/us-06-yang-identifier-syntax-validation.md) (Validates RFC 7950 YANG 1.1 identifier syntax and character rules)
+
+## Source References
+Structural Schema: https://github.com/YangModels/yang/blob/main/standard/ietf/RFC/ietf-yang-types%402025-12-22.yang
+Normative Specification: https://datatracker.ietf.org/doc/rfc9911/
+
+## Logical UI & Layout Bindings
+- **Target LUI Component:** PropertyGrid
+- **Target Layout Container ID:** properties_view
+- **Data Source Bindings:** /yang:identifier-types
