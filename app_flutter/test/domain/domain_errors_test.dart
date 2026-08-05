@@ -92,6 +92,21 @@ void main() {
         const SerializationError(targetType: 't', reason: 'r'),
         const DatabaseStorageError(message: 'm'),
         const InstanceNotFoundError(instanceId: 'i'),
+        const DomainNameLengthExceededError(length: 300),
+        const InvalidLabelSyntaxError(label: 'invalid..label'),
+        const InvalidHostFormatError(input: 'bad_host_@#\$%'),
+        const UriZeroLengthError(),
+        const UriNonAsciiError(input: 'https://x.com/ñ'),
+        const IpFlowLabelOutOfBoundsError(value: -1),
+        const DscpOutOfBoundsError(value: 64),
+        const InvalidUnicastAddressError(input: '224.0.0.1'),
+        const InvalidMulticastAddressError(input: '192.168.1.1'),
+        const UnresolvableScopeTypeError(value: 'cosmic'),
+        const InvalidAstronomicalBodyError(input: 'bad\x00'),
+        const FeatureDisabledAlternateSystemError(value: 'wgs84-3d'),
+        const InvalidGeodeticDatumError(input: 'bad\x00'),
+        const NegativeAccuracyValueError(fieldName: 'coordAccuracy', value: -1.0),
+        const AccuracyPrecisionExceededError(fieldName: 'heightAccuracy', value: 0.00000001),
       ];
 
       for (final err in errors) {
@@ -107,13 +122,54 @@ void main() {
           SchemaFieldEnumError(:final fieldName, :final value, :final allowedValues) =>
             'Enum: $fieldName ($value not in $allowedValues)',
           SerializationError(:final targetType, :final reason) =>
-            'Serialization: $targetType ($reason)',
+            'Serialization: $targetType — $reason',
           DatabaseStorageError(:final message) =>
-            'DatabaseStorage: $message',
+            'Database: $message',
           InstanceNotFoundError(:final instanceId) =>
-            'InstanceNotFound: $instanceId',
+            'NotFound: $instanceId',
+          InvalidIpVersionError(:final value) =>
+            'InvalidIpVersion: $value',
+          InvalidIpv4FormatError(:final input) =>
+            'InvalidIpv4Format: $input',
+          InvalidIpv6FormatError(:final input) =>
+            'InvalidIpv6Format: $input',
+          ZoneIndexDisallowedError(:final input) =>
+            'ZoneIndexDisallowed: $input',
+          Ipv4PrefixLengthOutOfBoundsError(:final length) =>
+            'Ipv4PrefixLen: $length',
+          Ipv6PrefixLengthOutOfBoundsError(:final length) =>
+            'Ipv6PrefixLen: $length',
+          DomainNameLengthExceededError(:final length) =>
+            'DomainNameLen: $length',
+          InvalidLabelSyntaxError(:final label) =>
+            'InvalidLabel: $label',
+          InvalidHostFormatError(:final input) =>
+            'InvalidHost: $input',
+          UriZeroLengthError() =>
+            'UriZeroLen',
+          UriNonAsciiError(:final input) =>
+            'UriNonAscii: $input',
+          IpFlowLabelOutOfBoundsError(:final value) =>
+            'IpFlowLabel: $value',
+          DscpOutOfBoundsError(:final value) =>
+            'Dscp: $value',
+          InvalidUnicastAddressError(:final input) =>
+            'InvalidUnicast: $input',
+          InvalidMulticastAddressError(:final input) =>
+            'InvalidMulticast: $input',
+          UnresolvableScopeTypeError(:final value) =>
+            'UnresolvableScope: $value',
+          InvalidAstronomicalBodyError(:final input) =>
+            'InvalidAstroBody: $input',
+          FeatureDisabledAlternateSystemError(:final value) =>
+            'FeatureDisabledAltSys: $value',
+          InvalidGeodeticDatumError(:final input) =>
+            'InvalidGeodeticDatum: $input',
+          NegativeAccuracyValueError(:final fieldName, :final value) =>
+            'NegativeAccuracy: $fieldName=$value',
+          AccuracyPrecisionExceededError(:final fieldName, :final value) =>
+            'AccuracyPrecision: $fieldName=$value',
         };
-
         expect(description, isNotEmpty);
       }
     });
