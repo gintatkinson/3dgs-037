@@ -18,7 +18,7 @@ The `ietf-geo-location` module models reference frames, geodetic systems, spatia
 
 ## 2. Requirements & Checklist
 - [ ] #34 - [ietf-geo-location: Geodetic Reference Frame](https://github.com/gintatkinson/3dgs-037/blob/main/docs/features/feat-09-geodetic-reference-frame.md) (reference-frame, alternate-system, astronomical-body)
-- [ ] #35 - [ietf-geo-location: Geodetic System and Accuracy Bounds](https://github.com/gintatkinson/3dgs-037/blob/main/docs/features/feat-10-geodetic-system-and-accuracy.md) (geodetic-system, geodetic-datum, coord-accuracy, height-accuracy)
+- [x] #35 - [ietf-geo-location: Geodetic System and Accuracy Bounds](https://github.com/gintatkinson/3dgs-037/blob/main/docs/features/feat-10-geodetic-system-and-accuracy.md) (geodetic-system, geodetic-datum, coord-accuracy, height-accuracy)
 - [ ] #36 - [ietf-geo-location: Geographic Coordinates and Altitude](https://github.com/gintatkinson/3dgs-037/blob/main/docs/features/feat-11-coordinates-and-altitude.md) (geo-location, latitude, longitude, height, x, y, z, timestamp, valid-until)
 - [ ] #37 - [ietf-geo-location: Motion and Velocity Vectors](https://github.com/gintatkinson/3dgs-037/blob/main/docs/features/feat-12-motion-and-velocity-vectors.md) (velocity, v-north, v-east, v-up)
 
