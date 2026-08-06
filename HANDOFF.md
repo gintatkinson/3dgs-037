@@ -6,7 +6,7 @@
 **Working tree**: Clean. All completed features committed and pushed.
 **Remote sync**: `git diff origin/main` is empty.
 
-### Completed Features (14 of 32)
+### Completed Features (13 of 32)
 
 | Epic | Features | Status |
 |------|----------|--------|
@@ -14,9 +14,11 @@
 | #24 — ietf-inet-types | #20, #21, #22, #23 | ✅ All resolved |
 | #38 — ietf-geo-location | #34, #35, #36, #37 | ✅ All resolved |
 | #51 — ietf-ni-location | #47 | ✅ Resolved |
-| #51 — ietf-ni-location | #48 | ⬜ NEXT |
+| #51 — ietf-ni-location | #48 | ⬜ NEXT (rolled back — re-implement) |
+| #51 — ietf-ni-location | #49 | ⬜ (rolled back — re-implement after #48) |
+| #51 — ietf-ni-location | #50 | ⬜ (rolled back — re-implement after #49) |
 
-**Remaining**: 18 features across 4 epics (#48, #49, #50, then epics 5-7).
+**Remaining**: 19 features — #48, #49, #50 (all rolled back, must re-implement with full governance), then 4 epics × 4 features.
 
 ### Verification Baseline
 - `flutter analyze`: **0 issues** (89 docstring warnings fixed, zero-touch clean room standard)
