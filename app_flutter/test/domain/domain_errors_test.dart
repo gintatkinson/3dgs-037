@@ -113,6 +113,8 @@ void main() {
         const MissingMandatoryCoordinatesError(branch: 'ellipsoid'),
         const InvalidDateTimeFormatError(input: 'bad-date'),
         const InvalidTemporalWindowError(timestamp: '2026-08-04T18:00:00Z', validUntil: '2026-08-04T12:00:00Z'),
+        const VelocityPrecisionExceededError(fieldName: 'vNorth', value: 0.0000000000001),
+        const UndefinedHeadingAngleError(),
       ];
 
       for (final err in errors) {
@@ -187,6 +189,10 @@ void main() {
             'InvalidDateTime: $input',
           InvalidTemporalWindowError(:final timestamp, :final validUntil) =>
             'InvalidWindow: $timestamp -> $validUntil',
+          VelocityPrecisionExceededError(:final fieldName, :final value) =>
+            'VelocityPrecision: $fieldName=$value',
+          UndefinedHeadingAngleError() =>
+            'UndefinedHeading',
         };
         expect(description, isNotEmpty);
       }

@@ -513,3 +513,34 @@ final class AccuracyPrecisionExceededError extends DomainError {
   /// The value that exceeded 6 fraction-digit precision.
   final double value;
 }
+
+/// Realises: [Feat-037/Velocity]
+/// Error raised when a velocity component exceeds 12 fraction digits
+/// of precision as mandated by the `decimal64 { fraction-digits 12 }`
+/// YANG type defined in RFC 9179 § geo-location/velocity.
+/// Error code: ERR-VEL-001
+@immutable
+final class VelocityPrecisionExceededError extends DomainError {
+  /// Creates a [VelocityPrecisionExceededError].
+  const VelocityPrecisionExceededError({
+    required this.fieldName,
+    required this.value,
+  });
+
+  /// The name of the velocity field that exceeded precision limits.
+  final String fieldName;
+
+  /// The value that exceeded 12 fraction-digit precision.
+  final double value;
+}
+
+/// Realises: [Feat-037/Velocity]
+/// Error raised when both v-north and v-east are zero, yielding an
+/// undefined 2D heading angle. The system must handle this condition
+/// gracefully per RFC 9179 § geo-location/velocity.
+/// Error code: ERR-VEL-003
+@immutable
+final class UndefinedHeadingAngleError extends DomainError {
+  /// Creates an [UndefinedHeadingAngleError].
+  const UndefinedHeadingAngleError();
+}
