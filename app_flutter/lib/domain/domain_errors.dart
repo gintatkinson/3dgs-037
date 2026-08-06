@@ -544,3 +544,48 @@ final class UndefinedHeadingAngleError extends DomainError {
   /// Creates an [UndefinedHeadingAngleError].
   const UndefinedHeadingAngleError();
 }
+
+/// Realises: [Feat-047/CountryCodeValidationError]
+/// Error raised when a country code string fails ISO 3166-1 alpha-2
+/// format validation (pattern `[A-Z]{2}`) as defined in
+/// ietf-ni-location.yang § physical-address/country-code.
+@immutable
+final class CountryCodeValidationError extends DomainError {
+  /// Creates a [CountryCodeValidationError] for [input].
+  const CountryCodeValidationError({required this.input});
+
+  /// The invalid country code string that was provided.
+  final String input;
+}
+
+/// Realises: [Feat-047/CyclicParentReferenceError]
+/// Error raised when setting a parent reference would create a cyclic
+/// dependency chain in the location hierarchy, violating the leafref
+/// integrity constraint in ietf-ni-location.yang § locations/location/parent.
+@immutable
+final class CyclicParentReferenceError extends DomainError {
+  /// Creates a [CyclicParentReferenceError].
+  const CyclicParentReferenceError({
+    required this.locationId,
+    required this.parentId,
+  });
+
+  /// The [id] of the location whose parent is being set.
+  final String locationId;
+
+  /// The [parentId] that would create the cycle.
+  final String parentId;
+}
+
+/// Realises: [Feat-047/DuplicateChassisIdError]
+/// Error raised when duplicate [chassisId] values are detected within a
+/// [contained-chassis] list, violating the YANG list key uniqueness
+/// constraint in ietf-ni-location.yang § contained-chassis.
+@immutable
+final class DuplicateChassisIdError extends DomainError {
+  /// Creates a [DuplicateChassisIdError] for the duplicate [chassisId].
+  const DuplicateChassisIdError({required this.chassisId});
+
+  /// The duplicate chassis identifier that was encountered.
+  final int chassisId;
+}

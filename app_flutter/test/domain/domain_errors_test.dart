@@ -115,6 +115,9 @@ void main() {
         const InvalidTemporalWindowError(timestamp: '2026-08-04T18:00:00Z', validUntil: '2026-08-04T12:00:00Z'),
         const VelocityPrecisionExceededError(fieldName: 'vNorth', value: 0.0000000000001),
         const UndefinedHeadingAngleError(),
+        const CountryCodeValidationError(input: 'USA'),
+        const CyclicParentReferenceError(locationId: 'loc-A', parentId: 'loc-B'),
+        const DuplicateChassisIdError(chassisId: 101),
       ];
 
       for (final err in errors) {
@@ -193,6 +196,12 @@ void main() {
             'VelocityPrecision: $fieldName=$value',
           UndefinedHeadingAngleError() =>
             'UndefinedHeading',
+          CountryCodeValidationError(:final input) =>
+            'CountryCode: $input',
+          CyclicParentReferenceError(:final locationId, :final parentId) =>
+            'CyclicParent: $locationId -> $parentId',
+          DuplicateChassisIdError(:final chassisId) =>
+            'DuplicateChassis: $chassisId',
         };
         expect(description, isNotEmpty);
       }
