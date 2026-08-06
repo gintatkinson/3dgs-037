@@ -3,9 +3,13 @@ import 'package:app_flutter/domain/models/ip_address_types.dart';
 import 'package:app_flutter/domain/result.dart';
 import 'package:flutter/foundation.dart';
 
+/// Field key constant for the container identifier.
 const String kFieldContainerId = 'containerId';
+/// Field key constant for the DNS domain name.
 const String kFieldDomainName = 'domainName';
+/// Field key constant for the host identifier.
 const String kFieldHost = 'host';
+/// Field key constant for the URI identifier.
 const String kFieldUri = 'uri';
 
 /// Realises: [Feat-021/DomainNameAndHostTypes]

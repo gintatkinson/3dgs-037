@@ -112,21 +112,37 @@ class ParsedDateTime {
       );
 }
 
+/// Field key constant for the RFC 3339 date-and-time value.
 const String kFieldDateAndTime = 'dateAndTime';
+/// Field key constant for the calendar date with optional timezone offset.
 const String kFieldDate = 'date';
+/// Field key constant for the calendar date strictly without timezone.
 const String kFieldDateNoZone = 'dateNoZone';
+/// Field key constant for the recurring daily time with optional timezone offset.
 const String kFieldTime = 'time';
+/// Field key constant for the recurring daily time strictly without timezone.
 const String kFieldTimeNoZone = 'timeNoZone';
+/// Field key constant for the hours duration.
 const String kFieldHours32 = 'hours32';
+/// Field key constant for the minutes duration.
 const String kFieldMinutes32 = 'minutes32';
+/// Field key constant for the seconds duration.
 const String kFieldSeconds32 = 'seconds32';
+/// Field key constant for the centiseconds duration.
 const String kFieldCentiseconds32 = 'centiseconds32';
+/// Field key constant for the milliseconds duration.
 const String kFieldMilliseconds32 = 'milliseconds32';
+/// Field key constant for the 32-bit microseconds duration.
 const String kFieldMicroseconds32 = 'microseconds32';
+/// Field key constant for the 64-bit microseconds duration.
 const String kFieldMicroseconds64 = 'microseconds64';
+/// Field key constant for the 32-bit nanoseconds duration.
 const String kFieldNanoseconds32 = 'nanoseconds32';
+/// Field key constant for the 64-bit nanoseconds duration.
 const String kFieldNanoseconds64 = 'nanoseconds64';
+/// Field key constant for the timeticks counter.
 const String kFieldTimeticks = 'timeticks';
+/// Field key constant for the timestamp value.
 const String kFieldTimestamp = 'timestamp';
 
 /// Realises: [Feat-003/DateAndTimeTypes]

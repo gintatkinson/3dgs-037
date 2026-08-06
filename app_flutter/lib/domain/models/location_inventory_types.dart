@@ -6,23 +6,41 @@ import 'package:flutter/foundation.dart';
 ///
 /// Field key constants for the location inventory container fields,
 /// used by [FieldDescriptor] schemas and serialisation logic.
+/// Field key constant for the YANG list key identifier.
 const String kFieldLocationId = 'id';
+/// Field key constant for the RFC 9562 UUID.
 const String kFieldUuid = 'uuid';
+/// Field key constant for the human-readable location name.
 const String kFieldName = 'name';
+/// Field key constant for the short location alias.
 const String kFieldAlias = 'alias';
+/// Field key constant for the free-text description.
 const String kFieldDescription = 'description';
+/// Field key constant for the location type identifier.
 const String kFieldType = 'type';
+/// Field key constant for the parent location leafref.
 const String kFieldParent = 'parent';
+/// Field key constant for the last update timestamp.
 const String kFieldTimestamp = 'timestamp';
+/// Field key constant for the validity expiry date-time.
 const String kFieldValidUntil = 'validUntil';
+/// Field key constant for the postal address.
 const String kFieldAddress = 'address';
+/// Field key constant for the postal code.
 const String kFieldPostalCode = 'postalCode';
+/// Field key constant for the state, province, or region.
 const String kFieldState = 'state';
+/// Field key constant for the city name.
 const String kFieldCity = 'city';
+/// Field key constant for the ISO 3166-1 alpha-2 country code.
 const String kFieldCountryCode = 'countryCode';
+/// Field key constant for the chassis identifier.
 const String kFieldChassisId = 'chassisId';
+/// Field key constant for the network element reference.
 const String kFieldNeRef = 'neRef';
+/// Field key constant for the component reference.
 const String kFieldComponentRef = 'componentRef';
+/// Field key constant for the contained chassis list.
 const String kFieldContainedChassis = 'containedChassis';
 
 /// Realises: [Feat-047/Location]

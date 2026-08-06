@@ -32,16 +32,27 @@ Result<IpVersion> parseIpVersion(int raw) {
   };
 }
 
+/// Field key constant for the container identifier.
 const String kFieldContainerId = 'containerId';
+/// Field key constant for the IP version code.
 const String kFieldIpVersion = 'ipVersion';
+/// Field key constant for the IP-version neutral address.
 const String kFieldIpAddress = 'ipAddress';
+/// Field key constant for the IPv4 address in dotted-quad notation.
 const String kFieldIpv4Address = 'ipv4Address';
+/// Field key constant for the IPv6 address in colon-hex notation.
 const String kFieldIpv6Address = 'ipv6Address';
+/// Field key constant for the IP-version neutral prefix.
 const String kFieldIpPrefix = 'ipPrefix';
+/// Field key constant for the IPv4 prefix in dotted-quad/prefix-length format.
 const String kFieldIpv4Prefix = 'ipv4Prefix';
+/// Field key constant for the IPv6 prefix in colon-hex/prefix-length format.
 const String kFieldIpv6Prefix = 'ipv6Prefix';
+/// Field key constant for the IP-version neutral address strictly without zone index.
 const String kFieldIpAddressNoZone = 'ipAddressNoZone';
+/// Field key constant for the IPv4 address in dotted-quad format without zone index.
 const String kFieldIpv4AddressNoZone = 'ipv4AddressNoZone';
+/// Field key constant for the IPv6 address in colon-hex format without zone index.
 const String kFieldIpv6AddressNoZone = 'ipv6AddressNoZone';
 
 /// Realises: [Feat-020/IpAddressTypes]

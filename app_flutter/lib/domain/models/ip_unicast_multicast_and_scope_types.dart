@@ -48,15 +48,25 @@ int ipScopeTypeCode(IpScopeType scope) {
 /// Returns `true` when [scope] is [IpScopeType.global].
 bool isGlobalScope(IpScopeType scope) => scope == IpScopeType.global;
 
+/// Field key constant for the container identifier.
 const String kFieldContainerId = 'containerId';
+/// Field key constant for the IPv6 flow label.
 const String kFieldIpv6FlowLabel = 'ipv6FlowLabel';
+/// Field key constant for the Differentiated Services Code Point.
 const String kFieldDscp = 'dscp';
+/// Field key constant for the IP unicast address.
 const String kFieldIpUnicastAddress = 'ipUnicastAddress';
+/// Field key constant for the IPv4 unicast address.
 const String kFieldIpv4UnicastAddress = 'ipv4UnicastAddress';
+/// Field key constant for the IPv6 unicast address.
 const String kFieldIpv6UnicastAddress = 'ipv6UnicastAddress';
+/// Field key constant for the IP multicast group address.
 const String kFieldIpMulticastAddress = 'ipMulticastAddress';
+/// Field key constant for the IPv4 multicast address.
 const String kFieldIpv4MulticastAddress = 'ipv4MulticastAddress';
+/// Field key constant for the IPv6 multicast address.
 const String kFieldIpv6MulticastAddress = 'ipv6MulticastAddress';
+/// Field key constant for the architectural scope identifier.
 const String kFieldScopeType = 'scopeType';
 
 /// Realises: [Feat-023/IpUnicastMulticastAndScopeTypes]

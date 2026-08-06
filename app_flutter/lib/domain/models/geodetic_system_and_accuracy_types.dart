@@ -6,8 +6,11 @@ import 'package:flutter/foundation.dart';
 ///
 /// Field key constants for the geodetic system container fields,
 /// used by [FieldDescriptor] schemas and serialisation logic.
+/// Field key constant for the geodetic datum string.
 const String kFieldGeodeticDatum = 'geodeticDatum';
+/// Field key constant for the horizontal coordinate accuracy.
 const String kFieldCoordAccuracy = 'coordAccuracy';
+/// Field key constant for the vertical height accuracy.
 const String kFieldHeightAccuracy = 'heightAccuracy';
 
 /// Realises: [Feat-035/GeodeticSystem]

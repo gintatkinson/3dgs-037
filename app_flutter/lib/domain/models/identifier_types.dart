@@ -2,10 +2,15 @@ import 'package:app_flutter/domain/domain_errors.dart';
 import 'package:app_flutter/domain/result.dart';
 import 'package:flutter/foundation.dart';
 
+/// Field key constant for the container identifier.
 const String kFieldContainerId = 'containerId';
+/// Field key constant for the ASN.1 object identifier.
 const String kFieldObjectIdentifier = 'objectIdentifier';
+/// Field key constant for the ASN.1 object identifier with at most 128 sub-identifiers.
 const String kFieldObjectIdentifier128 = 'objectIdentifier128';
+/// Field key constant for the RFC 9562 UUID.
 const String kFieldUuid = 'uuid';
+/// Field key constant for the RFC 7950 YANG identifier.
 const String kFieldYangIdentifier = 'yangIdentifier';
 
 /// Realises: [Feat-002/IdentifierTypes]

@@ -2,11 +2,17 @@ import 'package:app_flutter/domain/domain_errors.dart';
 import 'package:app_flutter/domain/result.dart';
 import 'package:flutter/foundation.dart';
 
+/// Field key constant for the 32-bit counter.
 const String kFieldCounter32 = 'counter32';
+/// Field key constant for the 32-bit zero-based counter.
 const String kFieldZeroBasedCounter32 = 'zeroBasedCounter32';
+/// Field key constant for the 64-bit counter.
 const String kFieldCounter64 = 'counter64';
+/// Field key constant for the 64-bit zero-based counter.
 const String kFieldZeroBasedCounter64 = 'zeroBasedCounter64';
+/// Field key constant for the 32-bit gauge.
 const String kFieldGauge32 = 'gauge32';
+/// Field key constant for the 64-bit gauge.
 const String kFieldGauge64 = 'gauge64';
 
 /// Realises: [Feat-001/CounterAndGaugeTypes]

@@ -2,8 +2,11 @@ import 'package:app_flutter/domain/domain_errors.dart';
 import 'package:app_flutter/domain/result.dart';
 import 'package:flutter/foundation.dart';
 
+/// Field key constant for the container identifier.
 const String kFieldContainerId = 'containerId';
+/// Field key constant for the Autonomous System number.
 const String kFieldAsNumber = 'asNumber';
+/// Field key constant for the transport protocol port number.
 const String kFieldPortNumber = 'portNumber';
 
 /// Realises: [Feat-022/AutonomousSystemAndPortTypes]

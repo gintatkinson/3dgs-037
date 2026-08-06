@@ -6,8 +6,11 @@ import 'package:flutter/foundation.dart';
 ///
 /// Field key constants for the geodetic reference frame container fields,
 /// used by [FieldDescriptor] schemas and serialisation logic.
+/// Field key constant for the astronomical body string.
 const String kFieldAstronomicalBody = 'astronomicalBody';
+/// Field key constant for the alternate coordinate reference system.
 const String kFieldAlternateSystem = 'alternateSystem';
+/// Field key constant for the alternate systems feature flag.
 const String kFieldAlternateSystems = 'alternateSystems';
 
 /// Realises: [Feat-034/ReferenceFrame]

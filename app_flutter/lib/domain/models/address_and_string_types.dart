@@ -2,11 +2,17 @@ import 'package:app_flutter/domain/domain_errors.dart';
 import 'package:app_flutter/domain/result.dart';
 import 'package:flutter/foundation.dart';
 
+/// Field key constant for the physical/media address.
 const String kFieldPhysAddress = 'physAddress';
+/// Field key constant for the IEEE 802 48-bit MAC address.
 const String kFieldMacAddress = 'macAddress';
+/// Field key constant for the hexadecimal string.
 const String kFieldHexString = 'hexString';
+/// Field key constant for the dotted-quad decimal notation.
 const String kFieldDottedQuad = 'dottedQuad';
+/// Field key constant for the BCP 47 language tag.
 const String kFieldLanguageTag = 'languageTag';
+/// Field key constant for the XPath 1.0 expression string.
 const String kFieldXpath10 = 'xpath10';
 
 /// Realises: [Feat-004/AddressAndStringTypes]

@@ -6,13 +6,21 @@ import 'package:flutter/foundation.dart';
 ///
 /// Field key constants for coordinate and altitude container fields,
 /// used by [FieldDescriptor] schemas and serialisation logic.
+/// Field key constant for the measurement timestamp.
 const String kFieldTimestamp = 'timestamp';
+/// Field key constant for the validity expiry date-time.
 const String kFieldValidUntil = 'validUntil';
+/// Field key constant for the latitude in decimal degrees.
 const String kFieldLatitude = 'latitude';
+/// Field key constant for the longitude in decimal degrees.
 const String kFieldLongitude = 'longitude';
+/// Field key constant for the height in meters relative to the reference ellipsoid.
 const String kFieldHeight = 'height';
+/// Field key constant for the Cartesian X coordinate.
 const String kFieldCartesianX = 'cartesianX';
+/// Field key constant for the Cartesian Y coordinate.
 const String kFieldCartesianY = 'cartesianY';
+/// Field key constant for the Cartesian Z coordinate.
 const String kFieldCartesianZ = 'cartesianZ';
 
 /// Realises: [Feat-036/EllipsoidalCoordinates]
