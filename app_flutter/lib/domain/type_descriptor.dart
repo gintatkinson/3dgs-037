@@ -226,6 +226,16 @@ class FieldDescriptor {
   /// Unknown formatter names are silently ignored.
   final List<String>? inputFormatters;
 
+  /// Optional callback to resolve the field value from a model object.
+  /// When provided, the widget calls this instead of using hardcoded
+  /// field-name switches.
+  final String Function(dynamic model)? valueResolver;
+
+  /// Optional callback to write a string value back to the model.
+  /// When provided, the widget renders an editable TextField.
+  /// When null, renders read-only Text.
+  final dynamic Function(dynamic model, String value)? valueWriter;
+
   /// Creates a new [FieldDescriptor] instance.
   const FieldDescriptor({
     required this.key,
@@ -241,6 +251,8 @@ class FieldDescriptor {
     this.enumDisplayNames,
     this.defaultValue,
     this.inputFormatters,
+    this.valueResolver,
+    this.valueWriter,
   });
 
   /// Creates a copy of this [FieldDescriptor] with the given fields replaced.
@@ -258,6 +270,8 @@ class FieldDescriptor {
     List<String>? enumDisplayNames,
     dynamic defaultValue,
     List<String>? inputFormatters,
+    String Function(dynamic model)? valueResolver,
+    dynamic Function(dynamic model, String value)? valueWriter,
   }) {
     return FieldDescriptor(
       key: key ?? this.key,
@@ -273,6 +287,8 @@ class FieldDescriptor {
       enumDisplayNames: enumDisplayNames ?? this.enumDisplayNames,
       defaultValue: defaultValue ?? this.defaultValue,
       inputFormatters: inputFormatters ?? this.inputFormatters,
+      valueResolver: valueResolver ?? this.valueResolver,
+      valueWriter: valueWriter ?? this.valueWriter,
     );
   }
 
@@ -292,7 +308,9 @@ class FieldDescriptor {
         listEquals(other.enumOptions, enumOptions) &&
         listEquals(other.enumDisplayNames, enumDisplayNames) &&
         other.defaultValue == defaultValue &&
-        listEquals(other.inputFormatters, inputFormatters);
+        listEquals(other.inputFormatters, inputFormatters) &&
+        identical(other.valueResolver, valueResolver) &&
+        identical(other.valueWriter, valueWriter);
   }
 
   @override
@@ -311,6 +329,8 @@ class FieldDescriptor {
       enumDisplayNames != null ? Object.hashAll(enumDisplayNames!) : null,
       defaultValue,
       inputFormatters != null ? Object.hashAll(inputFormatters!) : null,
+      identityHashCode(valueResolver),
+      identityHashCode(valueWriter),
     );
   }
 }

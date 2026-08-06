@@ -107,6 +107,12 @@ void main() {
         const InvalidGeodeticDatumError(input: 'bad\x00'),
         const NegativeAccuracyValueError(fieldName: 'coordAccuracy', value: -1.0),
         const AccuracyPrecisionExceededError(fieldName: 'heightAccuracy', value: 0.00000001),
+        const InvalidLatitudeOutOfBoundsError(value: 95.0),
+        const InvalidLongitudeOutOfBoundsError(value: 200.0),
+        const MutualExclusivityViolationError(),
+        const MissingMandatoryCoordinatesError(branch: 'ellipsoid'),
+        const InvalidDateTimeFormatError(input: 'bad-date'),
+        const InvalidTemporalWindowError(timestamp: '2026-08-04T18:00:00Z', validUntil: '2026-08-04T12:00:00Z'),
       ];
 
       for (final err in errors) {
@@ -169,6 +175,18 @@ void main() {
             'NegativeAccuracy: $fieldName=$value',
           AccuracyPrecisionExceededError(:final fieldName, :final value) =>
             'AccuracyPrecision: $fieldName=$value',
+          InvalidLatitudeOutOfBoundsError(:final value) =>
+            'InvalidLat: $value',
+          InvalidLongitudeOutOfBoundsError(:final value) =>
+            'InvalidLon: $value',
+          MutualExclusivityViolationError() =>
+            'MutualExcl',
+          MissingMandatoryCoordinatesError(:final branch) =>
+            'MissingCoords: $branch',
+          InvalidDateTimeFormatError(:final input) =>
+            'InvalidDateTime: $input',
+          InvalidTemporalWindowError(:final timestamp, :final validUntil) =>
+            'InvalidWindow: $timestamp -> $validUntil',
         };
         expect(description, isNotEmpty);
       }

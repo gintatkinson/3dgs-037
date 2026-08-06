@@ -36,7 +36,7 @@
           "type": "ResizableSplitter",
           "id": "workspace_split",
           "props": {
-            "axis": "horizontal",
+            "axis": "vertical",
             "resizable": true
           },
           "children": [
@@ -45,43 +45,44 @@
               "id": "topology_pane"
             },
             {
-              "type": "ResizableSplitter",
-              "id": "lower_split",
-              "props": {
-                "axis": "horizontal",
-                "resizable": true
-              },
+              "type": "DensityTable",
+              "id": "elements_view"
+            },
+            {
+              "type": "TabbedContainer",
+              "id": "details_and_relations_tab",
               "children": [
                 {
-                  "type": "DensityTable",
-                  "id": "elements_view"
+                  "type": "PropertyGrid",
+                  "id": "properties_view"
                 },
                 {
-                  "type": "TabbedContainer",
-                  "id": "details_and_relations_tab",
-                  "children": [
-                    {
-                      "type": "TableView",
-                      "id": "components_table",
-                      "props": {
-                        "label": "token:layout.labels.components"
-                      }
-                    },
-                    {
-                      "type": "TableView",
-                      "id": "relation_a_table",
-                      "props": {
-                        "label": "token:layout.labels.relation_a"
-                      }
-                    },
-                    {
-                      "type": "TableView",
-                      "id": "relation_b_table",
-                      "props": {
-                        "label": "token:layout.labels.relation_b"
-                      }
-                    }
-                  ]
+                  "type": "TableView",
+                  "id": "components_table",
+                  "props": {
+                    "label": "token:layout.labels.components"
+                  }
+                },
+                {
+                  "type": "TableView",
+                  "id": "relation_a_table",
+                  "props": {
+                    "label": "token:layout.labels.relation_a"
+                  }
+                },
+                {
+                  "type": "TableView",
+                  "id": "relation_b_table",
+                  "props": {
+                    "label": "token:layout.labels.relation_b"
+                  }
+                },
+                {
+                  "type": "TableView",
+                  "id": "relation_c_table",
+                  "props": {
+                    "label": "token:layout.labels.relation_c"
+                  }
                 }
               ]
             }

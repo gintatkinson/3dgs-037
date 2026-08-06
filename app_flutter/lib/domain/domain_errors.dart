@@ -415,6 +415,86 @@ final class NegativeAccuracyValueError extends DomainError {
   final double value;
 }
 
+/// Realises: [Feat-036/CoordinatesAndAltitudeTypes]
+/// Error raised when a `latitude` value is less than -90.0 or greater
+/// than +90.0 decimal degrees, violating the range constraint defined
+/// in RFC 9179 § geo-location/ellipsoid/latitude.
+@immutable
+final class InvalidLatitudeOutOfBoundsError extends DomainError {
+  /// Creates an [InvalidLatitudeOutOfBoundsError] for [value].
+  const InvalidLatitudeOutOfBoundsError({required this.value});
+
+  /// The out-of-bounds latitude value.
+  final double value;
+}
+
+/// Realises: [Feat-036/CoordinatesAndAltitudeTypes]
+/// Error raised when a `longitude` value is less than -180.0 or greater
+/// than +180.0 decimal degrees, violating the range constraint defined
+/// in RFC 9179 § geo-location/ellipsoid/longitude.
+@immutable
+final class InvalidLongitudeOutOfBoundsError extends DomainError {
+  /// Creates an [InvalidLongitudeOutOfBoundsError] for [value].
+  const InvalidLongitudeOutOfBoundsError({required this.value});
+
+  /// The out-of-bounds longitude value.
+  final double value;
+}
+
+/// Realises: [Feat-036/CoordinatesAndAltitudeTypes]
+/// Error raised when both `ellipsoid` and `cartesian` coordinate branches
+/// are present in a `geo-location` payload, violating the mutual exclusivity
+/// choice constraint defined in RFC 9179 § geo-location/location.
+@immutable
+final class MutualExclusivityViolationError extends DomainError {
+  /// Creates a [MutualExclusivityViolationError].
+  const MutualExclusivityViolationError();
+}
+
+/// Realises: [Feat-036/CoordinatesAndAltitudeTypes]
+/// Error raised when the `ellipsoid` branch is selected without providing
+/// both `latitude` and `longitude`, or when the `cartesian` branch is
+/// selected without providing `x`, `y`, and `z`.
+@immutable
+final class MissingMandatoryCoordinatesError extends DomainError {
+  /// Creates a [MissingMandatoryCoordinatesError] for [branch].
+  const MissingMandatoryCoordinatesError({required this.branch});
+
+  /// The branch name that is missing mandatory fields.
+  final String branch;
+}
+
+/// Realises: [Feat-036/CoordinatesAndAltitudeTypes]
+/// Error raised when `timestamp` or `valid-until` fails RFC 6991
+/// `date-and-time` format validation (ISO 8601).
+@immutable
+final class InvalidDateTimeFormatError extends DomainError {
+  /// Creates an [InvalidDateTimeFormatError] for [input].
+  const InvalidDateTimeFormatError({required this.input});
+
+  /// The invalid date-time string.
+  final String input;
+}
+
+/// Realises: [Feat-036/CoordinatesAndAltitudeTypes]
+/// Error raised when `valid-until` precedes `timestamp` in a
+/// `geo-location` record, violating the temporal consistency constraint
+/// defined in RFC 9179.
+@immutable
+final class InvalidTemporalWindowError extends DomainError {
+  /// Creates an [InvalidTemporalWindowError].
+  const InvalidTemporalWindowError({
+    required this.timestamp,
+    required this.validUntil,
+  });
+
+  /// The timestamp that should be earlier or equal.
+  final String timestamp;
+
+  /// The valid-until time that should be later or equal.
+  final String validUntil;
+}
+
 /// Realises: [Feat-035/GeodeticSystem]
 /// Error raised when `coordAccuracy` or `heightAccuracy` exceeds
 /// 6 fraction digits of decimal precision as mandated by the
@@ -433,4 +513,3 @@ final class AccuracyPrecisionExceededError extends DomainError {
   /// The value that exceeded 6 fraction-digit precision.
   final double value;
 }
-

@@ -452,6 +452,6 @@ Structural Schema: https://github.com/YangModels/yang/blob/main/standard/ietf/RF
 Normative Specification: https://datatracker.ietf.org/doc/rfc6021/
 
 ## Logical UI & Layout Bindings
-- **Target LUI Component:** N/A
-- **Target Layout Container ID:** N/A
-- **Data Source Bindings:** N/A
+- **Target LUI Component:** PropertyGrid
+- **Target Layout Container ID:** properties_view
+- **Data Source Bindings:** /ietf-inet-types:ip-address

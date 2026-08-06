@@ -28,57 +28,67 @@ class AddressAndStringPropertyWidget extends StatelessWidget {
     displayName: _headerText,
     iconName: 'dns',
     fields: [
-      const FieldDescriptor(
-        key: 'physAddress',
+      FieldDescriptor(
+        key: kFieldPhysAddress,
         label: 'Physical Address (phys-address)',
         type: 'string',
         pattern: r'^([0-9a-fA-F]{2}(:[0-9a-fA-F]{2})*)?$',
+        valueResolver: (model) =>
+            (model as AddressAndStringTypes).physAddress,
+        valueWriter: (model, value) =>
+            (model as AddressAndStringTypes).copyWith(physAddress: value),
       ),
-      const FieldDescriptor(
-        key: 'macAddress',
+      FieldDescriptor(
+        key: kFieldMacAddress,
         label: 'MAC Address (mac-address)',
         type: 'string',
         pattern: r'^[0-9a-fA-F]{2}(:[0-9a-fA-F]{2}){5}$',
+        valueResolver: (model) =>
+            (model as AddressAndStringTypes).macAddress,
+        valueWriter: (model, value) =>
+            (model as AddressAndStringTypes).copyWith(macAddress: value),
       ),
-      const FieldDescriptor(
-        key: 'hexString',
+      FieldDescriptor(
+        key: kFieldHexString,
         label: 'Hex String (hex-string)',
         type: 'string',
         pattern: r'^([0-9a-fA-F]{2}(:[0-9a-fA-F]{2})*)?$',
+        valueResolver: (model) =>
+            (model as AddressAndStringTypes).hexString,
+        valueWriter: (model, value) =>
+            (model as AddressAndStringTypes).copyWith(hexString: value),
       ),
-      const FieldDescriptor(
-        key: 'dottedQuad',
+      FieldDescriptor(
+        key: kFieldDottedQuad,
         label: 'Dotted Quad (dotted-quad)',
         type: 'string',
+        valueResolver: (model) =>
+            (model as AddressAndStringTypes).dottedQuad,
+        valueWriter: (model, value) =>
+            (model as AddressAndStringTypes).copyWith(dottedQuad: value),
       ),
-      const FieldDescriptor(
-        key: 'languageTag',
+      FieldDescriptor(
+        key: kFieldLanguageTag,
         label: 'Language Tag (language-tag)',
         type: 'string',
+        valueResolver: (model) =>
+            (model as AddressAndStringTypes).languageTag,
+        valueWriter: (model, value) =>
+            (model as AddressAndStringTypes).copyWith(languageTag: value),
       ),
-      const FieldDescriptor(
-        key: 'xpath10',
+      FieldDescriptor(
+        key: kFieldXpath10,
         label: 'XPath 1.0 (xpath1.0)',
         type: 'string',
+        valueResolver: (model) => (model as AddressAndStringTypes).xpath10,
+        valueWriter: (model, value) =>
+            (model as AddressAndStringTypes).copyWith(xpath10: value),
       ),
     ],
     childTypes: const [],
     relatedTypes: const [],
     parentTypes: const [],
   );
-
-  static String _formatValue(
-      FieldDescriptor field, AddressAndStringTypes model) {
-    return switch (field.key) {
-      'physAddress' => model.physAddress,
-      'macAddress' => model.macAddress,
-      'hexString' => model.hexString,
-      'dottedQuad' => model.dottedQuad,
-      'languageTag' => model.languageTag,
-      'xpath10' => model.xpath10,
-      _ => '-',
-    };
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -127,10 +137,9 @@ class AddressAndStringPropertyWidget extends StatelessWidget {
                   itemCount: _typeDescriptor.fields.length,
                   itemBuilder: (context, index) {
                     final field = _typeDescriptor.fields[index];
-                    final value = _formatValue(field, model);
                     return _PropertyRow(
                       field: field,
-                      value: value,
+                      model: model,
                     );
                   },
                 ),
@@ -145,18 +154,22 @@ class AddressAndStringPropertyWidget extends StatelessWidget {
 
 /// A single property row rendered from a [FieldDescriptor].
 ///
-/// Displays the field label and current value in a read-only card layout.
+/// Renders an editable TextField when the field has a valueWriter,
+/// or a read-only Text widget otherwise.
 class _PropertyRow extends StatelessWidget {
   const _PropertyRow({
     required this.field,
-    required this.value,
+    required this.model,
   });
 
   final FieldDescriptor field;
-  final String value;
+  final dynamic model;
 
   @override
   Widget build(BuildContext context) {
+    final valueText = field.valueResolver?.call(model) ?? '-';
+    final isEditable = field.valueWriter != null;
+
     return Card(
       margin: const EdgeInsets.symmetric(vertical: 4),
       child: Padding(
@@ -170,11 +183,29 @@ class _PropertyRow extends StatelessWidget {
             ),
             Expanded(
               flex: 1,
-              child: Text(value,
-                  style: Theme.of(context).textTheme.bodyLarge?.copyWith(
-                        fontFamily: 'monospace',
+              child: isEditable
+                  ? TextField(
+                      controller: TextEditingController(text: valueText),
+                      decoration: const InputDecoration(
+                        isDense: true,
+                        contentPadding:
+                            EdgeInsets.symmetric(horizontal: 4, vertical: 8),
                       ),
-                  textAlign: TextAlign.end),
+                      textAlign: TextAlign.end,
+                      style: Theme.of(context)
+                          .textTheme
+                          .bodyLarge
+                          ?.copyWith(fontFamily: 'monospace'),
+                      onChanged: (value) {
+                        field.valueWriter!.call(model, value);
+                      },
+                    )
+                  : Text(valueText,
+                      style: Theme.of(context)
+                          .textTheme
+                          .bodyLarge
+                          ?.copyWith(fontFamily: 'monospace'),
+                      textAlign: TextAlign.end),
             ),
           ],
         ),

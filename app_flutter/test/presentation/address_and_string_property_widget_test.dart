@@ -135,6 +135,34 @@ void main() {
     });
 
     testWidgets(
+        'Scenario6_GivenLoadedModel_WhenRendered_ThenAllFieldsHaveEditableTextFields',
+        (tester) async {
+      repo._fetchFactory = () async => Result.success(testRecord);
+
+      await tester.pumpWidget(buildWidget());
+      await viewModel.load('test-1');
+      await tester.pumpAndSettle();
+
+      expect(find.byType(TextField), findsNWidgets(6));
+    });
+
+    testWidgets(
+        'Scenario7_GivenLoadedModel_WhenUserTypesInTextField_ThenTextAppears',
+        (tester) async {
+      repo._fetchFactory = () async => Result.success(testRecord);
+
+      await tester.pumpWidget(buildWidget());
+      await viewModel.load('test-1');
+      await tester.pumpAndSettle();
+
+      final textFields = find.byType(TextField);
+      await tester.enterText(textFields.first, 'aa:bb:cc:dd:ee:ff');
+      await tester.pumpAndSettle();
+
+      expect(find.text('aa:bb:cc:dd:ee:ff'), findsOneWidget);
+    });
+
+    testWidgets(
         'Scenario5_GivenLoadedModel_WhenXPathAndLanguageTagDisplayed_ThenRenderCorrectlyInTableLayout',
         (tester) async {
       repo._fetchFactory = () async => Result.success(testRecord);
