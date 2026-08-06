@@ -14,13 +14,13 @@ This Epic encompasses the complete geographic location management capabilities d
 
 The `ietf-geo-location` module models reference frames, geodetic systems, spatial coordinate choices (ellipsoid vs. Cartesian), motion vectors, and temporal validity bounds. It serves as a core location infrastructure provider for physical network inventories, device placement tracking, fiber endpoints, and spatial topology visualization.
 
-**Parent Epic**: [Epic #38: [ietf-geo-location]: Geographic Location Management](file:///Users/perkunas/jail/3dgs-037/docs/epics/epic-03-ietf-geo-location.md)
+**Parent Epic**: [Epic #38: [ietf-geo-location]: Geographic Location Management](https://github.com/gintatkinson/3dgs-037/blob/main/docs/epics/epic-03-ietf-geo-location.md)
 
 ## 2. Requirements & Checklist
 - [ ] #34 - [ietf-geo-location: Geodetic Reference Frame](https://github.com/gintatkinson/3dgs-037/blob/main/docs/features/feat-09-geodetic-reference-frame.md) (reference-frame, alternate-system, astronomical-body)
 - [x] #35 - [ietf-geo-location: Geodetic System and Accuracy Bounds](https://github.com/gintatkinson/3dgs-037/blob/main/docs/features/feat-10-geodetic-system-and-accuracy.md) (geodetic-system, geodetic-datum, coord-accuracy, height-accuracy)
 - [ ] #36 - [ietf-geo-location: Geographic Coordinates and Altitude](https://github.com/gintatkinson/3dgs-037/blob/main/docs/features/feat-11-coordinates-and-altitude.md) (geo-location, latitude, longitude, height, x, y, z, timestamp, valid-until)
-- [ ] #37 - [ietf-geo-location: Motion and Velocity Vectors](https://github.com/gintatkinson/3dgs-037/blob/main/docs/features/feat-12-motion-and-velocity-vectors.md) (velocity, v-north, v-east, v-up)
+- [x] #37 - [ietf-geo-location: Motion and Velocity Vectors](https://github.com/gintatkinson/3dgs-037/blob/main/docs/features/feat-12-motion-and-velocity-vectors.md) (velocity, v-north, v-east, v-up)
 
 ### Associated Use Cases & User Stories
 
