@@ -1,135 +1,90 @@
-# Implementation Plan — Feature #37: Motion and Velocity Vectors
+# Implementation Plan — Feature #47: Location Inventory Base and Postal Address
 
-**Epic**: #38 (ietf-geo-location)  
-**Spec**: `docs/features/feat-12-motion-and-velocity-vectors.md`  
-**Schema container**: `ietf-geo-location:geo-location/velocity`  
+**Epic**: #51 (ietf-ni-location)  
+**Spec**: `docs/features/feat-13-location-inventory-base-and-postal-address.md`  
+**Schema container**: `ietf-ni-location:locations`  
 **Layout binding**: PropertyGrid → properties_view  
-**Data source**: `/nwi:network-inventory/nil:locations/nil:location/nil:geo-location/nil:velocity`  
-**Reference widget**: `coordinates_and_altitude_property_widget.dart`, `geodetic_system_property_widget.dart`
+**interface_type**: ui
 
-## Architecture
-
-The 3-layer DoD maps as follows:
+## 3-Layer Architecture
 
 | Layer | Component | File |
 |---|---|---|
-| Domain Model | `Velocity` class, validators, field key constants | `app_flutter/lib/domain/models/velocity_types.dart` |
-| Domain Model | Domain errors (ERR-VEL-001, ERR-VEL-002, ERR-VEL-003) | `app_flutter/lib/domain/domain_errors.dart` (append) |
-| Domain Model | Repository interface | `app_flutter/lib/domain/repositories/velocity_repository.dart` |
-| Data Layer | SQLite repository | `app_flutter/lib/data/repositories/sqlite_velocity_repository.dart` |
-| ViewModel | `VelocityViewModel` | `app_flutter/lib/presentation/viewmodels/velocity_viewmodel.dart` |
-| Widget | `VelocityPropertyWidget` | `app_flutter/lib/presentation/widgets/velocity_property_widget.dart` |
-| Tests | Domain types test | `app_flutter/test/domain/velocity_types_test.dart` |
-| Tests | SQLite repository test | `app_flutter/test/data/sqlite_velocity_repository_test.dart` |
-| Tests | ViewModel test | `app_flutter/test/presentation/velocity_viewmodel_test.dart` |
-| Tests | Widget + BDD test | `app_flutter/test/presentation/velocity_property_widget_test.dart` |
+| Domain | `Location`, `PhysicalAddress`, `ContainedChassis` classes + validators + field keys | `app_flutter/lib/domain/models/location_inventory_types.dart` |
+| Domain | Domain errors (CountryCodeValidationError, CyclicParentReferenceError, DuplicateChassisIdError) | `app_flutter/lib/domain/domain_errors.dart` (append) |
+| Domain | Repository interface | `app_flutter/lib/domain/repositories/location_inventory_repository.dart` |
+| Data | SQLite repository | `app_flutter/lib/data/repositories/sqlite_location_inventory_repository.dart` |
+| ViewModel | `LocationInventoryViewModel` | `app_flutter/lib/presentation/viewmodels/location_inventory_viewmodel.dart` |
+| Widget | `LocationInventoryPropertyWidget` | `app_flutter/lib/presentation/widgets/location_inventory_property_widget.dart` |
+| Tests | Domain types test | `app_flutter/test/domain/location_inventory_types_test.dart` |
+| Tests | SQLite repository test | `app_flutter/test/data/sqlite_location_inventory_repository_test.dart` |
+| Tests | ViewModel test | `app_flutter/test/presentation/location_inventory_viewmodel_test.dart` |
+| Tests | BDD widget test | `app_flutter/test/presentation/location_inventory_property_widget_test.dart` |
 
-## Domain Model Specification
+## Micro-Task 1: Domain Model + Errors
+### Location class
+- `containerId`, `id` (String), `uuid`, `name`, `alias`, `description`, `type`, `parent`, `timestamp`, `validUntil` (all nullable except id)
+- `@immutable`, `const` constructor, value equality
 
-### Velocity class (`@immutable`)
-```dart
-class Velocity {
-  const Velocity({
-    this.containerId = 'default',
-    this.vNorth,
-    this.vEast,
-    this.vUp,
-  });
-  final String containerId;
-  final double? vNorth;  // m/s, decimal64 12 fraction digits
-  final double? vEast;   // m/s, decimal64 12 fraction digits
-  final double? vUp;     // m/s, decimal64 12 fraction digits
-}
-```
+### PhysicalAddress class
+- `address`, `postalCode`, `state`, `city`, `countryCode` (all nullable String)
+- `@immutable`, `const` constructor, value equality
 
-### Field key constants
-```dart
-const String kFieldVNorth = 'vNorth';
-const String kFieldVEast = 'vEast';
-const String kFieldVUp = 'vUp';
-const String kFieldSpeed = 'speed';
-const String kFieldHeading = 'heading';
-```
+### ContainedChassis class
+- `chassisId` (int, required), `neRef`, `componentRef` (nullable String)
+- `@immutable`, `const` constructor, value equality
+
+### Field key constants (~20 keys)
 
 ### Validators (all return `Result<T>`)
-- `validateVelocityComponent(double value, String fieldName)` — checks non-negative and ≤12 fraction digits
-- `validateVelocity(Velocity model)` — aggregates all component validations
-- `calculateSpeed(double vNorth, double vEast)` — sqrt(v_north² + v_east²)
-- `calculateHeading(double vNorth, double vEast)` — atan2(v_east, v_north), returns 0.0 for zero vector
+- `validateCountryCode(String code)` — `[A-Z]{2}` regex, returns `CountryCodeValidationError`
+- `validateCyclicParent(String locationId, String parentId, Map<String, String?> parents)` — cycle detection
+- `validateLocation(Location model)` — aggregate validation
+- `validatePhysicalAddress(PhysicalAddress addr)` — country code check
+- `validateDuplicateChassisId(List<ContainedChassis> chassis)` — uniqueness check
 
-### New domain errors (appended to `domain_errors.dart`)
-- `VelocityPrecisionExceededError` (ERR-VEL-001) — exceeds 12 fraction digits
-- `NonNumericVelocityValueError` (ERR-VEL-002) — already covered by type system, but error class exists
-- `UndefinedHeadingAngleError` (ERR-VEL-003) — caught when both vNorth and vEast are zero
+### Domain errors (append to domain_errors.dart)
+- `CountryCodeValidationError` — `input` (String)
+- `CyclicParentReferenceError` — `locationId`, `parentId` (String)
+- `DuplicateChassisIdError` — `chassisId` (int)
 
-## Micro-Task Decomposition (3 tasks)
+### Tests (~12 tests)
+- Location creation/equality, PhysicalAddress creation, ContainedChassis creation
+- Country code validation (valid: "US", invalid: "USA", "us", "123")
+- Cyclic parent detection (A→B, B→A)
+- Duplicate chassis-id detection
 
-### Micro-Task 1: Domain Model + Errors
-**Target files**:
-- CREATE `app_flutter/lib/domain/models/velocity_types.dart`
-- MODIFY `app_flutter/lib/domain/domain_errors.dart` (append 3 new error classes)
-- CREATE `app_flutter/test/domain/velocity_types_test.dart`
+## Micro-Task 2: Repository + ViewModel
+Follow `geodetic_system_repository.dart` / `velocity_repository.dart` pattern exactly.
 
-**Driving tests (RED)**:
-- `should parse valid velocity vector with all components`
-- `should reject velocity component exceeding 12 fraction digits` (ERR-VEL-001)
-- `should calculate 2D speed as sqrt(v_north^2 + v_east^2)`
-- `should calculate 2D heading as atan2(v_east, v_north)`
-- `should handle zero vector heading gracefully` (ERR-VEL-003)
-- `should validate all three components via aggregate validator`
+### Repository interface
+- `initDatabase()`, `save()`, `fetch()`, `update()`, `delete()`, `fetchAll()`, `fetchByParent()`
+- Two tables: `locations` (id, uuid, name, alias, desc, type, parent, timestamp, valid_until, address, postal_code, state, city, country_code) and `contained_chassis` (location_id, chassis_id, ne_ref, component_ref)
 
-**Verification**: `flutter test test/domain/velocity_types_test.dart` — all pass
+### SQLite repository
+- Foreign key relationship between tables
+- Cascade delete on location removal
 
-### Micro-Task 2: Repository + ViewModel
-**Target files**:
-- CREATE `app_flutter/lib/domain/repositories/velocity_repository.dart`
-- CREATE `app_flutter/lib/data/repositories/sqlite_velocity_repository.dart`
-- CREATE `app_flutter/lib/presentation/viewmodels/velocity_viewmodel.dart`
-- CREATE `app_flutter/test/data/sqlite_velocity_repository_test.dart`
-- CREATE `app_flutter/test/presentation/velocity_viewmodel_test.dart`
+### ViewModel
+- `load(String recordId)`, `save(Location)`, `update(Location)`, `addChassis(ContainedChassis)`, `removeChassis(int chassisId)`
+- `_formatErrorMessage` handles new error types
+- `_disposed` guard
 
-**Driving tests (RED)**:
-- Repository: `should save and fetch velocity record`, `should return InstanceNotFoundError for missing record`, `should update existing record`
-- ViewModel: `should load velocity from repository`, `should save velocity to repository`, `should expose error message on failure`
+## Micro-Task 3: Widget + BDD Tests
+### Widget fields (PropertyGrid, TypeDescriptor-driven)
+**Editable**: id, uuid, name, alias, description, type, parent, timestamp, valid-until, address, postal-code, state, city, country-code
+**Read-only**: none (all editable per spec)
+**Sub-list**: ContainedChassis table (chassis-id, ne-ref, component-ref)
 
-**Verification**: `flutter test test/data/sqlite_velocity_repository_test.dart test/presentation/velocity_viewmodel_test.dart` — all pass
-
-### Micro-Task 3: Widget + BDD Acceptance Test
-**Target files**:
-- CREATE `app_flutter/lib/presentation/widgets/velocity_property_widget.dart`
-- CREATE `app_flutter/test/presentation/velocity_property_widget_test.dart`
-
-**Pattern**: Follow `coordinates_and_altitude_property_widget.dart` — `TypeDescriptor` with `FieldDescriptor`s using `valueResolver`/`valueWriter` callbacks. Fields: vNorth, vEast, vUp (all editable), Speed and Heading (read-only derived values). `ListenableBuilder` bound to `VelocityViewModel`.
-
-**BDD Widget Test (RED)**:
-```
-Given a VelocityPropertyWidget bound to a VelocityViewModel
-When the widget renders with vNorth=3.0, vEast=4.0, vUp=0.5
-Then the speed field displays 5.0
-And the heading field displays ~0.927 radians
-And all three velocity component fields are editable
-And the speed and heading fields are read-only
-```
-
-**Verification**: `flutter test test/presentation/velocity_property_widget_test.dart` — all pass
+### BDD tests (~5 tests matching spec scenarios)
+1. Render location with physical address fields
+2. Country code validation failure
+3. Hierarchical parent reference display
+4. Contained chassis list rendering
+5. Cyclic parent prevention
 
 ## Final Verification
 ```bash
 cd app_flutter && flutter analyze && flutter test && flutter build macos --release
 ```
-All must pass with zero issues.
-
-## File Summary
-
-| Action | File |
-|---|---|
-| CREATE | `app_flutter/lib/domain/models/velocity_types.dart` |
-| MODIFY | `app_flutter/lib/domain/domain_errors.dart` (append errors) |
-| CREATE | `app_flutter/lib/domain/repositories/velocity_repository.dart` |
-| CREATE | `app_flutter/lib/data/repositories/sqlite_velocity_repository.dart` |
-| CREATE | `app_flutter/lib/presentation/viewmodels/velocity_viewmodel.dart` |
-| CREATE | `app_flutter/lib/presentation/widgets/velocity_property_widget.dart` |
-| CREATE | `app_flutter/test/domain/velocity_types_test.dart` |
-| CREATE | `app_flutter/test/data/sqlite_velocity_repository_test.dart` |
-| CREATE | `app_flutter/test/presentation/velocity_viewmodel_test.dart` |
-| CREATE | `app_flutter/test/presentation/velocity_property_widget_test.dart` |
+All must pass with zero errors, zero warnings, zero test failures.
