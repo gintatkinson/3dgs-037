@@ -119,6 +119,7 @@ void main() {
         const CyclicParentReferenceError(locationId: 'loc-A', parentId: 'loc-B'),
         const DuplicateChassisIdError(chassisId: 101),
         const BuildingPositionValidationError(building: 'Building B', floor: 'Floor 3', room: 'Room 302', roomBuildingPosition: null),
+        const BuildingPositionLengthError(field: 'building', maxLength: 64, actualLength: 65),
       ];
 
       for (final err in errors) {
@@ -205,6 +206,8 @@ void main() {
             'DuplicateChassis: $chassisId',
           BuildingPositionValidationError(:final building, :final floor, :final room, :final roomBuildingPosition) =>
             'BuildingPosition: $building, $floor, $room, $roomBuildingPosition',
+          BuildingPositionLengthError(:final field, :final maxLength, :final actualLength) =>
+            'BuildingPosition: $field len=$actualLength max=$maxLength',
         };
         expect(description, isNotEmpty);
       }

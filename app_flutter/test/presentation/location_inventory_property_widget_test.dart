@@ -590,6 +590,63 @@ void main() {
     });
 
     // ---------------------------------------------------------------------------
+    // SCENARIO_14 — BuildingPosition preserved when editing non-BP field (Name)
+    // ---------------------------------------------------------------------------
+    testWidgets(
+        'BDD_SCENARIO_14 shouldPreserveBuildingPositionWhenEditingNonBPField',
+        (tester) async {
+      const bp = BuildingPosition(
+        building: 'B',
+        floor: '3',
+        room: '302',
+      );
+      final locationWithBP = Location(
+        containerId: 'test-regression-bp',
+        id: 'loc-regression-bp',
+        name: 'Original Name',
+        buildingPosition: bp,
+      );
+
+      await tester.runAsync(() async {
+        await harness.init();
+        await harness.repo.save(locationWithBP, id: 'test-regression-bp');
+        await harness.viewModel.load('test-regression-bp');
+      });
+
+      await tester.pumpWidget(
+        MaterialApp(
+          home: Scaffold(
+            body: LocationInventoryPropertyWidget(
+                viewModel: harness.viewModel),
+          ),
+        ),
+      );
+      await pumpSettle(tester);
+
+      expect(harness.viewModel.model?.buildingPosition?.building, equals('B'));
+
+      final widget = tester.widget<LocationInventoryPropertyWidget>(
+        find.byType(LocationInventoryPropertyWidget),
+      );
+      final descriptor = widget.typeDescriptor;
+      final nameField =
+          descriptor.fields.firstWhere((f) => f.key == kFieldName);
+      final currentModel = harness.viewModel.model!;
+
+      await tester.runAsync(() async {
+        final result = nameField.valueWriter!.call(currentModel, 'Updated Name');
+        final updated = result as Location;
+
+        expect(
+          updated.buildingPosition?.building,
+          equals('B'),
+          reason:
+              'BuildingPosition should be preserved after editing non-BP field',
+        );
+      });
+    });
+
+    // ---------------------------------------------------------------------------
     // SCENARIO_8: should render read-only chassis list
     // ---------------------------------------------------------------------------
     testWidgets(

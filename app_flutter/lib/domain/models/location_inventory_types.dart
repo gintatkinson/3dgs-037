@@ -294,10 +294,14 @@ class BuildingPosition {
       );
 }
 
-/// Realises: [Feat-048/formatRoomBuildingPosition]
+/// Realises: [Feat-048/BuildingPosition.formatRoomBuildingPosition]
 ///
-/// Formats a room building position string from individual building, floor,
-/// and room components. Non-empty segments are joined with `", "` separator.
+/// Formats building, floor, and room identifiers into a compound
+/// position string. Implemented as a top-level function rather than
+/// a member method to avoid coupling the formatting logic to
+/// a specific BuildingPosition instance state.
+///
+/// Non-empty segments are joined with `", "` separator.
 /// Null or empty segments are omitted gracefully.
 ///
 /// Example: `"Building B, Floor 3, Room 302"`
@@ -323,21 +327,33 @@ String formatRoomBuildingPosition(
 /// or [Failure] with [BuildingPositionValidationError] if all fields are
 /// null or empty.
 Result<BuildingPosition> validateBuildingPosition(BuildingPosition bp) {
-  final hasContent = (bp.building != null && bp.building!.isNotEmpty) ||
-      (bp.floor != null && bp.floor!.isNotEmpty) ||
-      (bp.room != null && bp.room!.isNotEmpty) ||
-      (bp.roomBuildingPosition != null && bp.roomBuildingPosition!.isNotEmpty);
-  if (hasContent) {
-    return Result.success(bp);
+  final hasContent = (bp.building != null && bp.building!.trim().isNotEmpty) ||
+      (bp.floor != null && bp.floor!.trim().isNotEmpty) ||
+      (bp.room != null && bp.room!.trim().isNotEmpty) ||
+      (bp.roomBuildingPosition != null && bp.roomBuildingPosition!.trim().isNotEmpty);
+  if (!hasContent) {
+    return Result.failure(
+      BuildingPositionValidationError(
+        building: bp.building,
+        floor: bp.floor,
+        room: bp.room,
+        roomBuildingPosition: bp.roomBuildingPosition,
+      ),
+    );
   }
-  return Result.failure(
-    BuildingPositionValidationError(
-      building: bp.building,
-      floor: bp.floor,
-      room: bp.room,
-      roomBuildingPosition: bp.roomBuildingPosition,
-    ),
-  );
+  if (bp.building != null && bp.building!.length > 64) {
+    return Result.failure(BuildingPositionLengthError(field: 'building', maxLength: 64, actualLength: bp.building!.length));
+  }
+  if (bp.floor != null && bp.floor!.length > 64) {
+    return Result.failure(BuildingPositionLengthError(field: 'floor', maxLength: 64, actualLength: bp.floor!.length));
+  }
+  if (bp.room != null && bp.room!.length > 64) {
+    return Result.failure(BuildingPositionLengthError(field: 'room', maxLength: 64, actualLength: bp.room!.length));
+  }
+  if (bp.roomBuildingPosition != null && bp.roomBuildingPosition!.length > 128) {
+    return Result.failure(BuildingPositionLengthError(field: 'roomBuildingPosition', maxLength: 128, actualLength: bp.roomBuildingPosition!.length));
+  }
+  return Result.success(bp);
 }
 
 /// Realises: [Feat-047/ContainedChassis]

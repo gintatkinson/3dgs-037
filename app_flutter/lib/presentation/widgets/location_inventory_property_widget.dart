@@ -24,7 +24,11 @@ class LocationInventoryPropertyWidget extends StatelessWidget {
   static const String _headerText =
       'PropertyGrid (/ietf-ni-location:locations/location)';
 
-  TypeDescriptor get _typeDescriptor => TypeDescriptor(
+  /// The [TypeDescriptor] driving the property grid fields at runtime.
+  /// Annotated [visibleForTesting] so regression tests can validate
+  /// field valueWriter correctness without full widget interaction.
+  @visibleForTesting
+  TypeDescriptor get typeDescriptor => TypeDescriptor(
         typeName: 'location',
         displayName: _headerText,
         iconName: 'location_on',
@@ -48,8 +52,9 @@ class LocationInventoryPropertyWidget extends StatelessWidget {
                 parent: m.parent,
                 timestamp: m.timestamp,
                 validUntil: m.validUntil,
-                physicalAddress: m.physicalAddress,
-                containedChassis: m.containedChassis,
+                 physicalAddress: m.physicalAddress,
+                 buildingPosition: m.buildingPosition,
+                 containedChassis: m.containedChassis,
               );
               viewModel.update(newLoc, recordId: m.containerId);
               return newLoc;
@@ -74,8 +79,9 @@ class LocationInventoryPropertyWidget extends StatelessWidget {
                 parent: m.parent,
                 timestamp: m.timestamp,
                 validUntil: m.validUntil,
-                physicalAddress: m.physicalAddress,
-                containedChassis: m.containedChassis,
+                 physicalAddress: m.physicalAddress,
+                 buildingPosition: m.buildingPosition,
+                 containedChassis: m.containedChassis,
               );
               viewModel.update(newLoc, recordId: m.containerId);
               return newLoc;
@@ -100,8 +106,9 @@ class LocationInventoryPropertyWidget extends StatelessWidget {
                 parent: m.parent,
                 timestamp: m.timestamp,
                 validUntil: m.validUntil,
-                physicalAddress: m.physicalAddress,
-                containedChassis: m.containedChassis,
+                 physicalAddress: m.physicalAddress,
+                 buildingPosition: m.buildingPosition,
+                 containedChassis: m.containedChassis,
               );
               viewModel.update(newLoc, recordId: m.containerId);
               return newLoc;
@@ -126,8 +133,9 @@ class LocationInventoryPropertyWidget extends StatelessWidget {
                 parent: m.parent,
                 timestamp: m.timestamp,
                 validUntil: m.validUntil,
-                physicalAddress: m.physicalAddress,
-                containedChassis: m.containedChassis,
+                 physicalAddress: m.physicalAddress,
+                 buildingPosition: m.buildingPosition,
+                 containedChassis: m.containedChassis,
               );
               viewModel.update(newLoc, recordId: m.containerId);
               return newLoc;
@@ -152,8 +160,9 @@ class LocationInventoryPropertyWidget extends StatelessWidget {
                 parent: m.parent,
                 timestamp: m.timestamp,
                 validUntil: m.validUntil,
-                physicalAddress: m.physicalAddress,
-                containedChassis: m.containedChassis,
+                 physicalAddress: m.physicalAddress,
+                 buildingPosition: m.buildingPosition,
+                 containedChassis: m.containedChassis,
               );
               viewModel.update(newLoc, recordId: m.containerId);
               return newLoc;
@@ -178,8 +187,9 @@ class LocationInventoryPropertyWidget extends StatelessWidget {
                 parent: m.parent,
                 timestamp: m.timestamp,
                 validUntil: m.validUntil,
-                physicalAddress: m.physicalAddress,
-                containedChassis: m.containedChassis,
+                 physicalAddress: m.physicalAddress,
+                 buildingPosition: m.buildingPosition,
+                 containedChassis: m.containedChassis,
               );
               viewModel.update(newLoc, recordId: m.containerId);
               return newLoc;
@@ -204,8 +214,9 @@ class LocationInventoryPropertyWidget extends StatelessWidget {
                 parent: value.isEmpty ? null : value,
                 timestamp: m.timestamp,
                 validUntil: m.validUntil,
-                physicalAddress: m.physicalAddress,
-                containedChassis: m.containedChassis,
+                 physicalAddress: m.physicalAddress,
+                 buildingPosition: m.buildingPosition,
+                 containedChassis: m.containedChassis,
               );
               viewModel.update(newLoc, recordId: m.containerId);
               return newLoc;
@@ -230,8 +241,9 @@ class LocationInventoryPropertyWidget extends StatelessWidget {
                 parent: m.parent,
                 timestamp: value.isEmpty ? null : value,
                 validUntil: m.validUntil,
-                physicalAddress: m.physicalAddress,
-                containedChassis: m.containedChassis,
+                 physicalAddress: m.physicalAddress,
+                 buildingPosition: m.buildingPosition,
+                 containedChassis: m.containedChassis,
               );
               viewModel.update(newLoc, recordId: m.containerId);
               return newLoc;
@@ -256,8 +268,9 @@ class LocationInventoryPropertyWidget extends StatelessWidget {
                 parent: m.parent,
                 timestamp: m.timestamp,
                 validUntil: value.isEmpty ? null : value,
-                physicalAddress: m.physicalAddress,
-                containedChassis: m.containedChassis,
+                 physicalAddress: m.physicalAddress,
+                 buildingPosition: m.buildingPosition,
+                 containedChassis: m.containedChassis,
               );
               viewModel.update(newLoc, recordId: m.containerId);
               return newLoc;
@@ -289,8 +302,9 @@ class LocationInventoryPropertyWidget extends StatelessWidget {
                 parent: m.parent,
                 timestamp: m.timestamp,
                 validUntil: m.validUntil,
-                physicalAddress: newAddr,
-                containedChassis: m.containedChassis,
+                 physicalAddress: newAddr,
+                 buildingPosition: m.buildingPosition,
+                 containedChassis: m.containedChassis,
               );
               viewModel.update(newLoc, recordId: m.containerId);
               return newLoc;
@@ -322,8 +336,9 @@ class LocationInventoryPropertyWidget extends StatelessWidget {
                 parent: m.parent,
                 timestamp: m.timestamp,
                 validUntil: m.validUntil,
-                physicalAddress: newAddr,
-                containedChassis: m.containedChassis,
+                 physicalAddress: newAddr,
+                 buildingPosition: m.buildingPosition,
+                 containedChassis: m.containedChassis,
               );
               viewModel.update(newLoc, recordId: m.containerId);
               return newLoc;
@@ -355,8 +370,9 @@ class LocationInventoryPropertyWidget extends StatelessWidget {
                 parent: m.parent,
                 timestamp: m.timestamp,
                 validUntil: m.validUntil,
-                physicalAddress: newAddr,
-                containedChassis: m.containedChassis,
+                 physicalAddress: newAddr,
+                 buildingPosition: m.buildingPosition,
+                 containedChassis: m.containedChassis,
               );
               viewModel.update(newLoc, recordId: m.containerId);
               return newLoc;
@@ -388,8 +404,9 @@ class LocationInventoryPropertyWidget extends StatelessWidget {
                 parent: m.parent,
                 timestamp: m.timestamp,
                 validUntil: m.validUntil,
-                physicalAddress: newAddr,
-                containedChassis: m.containedChassis,
+                 physicalAddress: newAddr,
+                 buildingPosition: m.buildingPosition,
+                 containedChassis: m.containedChassis,
               );
               viewModel.update(newLoc, recordId: m.containerId);
               return newLoc;
@@ -421,8 +438,9 @@ class LocationInventoryPropertyWidget extends StatelessWidget {
                 parent: m.parent,
                 timestamp: m.timestamp,
                 validUntil: m.validUntil,
-                physicalAddress: newAddr,
-                containedChassis: m.containedChassis,
+                 physicalAddress: newAddr,
+                 buildingPosition: m.buildingPosition,
+                 containedChassis: m.containedChassis,
               );
               viewModel.update(newLoc, recordId: m.containerId);
               return newLoc;
@@ -585,7 +603,7 @@ class LocationInventoryPropertyWidget extends StatelessWidget {
           return const SizedBox.shrink();
         }
 
-        final descriptor = _typeDescriptor;
+        final descriptor = typeDescriptor;
 
         return Padding(
           padding: const EdgeInsets.all(16),

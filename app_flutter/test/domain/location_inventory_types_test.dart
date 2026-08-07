@@ -443,6 +443,77 @@ void main() {
       final error = (result as Failure<BuildingPosition>).error;
       expect(error, isA<BuildingPositionValidationError>());
     });
+
+    // ---------------------------------------------------------------------------
+    // Length validation (Feat-048 §2)
+    // ---------------------------------------------------------------------------
+    test('should reject building > 64 characters', () {
+      final bp = BuildingPosition(building: 'B' * 65);
+      final result = validateBuildingPosition(bp);
+      expect(result.isFailure, isTrue);
+      final error = (result as Failure<BuildingPosition>).error;
+      expect(error, isA<BuildingPositionLengthError>());
+      final lenErr = error as BuildingPositionLengthError;
+      expect(lenErr.field, equals('building'));
+      expect(lenErr.maxLength, equals(64));
+      expect(lenErr.actualLength, equals(65));
+    });
+
+    test('should reject floor > 64 characters', () {
+      final bp = BuildingPosition(floor: 'F' * 65);
+      final result = validateBuildingPosition(bp);
+      expect(result.isFailure, isTrue);
+      final error = (result as Failure<BuildingPosition>).error;
+      expect(error, isA<BuildingPositionLengthError>());
+      final lenErr = error as BuildingPositionLengthError;
+      expect(lenErr.field, equals('floor'));
+      expect(lenErr.maxLength, equals(64));
+      expect(lenErr.actualLength, equals(65));
+    });
+
+    test('should reject room > 64 characters', () {
+      final bp = BuildingPosition(room: 'R' * 65);
+      final result = validateBuildingPosition(bp);
+      expect(result.isFailure, isTrue);
+      final error = (result as Failure<BuildingPosition>).error;
+      expect(error, isA<BuildingPositionLengthError>());
+      final lenErr = error as BuildingPositionLengthError;
+      expect(lenErr.field, equals('room'));
+      expect(lenErr.maxLength, equals(64));
+      expect(lenErr.actualLength, equals(65));
+    });
+
+    test('should reject roomBuildingPosition > 128 characters', () {
+      final bp = BuildingPosition(roomBuildingPosition: 'X' * 129);
+      final result = validateBuildingPosition(bp);
+      expect(result.isFailure, isTrue);
+      final error = (result as Failure<BuildingPosition>).error;
+      expect(error, isA<BuildingPositionLengthError>());
+      final lenErr = error as BuildingPositionLengthError;
+      expect(lenErr.field, equals('roomBuildingPosition'));
+      expect(lenErr.maxLength, equals(128));
+      expect(lenErr.actualLength, equals(129));
+    });
+
+    test('should accept building = 1 character', () {
+      final bp = BuildingPosition(building: 'B');
+      final result = validateBuildingPosition(bp);
+      expect(result.isSuccess, isTrue);
+    });
+
+    test('should accept building = 64 characters', () {
+      final bp = BuildingPosition(building: 'B' * 64);
+      final result = validateBuildingPosition(bp);
+      expect(result.isSuccess, isTrue);
+      expect((result as Success<BuildingPosition>).value.building!.length,
+          equals(64));
+    });
+
+    test('should reject building = 0 chars (empty string)', () {
+      final bp = BuildingPosition(building: '');
+      final result = validateBuildingPosition(bp);
+      expect(result.isFailure, isTrue);
+    });
   });
 
   group('Location equality with buildingPosition', () {

@@ -585,6 +585,28 @@ final class BuildingPositionValidationError extends DomainError {
   final String? roomBuildingPosition;
 }
 
+/// Realises: [Feat-048/BuildingPositionLengthError]
+///
+/// Error raised when a BuildingPosition field exceeds its maximum length.
+@immutable
+final class BuildingPositionLengthError extends DomainError {
+  /// Creates a [BuildingPositionLengthError].
+  const BuildingPositionLengthError({
+    required this.field,
+    required this.maxLength,
+    required this.actualLength,
+  });
+
+  /// The BuildingPosition field that exceeded the length limit.
+  final String field;
+
+  /// The maximum allowed length for this field.
+  final int maxLength;
+
+  /// The actual length that exceeded the limit.
+  final int actualLength;
+}
+
 /// Realises: [Feat-047/CyclicParentReferenceError]
 /// Error raised when setting a parent reference would create a cyclic
 /// dependency chain in the location hierarchy, violating the leafref
