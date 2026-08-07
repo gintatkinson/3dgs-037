@@ -43,9 +43,24 @@ class SqliteLocationInventoryRepository
           postal_code TEXT,
           state TEXT,
           city TEXT,
-          country_code TEXT
+          country_code TEXT,
+          building TEXT,
+          floor TEXT,
+          room TEXT,
+          room_building_position TEXT
         )
       ''');
+
+      for (final col in ['building', 'floor', 'room',
+          'room_building_position']) {
+        try {
+          await db.execute(
+            'ALTER TABLE $_locationsTable ADD COLUMN $col TEXT',
+          );
+        } catch (_) {
+          // column may already exist from a prior migration
+        }
+      }
       await db.execute('''
         CREATE TABLE IF NOT EXISTS $_chassisTable (
           location_id TEXT NOT NULL,
@@ -283,6 +298,10 @@ class SqliteLocationInventoryRepository
       'state': record.physicalAddress?.state,
       'city': record.physicalAddress?.city,
       'country_code': record.physicalAddress?.countryCode,
+      'building': record.buildingPosition?.building,
+      'floor': record.buildingPosition?.floor,
+      'room': record.buildingPosition?.room,
+      'room_building_position': record.buildingPosition?.roomBuildingPosition,
     };
   }
 
@@ -307,6 +326,19 @@ class SqliteLocationInventoryRepository
       );
     }
 
+    BuildingPosition? buildingPosition;
+    if (row['building'] != null ||
+        row['floor'] != null ||
+        row['room'] != null ||
+        row['room_building_position'] != null) {
+      buildingPosition = BuildingPosition(
+        building: row['building'] as String?,
+        floor: row['floor'] as String?,
+        room: row['room'] as String?,
+        roomBuildingPosition: row['room_building_position'] as String?,
+      );
+    }
+
     final chassis = chassisRows.map(_chassisFromRow).toList();
 
     return Location(
@@ -321,6 +353,7 @@ class SqliteLocationInventoryRepository
       timestamp: row['timestamp'] as String?,
       validUntil: row['valid_until'] as String?,
       physicalAddress: address,
+      buildingPosition: buildingPosition,
       containedChassis: chassis,
     );
   }

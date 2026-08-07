@@ -34,6 +34,14 @@ const String kFieldState = 'state';
 const String kFieldCity = 'city';
 /// Field key constant for the ISO 3166-1 alpha-2 country code.
 const String kFieldCountryCode = 'countryCode';
+/// Field key constant for the building identifier.
+const String kFieldBuilding = 'building';
+/// Field key constant for the floor designation.
+const String kFieldFloor = 'floor';
+/// Field key constant for the room identifier.
+const String kFieldRoom = 'room';
+/// Field key constant for the formatted room-building position string.
+const String kFieldRoomBuildingPosition = 'roomBuildingPosition';
 /// Field key constant for the chassis identifier.
 const String kFieldChassisId = 'chassisId';
 /// Field key constant for the network element reference.
@@ -68,6 +76,7 @@ const String kFieldContainedChassis = 'containedChassis';
 /// - [timestamp]: Optional RFC 3339 date-and-time of last update.
 /// - [validUntil]: Optional RFC 3339 date-and-time of validity expiry.
 /// - [physicalAddress]: Optional structured postal mailing address.
+/// - [buildingPosition]: Optional indoor building position information.
 /// - [containedChassis]: List of chassis directly deployed at this location.
 @immutable
 class Location {
@@ -84,6 +93,7 @@ class Location {
     this.timestamp,
     this.validUntil,
     this.physicalAddress,
+    this.buildingPosition,
     this.containedChassis = const [],
   });
 
@@ -120,6 +130,9 @@ class Location {
   /// Optional structured postal mailing address.
   final PhysicalAddress? physicalAddress;
 
+  /// Optional indoor building position information.
+  final BuildingPosition? buildingPosition;
+
   /// Chassis units directly deployed at this location without a rack.
   final List<ContainedChassis> containedChassis;
 
@@ -138,6 +151,7 @@ class Location {
         other.timestamp == timestamp &&
         other.validUntil == validUntil &&
         other.physicalAddress == physicalAddress &&
+        other.buildingPosition == buildingPosition &&
         listEquals(other.containedChassis, containedChassis);
   }
 
@@ -154,6 +168,7 @@ class Location {
         timestamp,
         validUntil,
         physicalAddress,
+        buildingPosition,
         Object.hashAll(containedChassis),
       );
 }
@@ -219,6 +234,110 @@ class PhysicalAddress {
         city,
         countryCode,
       );
+}
+
+/// Realises: [Feat-048/BuildingPosition]
+///
+/// Domain model capturing indoor building position attributes defined
+/// in the `ietf-ni-location` YANG module (ietf-ni-location.yang §
+/// physical-address/building, floor, room, room-building-position).
+///
+/// Represents fine-grained indoor location hierarchy within a facility:
+/// the building structure identifier, floor level, room or suite number,
+/// and a formatted compound position string.
+///
+/// Fields:
+/// - [building]: Optional building identifier (1-64 chars).
+/// - [floor]: Optional floor designation (1-64 chars).
+/// - [room]: Optional room identifier (1-64 chars).
+/// - [roomBuildingPosition]: Optional formatted compound position
+///   string (1-128 chars).
+@immutable
+class BuildingPosition {
+  /// Creates a [BuildingPosition] with the given fields.
+  const BuildingPosition({
+    this.building,
+    this.floor,
+    this.room,
+    this.roomBuildingPosition,
+  });
+
+  /// Optional building structure identifier.
+  final String? building;
+
+  /// Optional floor or level designation.
+  final String? floor;
+
+  /// Optional room number, suite, or rack hall identifier.
+  final String? room;
+
+  /// Optional formatted compound position string combining room, floor,
+  /// and building hierarchy.
+  final String? roomBuildingPosition;
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) return true;
+    return other is BuildingPosition &&
+        other.building == building &&
+        other.floor == floor &&
+        other.room == room &&
+        other.roomBuildingPosition == roomBuildingPosition;
+  }
+
+  @override
+  int get hashCode => Object.hash(
+        building,
+        floor,
+        room,
+        roomBuildingPosition,
+      );
+}
+
+/// Realises: [Feat-048/formatRoomBuildingPosition]
+///
+/// Formats a room building position string from individual building, floor,
+/// and room components. Non-empty segments are joined with `", "` separator.
+/// Null or empty segments are omitted gracefully.
+///
+/// Example: `"Building B, Floor 3, Room 302"`
+String formatRoomBuildingPosition(
+  String building,
+  String floor,
+  String room,
+) {
+  final parts = <String>[];
+  if (building.isNotEmpty) parts.add(building);
+  if (floor.isNotEmpty) parts.add(floor);
+  if (room.isNotEmpty) parts.add(room);
+  return parts.join(', ');
+}
+
+/// Realises: [Feat-048/validateBuildingPosition]
+///
+/// Validates a [BuildingPosition] instance. At least one of the four
+/// fields ([building], [floor], [room], [roomBuildingPosition]) must be
+/// non-null and non-empty.
+///
+/// Returns [Success] with the position if at least one field is populated,
+/// or [Failure] with [BuildingPositionValidationError] if all fields are
+/// null or empty.
+Result<BuildingPosition> validateBuildingPosition(BuildingPosition bp) {
+  final hasContent = (bp.building != null && bp.building!.isNotEmpty) ||
+      (bp.floor != null && bp.floor!.isNotEmpty) ||
+      (bp.room != null && bp.room!.isNotEmpty) ||
+      (bp.roomBuildingPosition != null && bp.roomBuildingPosition!.isNotEmpty);
+  if (hasContent) {
+    return Result.success(bp);
+  }
+  return Result.failure(
+    BuildingPositionValidationError(
+      building: bp.building,
+      floor: bp.floor,
+      room: bp.room,
+      roomBuildingPosition: bp.roomBuildingPosition,
+    ),
+  );
 }
 
 /// Realises: [Feat-047/ContainedChassis]

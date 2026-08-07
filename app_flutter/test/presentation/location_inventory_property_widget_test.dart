@@ -278,7 +278,7 @@ void main() {
       });
       await pumpSettle(tester);
 
-      expect(find.byType(TextField), findsNWidgets(14));
+      expect(find.byType(TextField), findsNWidgets(17));
 
       expect(find.text('Location ID'), findsOneWidget);
       expect(find.text('UUID'), findsOneWidget);
@@ -322,7 +322,271 @@ void main() {
       expect(find.text('City'), findsOneWidget);
       expect(find.text('Country Code'), findsOneWidget);
 
-      expect(find.byType(TextField), findsNWidgets(14));
+      expect(find.byType(TextField), findsNWidgets(17));
+    });
+
+    // ---------------------------------------------------------------------------
+    // SCENARIO_9 — Render BuildingPosition fields
+    // ---------------------------------------------------------------------------
+    testWidgets(
+        'BDD_SCENARIO_9 shouldRenderBuildingPositionFields',
+        (tester) async {
+      const bp = BuildingPosition(
+        building: 'B',
+        floor: '3',
+        room: '302',
+        roomBuildingPosition: 'B/3/302',
+      );
+      final locationWithBP = Location(
+        containerId: 'test-bp',
+        id: 'loc-with-bp',
+        buildingPosition: bp,
+      );
+
+      await tester.runAsync(() async {
+        await harness.init();
+        await harness.repo.save(locationWithBP, id: 'test-bp');
+      });
+
+      await tester.pumpWidget(
+        MaterialApp(
+          home: Scaffold(
+            body: LocationInventoryPropertyWidget(
+                viewModel: harness.viewModel),
+          ),
+        ),
+      );
+
+      await tester.runAsync(() async {
+        await harness.viewModel.load('test-bp');
+      });
+      await pumpSettle(tester);
+
+      expect(find.text('Building'), findsOneWidget);
+      expect(find.text('Floor'), findsOneWidget);
+      expect(find.text('Room'), findsOneWidget);
+      expect(find.text('Room Building Position'), findsOneWidget);
+
+      expect(find.text('B'), findsOneWidget);
+      expect(find.text('3'), findsOneWidget);
+      expect(find.text('302'), findsOneWidget);
+      expect(find.text('B, 3, 302'), findsOneWidget);
+    });
+
+    // ---------------------------------------------------------------------------
+    // SCENARIO_10 — Null BuildingPosition renders '-'
+    // ---------------------------------------------------------------------------
+    testWidgets(
+        'BDD_SCENARIO_10 shouldRenderDashForNullBuildingPosition',
+        (tester) async {
+      final locationNullBP = Location(
+        containerId: 'test-null-bp',
+        id: 'loc-null-bp',
+        physicalAddress: const PhysicalAddress(
+          city: 'Austin',
+        ),
+        buildingPosition: null,
+      );
+
+      await tester.runAsync(() async {
+        await harness.init();
+        await harness.repo.save(locationNullBP, id: 'test-null-bp');
+      });
+
+      await tester.pumpWidget(
+        MaterialApp(
+          home: Scaffold(
+            body: LocationInventoryPropertyWidget(
+                viewModel: harness.viewModel),
+          ),
+        ),
+      );
+
+      await tester.runAsync(() async {
+        await harness.viewModel.load('test-null-bp');
+      });
+      await pumpSettle(tester);
+
+      expect(find.text('Building'), findsOneWidget);
+      expect(find.text('Floor'), findsOneWidget);
+      expect(find.text('Room'), findsOneWidget);
+      expect(find.text('Room Building Position'), findsOneWidget);
+
+      final allTextFields = tester.widgetList<TextField>(
+        find.byType(TextField),
+      );
+      final fieldTexts =
+          allTextFields.map((tf) => tf.controller?.text ?? '').toList();
+      expect(fieldTexts.where((t) => t == '-').length, greaterThanOrEqualTo(3));
+    });
+
+    // ---------------------------------------------------------------------------
+    // SCENARIO_11 — Read-only roomBuildingPosition computed field
+    // ---------------------------------------------------------------------------
+    testWidgets(
+        'BDD_SCENARIO_11 shouldRenderReadOnlyRoomBuildingPosition',
+        (tester) async {
+      const bp = BuildingPosition(
+        building: 'West',
+        floor: '2',
+        room: '201-A',
+        roomBuildingPosition: 'should-not-appear',
+      );
+      final locationWithBP = Location(
+        containerId: 'test-bp-ro',
+        id: 'loc-ro',
+        buildingPosition: bp,
+      );
+
+      await tester.runAsync(() async {
+        await harness.init();
+        await harness.repo.save(locationWithBP, id: 'test-bp-ro');
+      });
+
+      await tester.pumpWidget(
+        MaterialApp(
+          home: Scaffold(
+            body: LocationInventoryPropertyWidget(
+                viewModel: harness.viewModel),
+          ),
+        ),
+      );
+
+      await tester.runAsync(() async {
+        await harness.viewModel.load('test-bp-ro');
+      });
+      await pumpSettle(tester);
+
+      expect(find.text('West, 2, 201-A'), findsOneWidget);
+      expect(find.text('should-not-appear'), findsNothing);
+      expect(find.text('Room Building Position'), findsOneWidget);
+
+      final allTextFields = tester.widgetList<TextField>(
+        find.byType(TextField),
+      );
+      final textFieldValues =
+          allTextFields.map((tf) => tf.controller?.text ?? '').toSet();
+      expect(textFieldValues.contains('West, 2, 201-A'), isFalse);
+    });
+
+    // ---------------------------------------------------------------------------
+    // SCENARIO_12 — Edit building field propagates to roomBuildingPosition
+    // ---------------------------------------------------------------------------
+    testWidgets(
+        'BDD_SCENARIO_12 shouldEditBuildingFieldAndPropagateToComputedField',
+        (tester) async {
+      const bp = BuildingPosition(
+        building: 'Alpha',
+        floor: '1',
+        room: 'R01',
+      );
+      final locationWithBP = Location(
+        containerId: 'test-edit-bp',
+        id: 'loc-edit-bp',
+        buildingPosition: bp,
+      );
+
+      await tester.runAsync(() async {
+        await harness.init();
+        await harness.repo.save(locationWithBP, id: 'test-edit-bp');
+      });
+
+      await tester.pumpWidget(
+        MaterialApp(
+          home: Scaffold(
+            body: LocationInventoryPropertyWidget(
+                viewModel: harness.viewModel),
+          ),
+        ),
+      );
+
+      await tester.runAsync(() async {
+        await harness.viewModel.load('test-edit-bp');
+      });
+      await pumpSettle(tester);
+
+      expect(find.text('Alpha'), findsOneWidget);
+      expect(find.text('Alpha, 1, R01'), findsOneWidget);
+
+      final updatedBp = BuildingPosition(
+        building: 'Bravo',
+        floor: '1',
+        room: 'R01',
+      );
+      final updatedLoc = Location(
+        containerId: 'test-edit-bp',
+        id: 'loc-edit-bp',
+        buildingPosition: updatedBp,
+      );
+
+      await tester.runAsync(() async {
+        await harness.viewModel.update(updatedLoc, recordId: 'test-edit-bp');
+      });
+      await pumpSettle(tester);
+
+      expect(find.text('Bravo'), findsOneWidget);
+      expect(find.text('Bravo, 1, R01'), findsOneWidget);
+      expect(find.text('Alpha, 1, R01'), findsNothing);
+    });
+
+    // ---------------------------------------------------------------------------
+    // SCENARIO_13 — Persistence integration round-trip
+    // ---------------------------------------------------------------------------
+    testWidgets(
+        'BDD_SCENARIO_13 shouldPreserveBuildingPositionOnPersistenceRoundTrip',
+        (tester) async {
+      const bp = BuildingPosition(
+        building: 'TowerA',
+        floor: '7',
+        room: '700',
+        roomBuildingPosition: 'TowerA/7/700',
+      );
+      final locationWithBP = Location(
+        containerId: 'test-roundtrip',
+        id: 'loc-roundtrip',
+        name: 'Roundtrip Location',
+        buildingPosition: bp,
+      );
+
+      await tester.runAsync(() async {
+        await harness.init();
+        await harness.viewModel.save(locationWithBP, recordId: 'test-roundtrip');
+      });
+
+      await tester.pumpWidget(
+        MaterialApp(
+          home: Scaffold(
+            body: LocationInventoryPropertyWidget(
+                viewModel: harness.viewModel),
+          ),
+        ),
+      );
+      await pumpSettle(tester);
+
+      expect(find.text('TowerA'), findsOneWidget);
+      expect(find.text('7'), findsOneWidget);
+      expect(find.text('700'), findsOneWidget);
+      expect(find.text('TowerA, 7, 700'), findsOneWidget);
+
+      await tester.runAsync(() async {
+        await harness.viewModel.load('nonexistent');
+      });
+      await pumpSettle(tester);
+
+      await tester.runAsync(() async {
+        await harness.viewModel.load('test-roundtrip');
+      });
+      await pumpSettle(tester);
+
+      expect(find.text('Building'), findsOneWidget);
+      expect(find.text('Floor'), findsOneWidget);
+      expect(find.text('Room'), findsOneWidget);
+      expect(find.text('Room Building Position'), findsOneWidget);
+
+      expect(find.text('TowerA'), findsOneWidget);
+      expect(find.text('7'), findsOneWidget);
+      expect(find.text('700'), findsOneWidget);
+      expect(find.text('TowerA, 7, 700'), findsOneWidget);
     });
 
     // ---------------------------------------------------------------------------

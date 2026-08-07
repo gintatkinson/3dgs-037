@@ -558,6 +558,33 @@ final class CountryCodeValidationError extends DomainError {
   final String input;
 }
 
+/// Realises: [Feat-048/BuildingPositionValidationError]
+/// Error raised when a [BuildingPosition] has all fields null or empty,
+/// violating the requirement that at least one indoor position field
+/// must be populated as defined in ietf-ni-location.yang § physical-address.
+@immutable
+final class BuildingPositionValidationError extends DomainError {
+  /// Creates a [BuildingPositionValidationError] with the input field values.
+  const BuildingPositionValidationError({
+    this.building,
+    this.floor,
+    this.room,
+    this.roomBuildingPosition,
+  });
+
+  /// The building identifier that was provided (null or empty).
+  final String? building;
+
+  /// The floor designation that was provided (null or empty).
+  final String? floor;
+
+  /// The room identifier that was provided (null or empty).
+  final String? room;
+
+  /// The formatted room-building position that was provided (null or empty).
+  final String? roomBuildingPosition;
+}
+
 /// Realises: [Feat-047/CyclicParentReferenceError]
 /// Error raised when setting a parent reference would create a cyclic
 /// dependency chain in the location hierarchy, violating the leafref

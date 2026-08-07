@@ -18,7 +18,7 @@ The `ietf-ni-location` model extends standard inventory management paradigms by 
 
 ## 2. Requirements & Checklist
 - [x] #47 - [ietf-ni-location: Location Inventory Base and Postal Address](https://github.com/gintatkinson/3dgs-037/blob/main/docs/features/feat-13-location-inventory-base-and-postal-address.md) (locations, location, id, type, parent, timestamp, valid-until, physical-address)
-- [ ] #48 - [ietf-ni-location: Building and Floor Position Specs](https://github.com/gintatkinson/3dgs-037/blob/main/docs/features/feat-14-building-and-floor-position-specs.md) (room-building-position, building, floor, room, address, postal-code, state, city, country-code)
+- [x] #48 - [ietf-ni-location: Building and Floor Position Specs](https://github.com/gintatkinson/3dgs-037/blob/main/docs/features/feat-14-building-and-floor-position-specs.md) (room-building-position, building, floor, room, address, postal-code, state, city, country-code)
 - [ ] #49 - [ietf-ni-location: Rack and Bay Positioning](https://github.com/gintatkinson/3dgs-037/blob/main/docs/features/feat-15-rack-and-bay-positioning.md) (racks, rack, rack-class, height, width, depth, max-voltage, max-allocated-power, contained-chassis, relative-position)
 - [ ] #50 - [ietf-ni-location: Geo-Location Integration Augment](https://github.com/gintatkinson/3dgs-037/blob/main/docs/features/feat-16-geo-location-integration-augment.md) (rack-location, location-ref, row-number, column-number, ietf-geo-location import & binding)
 
