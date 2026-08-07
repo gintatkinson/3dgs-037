@@ -429,6 +429,120 @@ class LocationInventoryPropertyWidget extends StatelessWidget {
             },
           ),
           FieldDescriptor(
+            key: kFieldBuilding,
+            label: 'Building',
+            type: 'string',
+            valueResolver: (model) =>
+                (model as Location).buildingPosition?.building ?? '-',
+            valueWriter: (model, value) {
+              final m = model as Location;
+              final newBp = BuildingPosition(
+                building: value.isEmpty ? null : value,
+                floor: m.buildingPosition?.floor,
+                room: m.buildingPosition?.room,
+                roomBuildingPosition: m.buildingPosition?.roomBuildingPosition,
+              );
+              final newLoc = Location(
+                containerId: m.containerId,
+                id: m.id,
+                uuid: m.uuid,
+                name: m.name,
+                alias: m.alias,
+                description: m.description,
+                type: m.type,
+                parent: m.parent,
+                timestamp: m.timestamp,
+                validUntil: m.validUntil,
+                physicalAddress: m.physicalAddress,
+                buildingPosition: newBp,
+                containedChassis: m.containedChassis,
+              );
+              viewModel.update(newLoc, recordId: m.containerId);
+              return newLoc;
+            },
+          ),
+          FieldDescriptor(
+            key: kFieldFloor,
+            label: 'Floor',
+            type: 'string',
+            valueResolver: (model) =>
+                (model as Location).buildingPosition?.floor ?? '-',
+            valueWriter: (model, value) {
+              final m = model as Location;
+              final newBp = BuildingPosition(
+                building: m.buildingPosition?.building,
+                floor: value.isEmpty ? null : value,
+                room: m.buildingPosition?.room,
+                roomBuildingPosition: m.buildingPosition?.roomBuildingPosition,
+              );
+              final newLoc = Location(
+                containerId: m.containerId,
+                id: m.id,
+                uuid: m.uuid,
+                name: m.name,
+                alias: m.alias,
+                description: m.description,
+                type: m.type,
+                parent: m.parent,
+                timestamp: m.timestamp,
+                validUntil: m.validUntil,
+                physicalAddress: m.physicalAddress,
+                buildingPosition: newBp,
+                containedChassis: m.containedChassis,
+              );
+              viewModel.update(newLoc, recordId: m.containerId);
+              return newLoc;
+            },
+          ),
+          FieldDescriptor(
+            key: kFieldRoom,
+            label: 'Room',
+            type: 'string',
+            valueResolver: (model) =>
+                (model as Location).buildingPosition?.room ?? '-',
+            valueWriter: (model, value) {
+              final m = model as Location;
+              final newBp = BuildingPosition(
+                building: m.buildingPosition?.building,
+                floor: m.buildingPosition?.floor,
+                room: value.isEmpty ? null : value,
+                roomBuildingPosition: m.buildingPosition?.roomBuildingPosition,
+              );
+              final newLoc = Location(
+                containerId: m.containerId,
+                id: m.id,
+                uuid: m.uuid,
+                name: m.name,
+                alias: m.alias,
+                description: m.description,
+                type: m.type,
+                parent: m.parent,
+                timestamp: m.timestamp,
+                validUntil: m.validUntil,
+                physicalAddress: m.physicalAddress,
+                buildingPosition: newBp,
+                containedChassis: m.containedChassis,
+              );
+              viewModel.update(newLoc, recordId: m.containerId);
+              return newLoc;
+            },
+          ),
+          FieldDescriptor(
+            key: kFieldRoomBuildingPosition,
+            label: 'Room Building Position',
+            type: 'string',
+            valueResolver: (model) {
+              final m = model as Location;
+              final bp = m.buildingPosition;
+              if (bp == null) return '-';
+              return formatRoomBuildingPosition(
+                bp.building ?? '',
+                bp.floor ?? '',
+                bp.room ?? '',
+              );
+            },
+          ),
+          FieldDescriptor(
             key: kFieldContainedChassis,
             label: 'Contained Chassis',
             type: 'string',

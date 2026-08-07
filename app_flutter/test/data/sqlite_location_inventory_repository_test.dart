@@ -289,5 +289,99 @@ void main() {
       expect(
           (error as InstanceNotFoundError).instanceId, equals('nonexistent'));
     });
+
+    const testFullBuildingPosition = BuildingPosition(
+      building: 'Building B',
+      floor: 'Floor 3',
+      room: 'Room 302',
+      roomBuildingPosition: 'B/3/302',
+    );
+
+    test('should save and fetch location with full buildingPosition', () async {
+      const locWithBP = Location(
+        containerId: 'test-container',
+        id: 'loc-bp-full',
+        name: 'BP Full',
+        buildingPosition: testFullBuildingPosition,
+      );
+
+      final saveResult = await repo.save(locWithBP, id: 'bp-key-full');
+      expect(saveResult.isSuccess, isTrue);
+      final saved = (saveResult as Success<Location>).value;
+      expect(saved.buildingPosition, equals(testFullBuildingPosition));
+
+      final fetchResult = await repo.fetch(id: 'bp-key-full');
+      expect(fetchResult.isSuccess, isTrue);
+      final fetched = (fetchResult as Success<Location>).value;
+      expect(fetched.buildingPosition, equals(testFullBuildingPosition));
+    });
+
+    test('should save and fetch location with null buildingPosition', () async {
+      const locNullBP = Location(
+        containerId: 'test-container',
+        id: 'loc-bp-null',
+        name: 'BP Null',
+        buildingPosition: null,
+      );
+
+      final saveResult = await repo.save(locNullBP, id: 'bp-key-null');
+      expect(saveResult.isSuccess, isTrue);
+
+      final fetchResult = await repo.fetch(id: 'bp-key-null');
+      expect(fetchResult.isSuccess, isTrue);
+      final fetched = (fetchResult as Success<Location>).value;
+      expect(fetched.buildingPosition, isNull);
+    });
+
+    test('should save and fetch location with partial buildingPosition',
+        () async {
+      const partialBP = BuildingPosition(
+        building: 'Tower A',
+        floor: '12',
+      );
+      const locPartialBP = Location(
+        containerId: 'test-container',
+        id: 'loc-bp-partial',
+        name: 'BP Partial',
+        buildingPosition: partialBP,
+      );
+
+      final saveResult = await repo.save(locPartialBP, id: 'bp-key-partial');
+      expect(saveResult.isSuccess, isTrue);
+      final saved = (saveResult as Success<Location>).value;
+      expect(saved.buildingPosition, equals(partialBP));
+
+      final fetchResult = await repo.fetch(id: 'bp-key-partial');
+      expect(fetchResult.isSuccess, isTrue);
+      final fetched = (fetchResult as Success<Location>).value;
+      expect(fetched.buildingPosition, equals(partialBP));
+    });
+
+    test('should preserve buildingPosition on update', () async {
+      const locWithBP = Location(
+        containerId: 'test-container',
+        id: 'loc-bp-update',
+        name: 'BP Update',
+        buildingPosition: testFullBuildingPosition,
+      );
+
+      await repo.save(locWithBP, id: 'bp-key-update');
+
+      const updated = Location(
+        containerId: 'updated-container',
+        id: 'loc-bp-update',
+        name: 'Updated BP Name',
+        buildingPosition: testFullBuildingPosition,
+      );
+
+      final updateResult = await repo.update(updated, id: 'bp-key-update');
+      expect(updateResult.isSuccess, isTrue);
+
+      final fetchResult = await repo.fetch(id: 'bp-key-update');
+      expect(fetchResult.isSuccess, isTrue);
+      final fetched = (fetchResult as Success<Location>).value;
+      expect(fetched.name, equals('Updated BP Name'));
+      expect(fetched.buildingPosition, equals(testFullBuildingPosition));
+    });
   });
 }

@@ -125,6 +125,7 @@ class LocationInventoryViewModel extends ChangeNotifier {
       timestamp: _model!.timestamp,
       validUntil: _model!.validUntil,
       physicalAddress: _model!.physicalAddress,
+      buildingPosition: _model!.buildingPosition,
       containedChassis: updatedList,
     );
     final result = await _repository.addChassis(_model!.id, chassis);
@@ -156,6 +157,7 @@ class LocationInventoryViewModel extends ChangeNotifier {
       timestamp: _model!.timestamp,
       validUntil: _model!.validUntil,
       physicalAddress: _model!.physicalAddress,
+      buildingPosition: _model!.buildingPosition,
       containedChassis: updatedList,
     );
     final result = await _repository.removeChassis(_model!.id, chassisId);

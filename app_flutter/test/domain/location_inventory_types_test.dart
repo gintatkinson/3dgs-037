@@ -319,6 +319,159 @@ void main() {
     });
   });
 
+  group('BuildingPosition', () {
+    test('should create BuildingPosition with all fields', () {
+      const bp = BuildingPosition(
+        building: 'Building B',
+        floor: 'Floor 3',
+        room: 'Room 302',
+        roomBuildingPosition: 'Building B, Floor 3, Room 302',
+      );
+      expect(bp.building, equals('Building B'));
+      expect(bp.floor, equals('Floor 3'));
+      expect(bp.room, equals('Room 302'));
+      expect(bp.roomBuildingPosition, equals('Building B, Floor 3, Room 302'));
+    });
+
+    test('should create BuildingPosition with null fields', () {
+      const bp = BuildingPosition();
+      expect(bp.building, isNull);
+      expect(bp.floor, isNull);
+      expect(bp.room, isNull);
+      expect(bp.roomBuildingPosition, isNull);
+    });
+
+    test('should have value equality for same fields', () {
+      const a = BuildingPosition(
+        building: 'Building B',
+        floor: 'Floor 3',
+        room: 'Room 302',
+        roomBuildingPosition: 'Building B, Floor 3, Room 302',
+      );
+      const b = BuildingPosition(
+        building: 'Building B',
+        floor: 'Floor 3',
+        room: 'Room 302',
+        roomBuildingPosition: 'Building B, Floor 3, Room 302',
+      );
+      expect(a, equals(b));
+      expect(a.hashCode, equals(b.hashCode));
+    });
+
+    test('should distinguish different BuildingPositions', () {
+      const a = BuildingPosition(building: 'Building A');
+      const b = BuildingPosition(building: 'Building B');
+      expect(a, isNot(equals(b)));
+    });
+  });
+
+  group('formatRoomBuildingPosition', () {
+    test('should format with all fields present', () {
+      final result = formatRoomBuildingPosition(
+        'Building B',
+        'Floor 3',
+        'Room 302',
+      );
+      expect(result, equals('Building B, Floor 3, Room 302'));
+    });
+
+    test('should omit null building', () {
+      final result = formatRoomBuildingPosition(
+        '',
+        'Floor 3',
+        'Room 302',
+      );
+      expect(result, equals('Floor 3, Room 302'));
+    });
+
+    test('should omit two null fields', () {
+      final result = formatRoomBuildingPosition(
+        'Building B',
+        '',
+        '',
+      );
+      expect(result, equals('Building B'));
+    });
+
+    test('should return empty string when all fields are null or empty', () {
+      final result = formatRoomBuildingPosition('', '', '');
+      expect(result, equals(''));
+    });
+  });
+
+  group('validateBuildingPosition', () {
+    test('should accept BuildingPosition with some non-empty fields', () {
+      const bp = BuildingPosition(
+        building: 'Building B',
+        floor: 'Floor 3',
+        room: 'Room 302',
+        roomBuildingPosition: 'Building B, Floor 3, Room 302',
+      );
+      final result = validateBuildingPosition(bp);
+      expect(result.isSuccess, isTrue);
+      expect((result as Success<BuildingPosition>).value, equals(bp));
+    });
+
+    test('should accept BuildingPosition with building only', () {
+      const bp = BuildingPosition(building: 'Building C');
+      final result = validateBuildingPosition(bp);
+      expect(result.isSuccess, isTrue);
+    });
+
+    test('should reject BuildingPosition with all empty strings', () {
+      const bp = BuildingPosition(
+        building: '',
+        floor: '',
+        room: '',
+        roomBuildingPosition: '',
+      );
+      final result = validateBuildingPosition(bp);
+      expect(result.isFailure, isTrue);
+      final error = (result as Failure<BuildingPosition>).error;
+      expect(error, isA<BuildingPositionValidationError>());
+      final bpError = error as BuildingPositionValidationError;
+      expect(bpError.building, equals(''));
+      expect(bpError.floor, equals(''));
+      expect(bpError.room, equals(''));
+      expect(bpError.roomBuildingPosition, equals(''));
+    });
+
+    test('should reject BuildingPosition with all null fields', () {
+      const bp = BuildingPosition();
+      final result = validateBuildingPosition(bp);
+      expect(result.isFailure, isTrue);
+      final error = (result as Failure<BuildingPosition>).error;
+      expect(error, isA<BuildingPositionValidationError>());
+    });
+  });
+
+  group('Location equality with buildingPosition', () {
+    test('should include buildingPosition in Location equality', () {
+      const bp = BuildingPosition(
+        building: 'Building B',
+        floor: 'Floor 3',
+        room: 'Room 302',
+        roomBuildingPosition: 'Building B, Floor 3, Room 302',
+      );
+      const a = Location(id: 'loc-test', buildingPosition: bp);
+      const b = Location(id: 'loc-test', buildingPosition: bp);
+      expect(a, equals(b));
+      expect(a.hashCode, equals(b.hashCode));
+    });
+
+    test('should distinguish by buildingPosition', () {
+      const a = Location(
+        id: 'loc-test',
+        buildingPosition: BuildingPosition(building: 'Building A'),
+      );
+      const b = Location(
+        id: 'loc-test',
+        buildingPosition: BuildingPosition(building: 'Building B'),
+      );
+      expect(a, isNot(equals(b)));
+    });
+  });
+
   group('Field key constants', () {
     test('should define kFieldLocationId', () {
       expect(kFieldLocationId, equals('id'));
@@ -361,6 +514,18 @@ void main() {
     });
     test('should define kFieldCountryCode', () {
       expect(kFieldCountryCode, equals('countryCode'));
+    });
+    test('should define kFieldBuilding', () {
+      expect(kFieldBuilding, equals('building'));
+    });
+    test('should define kFieldFloor', () {
+      expect(kFieldFloor, equals('floor'));
+    });
+    test('should define kFieldRoom', () {
+      expect(kFieldRoom, equals('room'));
+    });
+    test('should define kFieldRoomBuildingPosition', () {
+      expect(kFieldRoomBuildingPosition, equals('roomBuildingPosition'));
     });
     test('should define kFieldChassisId', () {
       expect(kFieldChassisId, equals('chassisId'));

@@ -118,6 +118,7 @@ void main() {
         const CountryCodeValidationError(input: 'USA'),
         const CyclicParentReferenceError(locationId: 'loc-A', parentId: 'loc-B'),
         const DuplicateChassisIdError(chassisId: 101),
+        const BuildingPositionValidationError(building: 'Building B', floor: 'Floor 3', room: 'Room 302', roomBuildingPosition: null),
       ];
 
       for (final err in errors) {
@@ -202,6 +203,8 @@ void main() {
             'CyclicParent: $locationId -> $parentId',
           DuplicateChassisIdError(:final chassisId) =>
             'DuplicateChassis: $chassisId',
+          BuildingPositionValidationError(:final building, :final floor, :final room, :final roomBuildingPosition) =>
+            'BuildingPosition: $building, $floor, $room, $roomBuildingPosition',
         };
         expect(description, isNotEmpty);
       }
