@@ -127,3 +127,25 @@ Realises [Feat-048/validateBuildingPosition]
 - ViewModel propagation → `location_inventory_viewmodel.dart:128,160`
 - FieldDescriptors (4) → `location_inventory_property_widget.dart:431-549`
 - BDD test scenarios (5) → `location_inventory_property_widget_test.dart:326-597`
+
+## Post-Audit Remediation
+
+### Fix 1: Data-Loss Bug — valueWriters Now Preserve buildingPosition
+
+Audit identified that all 14 `valueWriter` closures in `location_inventory_property_widget.dart` were constructing new `Location` objects without copying `buildingPosition`, causing field edits to silently wipe all indoor position data. All 14 valueWriters have been updated to include `buildingPosition` in their copy operations.
+
+### Fix 2: Length Validation
+
+Added length validation for `BuildingPosition` fields:
+- `building`, `floor`, `room`: 1–64 characters
+- `roomBuildingPosition`: 1–128 characters
+
+Enforced via new `BuildingPositionLengthError` error type alongside existing `BuildingPositionValidationError`. User input is silently truncated by the widget layer (excess characters drop), with the ViewModel enforcing the same constraint on load.
+
+### Fix 3: Docstring Update for formatRoomBuildingPosition
+
+Updated the docstring on `formatRoomBuildingPosition` to document the output format and nil-handling behavior as required by the audit.
+
+### Test Count
+
+1155 → 1163 (+8 new tests)
